@@ -1,7 +1,8 @@
 #!/bin/env bash
 
-{{- $bw_folder_id := "3bb893f4-9a06-4477-afe5-b33c00c20c5d" }}
-{{- $github_token_id := "1b48a5cc-4f95-4704-a6e2-b33c011e4532" }}
+# Set Bitwarden folder and GitHub token IDs
+bw_folder_id="3bb893f4-9a06-4477-afe5-b33c00c20c5d"
+github_token_id="1b48a5cc-4f95-4704-a6e2-b33c011e4532"
 
 # Ensure dependencies
 command -v bw  &>/dev/null || gum spin --title "Installing Bitwarden CLI..." -- yay -S --noconfirm bitwarden-cli
@@ -28,17 +29,18 @@ fi
 # Import GPG keys
 echo
 echo "$(gum style --foreground 4 "[INFO]") Importing GPG keys..."
-gum spin --title "Importing GPG keys..." -- bash -c "bw list items --session \"$BW_SESSION\" --folderid \"{{ $bw_folder_id }}\" | jq -r '.[] | select(.notes | contains(\"BEGIN PGP\")) | .notes' | gpg --import -q"
+gum spin --title "Importing GPG keys..." -- bash -c "bw list items --session \"$BW_SESSION\" --folderid \"$bw_folder_id\" | jq -r '.[] | select(.notes | contains(\"BEGIN PGP\")) | .notes' | gpg --import --batch --yes -q"
 
 # Trust the key
 echo
 echo "$(gum style --foreground 4 "[INFO]") Setting GPG key trust..."
-gum spin --title "Setting key trust level..." -- bash -c "echo -e \"trust\\n5\\ny\\n\" | gpg --command-fd 0 --edit-key {{ .email }} &>/dev/null"
+KEY_ID=$(gpg --list-secret-keys --with-colons | grep '^sec' | cut -d: -f5 | head -n1)
+[ -n "$KEY_ID" ] && gum spin --title "Setting key trust level..." -- bash -c "echo -e \"trust\n5\ny\n\" | gpg --command-fd 0 --edit-key \"$KEY_ID\" &>/dev/null"
 
 # Get token and clone
 echo
 echo "$(gum style --foreground 4 "[INFO]") Cloning password store..."
-GITHUB_TOKEN=$(gum spin --title "Getting GitHub token..." -- bash -c "bw --session \"$BW_SESSION\" get item \"{{ $github_token_id }}\" | jq -r '.notes'")
+GITHUB_TOKEN=$(gum spin --title "Getting GitHub token..." -- bash -c "bw --session \"$BW_SESSION\" get item \"$github_token_id\" | jq -r '.notes'")
 gum spin --title "Cloning password store..." -- git clone "https://${GITHUB_TOKEN}@github.com/shadowe1ite/.password-store.git" ~/.password-store
 
 # Cleanup
