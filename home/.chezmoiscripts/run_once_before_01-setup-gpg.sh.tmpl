@@ -9,6 +9,10 @@ command -v jq  &>/dev/null || gum spin --title "Installing jq..." -- yay -S --no
 command -v gpg &>/dev/null || gum spin --title "Installing GnuPG..." -- yay -S --noconfirm gnupg
 command -v git &>/dev/null || gum spin --title "Installing git..." -- yay -S --noconfirm git
 
+# Ensure Bitwarden config dir exists (avoid warnings)
+mkdir -p "$HOME/.config/Bitwarden CLI"
+touch "$HOME/.config/Bitwarden CLI/data.json"
+
 # Login to Bitwarden with email from config
 echo
 echo "$(gum style --foreground 4 "[INFO]") Logging in to Bitwarden..."
