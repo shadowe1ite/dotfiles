@@ -20,6 +20,12 @@ install_pkg() {
   local name=$1
   local packages=$2
   echo "$(gum style --foreground 4 "[INFO]") Installing ${name} packages"
+
+  # Check if jack2 exists and remove it
+  if pacman -Q jack2 &>/dev/null; then
+    gum spin --title "Removing conflicting jack2..." -- yay -Rnsdd --noconfirm jack2
+  fi
+
   # Use this approach to better handle Ctrl+C
   gum spin --title "Installing ${name} packages..." -- bash -c "yay -S --asexplicit --sudoloop --needed --noconfirm --removemake ${packages} || exit \$?" && echo "$(gum style --foreground 10 "[SUCCESS]")" || echo "$(gum style --foreground 1 "[FAILED]")"
   echo
