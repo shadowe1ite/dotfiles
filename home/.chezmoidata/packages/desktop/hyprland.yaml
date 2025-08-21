@@ -1,7 +1,4 @@
 hyprland:
-  - hyprutils
-  - hyprlang
-  - hyprwayland-scanner
   - hyprland
   - xdg-desktop-portal-hyprland
   - hypridle
@@ -11,6 +8,17 @@ hyprland:
 
 icons:
   - fluent-icon-theme-git
+
+gtk:
+  - adw-gtk-theme
+
+qt:
+  - kvantum
+  - qt5ct
+  - qt6ct
+  - qt5-wayland
+  - qt6-wayland
+  - nwg-look
 
 audio:
   - pipewire
@@ -28,22 +36,13 @@ wallpaper:
   - swww
   - waypaper
   - matugen-bin
-  - adw-gtk-theme
 
 fonts:
   - ttf-sourcecodepro-nerd
 
 clipboard:
   - wl-clipboard
-  - wl-clip-persist-git
-
-gtk_qt:
-  - kvantum
-  - qt5ct
-  - qt6ct
-  - qt5-wayland
-  - qt6-wayland
-  - nwg-look
+  - wl-clip-persist
 
 scratchpad:
   - pyprland

@@ -1,10 +1,10 @@
 {{- if ne .chezmoi.username "shadow" }}
-.chezmoiscripts/01-configure-repo.sh
-.chezmoiscripts/02-install-packages.sh
-.chezmoiscripts/03-setup-sddm.sh
-.chezmoiscripts/04-enable-services.sh
-.chezmoiscripts/setup-gpg.sh
-.chezmoiscripts/setup-spotify.sh
+.chezmoiscripts/01-setup-gpg.sh
+.chezmoiscripts/02-configure-repo.sh
+.chezmoiscripts/03-install-packages.sh
+.chezmoiscripts/04-setup-sddm.sh
+.chezmoiscripts/06-setup-spotify.sh
+.chezmoiscripts/befor_05-enable-services.sh
 .gnupg
 .gnupg/**
 .config/spotify/*
