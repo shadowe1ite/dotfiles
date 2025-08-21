@@ -1,0 +1,46 @@
+#!/bin/env bash
+
+{{- $bw_folder_id := "3bb893f4-9a06-4477-afe5-b33c00c20c5d" }}
+{{- $github_token_id := "1b48a5cc-4f95-4704-a6e2-b33c011e4532" }}
+
+# Ensure dependencies
+command -v bw  &>/dev/null || gum spin --title "Installing Bitwarden CLI..." -- yay -S --noconfirm bitwarden-cli
+command -v jq  &>/dev/null || gum spin --title "Installing jq..." -- yay -S --noconfirm jq
+command -v gpg &>/dev/null || gum spin --title "Installing GnuPG..." -- yay -S --noconfirm gnupg
+command -v git &>/dev/null || gum spin --title "Installing git..." -- yay -S --noconfirm git
+
+# Login to Bitwarden with email from config
+echo
+echo "$(gum style --foreground 4 "[INFO]") Logging in to Bitwarden..."
+BW_SESSION=$(bw login {{ .email }} --raw)
+
+if [ -z "$BW_SESSION" ]; then
+  echo
+  echo "$(gum style --foreground 3 "[WARN]") Failed to log in to Bitwarden. Retrying..."
+  BW_SESSION=$(bw login {{ .email }} --raw)
+  [ -z "$BW_SESSION" ] && { echo; echo "$(gum style --foreground 1 "[ERROR]") Login failed. Exiting."; exit 1; }
+fi
+
+# Import GPG keys
+echo
+echo "$(gum style --foreground 4 "[INFO]") Importing GPG keys..."
+gum spin --title "Importing GPG keys..." -- bash -c "bw list items --session \"$BW_SESSION\" --folderid \"{{ $bw_folder_id }}\" | jq -r '.[] | select(.notes | contains(\"BEGIN PGP\")) | .notes' | gpg --import -q"
+
+# Trust the key
+echo
+echo "$(gum style --foreground 4 "[INFO]") Setting GPG key trust..."
+gum spin --title "Setting key trust level..." -- bash -c "echo -e \"trust\\n5\\ny\\n\" | gpg --command-fd 0 --edit-key {{ .email }} &>/dev/null"
+
+# Get token and clone
+echo
+echo "$(gum style --foreground 4 "[INFO]") Cloning password store..."
+GITHUB_TOKEN=$(gum spin --title "Getting GitHub token..." -- bash -c "bw --session \"$BW_SESSION\" get item \"{{ $github_token_id }}\" | jq -r '.notes'")
+gum spin --title "Cloning password store..." -- git clone "https://${GITHUB_TOKEN}@github.com/shadowe1ite/.password-store.git" ~/.password-store
+
+# Cleanup
+echo
+echo "$(gum style --foreground 4 "[INFO]") Cleaning up..."
+gum spin --title "Logging out of Bitwarden..." -- bw logout
+gum spin --title "Removing Bitwarden CLI..." -- yay -Rns --noconfirm bitwarden-cli
+echo
+echo "$(gum style --foreground 10 "[SUCCESS]") GPG Setup completed"

@@ -1,0 +1,27 @@
+[pyprland]
+plugins = [
+  "scratchpads",
+  "magnify"
+]
+
+[workspaces_follow_focus]
+max_workspaces = 9
+
+[expose]
+include_special = false
+
+
+[scratchpads.ncmpcpp]
+animation = "fromTop"
+command = "foot --title \"ncmpcpp\" sh -c ncmpcpp"
+class = "ncmpcpp"
+lazy = true
+size = "75% 40%"
+
+[scratchpads.sptlrx]
+animation = "fromTop"
+command = "foot --title \"sptlrx\" sh -c sptlrx"
+class = "sptlrx"
+lazy = true
+size = "50% 40%"
+position = "25% 6%"

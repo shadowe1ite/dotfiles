@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+export PATH="$HOME/.local/bin:$PATH"
+
+# Abort early if already done
+if [[ -f /etc/pacman.conf.bak ]]; then
+  echo "$(gum style --foreground 3 '[WARN]') pacman.conf.bak exists. Skipping rewrite."
+  exit 0
+fi
+
+echo "$(gum style --foreground 4 '[INFO]') Setting up repositories..."
+sudo cp /etc/pacman.conf /etc/pacman.conf.bak
+
+# Init keys (idempotent)
+gum spin --title "Initializing pacman keys..." -- sudo pacman-key --init
+gum spin --title "Populating archlinux keys..." -- sudo pacman-key --populate archlinux
+
+# --- Athena (always) ---
+if [[ ! -f /etc/pacman.d/athena-mirrorlist ]]; then
+  gum spin --title "Downloading Athena mirrorlist..." -- sudo curl -fsSL https://raw.githubusercontent.com/Athena-OS/athena/main/packages/os-specific/system/athena-mirrorlist/athena-mirrorlist \
+    -o /etc/pacman.d/athena-mirrorlist
+  if ! sudo pacman-key --list-keys A3F78B994C2171D5 >/dev/null 2>&1; then
+    gum spin --title "Receiving Athena keys..." -- sudo pacman-key --recv-keys A3F78B994C2171D5 --keyserver keys.openpgp.org
+    gum spin --title "Signing Athena keys..." -- sudo pacman-key --lsign A3F78B994C2171D5
+  fi
+  echo "$(gum style --foreground 10 '[SUCCESS]') Athena repo installed."
+else
+  echo "$(gum style --foreground 3 '[WARN]') Athena repo already present"
+fi
+
+# --- Chaotic (always) ---
+if [[ ! -f /etc/pacman.d/chaotic-mirrorlist ]]; then
+  gum spin --title "Receiving Chaotic keys..." -- sudo pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
+  gum spin --title "Signing Chaotic keys..." -- sudo pacman-key --lsign-key 3056513887B78AEB
+  gum spin --title "Installing Chaotic packages..." -- sudo pacman -U --noconfirm \
+    'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' \
+    'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
+  echo "$(gum style --foreground 10 '[SUCCESS]') Chaotic repo installed."
+else
+  echo "$(gum style --foreground 3 '[WARN]') Chaotic repo already present"
+fi
+
+# Write pacman.conf (always includes both repos)
+gum spin --title "Writing pacman configuration..." -- sudo tee /etc/pacman.conf > /dev/null <<'EOF'
+{{ includeTemplate "pacman.conf" . }}
+EOF
+
+echo "$(gum style --foreground 10 '[SUCCESS]') Done. Backup at /etc/pacman.conf.bak"

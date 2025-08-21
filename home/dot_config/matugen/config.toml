@@ -1,0 +1,175 @@
+[config.custom_colors]
+red = "#f38ba8"
+
+[templates.waybar]
+input_path = './templates/colors-waybar.css'
+output_path = '~/.config/waybar/wall.css'
+#pre_hook = 'killall syshud;syshud & disown'  # for syshud use same css
+
+[templates.swaync]
+input_path = './templates/colors-waybar.css'
+output_path = '~/.config/swaync/meterial.css'
+#post_hook = 'swaync-client -rs'
+
+[templates.kitty]
+input_path = './templates/colors-kitty.conf'
+output_path = '~/.config/kitty/themes/meterial.conf'
+post_hook = 'kill -SIGUSR1 $(pidof kitty);kitten themes --reload-in=all meterial &'
+
+[templates.tmux]
+input_path = './templates/colors-tmux.conf'
+output_path = '~/.config/tmux/tmux.conf'
+post_hook = 'tmux source ~/.config/tmux/tmux.conf &'
+
+[templates.foot]
+input_path = './templates/colors-foot.ini'
+output_path = '~/.config/foot/material.ini'
+#post_hook = '''
+#            for tty in /dev/pts/[0-9]*; do
+#                printf '\033]4;0;{{colors.surface.default.hex}}\007'          > "$tty"
+#                printf '\033]4;1;{{colors.red.default.hex}}\007'              > "$tty"
+#                printf '\033]4;2;{{colors.primary.default.hex}}\007'          > "$tty"
+#                printf '\033]4;3;{{colors.secondary.default.hex}}\007'        > "$tty"
+#                printf '\033]4;4;{{colors.tertiary.default.hex}}\007'         > "$tty"
+#                printf '\033]4;5;{{colors.secondary_container.default.hex}}\007' > "$tty"
+#                printf '\033]4;6;{{colors.primary_fixed.default.hex}}\007'    > "$tty"
+#                printf '\033]4;7;{{colors.on_surface.default.hex}}\007'       > "$tty"
+#            
+#                printf '\033]4;8;{{colors.surface_bright.default.hex}}\007'   > "$tty"
+#                printf '\033]4;9;{{colors.red_source.default.hex}}\007'       > "$tty"
+#                printf '\033]4;10;{{colors.primary_fixed.default.hex}}\007'   > "$tty"
+#                printf '\033]4;11;{{colors.secondary_fixed.default.hex}}\007' > "$tty"
+#                printf '\033]4;12;{{colors.tertiary_fixed.default.hex}}\007'  > "$tty"
+#                printf '\033]4;13;{{colors.secondary.default.hex}}\007'       > "$tty"
+#                printf '\033]4;14;{{colors.primary.default.hex}}\007'         > "$tty"
+#                printf '\033]4;15;{{colors.on_surface.default.hex}}\007'      > "$tty"
+#            done
+#          ```
+post_hook = '''
+            for tty in /dev/pts/[0-9]*; do printf '\033]11;{{colors.surface.default.hex}}\007' > "$tty" 2>/dev/null; done
+            #for tty in /dev/pts/[0-9]*; do printf '\033]4;5;{{colors.primary.default.hex}}\007' > "$tty" 2>/dev/null; done
+            '''
+
+[templates.tty]
+input_path = './templates/colors-tty.sh'
+output_path = '~/.cache/wal/sequences'
+
+[templates.gtk3]
+input_path = './templates/colors-gtk.css'
+output_path = '~/.config/gtk-3.0/colors.css'
+
+[templates.gtk4]
+input_path = './templates/colors-gtk.css'
+output_path = '~/.config/gtk-4.0/colors.css'
+
+[templates.qt5ct]
+input_path = './templates/colors-qt.conf'
+output_path = '~/.config/qt5ct/colors/meterial.conf'
+
+[templates.qt6ct]
+input_path = './templates/colors-qt.conf'
+output_path = '~/.config/qt6ct/colors/meterial.conf'
+
+[templates.kvantum]
+input_path = '~/.config/matugen/templates/colors-kvantum.kvconfig'
+output_path = '~/.config/Kvantum/meterial/meterial.kvconfig'
+
+[templates.kvantum-svg]
+input_path = "~/.config/matugen/templates/colors-kvantum.svg"
+output_path = "~/.config/Kvantum/meterial/meterial.svg"
+
+[templates.neovim-nvchad]
+input_path = '~/.config/matugen/templates/colors-nvchad.lua'
+output_path = '~/.local/share/nvim/lazy/base46/lua/base46/themes/meterial.lua'
+post_hook = 'killall -SIGUSR1 nvim &'
+
+[templates.neovim-nvchad-colors]
+input_path = '~/.config/matugen/templates/colors-nvchad'
+output_path = '~/.cache/wal/colors'
+
+[templates.spicetify]
+input_path = '~/.config/matugen/templates/colors-spotify.ini'
+output_path = '~/.config/spicetify/Themes/Comfy/color.ini'
+post_hook = 'spicetify apply &'
+
+[templates.hyprland]
+input_path = '~/.config/matugen/templates/colors-hyprland.conf'
+output_path = '~/.config/hypr/modules/meterial.conf'
+post_hook = 'hyprctl reload &'
+
+[templates.niri]
+input_path = '~/.config/matugen/templates/colors-niri.kdl'
+output_path = '~/.config/niri/config.kdl'
+
+[templates.telegram]
+input_path = "~/.config/matugen/templates/colors-telegram.tdesktop-theme"
+output_path = "~/.config/telegram-desktop/themes/colors.tdesktop-theme"
+post_hook = 'bg=$(head -n 1 ~/.cache/wal/colors);magick -size 256x256 "xc:$bg" ~/.config/telegram-desktop/themes/tiled.png && zip -q -j ~/.config/telegram-desktop/themes/meterial.tdesktop-theme ~/.config/telegram-desktop/themes/colors.tdesktop-theme ~/.config/telegram-desktop/themes/tiled.png && rm ~/.config/telegram-desktop/themes/colors.tdesktop-theme ~/.config/telegram-desktop/themes/tiled.png'
+
+[templates.vesktop]
+input_path = "~/.config/matugen/templates/colors-discord.css"
+output_path = "~/.config/vesktop/themes/meterial.css"
+
+[templates.clipse]
+input_path = '~/.config/matugen/templates/colors-clipse.json'
+output_path = '~/.config/clipse/custom_theme.json'
+
+#[templates.cava]
+#input_path = '~/.config/matugen/templates/colors-cava'
+#output_path = '~/.config/cava/config'
+#post_hook = 'pkill -USR2 cava'
+
+[templates.mpv]
+input_path = '~/.config/matugen/templates/colors-mpv.conf'
+output_path = '~/.config/mpv/meterial.conf'
+
+[templates.folders]
+input_path = '~/.config/matugen/templates/colors-folders.toml'
+output_path = '/tmp/icons'
+colors_to_compare = [
+  { name = "Fluent-teal-dark", color = "#159a80" },
+  { name = "Fluent-green-dark", color = "#a1bf80" },
+  { name = "Fluent-yellow-dark", color = "#f3c863" },
+  { name = "Fluent-orange-dark", color = "#eba96a" },
+  { name = "Fluent-red-dark", color = "#e27c7c" },
+  { name = "Fluent-pink-dark", color = "#ec87a9" },
+  { name = "Fluent-purple-dark", color = "#9b7fcb" },
+  { name = "Fluent-dark", color = "#5294e2" }
+]
+compare_to = "{{colors.primary.default.hex}}"
+post_hook = "gsettings set org.gnome.desktop.interface icon-theme {{closest_color}} && sed -i 's/^Theme=.*/Theme={{closest_color}}/' .config/kdeglobals && sed -i \"s/^\\$icon = '.*'/\\$icon = 'Fluent-green-dark'/\" ~/.config/hypr/modules/meterial.conf &"
+
+[templates.pywalfox]
+input_path = '~/.config/matugen/templates/colors-pywalfox.json'
+output_path = '~/.cache/wal/colors.json'
+post_hook = 'pywalfox update &'
+
+[templates.rofi]
+input_path = '~/.config/matugen/templates/colors-rofi.rasi'
+output_path = '~/.config/rofi/themes/colors.rasi'
+
+[templates.flameshot]
+input_path = '~/.config/matugen/templates/colors-flameshot.ini'
+output_path = '~/.config/flameshot/flameshot.ini'
+
+[templates.normcap]
+input_path = '~/.config/matugen/templates/colors-normcap.conf'
+output_path = '~/.config/normcap/settings.conf'
+
+[templates.quickshell]
+input_path = '~/.config/matugen/templates/colors-quickshell.json'
+output_path = '~/.local/state/quickshell/user/generated/colors.json'
+
+[templates.fuzzel]
+input_path = '~/.config/matugen/templates/colors-fuzzel.ini'
+output_path = '~/.config/fuzzel/fuzzel_theme.ini'
+
+[templates.zenChrome]
+input_path = '~/.config/matugen/templates/colors-zenChrome.css'
+output_path = '~/.cache/zenChrome.css'
+post_hook = 'ln -sf ~/.cache/zenChrome.css ~/.zen/*release*/chrome/userChrome.css'
+
+[templates.zenContent]
+input_path = '~/.config/matugen/templates/colors-zenContent.css'
+output_path = '~/.cache/zenContent.css'
+post_hook = 'ln -sf ~/.cache/zenChrome.css ~/.zen/*release*/chrome/userContent.css'

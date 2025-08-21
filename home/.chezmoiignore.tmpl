@@ -1,0 +1,13 @@
+{{- if ne .chezmoi.username "shadow" }}
+.chezmoiscripts/01-configure-repo.sh
+.chezmoiscripts/02-install-packages.sh
+.chezmoiscripts/03-setup-sddm.sh
+.chezmoiscripts/04-enable-services.sh
+.chezmoiscripts/setup-gpg.sh
+.chezmoiscripts/setup-spotify.sh
+.gnupg
+.gnupg/**
+.config/spotify/*
+.gitconfig
+.git-credentials
+{{- end }}

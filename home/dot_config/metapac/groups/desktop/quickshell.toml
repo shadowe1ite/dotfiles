@@ -1,0 +1,61 @@
+arch = [
+  { package = "quickshell-git", hooks = { after_install = [
+    "sh",
+    "-c",
+    "[ ! -d ~/.local/state/quickshell/user ] && mkdir -p ~/.local/state/quickshell/user; touch ~/.local/state/quickshell/user/first_run.txt"
+  ] } },
+
+  #"bongocat",
+  "kdialog",
+  "qt6-5compat",
+  "qt6-avif-image-plugin",
+  "qt6-base",
+  "qt6-declarative",
+  "qt6-imageformats",
+  "qt6-multimedia",
+  "qt6-positioning",
+  "qt6-quicktimeline",
+  "qt6-sensors",
+  "qt6-svg",
+  "qt6-tools",
+  "qt6-translations",
+  "qt6-virtualkeyboard",
+  "syntax-highlighting",
+  "translate-shell",
+  "upower",
+  "wtype",
+
+  { package = "ydotool", hooks = { after_install = [
+    "systemctl",
+    "--user",
+    "enable",
+    "--now",
+    "ydotool"
+  ] } },
+
+  "illogical-impulse-basic",
+  "hyprshot",
+  "slurp",
+  "swappy",
+  "tesseract",
+  "tesseract-data-eng",
+  # "wf-recorder",
+  "darkly",
+  "eza",
+  "fontconfig",
+  "otf-space-grotesk",
+  "ttf-gabarito-git",
+  "ttf-jetbrains-mono-nerd",
+  "ttf-material-symbols-variable-git",
+  "ttf-readex-pro",
+  "ttf-rubik-vf",
+  "ttf-twemoji",
+  "libsoup3",
+  "libportal-gtk4",
+  "gobject-introspection",
+  "sassc",
+  "python-opencv",
+  "fuzzel",
+  "plasma-nm"
+  
+]

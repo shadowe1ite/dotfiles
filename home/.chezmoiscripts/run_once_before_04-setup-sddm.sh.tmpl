@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+THEME_DIR="/usr/share/sddm/themes/silent"
+META_PATH="$THEME_DIR/metadata.desktop"
+
+echo "$(gum style --foreground 4 "[INFO]") Writing /etc/sddm.conf"
+sudo tee /etc/sddm.conf >/dev/null <<'EOF'
+{{ includeTemplate "sddm.conf" . }}
+EOF
+echo "$(gum style --foreground 10 "[SUCCESS]") /etc/sddm.conf done"
+
+echo
+
+if [[ ! -d "$THEME_DIR" ]]; then
+  echo "$(gum style --foreground 3 "[WARN]") Theme directory missing: $THEME_DIR"
+  echo "$(gum style --foreground 3 "[WARN]") Install the Silent theme package, then re-run."
+  exit 0
+fi
+
+echo "$(gum style --foreground 4 "[INFO]") Writing $META_PATH (variant: {{ or .sddm_silent_variant "rei" }})"
+sudo tee "$META_PATH" >/dev/null <<'EOF'
+{{ includeTemplate "silent_metadata.desktop.tmpl" . }}
+EOF
+echo "$(gum style --foreground 10 "[SUCCESS]") $META_PATH done"
+
+echo
+
+echo "$(gum style --foreground 4 "[INFO]") Enabling sddm service"
+if systemctl is-enabled --quiet sddm 2>/dev/null; then
+  echo "$(gum style --foreground 3 "[WARN]") sddm already enabled"
+else
+  sudo systemctl enable sddm
+  echo "$(gum style --foreground 10 "[SUCCESS]") Enabled sddm"
+fi
+
+echo
+
+echo "$(gum style --foreground 4 "[INFO]") Finished. Restart to apply now: sudo systemctl restart sddm (logs you out)"

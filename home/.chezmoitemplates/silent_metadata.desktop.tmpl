@@ -1,0 +1,40 @@
+[SddmGreeterTheme]
+Name=Silent
+Type=sddm-theme
+Description=A very customizable SDDM theme that actually looks good.
+License=GPL-3.0-or-later
+Version=1.3.0
+Theme-Id=silent
+Theme-API=2.0
+MainScript=Main.qml
+Screenshot=docs/previews/default.png
+TranslationsDirectory=translations
+QtVersion=6
+
+{{- $variants := list
+"default"
+"default-left"
+"default-right"
+"rei"
+"ken"
+"silvia"
+"catppuccin-latte"
+"catppuccin-frappe"
+"catppuccin-macchiato"
+"catppuccin-mocha"
+-}}
+{{- $want := or .sddm_silent_variant "rei" -}}
+{{- $ok := false -}}
+{{- range $variants }}{{ if eq . $want }}{{ $ok = true }}{{ end }}{{ end -}}
+{{- if not $ok }}
+; NOTE: Unknown variant '{{ $want }}' requested; falling back to 'rei'.
+{{- $want = "rei" -}}
+{{- end }}
+
+{{- range $variants }}
+{{- if eq . $want }}
+ConfigFile=configs/{{ . }}.conf
+{{- else }}
+; ConfigFile=configs/{{ . }}.conf
+{{- end }}
+{{- end }}

@@ -1,0 +1,36 @@
+#!/bin/env bash
+
+# Base storage location - simple template variable
+STORAGE="{{ .storage | default "/mnt/storage" }}"
+
+echo
+echo "$(gum style --foreground 4 "[INFO]") Setting up user directories and symlinks"
+echo "$(gum style --foreground 4 "[INFO]") Storage path: ${STORAGE}"
+echo
+
+# Handle special directories first
+[ -d $HOME/Documents ] && { echo "$(gum style --foreground 1 "Removing $HOME/Documents")"; rm -rf $HOME/Documents; }
+[ ! -d $HOME/Videos ] && { echo "$(gum style --foreground 2 "Creating $HOME/Videos")"; mkdir -p $HOME/Videos; }
+
+# Create all symlinks with source existence check
+for link in \
+    "$STORAGE/Movies:$HOME/Videos/Movies" \
+    "$STORAGE/courses:$HOME/Videos/courses" \
+    "$STORAGE/Documents:$HOME/Documents" \
+    "$STORAGE/wall:$HOME/wall" \
+    "$STORAGE/code:$HOME/code"; do
+    
+    SRC=${link%:*}
+    DST=${link#*:}
+    
+    # Check if source exists
+    [ ! -d "$SRC" ] && { echo "$(gum style --foreground 1 "Error: $SRC doesn't exist")"; continue; }
+    
+    # Remove existing destination if it exists
+    [ -e "$DST" ] && { echo "$(gum style --foreground 3 "Removing existing $DST")"; rm -rf "$DST"; }
+    
+    # Create symlink
+    ln -sf "$SRC" "$DST" && echo "$(gum style --foreground 2 "Linked: $DST -> $SRC")"
+done
+
+echo "$(gum style --foreground 10 "[SUCCESS]") Finished setting up directories"

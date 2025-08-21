@@ -1,0 +1,14 @@
+services:
+  user:
+    - pipewire.service
+    - pipewire.socket
+    - pipewire-pulse.service
+    - pipewire-pulse.socket
+    - wireplumber.service
+    - ydotool.service
+    - gpg-agent.socket
+  system:
+    - thermald.service
+    - earlyoom.service
+    - bluetooth.service
+    - docker.service

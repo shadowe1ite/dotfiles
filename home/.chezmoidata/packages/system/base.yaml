@@ -1,0 +1,55 @@
+hardware:
+  - brightnessctl
+  - thermald
+  - earlyoom
+
+containers:
+  - docker
+  - docker-compose
+  - podman
+  - distrobox
+
+pkgmanagers:
+  - yay
+  - downgrade
+
+python:
+  - python
+  - python-pip
+  - python-pipx
+  - python-packaging
+
+man:
+  - man-db
+  - man-pages
+
+network:
+  - net-tools
+  - wireless_tools
+  - network-manager-applet
+  - blueman
+
+utils:
+  - wget
+  - unzip
+  - zip
+  - tar
+  - unrar
+  - 7zip
+  - grc
+  - plocate
+  - jq
+  - fzf
+  - bat
+  - binder_linux-dkms
+
+dots:
+  - xdg-user-dirs
+  - zoxide
+  - zsh
+  - starship
+  - tmux
+  - tmux-plugin-manager
+
+secrets:
+  - pass

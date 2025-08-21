@@ -1,0 +1,17 @@
+bar:
+  - waybar
+
+notifications:
+  - swaync
+  - syshud
+
+launchers:
+  - rofi-lbonn-wayland-git
+  - rofi-emoji-git
+
+clipboard:
+  - clipse
+
+fonts:
+  - ttf-press-start-2p
+  - noto-fonts-emoji

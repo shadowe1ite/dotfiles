@@ -1,0 +1,14 @@
+[".local/bin/gum"]
+type = "archive-file"
+url = {{ gitHubLatestReleaseAssetURL "charmbracelet/gum" "gum_*_Linux_x86_64.tar.gz" | quote }}
+executable = true
+stripComponents = 1
+path = "gum"
+
+[".config/quickshell"]
+type = "archive"
+url = "https://api.github.com/repos/end-4/dots-hyprland/tarball"
+exact = true
+include = ["*/.config/quickshell/**"]
+stripComponents = 3
+refreshPeriod = "168h"

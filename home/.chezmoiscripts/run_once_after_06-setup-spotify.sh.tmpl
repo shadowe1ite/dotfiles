@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+# Check and install dependencies
+echo
+echo "$(gum style --foreground 4 "[INFO]") Checking Spotify dependencies..."
+command -v spotify &>/dev/null || gum spin --title "Installing Spotify..." -- yay -S --noconfirm spotify
+command -v spicetify &>/dev/null || gum spin --title "Installing Spicetify..." -- yay -S --noconfirm spicetify-cli
+command -v spotx &>/dev/null || gum spin --title "Installing SpotX..." -- yay -S --noconfirm spotx-git
+
+# Make Spotify directories writable
+echo
+echo "$(gum style --foreground 4 "[INFO]") Setting up Spotify permissions..."
+gum spin --title "Configuring permissions..." -- sudo chmod a+wr /opt/spotify
+gum spin --title "Setting App permissions..." -- sudo chmod a+wr /opt/spotify/Apps -R
+
+# Run spotx (with error handling)
+echo
+echo "$(gum style --foreground 4 "[INFO]") Running SpotX..."
+if ! gum spin --title "Running SpotX..." -- spotx; then
+  echo "$(gum style --foreground 3 "[WARN]") SpotX failed, continuing anyway"
+fi
+
+# Configure spicetify
+echo
+echo "$(gum style --foreground 4 "[INFO]") Configuring Spicetify..."
+
+# Run spicetify commands with gum spin (as separate operations)
+gum spin --title "Creating Spicetify backup..." -- spicetify backup
+gum spin --title "Applying Spicetify base config..." -- spicetify apply
+
+gum spin --title "Setting Comfy theme..." -- spicetify config current_theme Comfy
+gum spin --title "Setting color scheme..." -- spicetify config color_scheme color
+gum spin --title "Configuring CSS injection..." -- spicetify config inject_css 1 replace_colors 1 overwrite_assets 1 inject_theme_js 1
+gum spin --title "Configuring sidebar..." -- spicetify config sidebar_config 0
+gum spin --title "Applying final configuration..." -- spicetify apply
+
+echo
+echo "$(gum style --foreground 10 "[SUCCESS]") Spotify setup completed"

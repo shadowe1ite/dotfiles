@@ -1,0 +1,56 @@
+hyprland:
+  - hyprutils
+  - hyprlang
+  - hyprwayland-scanner
+  - hyprland
+  - xdg-desktop-portal-hyprland
+  - hypridle
+  - hyprlock
+  - hyprpicker
+  - hyprpolkitagent
+
+icons:
+  - fluent-icon-theme-git
+
+audio:
+  - pipewire
+  - pipewire-pulse
+  - pipewire-alsa
+  - pipewire-audio
+  - pipewire-jack
+  - gst-plugin-pipewire
+  - wireplumber
+
+terminal:
+  - foot
+
+wallpaper:
+  - swww
+  - waypaper
+  - matugen-bin
+  - adw-gtk-theme
+
+fonts:
+  - ttf-sourcecodepro-nerd
+
+clipboard:
+  - wl-clipboard
+  - wl-clip-persist-git
+
+gtk_qt:
+  - kvantum
+  - qt5ct
+  - qt6ct
+  - qt5-wayland
+  - qt6-wayland
+  - nwg-look
+
+scratchpad:
+  - pyprland
+
+gestures:
+  - libinput-gestures
+
+display_manager:
+  - sddm
+  - sddm-silent-theme

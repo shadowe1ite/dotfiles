@@ -1,0 +1,17 @@
+drivers-generic:
+  - libva
+  - libva-utils
+  - vulkan-tools
+  - vulkan-icd-loader
+  - mesa
+
+drivers-intel:
+  - intel-ucode
+  - vulkan-intel
+
+drivers-nvidia:
+  - nvidia
+  - nvidia-utils
+  - libva-nvidia-driver-git
+  - nvidia-prime
+  - nvidia-settings

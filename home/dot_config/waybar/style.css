@@ -1,0 +1,248 @@
+@import "wall.css";
+
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "JetBrainsMono Nerd Font", "MesloLGS Nerd Font", "Font Awesome";
+  font-weight: bold;
+  font-size: 12px;
+  min-height: 0;
+}
+
+window#waybar {
+  background-color: @background;
+  border: 2px solid @primary;
+  border-radius: 10px;
+}
+
+tooltip {
+  background: @surface;
+  opacity: 1;
+  border-radius: 10px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: @tertiary;
+}
+
+tooltip label {
+  font-size: 16px;
+  color: @on_surface;
+}
+
+#workspaces button {
+  padding: 7px 0;
+  color: @primary;
+  margin-right: 5px;
+  background-color: transparent;
+}
+
+#workspaces button.active {
+  color: @on_primary_container;
+  background-color: @primary_container;
+  border-radius: 15px;
+}
+
+#workspaces button.focused {
+  color: @on_tertiary_container;
+  background: @tertiary_container;
+  border-radius: 15px;
+}
+
+#workspaces button.urgent {
+  color: @on_error_container;
+  background: @error_container;
+  border-radius: 15px;
+}
+
+#workspaces button:hover {
+  background: @surface_container_high;
+  color: @primary_fixed;
+  border-radius: 15px;
+}
+
+#custom-launch_rofi,
+#custom-lock_screen,
+#custom-power,
+#custom-reboot,
+#custom-logout,
+#custom-lock,
+#custom-weather,
+#idle_inhibitor,
+#clock,
+#pulseaudio,
+#network,
+#tray,
+#workspaces,
+#battery,
+#temperature,
+#mpris,
+#custom-nightlight,
+#custom-notify,
+#backlight {
+  background: transparent;
+  opacity: 1;
+  padding: 10px 4px;
+  padding-left: 6px;
+}
+
+#idle_inhibitor {
+  font-size: 15px;
+  padding: 5px 0;
+  background: transparent;
+  color: @secondary;
+  border-radius: 15px 0 0 15px;
+  margin-right: 0px;
+}
+
+#custom-nightlight {
+  border-radius: 0;
+  color: @tertiary;
+  font-size: 14px;
+  margin-left: 6px;
+}
+
+#custom-notify {
+  color: #EBA0AC;
+}
+
+#mpris {
+  background-color: transparent;
+  font-size: 15px;
+  color: @primary_fixed;
+}
+
+#temperature, #battery {
+  color: @tertiary_fixed;
+  background-color: transparent;
+}
+
+#battery.critical:not(.charging) {
+  color: @error;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@keyframes blink {
+  to {
+    color: @error_container;
+  }
+}
+
+#custom-reboot,
+#custom-logout,
+#custom-lock,
+#custom-power {
+  color: @error;
+  border-radius: 15px;
+  font-size: 15px;
+  font-weight: bolder;
+  padding-left: 1px;
+}
+
+#custom-power {
+  padding-bottom: 10px;
+}
+
+#network {
+  background-color: transparent;
+  font-size: 15px;
+  color: @secondary_fixed;
+}
+
+/*#backlight {
+  background-color: @surface_container;
+  color: @primary_fixed_dim;
+  padding: 0 5px;
+  font-size: 16px;
+  border-radius: 0 15px 15px 0;
+}
+*/
+#custom-lock_screen {
+  border-radius: 15px;
+  padding-right: 13px;
+}
+
+#tray {
+  background-color: transparent;
+  font-size: 12px;
+}
+
+#custom-weather {
+  color: @tertiary_fixed;
+  border-radius: 15px;
+  background-color: transparent;
+}
+
+#workspaces {
+  border-radius: 15px;
+}
+
+#custom-launch_rofi {
+  color: @primary;
+  padding: 15px;
+  padding-right: 20px;
+  font-size: 15px;
+  border-radius: 15px;
+}
+
+
+#backlight-slider, #pulseaudio-slider {
+  margin-top: 10px;
+}
+
+
+#backlight-slider slider, #pulseaudio-slider slider {
+  min-height: 7px;
+  min-width: 15px;
+  opacity: 0;
+  background-color: @primary_fixed_dim;
+  border-radius: 3px;
+  box-shadow: 1px 5px 6px 1px #272727;
+}
+
+#backlight-slider trough, #pulseaudio-slider trough {
+  min-height: 100px;
+  min-width: 7px;
+  border-radius: 5px;
+  background-color: @tertiary_container;
+}
+
+
+#backlight-slider highlight, #pulseaudio-slider highlight {
+  min-width: 5px;
+  border-radius: 5px;
+  background-color: @tertiary;
+}
+
+#backlight, #pulseaudio {
+  background-color: transparent;
+  margin-top: -5px;
+  color: @primary_fixed_dim;
+}
+
+#clock,
+#clock-calender {
+  color: @tertiary;
+  border-radius: 15px;
+  padding: 15px 0;
+  font-size: 12px;
+}
+
+#clock {
+  padding-top: 5px;
+}
+
+#custom-dots {
+  color: @secondary;
+  font-size: 15px;
+}
+
+#custom-dot {
+  color: @secondary_fixed_dim;
+  font-size: 15;
+  padding: 0 15px;
+  padding-left: 10px;
+}

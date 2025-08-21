@@ -1,0 +1,61 @@
+character_selector:
+  - gnome-characters
+
+task_manager:
+  - resources
+
+ocr:
+  - normcap
+
+usb:
+  - udiskie
+
+network:
+  - better-control-git
+
+browser:
+  - zen-browser-bin
+
+social:
+  - telegram-desktop
+  - vesktop-bin
+
+media:
+  - dolphin
+  - nautilus
+  - packet
+  - qt5-imageformats
+  - ffmpegthumbs
+  - loupe
+  - ark
+  - mpv
+  - mpv-thumbfast-git
+  - qbittorrent
+  - mugshot
+
+screen_record:
+  - obs-studio
+
+documents:
+  - zaread-git
+  - libreoffice-still
+  - evince
+  - pdfarranger
+
+rgb:
+  - piper
+  - openrgb
+
+code:
+  - visual-studio-code-bin
+  - neovim
+  - gnome-text-editor
+
+music:
+  - mpd
+  - mpc
+  - pamixer
+  - easyeffects
+  - spotify
+  - spicetify-cli
+  - spotx-git

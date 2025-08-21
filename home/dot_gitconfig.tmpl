@@ -1,0 +1,16 @@
+[user]
+	email = {{ .email}}
+	name = {{ .name}}
+  signingkey = {{ .email}}
+
+[credential]
+	helper = store
+
+[core]
+	editor = nvim
+
+[commit]
+	gpgsign = true
+
+[github]
+	signingkey = {{ .email}}

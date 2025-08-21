@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+USER_SERVICES=(
+{{- with .services }}
+  {{- with .user }}
+    {{- range . }}"{{ . }}" {{ end -}}
+  {{- end -}}
+{{- end -}}
+)
+
+SYSTEM_SERVICES=(
+{{- with .services }}
+  {{- with .system }}
+    {{- range . }}"{{ . }}" {{ end -}}
+  {{- end -}}
+{{- end -}}
+)
+
+echo;echo "$(gum style --foreground 4 "[INFO]") Setting up services"
+
+echo;echo "$(gum style --foreground 5 "User services count:") $(gum style --foreground 1 "${#USER_SERVICES[@]}")"
+for s in "${USER_SERVICES[@]}"; do
+  if systemctl --user is-enabled "$s" &>/dev/null; then
+    echo "$(gum style --foreground 6 "already:") $s"
+  else
+    if systemctl --user enable --now "$s" &>/dev/null; then
+      echo "$(gum style --foreground 2 "enabled:") $s"
+    else
+      echo "$(gum style --foreground 1 "FAILED:") $s"
+    fi
+  fi
+done
+
+echo;echo "$(gum style --foreground 5 "System services count:") $(gum style --foreground 1 "${#SYSTEM_SERVICES[@]}")"
+for s in "${SYSTEM_SERVICES[@]}"; do
+  if systemctl is-enabled "$s" &>/dev/null; then
+    echo "$(gum style --foreground 6 "already:") $s"
+  else
+    if sudo systemctl enable --now "$s" &>/dev/null; then
+      echo "$(gum style --foreground 2 "enabled:") $s"
+    else
+      echo "$(gum style --foreground 1 "FAILED:") $s"
+    fi
+  fi
+done
+
+echo;echo "$(gum style --foreground 10 "[SUCCESS]") Finished setting up services"
