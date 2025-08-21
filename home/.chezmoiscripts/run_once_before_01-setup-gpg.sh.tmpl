@@ -33,7 +33,7 @@ gum spin --title "Importing GPG keys..." -- bash -c "bw list items --session \"$
 # Trust the key
 echo
 echo "$(gum style --foreground 4 "[INFO]") Setting GPG key trust..."
-gum spin --title "Setting key trust level..." -- bash -c "echo -e \"trust\\n5\\ny\\n\" | gpg --command-fd 0 --edit-key {{ .email }} &>/dev/null"
+gum spin --title "Setting key trust level..." -- bash -c "echo -e \"trust\\n5\\ny\\n\" | gpg --batch --command-fd 0 --edit-key {{ .email }} >/dev/null 2>&1"
 
 # Get token and clone
 echo
