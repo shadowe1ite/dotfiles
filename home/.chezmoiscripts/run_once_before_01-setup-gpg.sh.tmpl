@@ -4,6 +4,8 @@
 {{- $github_token_id := "1b48a5cc-4f95-4704-a6e2-b33c011e4532" }}
 
 # Ensure dependencies
+yay -S --noconfirm gum >/dev/null 2>&1
+clear
 command -v bw  &>/dev/null || gum spin --title "Installing Bitwarden CLI..." -- yay -S --noconfirm bitwarden-cli
 command -v jq  &>/dev/null || gum spin --title "Installing jq..." -- yay -S --noconfirm jq
 command -v gpg &>/dev/null || gum spin --title "Installing GnuPG..." -- yay -S --noconfirm gnupg
