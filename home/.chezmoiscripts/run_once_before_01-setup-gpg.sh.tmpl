@@ -46,7 +46,8 @@ EOF
 
 # Restart GPG agent and unlock key once
 gpg-connect-agent reloadagent /bye
-gpg --sign --default-key {{ .email }} --output /dev/null <<< "unlock"
+echo "$(gum style --foreground 4 "[INFO]") Enter GPG password"
+gpg --pinentry-mode loopback --sign --default-key {{ .email }} --output /dev/null <<< "unlock"
 
 # Get token and clone
 echo
