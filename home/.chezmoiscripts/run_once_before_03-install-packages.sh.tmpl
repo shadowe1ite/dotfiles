@@ -38,7 +38,7 @@ skip_pkg() {
 }
 
 # Update database
-gum spin --title "Sending Telegram reminder" -- curl -s -X POST "https://api.telegram.org/bot{{ pass "telegram/bot/token" }}/sendMessage" -d chat_id="{{ pass "telegram/bot/chatId" }}" -d text="📦 Package installion started ..."
+gum spin --title "Sending Telegram reminder" -- curl -s -X POST "https://api.telegram.org/bot{{ pass "telegram/bot/token" }}/sendMessage" -d chat_id="{{ pass "telegram/bot/chatId" }}" -d text="📦 Package installation started..."
 
 echo "$(gum style --foreground 4 "[INFO]") Updating database"
 gum spin --title "Updating database..." -- bash -c "yay -Syy --noconfirm --sudoloop || exit \$?" && echo "$(gum style --foreground 10 "[SUCCESS]")" || echo "$(gum style --foreground 1 "[FAILED]")"
