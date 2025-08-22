@@ -35,6 +35,19 @@ echo
 echo "$(gum style --foreground 4 "[INFO]") Setting GPG key trust..."
 gum spin --title "Setting key trust level..." -- bash -c "echo -e \"trust\\n5\\ny\\n\" | gpg --batch --command-fd 0 --edit-key {{ .email }} >/dev/null 2>&1"
 
+# Configure GPG agent for passphrase caching
+echo
+echo "$(gum style --foreground 4 "[INFO]") Configuring GPG agent..."
+mkdir -p ~/.gnupg
+cat > ~/.gnupg/gpg-agent.conf << EOF
+default-cache-ttl 28800
+max-cache-ttl 86400
+EOF
+
+# Restart GPG agent and unlock key once
+gpg-connect-agent reloadagent /bye
+echo "test" | gpg --clearsign --default-key {{ .email }} >/dev/null 2>&1
+
 # Get token and clone
 echo
 echo "$(gum style --foreground 4 "[INFO]") Cloning password store..."
