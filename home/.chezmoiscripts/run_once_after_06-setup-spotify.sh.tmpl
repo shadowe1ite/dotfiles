@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 # Check and install dependencies
+gum spin --title "Sending Telegram reminder" -- curl -s -X POST "https://api.telegram.org/bot{{ pass "telegram/bot/token" }}/sendMessage" -d chat_id="{{ pass "telegram/bot/chatId" }}" -d text="🎵 Setting up Spotify."
+
 echo
 echo "$(gum style --foreground 4 "[INFO]") Checking Spotify dependencies..."
 command -v spotify &>/dev/null || gum spin --title "Installing Spotify..." -- yay -S --noconfirm spotify
@@ -35,4 +37,6 @@ gum spin --title "Configuring sidebar..." -- spicetify config sidebar_config 0
 gum spin --title "Applying final configuration..." -- spicetify apply
 
 echo
+gum spin --title "Sending Telegram reminder" -- curl -s -X POST "https://api.telegram.org/bot{{ pass "telegram/bot/token" }}/sendMessage" -d chat_id="{{ pass "telegram/bot/chatId" }}" -d text="✅ Finished Setting spotify."
+
 echo "$(gum style --foreground 10 "[SUCCESS]") Spotify setup completed"

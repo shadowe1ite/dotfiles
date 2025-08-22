@@ -43,6 +43,8 @@ gum spin --title "Updating database..." -- bash -c "yay -Syy --noconfirm --sudol
 echo
 
 # Install packages
+gum spin --title "Sending Telegram reminder" -- curl -s -X POST "https://api.telegram.org/bot{{ pass "telegram/bot/token" }}/sendMessage" -d chat_id="{{ pass "telegram/bot/chatId" }}" -d text="📦 Package installion started ..."
+
 install_pkg "Base" "{{ template "list" $base }}"
 install_pkg "Nvidia" "{{ template "list" $nvidia }}"
 install_pkg "Hyprland" "{{ template "list" $hyprland }}"
@@ -72,5 +74,8 @@ install_pkg "Games" "{{ template "list" $games }}"
 {{ else }}
 skip_pkg "Games"
 {{ end }}
+
+gum spin --title "Sending Telegram reminder" -- curl -s -X POST "https://api.telegram.org/bot{{ pass "telegram/bot/token" }}/sendMessage" -d chat_id="{{ pass "telegram/bot/chatId" }}" -d text="✅ Package Installation Finished."
+
 
 echo "$(gum style --foreground 10 "[SUCCESS]") All done."

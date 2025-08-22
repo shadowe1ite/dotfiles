@@ -35,4 +35,4 @@ done
 
 echo "$(gum style --foreground 10 "[SUCCESS]") Finished setting up directories"
 
-gum spin --title "Sending Telegram reminder" -- curl -s -X POST "https://api.telegram.org/bot{{ pass "telegram/bot/token" }}/sendMessage" -d chat_id="{{ pass "telegram/bot/chatId" }}" -d text="📁 All Done. Now reboot your system"
+gum spin --title "Sending Telegram reminder" -- curl -s -X POST "https://api.telegram.org/bot{{ pass "telegram/bot/token" }}/sendMessage" -d chat_id="{{ pass "telegram/bot/chatId" }}" -d text="🌸 All Done 🎉. Now reboot your system"
