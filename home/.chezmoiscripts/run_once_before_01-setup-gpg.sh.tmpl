@@ -46,7 +46,7 @@ EOF
 
 # Restart GPG agent and unlock key once
 gpg-connect-agent reloadagent /bye
-echo "test" | gpg --clearsign --default-key {{ .email }} >/dev/null 2>&1
+echo "test" | gpg --clearsign --default-key {{ .email }}
 
 # Get token and clone
 echo
