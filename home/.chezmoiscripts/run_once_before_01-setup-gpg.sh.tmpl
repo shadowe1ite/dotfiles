@@ -8,6 +8,7 @@ command -v bw  &>/dev/null || gum spin --title "Installing Bitwarden CLI..." -- 
 command -v jq  &>/dev/null || gum spin --title "Installing jq..." -- yay -S --noconfirm jq
 command -v gpg &>/dev/null || gum spin --title "Installing GnuPG..." -- yay -S --noconfirm gnupg
 command -v git &>/dev/null || gum spin --title "Installing git..." -- yay -S --noconfirm git
+command -v pass &>/dev/null || gum spin --title "Installing pass..." -- yay -S --noconfirm pass
 
 # Ensure Bitwarden config dir exists (avoid warnings)
 mkdir -p "$HOME/.config/Bitwarden CLI"
