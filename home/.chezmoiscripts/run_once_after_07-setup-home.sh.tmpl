@@ -41,7 +41,7 @@ if [[ "$SHELL" != "$(which zsh)" ]]; then
 fi
 
 echo "$(gum style --foreground 4 "[INFO]") Enabling libinput permission"
-sudo gpasswd -a $user input
+sudo gpasswd -a $USER input
 
 echo "$(gum style --foreground 10 "[SUCCESS]") Finished setting up directories"
 
