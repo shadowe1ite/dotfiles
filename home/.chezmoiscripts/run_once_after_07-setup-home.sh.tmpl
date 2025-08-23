@@ -33,6 +33,7 @@ for link in \
     ln -sf "$SRC" "$DST" && echo "$(gum style --foreground 2 "Linked: $DST -> $SRC")"
 done
 
+{{- if ne .chezmoi.username "shadow" }}
 # Check if current shell is already zsh
 if [[ "$SHELL" != "$(which zsh)" ]]; then
     gum spin --title "Installing Zsh Plugins" -- zsh -c 'source ~/.zshrc'
@@ -46,3 +47,4 @@ sudo gpasswd -a $USER input
 echo "$(gum style --foreground 10 "[SUCCESS]") Finished setting up directories"
 
 gum spin --title "Sending Telegram reminder" -- curl -s -X POST "https://api.telegram.org/bot{{ pass "telegram/bot/token" }}/sendMessage" -d chat_id="{{ pass "telegram/bot/chatId" }}" -d text="🌸 All Done 🎉. Now reboot your system"
+{{- end }}
