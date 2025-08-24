@@ -49,6 +49,8 @@ scratchpad:
 
 gestures:
   - libinput-gestures
+  - xdotool
+  - wmctrl
 
 display_manager:
   - sddm
