@@ -33,7 +33,7 @@ for link in \
     ln -sf "$SRC" "$DST" && echo "$(gum style --foreground 2 "Linked: $DST -> $SRC")"
 done
 
-{{- if ne .chezmoi.username "shadow" }}
+{{- if eq .chezmoi.username "shadow" }}
 # Check if current shell is already zsh
 if [[ "$SHELL" != "$(which zsh)" ]]; then
     gum spin --title "Installing Zsh Plugins" -- zsh -c 'source ~/.zshrc'
