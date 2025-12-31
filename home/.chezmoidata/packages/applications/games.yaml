@@ -1,0 +1,14 @@
+gaming:
+#  - wine
+#  - winetricks
+  - lutris
+#  - rofi-games
+  - dualsensectl
+  - steam
+  - bottles
+  - gamescope
+  - gamemode
+  - mangohud
+#  - proton-ge-custom-bin
+  - protonup-qt
+  - heroic-games-launcher-bin

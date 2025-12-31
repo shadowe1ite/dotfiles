@@ -1,0 +1,60 @@
+{{- $chassis := includeTemplate "sys-chassis.tmpl" . }}
+
+{{- if eq $chassis "vm" }}
+.chezmoiscripts/06-setup-second-disk.sh
+{{ end }}
+
+{{- if ne .chezmoi.username .user }}
+.chezmoiscripts/01-setup-gpg.sh
+.chezmoiscripts/02-configure-repo.sh
+.chezmoiscripts/03-install-packages.sh
+.chezmoiscripts/04-setup-sddm.sh
+.chezmoiscripts/05-enable-services.sh
+.chezmoiscripts/06-setup-second-disk.sh
+.gnupg
+.gnupg/**
+.config/spotify/*
+.gitconfig
+.git-credentials
+.local/state/quickshell/user/todo.json
+.chezmoiscripts/06a-setup-nvidia.sh
+.chezmoiscripts/00-prepare.sh
+.config/archinstall/creds.json
+.local/bin/flash
+.zen/{{ .home.zen.release_path }}/bookmarks.html
+.vdirsyncer/
+.config/khal/
+.config/vdirsyncer/
+.local/share/lutris/games/
+.local/share/lutris/pga.db
+.ssh/
+{{- end }}
+
+{{- if eq .home.zen.sineMode false }}
+.zen/{{ .home.zen.release_path }}/chrome/JS
+.zen/{{ .home.zen.release_path }}/chrome/sine-mods
+.zen/{{ .home.zen.release_path }}/chrome/utils
+{{ end }}
+
+{{- if eq .home.zen.sineMode true }}
+.zen/{{ .home.zen.release_path }}/chrome/userChrome.css
+.zen/{{ .home.zen.release_path }}/chrome/userContent.css
+{{ end }}
+
+{{- if ne .chezmoi.osRelease.id "arch" }}
+.chezmoiscripts/00-prepare.sh
+.chezmoiscripts/06a-setup-nvidia.sh
+{{ end }}
+
+{{ if eq .chezmoi.osRelease.id "raspbian" }}
+.chezmoiscripts/*
+.git-credentials
+.gdbinit
+.zen/
+.gnupg/
+.local/
+.vdirsyncer/
+.config/*
+.ssh/
+!.config/nvim
+{{ end }}

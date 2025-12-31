@@ -1,0 +1,7 @@
+system:
+  disable_runtime: false
+  disable_screen_saver: false
+  game_path: /home/shadow/Documents/Games/Installed
+  gamescope: true
+  gamescope_hdr: false
+  mangohud: true

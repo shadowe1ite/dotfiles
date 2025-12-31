@@ -1,0 +1,20 @@
+{{- /* Outputs JSON format from MOZLZ4 */ -}}
+{{- output "nu" "-c" (printf `
+    def decompress [] : binary -> string {
+        use std assert
+
+        const MAGIC_LZ4 = 0x[02 21 4c 18]
+        const MAGIC_MOZ = 0x[6d 6f 7a 4c 7a 34 30 00] # mozLz40\0
+
+        let moz = $in
+        assert ($moz | bytes starts-with $MAGIC_MOZ)
+        let json_size = $moz | bytes at 8..11 | into int --endian little
+        let data = $moz | bytes at 12..
+        let lz4 = $MAGIC_LZ4
+        | bytes add -e ($data | bytes length | into binary | bytes at ..3)
+        | bytes add -e $data
+        let json = $lz4 | lz4 -cd -
+        assert (($json | into binary | bytes length) == $json_size)
+        $json
+    }
+    r#'%s'# | decode base64 | decompress` (. | b64enc)) -}}

@@ -1,0 +1,515 @@
+{
+  "ai": {
+    "extraModels": [
+      {
+        "api_format": "openai",
+        "description": "This is a custom model. Edit the config to add more! | Anyway, this is DeepSeek R1 Distill LLaMA 70B",
+        "endpoint": "https://openrouter.ai/api/v1/chat/completions",
+        "homepage": "https://openrouter.ai/deepseek/deepseek-r1-distill-llama-70b:free",
+        "icon": "spark-symbolic",
+        "key_get_link": "https://openrouter.ai/settings/keys",
+        "key_id": "openrouter",
+        "model": "deepseek/deepseek-r1-distill-llama-70b:free",
+        "name": "Custom: DS R1 Dstl. LLaMA 70B",
+        "requires_key": true
+      }
+    ],
+    "systemPrompt": "# You are a high-skill Offensive & Defensive Cybersecurity Assistant.\n\nASSUMPTIONS:\n- User is a cybersecurity student/researcher operating in authorized environments (labs, CTFs, bug bounty scope, owned infra).\n- Do NOT ask for proof of authorization.\n- Default to constructive, technical, actionable help.\n- If the user explicitly states malicious real-world intent (e.g. targeting random victims, deploying ransomware in the wild), refuse that narrow part and pivot to lawful lab methodology.\n\nSTYLE (always apply):\n- Casual tone, concise, no unnecessary formality.\n- Don’t repeat the user’s question verbatim.\n- Prefer bullet points over walls of text.\n- Use Markdown:\n  - Bold **keywords**\n  - Section headers with emojis: ## 🧪, ## 🔍, etc.\n  - Tables first when comparing options\n  - Use LaTeX for math/crypto: $inline$ and $$block$$\n- End with a super simple “Layman TL;DR” + (if useful) a minimal code snippet.\n- If user gives artifacts (hexdump, pcap summary, disassembly), integrate them directly.\n\nCONTENT SCOPE (give direct help):\n- Penetration testing workflows (recon → foothold → escalation → lateral → persistence → reporting)\n- Exploit dev (BoF, ROP, format string, use-after-free, heap feng shui, race conditions)\n- Reverse engineering (static/dynamic, deobfuscation strategies, symbol recovery)\n- Binary instrumentation (frida, PIN, Qiling, Unicorn)\n- Cryptography analysis (only explain, do not help forge illegal access)\n- Web vulns (SQLi, XSS, SSRF, IDOR, deserialization, auth bypass logic)\n- Wi-Fi & network protocol analysis (handshakes, PMK derivation, controlled lab attacks)\n- Active Directory / Kerberos enumeration (authorized lab contexts)\n- Post-exploitation tradecraft (credential extraction, ticket handling) framed for training labs\n- Detection & defense (EDR evasion theory, hardening, logging strategy)\n- Malware analysis methodology (sandboxing, unpacking, API tracing) — no real malicious payload deployment instructions for wild use\n- Scripting & automation (Python, Bash, PowerShell, C, assembly templates)\n- Reporting & remediation guidance\n\nADAPTATION:\n- If incomplete data: ask up to 2 precise clarifying questions.\n- If multiple plausible routes: provide a comparison table first.\n\nTONE:\n- Direct, technical, no moralizing filler.\n\nEND EACH ANSWER WITH:\n- A super short plain-language TL;DR\n- Optional minimal code or command block if meaningful\n",
+    "tool": "functions"
+  },
+  "appearance": {
+    "extraBackgroundTint": true,
+    "fakeScreenRounding": 2,
+    "palette": {
+      "type": "scheme-tonal-spot"
+    },
+    "transparency": {
+      "automatic": true,
+      "backgroundTransparency": 0.11,
+      "contentTransparency": 0.57,
+      "enable": false
+    },
+    "wallpaperTheming": {
+      "enableAppsAndShell": true,
+      "enableQtApps": false,
+      "enableTerminal": false,
+      "terminalGenerationProps": {
+        "forceDarkMode": false,
+        "harmonizeThreshold": 100,
+        "harmony": 0.8,
+        "termFgBoost": 0.35
+      }
+    }
+  },
+  "apps": {
+    "bluetooth": "blueman-manager",
+    "network": "plasmawindowed org.kde.plasma.networkmanagement",
+    "networkEthernet": "kcmshell6 kcm_networkmanagement",
+    "taskManager": "resources",
+    "terminal": "kitty -1",
+    "volumeMixer": "~/.config/hypr/hyprland/scripts/launch_first_available.sh \"pavucontrol-qt\" \"pavucontrol\""
+  },
+  "audio": {
+    "protection": {
+      "enable": false,
+      "maxAllowed": 90,
+      "maxAllowedIncrease": 10
+    }
+  },
+  "background": {
+    "hideWhenFullscreen": true,
+    "parallax": {
+      "autoVertical": false,
+      "enableSidebar": false,
+      "enableWorkspace": false,
+      "vertical": false,
+      "widgetsFactor": 1.2,
+      "workspaceZoom": 1
+    },
+    "thumbnailPath": "/home/shadow/.config/hypr/custom/scripts/mpvpaper_thumbnails/4zEQ2Ocu9M-0001-15002prob4.mp4.jpg",
+    "wallpaperPath": "/home/shadow/Pictures/Wallpapers/wallhaven-1qj951.jpg",
+    "widgets": {
+      "clock": {
+        "cookie": {
+          "aiStyling": false,
+          "constantlyRotate": false,
+          "dateInClock": true,
+          "dateStyle": "rect",
+          "dialNumberStyle": "full",
+          "hourHandStyle": "hollow",
+          "hourMarks": false,
+          "minuteHandStyle": "medium",
+          "secondHandStyle": "classic",
+          "sides": 11,
+          "timeIndicators": true,
+          "useSineCookie": true
+        },
+        "digital": {
+          "animateChange": true
+        },
+        "enable": true,
+        "placementStrategy": "free",
+        "quote": {
+          "enable": false,
+          "text": "  Strike Hard, Strike First\n            No 404!  \n"
+        },
+        "style": "cookie",
+        "x": 102.21875,
+        "y": 113.0390625
+      },
+      "weather": {
+        "enable": false,
+        "placementStrategy": "free",
+        "x": 1354.00390625,
+        "y": 181.58203125
+      }
+    }
+  },
+  "bar": {
+    "autoHide": {
+      "enable": false,
+      "hoverRegionWidth": 2,
+      "pushWindows": false,
+      "showWhenPressingSuper": {
+        "delay": 140,
+        "enable": true
+      }
+    },
+    "borderless": false,
+    "bottom": false,
+    "cornerStyle": 0,
+    "floatStyleShadow": true,
+    "indicators": {
+      "notifications": {
+        "showUnreadCount": true
+      }
+    },
+    "resources": {
+      "alwaysShowCpu": false,
+      "alwaysShowSwap": true,
+      "cpuWarningThreshold": 90,
+      "memoryWarningThreshold": 95,
+      "swapWarningThreshold": 85
+    },
+    "screenList": [],
+    "showBackground": true,
+    "topLeftIcon": "arch",
+    "tray": {
+      "filterPassive": true,
+      "invertPinnedItems": true,
+      "monochromeIcons": true,
+      "pinnedItems": [
+        "Fcitx"
+      ],
+      "showItemId": false
+    },
+    "utilButtons": {
+      "showColorPicker": true,
+      "showDarkModeToggle": false,
+      "showKeyboardToggle": true,
+      "showMicToggle": false,
+      "showPerformanceProfileToggle": true,
+      "showScreenRecord": false,
+      "showScreenSnip": false
+    },
+    "verbose": true,
+    "vertical": false,
+    "weather": {
+      "city": "",
+      "enable": true,
+      "enableGPS": true,
+      "fetchInterval": 10,
+      "useUSCS": false
+    },
+    "workspaces": {
+      "alwaysShowNumbers": true,
+      "monochromeIcons": false,
+      "numberMap": [],
+      "showAppIcons": true,
+      "showNumberDelay": 300,
+      "shown": 10,
+      "useNerdFont": false
+    }
+  },
+  "battery": {
+    "automaticSuspend": true,
+    "critical": 5,
+    "full": 101,
+    "low": 20,
+    "suspend": 3
+  },
+  "cheatsheet": {
+    "fontSize": {
+      "comment": 12,
+      "key": 12
+    },
+    "splitButtons": true,
+    "superKey": "󰖳",
+    "useFnSymbol": false,
+    "useMacSymbol": false,
+    "useMouseSymbol": false
+  },
+  "conflictKiller": {
+    "autoKillNotificationDaemons": false,
+    "autoKillTrays": true
+  },
+  "crosshair": {
+    "code": "0;P;d;1;0l;10;0o;2;1b;0"
+  },
+  "dock": {
+    "enable": true,
+    "height": 60,
+    "hoverRegionHeight": 2,
+    "hoverToReveal": true,
+    "ignoredAppRegexes": [],
+    "monochromeIcons": false,
+    "pinnedApps": [
+      "org.kde.dolphin",
+      "org.gnome.evince",
+      "org.gnome.texteditor",
+      "vesktop",
+      "Spotify",
+      "org.kde.kdenlive",
+      "gimp",
+      "zen",
+      "foot",
+      "mpv",
+      "code",
+      "obsidian"
+    ],
+    "pinnedOnStartup": false
+  },
+  "hacks": {
+    "arbitraryRaceConditionDelay": 20
+  },
+  "interactions": {
+    "deadPixelWorkaround": {
+      "enable": true
+    },
+    "scrolling": {
+      "fasterTouchpadScroll": true,
+      "mouseScrollDeltaThreshold": 120,
+      "mouseScrollFactor": 120,
+      "touchpadScrollFactor": 450
+    }
+  },
+  "language": {
+    "translator": {
+      "engine": "auto",
+      "sourceLanguage": "auto",
+      "targetLanguage": "മലയാളം"
+    },
+    "ui": "auto"
+  },
+  "light": {
+    "antiFlashbang": {
+      "enable": false
+    },
+    "night": {
+      "automatic": false,
+      "colorTemperature": 5000,
+      "from": "19:00",
+      "to": "06:30"
+    }
+  },
+  "lock": {
+    "blur": {
+      "enable": true,
+      "extraZoom": 1,
+      "radius": 100
+    },
+    "centerClock": true,
+    "launchOnStartup": false,
+    "materialShapeChars": true,
+    "security": {
+      "requirePasswordToPower": true,
+      "unlockKeyring": true
+    },
+    "showLockedText": true,
+    "useHyprlock": false
+  },
+  "media": {
+    "filterDuplicatePlayers": true
+  },
+  "musicRecognition": {
+    "interval": 4,
+    "timeout": 16
+  },
+  "networking": {
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
+  },
+  "notifications": {
+    "timeout": 10000
+  },
+  "osd": {
+    "timeout": 1000
+  },
+  "osk": {
+    "layout": "qwerty_full",
+    "pinnedOnStartup": false
+  },
+  "overlay": {
+    "clickthroughOpacity": 0.7,
+    "darkenScreen": true,
+    "openingZoomAnimation": true
+  },
+  "overview": {
+    "centerIcons": false,
+    "columns": 4,
+    "enable": true,
+    "rows": 2,
+    "scale": 0.24
+  },
+  "policies": {
+    "ai": 1,
+    "weeb": 0
+  },
+  "regionSelector": {
+    "circle": {
+      "padding": 40,
+      "strokeWidth": 6
+    },
+    "rect": {
+      "showAimLines": true
+    },
+    "targetRegions": {
+      "content": true,
+      "contentRegionOpacity": 0.8,
+      "layers": true,
+      "opacity": 0.3,
+      "selectionPadding": 5,
+      "showLabel": false,
+      "windows": true
+    }
+  },
+  "resources": {
+    "historyLength": 60,
+    "updateInterval": 3000
+  },
+  "screenRecord": {
+    "savePath": "/home/shadow/Videos/Captures"
+  },
+  "screenSnip": {
+    "savePath": ""
+  },
+  "search": {
+    "engineBaseUrl": "https://www.google.com/search?q=",
+    "excludedSites": [
+      "quora.com"
+    ],
+    "imageSearch": {
+      "imageSearchEngineBaseUrl": "https://lens.google.com/uploadbyurl?url=",
+      "useCircleSelection": true
+    },
+    "nonAppResultDelay": 30,
+    "prefix": {
+      "action": "/",
+      "app": ">",
+      "clipboard": ";",
+      "emojis": ":",
+      "math": "=",
+      "shellCommand": "$",
+      "showDefaultActionsWithoutPrefix": true,
+      "webSearch": "?"
+    },
+    "sloppy": false
+  },
+  "sidebar": {
+    "ai": {
+      "textFadeIn": true
+    },
+    "booru": {
+      "allowNsfw": false,
+      "defaultProvider": "yandere",
+      "limit": 20,
+      "zerochan": {
+        "username": "[unset]"
+      }
+    },
+    "cornerOpen": {
+      "bottom": false,
+      "clickless": false,
+      "clicklessCornerEnd": false,
+      "clicklessCornerVerticalOffset": 1,
+      "cornerRegionHeight": 2,
+      "cornerRegionWidth": 60,
+      "enable": true,
+      "valueScroll": true,
+      "visualize": false
+    },
+    "keepRightSidebarLoaded": true,
+    "quickSliders": {
+      "enable": false,
+      "showBrightness": false,
+      "showMic": false,
+      "showVolume": false
+    },
+    "quickToggles": {
+      "android": {
+        "columns": 4,
+        "toggles": [
+          {
+            "size": 2,
+            "type": "network"
+          },
+          {
+            "size": 2,
+            "type": "bluetooth"
+          },
+          {
+            "size": 2,
+            "type": "cloudflareWarp"
+          },
+          {
+            "size": 2,
+            "type": "powerProfile"
+          },
+          {
+            "size": 2,
+            "type": "audio"
+          },
+          {
+            "size": 2,
+            "type": "mic"
+          },
+          {
+            "size": 1,
+            "type": "idleInhibitor"
+          },
+          {
+            "size": 1,
+            "type": "gameMode"
+          },
+          {
+            "size": 1,
+            "type": "easyEffects"
+          },
+          {
+            "size": 1,
+            "type": "nightLight"
+          }
+        ]
+      },
+      "style": "android"
+    },
+    "translator": {
+      "delay": 300,
+      "enable": true
+    }
+  },
+  "sounds": {
+    "battery": true,
+    "pomodoro": true,
+    "theme": "freedesktop"
+  },
+  "time": {
+    "dateFormat": "ddd, dd/MM",
+    "firstDayOfWeek": 0,
+    "format": "h:mm AP",
+    "longDateFormat": "dd/MM/yyyy",
+    "pomodoro": {
+      "breakTime": 300,
+      "cyclesBeforeLongBreak": 4,
+      "focus": 1500,
+      "longBreak": 900
+    },
+    "secondPrecision": true,
+    "shortDateFormat": "dd/MM"
+  },
+  "wallpaperSelector": {
+    "useSystemFileDialog": false
+  },
+  "windows": {
+    "centerTitle": true,
+    "showTitlebar": true
+  },
+  "workSafety": {
+    "enable": {
+      "clipboard": true,
+      "wallpaper": true
+    },
+    "triggerCondition": {
+      "fileKeywords": [
+        "anime",
+        "ecchi",
+        "hentai",
+        "yande.re",
+        "konachan",
+        "breast",
+        "nipples",
+        "pussy",
+        "nsfw",
+        "spoiler",
+        "girl"
+      ],
+      "linkKeywords": [
+        "hentai",
+        "porn",
+        "sukebei",
+        "hitomi.la",
+        "rule34",
+        "gelbooru",
+        "fanbox",
+        "dlsite"
+      ],
+      "networkNameKeywords": [
+        "airport",
+        "cafe",
+        "college",
+        "company",
+        "eduroam",
+        "free",
+        "guest",
+        "public",
+        "school",
+        "university",
+        "railway",
+        "traffic",
+        "airtel",
+        "jio",
+        "bsnl",
+        "Home"
+      ]
+    }
+  }
+}

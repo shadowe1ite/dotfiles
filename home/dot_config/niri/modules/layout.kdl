@@ -1,0 +1,35 @@
+layout {
+  gaps 10
+  //empty-workspace-above-first
+  //always-center-single-column
+  
+  preset-column-widths {
+      proportion 0.33333
+      proportion 0.5
+      proportion 1.0
+      proportion 0.66667
+  }
+
+  default-column-width { proportion 0.5; }
+
+  preset-window-heights {
+      proportion 0.33333
+      proportion 0.5
+      proportion 1.0
+      proportion 0.66667
+  }
+
+  shadow {
+    on
+  }
+
+  border {
+    on
+    width 1
+  }
+
+  focus-ring {
+    on
+    width 1 
+  }
+}

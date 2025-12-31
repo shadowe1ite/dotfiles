@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Burp Suite Professional
+Exec=/home/shadow/.local/bin/burpsuite-pro
+Icon=/home/shadow/.local/share/applications/burpsuite-pro.png
+Comment=Burp Suite is an integrated platform for attacking web applications (professional edition)
+Categories=Development;Security
+Terminal=false
+MimeType=application/x-extension-burp;
+StartupWMClass=burp-StartBurp

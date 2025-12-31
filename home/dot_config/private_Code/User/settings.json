@@ -1,0 +1,59 @@
+{
+    "editor.fontSize": 15,
+    "terminal.integrated.fontSize": 15,
+    "terminal.integrated.lineHeight": 1.15,
+    "animations.Install-Method": "Apc Customize UI++",
+    "github.copilot.enable": {
+        "*": false,
+        "plaintext": false,
+        "markdown": false,
+        "scminput": false
+    },
+    "git.openRepositoryInParentFolders": "never",
+    "security.workspace.trust.untrustedFiles": "open",
+    "github.copilot.editor.enableAutoCompletions": true,
+    "todohighlight.keywordsPattern": "TODO",
+    "todohighlight.keywords": [],
+    "todohighlight.defaultStyle": {
+        "color": "#AED18D"
+    },
+    "cmake.showOptionsMovedNotification": false,
+    "code-runner.languageIdToFileExtensionMap": {
+        "bat": ".bat",
+        "powershell": ".ps1",
+        "typescript": ".ts"
+    },
+    "code-runner.clearPreviousOutput": true,
+    "redhat.telemetry.enabled": true,
+    "liveServer.settings.fullReload": true,
+    "files.associations": {
+        "*.css": "css"
+    },
+    "files.autoSave": "afterDelay",
+    "fiveServer.ignore": [],
+    "workbench.startupEditor": "none",
+    "files.exclude": {
+        "": true,
+        "**/.venv": true,
+        "**/.vscode": true
+    },
+    "github.copilot.advanced": {},
+    "workbench.colorTheme": "Material Code",
+    "explorer.compactFolders": false,
+    "workbench.iconTheme": "catppuccin-mocha",
+    "git.confirmSync": false,
+    "workbench.panel.showLabels": false,
+    "terminal.integrated.tabs.enabled": false,
+    "window.menuBarVisibility": "compact",
+    "github.copilot.nextEditSuggestions.enabled": true,
+
+    // Updated fonts (use exact family names from fc-list)
+    "editor.fontFamily": "'JetBrainsMono Nerd Font', 'JetBrainsMono Nerd Font Mono', 'JetBrains Mono', monospace",
+    "editor.fontLigatures": true,
+
+    // Terminal should use the Mono variant for width-correct glyphs
+    // Include the rare typoed family seen in fc-list as a fallback
+    "terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font Mono', 'JetBrainsMonoNL Nerd Font Mono', 'JetBrainMono Nerd Font Mono', monospace"
+,
+  "material-code.primaryColor": "#39AB8C"
+}

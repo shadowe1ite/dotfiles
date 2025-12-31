@@ -1,0 +1,16 @@
+// # core
+spawn-at-startup "gnome-keyring-daemon" "--start" "--components=secrets"
+spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
+spawn-at-startup "dbus-update-activation-environment" "--systemd" "--all"
+spawn-at-startup "systemctl" "--user" "import-environment" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
+
+spawn-at-startup "wl-paste" "--type" "text" "--watch" "bash" "-c" "cliphist store"
+spawn-at-startup "wl-paste" "--type" "image" "--watch" "bash" "-c" "cliphist store"
+spawn-at-startup "wl-clip-persist" "--clipboard" "regular"
+spawn-at-startup "udiskie" "--no-automount" "--smart-tray"
+
+// # Controller alert
+spawn-at-startup "sh" "-c" "dualsensectl monitor add \"notify-send 'Controller Connected' '🎮 DualSense controller is now ready' -i input-gaming\""
+spawn-at-startup "sh" "-c" "dualsensectl monitor remove \"notify-send 'Controller Disconnected' '🎮 DualSense controller has been removed' -i input-gaming\""
+
+spawn-at-startup "xwayland-satellite"

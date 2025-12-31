@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SKIP_FLASH=false
+
+for arg in "$@"; do
+    case $arg in
+        --skip-flash) SKIP_FLASH=true ;;
+    esac
+done
+
+if [ "$EUID" -ne 0 ]; then
+    sudo -v
+    while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+fi
+
+command -v gum >/dev/null || { echo "gum missing. Install: https://github.com/charmbracelet/gum"; exit 1; }
+command -v mkarchiso >/dev/null || { echo "mkarchiso missing. Install archiso: sudo pacman -S archiso"; exit 1; }
+
+if [ "$SKIP_FLASH" = false ]; then
+    mapfile -t DRIVES < <(
+        lsblk -dno NAME,TYPE,RM,SIZE,MODEL |
+        awk '$2=="disk" && $3==1 {print "/dev/" $1 " (" $4 ", " $5 ")"}'
+    )
+    if [ ${#DRIVES[@]} -eq 0 ]; then
+        gum style --foreground=9 --bold "No removable drives detected. Exiting."
+        exit 1
+    fi
+
+    USB_DEV=$(gum choose --limit=1 --header "Select USB device to flash:" "${DRIVES[@]}")
+    TARGET="${USB_DEV%% *}"
+fi
+
+WORKDIR=$(mktemp -d)
+
+gum spin --title "Copying releng profile..." -- cp -r /usr/share/archiso/configs/releng "$WORKDIR/archiso"
+cd "$WORKDIR/archiso"
+
+cp "$HOME/.config/archinstall/config.json" airootfs/root/ 2>/dev/null || true
+cp "$HOME/.config/archinstall/creds.json" airootfs/root/ 2>/dev/null || true
+
+echo 'iwctl station wlan0 scan && sleep 3 && iwctl --passphrase "{{ pass "desktop/wifi-pass" }}" station wlan0 connect "{{ pass "desktop/wifi-name" }}" && archinstall --config config.json --creds creds.json' >> airootfs/root/.zshrc
+
+gum spin --spinner points --title "Building ArchISO..." -- sudo mkarchiso -v -o out .
+ISO_FILE=$(ls out/*.iso | head -n1)
+
+mkdir -p "$HOME/Documents/OS"
+sudo rm -f "$HOME/Documents/OS/archlinux-*.iso"
+
+gum spin --title "Moving ISO to ~/Documents/OS..." -- sudo mv "$ISO_FILE" "$HOME/Documents/OS/"
+
+if [ "$SKIP_FLASH" = false ]; then
+    gum spin --spinner meter --title "Flashing ISO to $TARGET..." -- sudo dd if="$HOME/Documents/OS/$(basename "$ISO_FILE")" of="$TARGET" bs=4M status=progress oflag=sync
+fi
+
+gum spin --title "Cleaning workdir $WORKDIR ..." -- sudo rm -rf "$WORKDIR"
+
+gum style --foreground=10 --bold "Done! $([ "$SKIP_FLASH" = true ] && echo 'ISO created.' || echo "$TARGET is flashed.")"

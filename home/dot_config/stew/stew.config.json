@@ -1,0 +1,5 @@
+{
+	"stewPath": "/home/shadow/.local/share/stew",
+	"stewBinPath": "/home/shadow/.local/bin/.stew",
+	"excludedFromUpgradeAll": []
+}

@@ -1,0 +1,47 @@
+{{- $EndId := "end-4" -}}
+{{- $EndBranch := "main" -}}
+
+{{ if ne .chezmoi.osRelease.id "raspbian" }}
+#[".config/quickshell"]
+#type = "archive"
+#url = "https://api.github.com/repos/{{ $EndId }}/dots-hyprland/tarball/{{ $EndBranch }}"
+#exact = false
+#include = ["*/dots/.config/quickshell/**"]
+#stripComponents = 4
+#refreshperiod = "24h"
+#
+#[".config/quickshell/ii/modules/common/widgets/shapes"]
+#stripComponents = 1
+#type = "archive"
+#url = "https://github.com/end-4/rounded-polygon-qmljs/archive/refs/heads/master.zip"
+#refreshperiod = "24h"
+
+[".config/quickshell/noctalia-shell"]
+type = "git-repo"
+url = "https://github.com/noctalia-dev/noctalia-shell"
+refreshPeriod = "1m"
+
+[".local/share/fonts"]
+type = "archive"
+url = "https://smc.org.in/downloads/fonts/raghumalayalamsans/raghumalayalamsans.zip"
+include = ["*.otf", "*.ttf"]
+refreshPeriod = "744h"
+
+[".local/share/icons/Bibata-Modern-Ice"]
+type = "archive"
+url = "https://github.com/rtgiskard/bibata_cursor/releases/latest/download/Bibata-Modern-Ice.hypr.tar.zst"
+refreshPeriod = "744h"
+stripComponents = 1
+
+[".local/share/icons/Bibata-Modern-Ice/"]
+type = "archive"
+url = "https://github.com/ful1e5/Bibata_Cursor/releases/latest/download/Bibata-Modern-Ice.tar.xz"
+include = ["*/**"]
+refreshPeriod = "744h"
+stripComponents = 1
+
+[".config/gf"]
+type = "git-repo"
+url = "https://github.com/coffinxp/GFpattren"
+refreshPeriod = "168h"
+{{ end }}

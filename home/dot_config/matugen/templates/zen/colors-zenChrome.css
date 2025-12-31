@@ -1,0 +1,191 @@
+/* Catppuccin Mocha Sapphire userChrome.css*/
+
+@media (prefers-color-scheme: dark) {
+
+  :root {
+    --zen-colors-primary: {{colors.surface_container_high.default.hex}} !important;
+    --zen-primary-color: {{colors.primary.default.hex}} !important;
+    --zen-colors-secondary: {{colors.surface_container_high.default.hex}} !important;
+    --zen-colors-tertiary: {{colors.surface_bright.default.hex}} !important;
+    --zen-colors-border: {{colors.primary.default.hex}} !important;
+    --toolbarbutton-icon-fill: {{colors.primary.default.hex}} !important;
+    --lwt-text-color: {{colors.on_surface.default.hex}} !important;
+    --toolbar-field-color: {{colors.on_surface.default.hex}} !important;
+    --tab-selected-textcolor: {{colors.primary.default.hex}} !important;
+    --toolbar-field-focus-color: {{colors.on_surface.default.hex}} !important;
+    --toolbar-color: {{colors.on_surface.default.hex}} !important;
+    --newtab-text-primary-color: {{colors.on_surface.default.hex}} !important;
+    --arrowpanel-color: {{colors.on_surface.default.hex}} !important;
+    --arrowpanel-background: {{colors.surface.default.hex}} !important;
+    --sidebar-text-color: {{colors.on_surface.default.hex}} !important;
+    --lwt-sidebar-text-color: {{colors.on_surface.default.hex}} !important;
+    --lwt-sidebar-background-color: {{colors.surface_dim.default.hex}} !important;
+    --toolbar-bgcolor: {{colors.surface_container_high.default.hex}} !important;
+    --newtab-background-color: {{colors.surface.default.hex}} !important;
+    --zen-themed-toolbar-bg: {{colors.surface.default.hex}} !important;
+    --zen-main-browser-background: {{colors.surface.default.hex}} !important;
+    --toolbox-bgcolor-inactive: {{colors.surface.default.hex}} !important;
+  }
+
+  #permissions-granted-icon{
+    color: {{colors.surface.default.hex}} !important;
+  }
+
+  .sidebar-placesTree {
+    background-color: {{colors.surface.default.hex}} !important;
+  }
+
+  #zen-workspaces-button {
+    background-color: {{colors.surface.default.hex}} !important;
+  }
+
+  #TabsToolbar {
+    background-color: {{colors.surface.default.hex}} !important;
+  }
+
+  .urlbar-background {
+    background-color: {{colors.surface_container_high.default.hex}} !important;
+  }
+
+  .content-shortcuts {
+    background-color: {{colors.surface_container_high.default.hex}} !important;
+    border-color: {{colors.primary.default.hex}} !important;
+  }
+
+  .urlbarView-url {
+    color: {{colors.primary.default.hex}} !important;
+  }
+
+  #zenEditBookmarkPanelFaviconContainer {
+    background: {{colors.surface_dim.default.hex}} !important;
+  }
+
+  toolbar .toolbarbutton-1 {
+    &:not([disabled]) {
+      &:is([open], [checked]) > :is(.toolbarbutton-icon, .toolbarbutton-text, .toolbarbutton-badge-stack){
+        fill: {{colors.surface_dim.default.hex}};
+      }
+    }
+  }
+  .identity-color-blue {
+    --identity-tab-color: #89b4fa !important;
+    --identity-icon-color: #89b4fa !important;
+  }
+  .identity-color-turquoise {
+    --identity-tab-color: #94e2d5 !important;
+    --identity-icon-color: #94e2d5 !important;
+  }
+  .identity-color-green {
+    --identity-tab-color: #a6e3a1 !important;
+    --identity-icon-color: #a6e3a1 !important;
+  }
+  .identity-color-yellow {
+    --identity-tab-color: #f9e2af !important;
+    --identity-icon-color: #f9e2af !important;
+  }
+  .identity-color-orange {
+    --identity-tab-color: #fab387 !important;
+    --identity-icon-color: #fab387 !important;
+  }
+  .identity-color-red {
+    --identity-tab-color: #f38ba8 !important;
+    --identity-icon-color: #f38ba8 !important;
+  }
+  .identity-color-pink {
+    --identity-tab-color: #f5c2e7 !important;
+    --identity-icon-color: #f5c2e7 !important;
+  }
+  .identity-color-purple {
+    --identity-tab-color: #cba6f7 !important;
+    --identity-icon-color: #cba6f7 !important;
+  }
+}
+
+hbox#titlebar {
+    background-color: {{colors.surface.default.hex}} !important;
+    border-radius: 11px !important;
+}
+
+.zen-current-workspace-indicator {
+  display: none !important;
+}
+
+/* CSD */
+#navigator-toolbox[zen-right-side="true"] > #zen-sidebar-top-buttons > .titlebar-buttonbox-container > .titlebar-buttonbox {
+    margin-top: 11px !important;
+}
+
+.titlebar-buttonbox {
+    margin-right: 10px;
+    padding-right: 0px !important;
+}
+
+.titlebar-button {
+    padding: 0px !important;
+    min-height: 16px !important;
+    min-width: 16px !important;
+    height: 16px !important;
+    align-self: center;
+    margin-left: 14px !important;
+    border-radius: 50px;
+    transition: all 100ms;
+}
+
+.titlebar-min {
+    background-color: #fdbe04 !important;
+}
+
+.titlebar-max, .titlebar-restore {
+    background-color: #38c76a !important;
+}
+
+.titlebar-close {
+    background-color: #fd5f51 !important;
+}
+
+.titlebar-button > image {
+    visibility: collapse !important;
+}
+
+/* Inactive window state */
+.titlebar-button:-moz-window-inactive {
+    background-color: #4C4C50 !important;
+}
+
+@media (-moz-bool-pref: "theme.zen-minimal-exit-menu.enable-icon-visibility"){
+    .titlebar-button:hover > image {
+        visibility: visible !important;
+        max-height: 12px !important;
+        max-width: 12px !important;
+        position: relative !important;
+        left: 0 !important;
+        filter: brightness(0) invert(1) !important;
+    }
+}
+
+@media (-moz-bool-pref: "theme.zen-minimal-exit-menu.enable-macos-identic") {
+    /* Keep original colors on hover, don't dim */
+}
+
+@media not (-moz-bool-pref: "theme.zen-minimal-exit-menu.enable-macos-identic") {
+    .titlebar-button {
+        background-color: #323238 !important;
+    }
+    
+    .titlebar-min:hover {
+        background-color: #fdbe04 !important;
+    }
+
+    .titlebar-max:hover, .titlebar-restore:hover {
+        background-color: #38c76a !important;
+    }
+
+    .titlebar-close:hover {
+        background-color: #fd5f51 !important;
+    }
+    
+    .titlebar-button:hover {
+        min-height: 20px !important;
+    }
+}
+/* CSD END */

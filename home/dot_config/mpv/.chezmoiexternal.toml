@@ -1,0 +1,24 @@
+[fonts]
+include = ['fonts/**']
+stripComponents = 1
+type = 'archive'
+url = 'https://github.com/tomasklaen/uosc/releases/latest/download/uosc.zip'
+refreshPeriod = "168h"
+
+[scripts]
+include = ['scripts/**']
+stripComponents = 1
+type = 'archive'
+url = 'https://github.com/tomasklaen/uosc/releases/latest/download/uosc.zip'
+refreshPeriod = "168h"
+
+["scripts/videoclip"]
+stripComponents = 1
+type = "archive"
+url = "https://github.com/Ajatt-Tools/videoclip/archive/refs/heads/master.zip"
+refreshPeriod = "168h"
+
+["scripts/skip-intro.lua"]
+type = "file"
+url = "https://raw.githubusercontent.com/rui-ddc/skip-intro/refs/heads/master/skip-intro.lua"
+refreshPeriod = "168h"

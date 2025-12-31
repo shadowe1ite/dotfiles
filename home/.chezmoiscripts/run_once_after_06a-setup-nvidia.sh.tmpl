@@ -1,0 +1,12 @@
+#!/bin/env bash
+
+set -euo pipefail
+
+if [[ -f /boot/grub/grub.cfg || -f /boot/grub2/grub.cfg ]]; then
+  gum spin --title "Add Nvidia to grub..." -- sudo sed -i 's/quiet/splash quiet nvidia_drm.modeset=1/g' /etc/default/grub
+  gum spin --title "re-generate grub config..." -- sudo grub-mkconfig -o /boot/grub/grub.cfg
+fi
+
+gum spin --title "Add Nvidia to mkinitcpio..." -- sudo sed -i 's/MODULES=()/MODULES=(nvidia nvidia_modeset nvidia_uvm nvidia_drm)/g' /etc/mkinitcpio.conf
+gum spin --title "blacklisting nouveau..." -- echo "blacklist nouveau" | sudo tee /etc/modprobe.d/blacklist.conf 2>/dev/null
+gum spin --title "rebuild initramfs..." -- sudo mkinitcpio -P

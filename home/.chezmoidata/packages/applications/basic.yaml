@@ -1,0 +1,88 @@
+task_manager:
+  - resources
+
+usb:
+  - udiskie
+
+network:
+  - wireshark-qt
+
+browser:
+  - zen-browser-bin
+  - browserpass-firefox
+
+social:
+  - telegram-desktop-bin
+  - vesktop-bin
+
+media:
+  - dolphin
+  - filelight
+  - kio-admin
+  - nautilus
+  - packet
+  - qt5-imageformats
+  - ffmpegthumbs
+  - loupe
+  - ark
+  - mpv
+  - mpv-thumbfast-git
+  - mpv-mpris2-bin
+  - qbittorrent
+  - mugshot
+  - dicebear
+
+secret:
+  - seahorse
+
+screen_record:
+  - obs-studio
+  - gpu-screen-recorder
+
+documents:
+  - zaread-git
+  - libreoffice-still
+  - evince
+  - pdfarranger
+
+annotation:
+  - gradia
+
+rgb:
+  - piper
+  - openrgb
+
+text:
+  - neovim
+  - gnome-text-editor
+
+music:
+  - mpd
+  - mpc
+  - playerctl
+  - easyeffects
+  - spotify
+  - gapless
+  - spicetify-cli
+  - spotx-git
+  - sptlrx-bin 
+  - cava
+
+hyprvisors:
+  - libvirt
+  - virt-manager
+  - qemu-full
+  - dnsmasq
+  - dmidecode
+
+lang:
+  - fcitx5
+  - e1ite/govarnam-schemes-git
+  - varnam-fcitx5-git
+  - tesseract-data-mal
+  - tesseract
+  - tesseract-data-eng
+
+productivity:
+  - gnome-calendar
+  - gnome-online-accounts-gtk

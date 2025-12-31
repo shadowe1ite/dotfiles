@@ -1,0 +1,55 @@
+hyprland:
+  - hyprland
+  - xdg-desktop-portal-hyprland
+  - hypridle
+  - hyprpicker
+  - hyprpolkitagent
+  - hyprland-guiutils
+
+icons:
+  - fluent-icon-theme-git
+
+gtk:
+  - adw-gtk-theme
+
+qt:
+  - kvantum
+  - qt5ct
+  - qt6ct
+  - qt5-wayland
+  - qt6-wayland
+  - nwg-look
+
+audio:
+  - pipewire
+  - pipewire-pulse
+  - pipewire-alsa
+  - pipewire-audio
+  - pipewire-jack
+  - gst-plugin-pipewire
+  - gst-plugins-good
+  - gst-libav
+  - wireplumber
+
+terminal:
+  - alacritty
+
+wallpaper:
+  - matugen-bin
+
+fonts:
+  - ttf-sourcecodepro-nerd
+  - ttf-jetbrains-mono-nerd
+  - ttf-hack-nerd
+  - noto-fonts-emoji
+
+clipboard:
+  - wl-clipboard
+  - wl-clip-persist
+  - cliphist
+  - slurp
+  - grimblast-git
+
+display_manager:
+  - sddm
+  - sddm-silent-theme

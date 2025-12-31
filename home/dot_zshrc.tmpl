@@ -1,0 +1,216 @@
+ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+# ZimFW init
+export ZIM_HOME="$HOME/.zim"
+
+# Auto-install ZimFW if missing
+if [[ ! -f "$ZIM_HOME/zimfw.zsh" ]]; then
+  mkdir -p "$ZIM_HOME"
+  curl -fsSL https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh \
+    -o "$ZIM_HOME/zimfw.zsh"
+fi
+
+# Build init.zsh if missing/outdated
+if [[ ! -f "$ZIM_HOME/init.zsh" ]]; then
+  source "$ZIM_HOME/zimfw.zsh" init
+fi
+
+# Load Zim
+source "$ZIM_HOME/init.zsh"
+
+# Shell integrations
+eval "$(starship init zsh)"
+eval "$(fzf --zsh)"
+eval "$(zoxide init --cmd cd zsh)"
+
+# Keybindings
+bindkey -e
+bindkey '^p' history-search-backward
+bindkey '^n' history-search-forward
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
+bindkey '^[w' kill-region
+for key ('^[[A' '^P' ${terminfo[kcuu1]}) bindkey ${key} history-substring-search-up
+for key ('^[[B' '^N' ${terminfo[kcud1]}) bindkey ${key} history-substring-search-down
+for key ('k') bindkey -M vicmd ${key} history-substring-search-up
+for key ('j') bindkey -M vicmd ${key} history-substring-search-down
+unset key
+
+# HISTORY
+HISTSIZE=5000
+HISTFILE=~/.zsh_history
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
+
+# Completion styling
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' menu no
+zstyle ":completion:*:commands" rehash 1
+zstyle ':completion:*:descriptions' format ''
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+
+# alias
+alias tmux="tmux -u"
+alias ls="ls --color=auto -1t"
+alias cp="cp -iv"
+alias mv="mv -iv"
+alias ls="eza --icons -1" 
+alias vi="nvim"
+alias vim="nvim"
+alias hs="history 1 | cut -c 8- | sort | uniq | fzf | tr -d '\\n' | wl-copy"
+alias grep="grep --color"
+alias pacman="pacman --color auto"
+alias zathura="zaread"
+alias sioyek="zaread"
+alias hyprpm="hyprpm -v"
+alias cat="bat -p"
+alias icat="/bin/cat"
+alias psql="sudo -u postgres psql"
+alias proxychains='proxychains -q'
+alias lfimap="/usr/share/lfimap/lfimap/lfimap.py"
+alias pwncat="PYTHONWARNINGS=ignore pwncat-cs"
+alias cdots="cd ~/.local/share/chezmoi"
+alias cz="chezmoi"
+alias up-end="sh ~/.local/share/chezmoi/home/.chezmoi.d/scripts/get-quickshell https://github.com/end-4/dots-hyprland.git main .config/quickshell"
+#alias httpx="httpx -no-color"
+
+# export
+export PATH=$PATH:$HOME/.local/bin
+export PATH=$PATH:$HOME/.local/bin/.stew
+export PATH=$PATH:/opt/metasploit/tools/exploit
+export PATH=$PATH:/usr/share/firmware-mod-kit
+export PATH=$PATH:/opt/android-sdk/build-tools/35.0.0/
+export PATH=$PATH:$HOME/go/bin/
+export TERM=xterm-256color
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#575656'
+export MANPAGER='nvim +Man!'
+export MPD_HOST=127.0.0.1
+export MPD_PORT=6690
+export DOTS="/opt/dots/" 
+
+
+# sec
+export payloads=/mnt/storage/payloads/ 
+export rockyou=$payloads/SecLists/Passwords/Leaked-Databases/rockyou.txt
+
+# Fn
+nvim() {
+    command nvim "$@"
+    printf '\033[0 q'
+}
+
+fn hyprsync(){
+    packages=("hyprutils" "hyprlang" "hyprwayland-scanner" "aquamarine-git" "hyprland" "xdg-desktop-portal-hyprland" "hypridle" "hyprlock" "hyprpolkitagent")
+    hyprctl notify 0 5000 "rgb(FF642B)" "  Updating Hyprland Pkgs"
+    yay -Sy --noconfirm
+    for pkg in "${packages[@]}"; do
+        hyprctl notify 1 5000 "rgb(8AADF4)" "  Installing $pkg"
+        yay -Sydd --noconfirm "$pkg"
+        if [ $? -ne 0 ]; then
+            hyprctl notify 3 5000 "rgb(EF5350)" "  $pkg Failed to Install"
+        else
+            hyprctl notify 5 5000 "rgb(22DA6E)" "  $pkg Installed Successfully"
+        fi
+    done
+}
+
+fn syncdots() {
+  case "${1:--s}" in
+    -s) (cd "$DOTS" && stow --adopt -t "$HOME" */) ;; # Sync
+    -r) (cd "$DOTS" && stow -D -d "$DOTS" -t $HOME */) ;; # Remove
+    *) echo "Usage: dotfiles [-s | -r | -R]" && return 1 ;;
+  esac
+}
+
+fn cuser() {
+  if [ "$1" = "-d" ]; then
+    user=$2
+    [ -z "$user" ] && echo "Usage: cuser -d <username>" && return 1
+
+    sudo pkill -9 -u "$user" 2>/dev/null
+    sudo userdel -r "$user" 2>/dev/null && echo "[✓] $user deleted" || echo "[✗] Failed"
+    return $?
+  fi
+
+  user=$1
+  [ -z "$user" ] && echo "Usage: cuser <username> or cuser -d <username>" && return 1
+
+
+  sudo useradd -m -s /bin/zsh "$user"
+  sudo passwd "$user"
+  sudo -u "$user" xdg-user-dirs-update
+  
+  if [ "$user" = "private" ]; then
+      GITHUB_TOKEN=$(gum spin --title "Getting GitHub token..." -- pass show private/github-token)
+      GITHUB_NAME=$(gum spin --title "Getting GitHub name..." -- pass show private/github-name)
+      GITHUB_EMAIL=$(gum spin --title "Getting GitHub email..." -- pass show private/github-mail)
+  
+      gum spin --title "Cloning password store..." -- sudo -u "$user" git clone https://$GITHUB_NAME:$GITHUB_TOKEN@github.com/$GITHUB_NAME/.password-store.git /home/$user/.password-store
+  
+      gum spin --title "Importing GPG public key..." -- bash -c "pass show private/gpg-public | sudo -u '$user' gpg --import --batch --yes -q"
+      gum spin --title "Importing GPG private key..." -- bash -c "pass show private/gpg-private | sudo -u '$user' gpg --import --batch --yes -q"
+      gum spin --title "Setting GPG key trust..." -- sudo -u "$user" bash -c "echo -e 'trust\n5\ny\n' | gpg --batch --command-fd 0 --edit-key '7308EC4C8C044703C11DB74DECA9D568833590D2' >/dev/null 2>&1 || true"
+
+      gum spin --title "Configuring Git user name..." -- sudo -u "$user" git config --global user.name "$GITHUB_NAME"
+      gum spin --title "Configuring Git user email..." -- sudo -u "$user" git config --global user.email "$GITHUB_EMAIL"
+      gum spin --title "Configuring Git credential helper..." -- sudo -u "$user" git config --global credential.helper store
+      gum spin --title "Configuring Git editor..." -- sudo -u "$user" git config --global core.editor nvim
+      sudo -u "$user" bash -c "echo \"https://$GITHUB_TOKEN:$GITHUB_TOKEN@github.com\" > /home/$user/.git-credentials"
+      bash /usr/share/sddm/themes/silent/change_avatar.sh $user $HOME/.local/share/chezmoi/.github/pfp/private.png
+  fi
+
+  if [ "$user" != "private" ]; then
+      pfp=$(mktemp -d)
+      gum spin --title "Generationg pfp..." -- dicebear dylan "$pfp" --format png --seed "$(uuidgen)" --backgroundColor 121317
+      gum spin --title "Setting pfp..." -- bash /usr/share/sddm/themes/silent/change_avatar.sh "$user" "$(find "$pfp" -type f | head -n1)"
+  fi
+
+  sudo -u "$user" sh -c "cd /home/$user && chezmoi init --apply shadowe1ite"
+  gum spin --title "Creating new Warp registration..." -- sudo -u "$user" bash -c "echo 'y' | warp-cli registration new"
+  gum spin --title "connecting to warp..." -- sudo -u "$user" bash -c "warp-cli connect"
+  gum spin --title "Installing Zsh Plugins" -- sudo -u "$user" zsh -c 'source ~/.zshrc'
+
+  echo "[✓] User '$user' created !"
+}
+
+export PATH=$PATH:/home/shadow/.spicetify
+#source "/usr/lib/emsdk/emsdk_env.sh"
+
+# bun completions
+[ -s "/home/shadow/.bun/_bun" ] && source "/home/shadow/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+[ -f /opt/miniconda/etc/profile.d/conda.sh ] && source /opt/miniconda/etc/profile.d/conda.sh
+
+export PATH=/home/shadow/.pdtm/go/bin:$PATH
+export PATH=/home/shadow/go/bin:$PATH
+export PATH=$HOME/.cargo/bin:$PATH
+
+[ -f ~/explicit_filter.restore ] && rm ~/explicit_filter.restore
+
+source /mnt/storage/scripts/.alias
+
+[ ! -f "$HOME/.x-cmd.root/X" ] || . "$HOME/.x-cmd.root/X" # boot up x-cmd.
+
+# Golang environment variables
+export GOROOT=/usr/lib/go
+export PATH=$PATH:$GOROOT/bin
+export PATH=$GOPATH/bin:$GOROOT/bin:$HOME/.local/bin:$PATH
+
+## [Completion]
+## Completion scripts setup. Remove the following line to uninstall
+[[ -f /home/shadow/.dart-cli-completion/zsh-config.zsh ]] && . /home/shadow/.dart-cli-completion/zsh-config.zsh || true
+## [/Completion]
+#
+

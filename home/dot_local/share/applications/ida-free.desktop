@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=IDA Free
+Comment=The Interactive Disassembler
+Exec=/opt/ida-free/ida64
+Icon=/opt/ida-free/appico64.png
+Terminal=false
+Type=Application
+Categories=Development
+StartupWMClass=IDA

@@ -1,0 +1,10 @@
+environment {
+    BROWSER "zen-browser"
+    TERMINAL "alacritty"
+    EDITOR "nvim"
+    FILEMANAGER "dolphin"
+    
+    XDG_UTILS_TERMINAL "alacritty"
+    XDG_UTILS_BROWSER "zen-browser"
+    XDG_UTILS_FILEMANAGER "dolphin"
+}

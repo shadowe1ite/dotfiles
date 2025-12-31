@@ -1,0 +1,121 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+add_newline = true
+continuation_prompt = "∙  ┆ "
+palette = "colors"
+
+format = """
+$nix_shell$os $directory$container$git_branch $git_status$python$nodejs$bun$deno$lua$rust$java$c$golang$dart$elixir$cmd_duration$status$line_break[❯](bold primary)${custom.space}
+"""
+
+[palettes.colors]
+primary = '#cdbdff'
+on_primary = '#34275e'
+secondary = '#cbc3dc'
+tertiary = '#eeb8ca'
+error = '#ffb4ab'
+dir_bg = '#2b292f'
+dir_fg = '#e6e1e9'
+os_color = '#cdbdff'
+
+[custom.space]
+when = "! test $env"
+format = " "
+
+[status]
+symbol = "✗"
+not_found_symbol = "󰍉 Not Found"
+not_executable_symbol = " Can't Execute"
+sigint_symbol = "󰂭 "
+signal_symbol = "󱑽 "
+success_symbol = ""
+format = "[$symbol](fg:error)"
+map_symbol = true
+disabled = false
+
+[cmd_duration]
+min_time = 1000
+format = "[$duration ](fg:tertiary)"
+
+[nix_shell]
+disabled = false
+format = "[](fg:primary)[ ](bg:primary fg:on_primary)[](fg:primary) "
+
+[os]
+disabled = false
+format = "$symbol"
+
+[os.symbols]
+Arch = "[ ](fg:os_color)"
+Alpine = "[ ](fg:os_color)"
+Debian = "[ ](fg:error)"
+EndeavourOS = "[ ](fg:secondary)"
+Fedora = "[ ](fg:os_color)"
+NixOS = "[ ](fg:os_color)"
+openSUSE = "[ ](fg:tertiary)"
+SUSE = "[ ](fg:tertiary)"
+Ubuntu = "[ ](fg:secondary)"
+Macos = "[ ](fg:os_color)"
+Kali = "[ ](fg:os_color)"
+CachyOS = "[ ](fg:os_color)"
+Raspbian = "[ ](fg:error)"
+
+[directory]
+format = "[](fg:dir_bg)[$path](bg:dir_bg fg:dir_fg)[](fg:dir_bg) [$read_only](fg:tertiary)"
+read_only = " "
+truncate_to_repo = true
+truncation_length = 4
+truncation_symbol = ""
+
+[container]
+symbol = " 󰏖"
+format = "[$symbol ](tertiary dimmed)"
+
+[git_branch]
+symbol = ""
+style = ""
+format = "[ $symbol $branch](fg:secondary)(:$remote_branch)"
+
+[python]
+symbol = ""
+format = "[$symbol ](tertiary)"
+
+[nodejs]
+symbol = "󰛦"
+format = "[$symbol ](primary)"
+
+[bun]
+symbol = "󰛦"
+format = "[$symbol ](primary)"
+
+[deno]
+symbol = "󰛦"
+format = "[$symbol ](primary)"
+
+[lua]
+symbol = "󰢱"
+format = "[$symbol ](primary)"
+
+[rust]
+symbol = ""
+format = "[$symbol ](error)"
+
+[java]
+symbol = ""
+format = "[$symbol ](error)"
+
+[c]
+symbol = ""
+format = "[$symbol ](primary)"
+
+[golang]
+symbol = ""
+format = "[$symbol ](primary)"
+
+[dart]
+symbol = ""
+format = "[$symbol ](primary)"
+
+[elixir]
+symbol = ""
+format = "[$symbol ](secondary)"

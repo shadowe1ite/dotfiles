@@ -1,0 +1,90 @@
+binds {
+
+    // Apps
+    Mod+Return { spawn "alacritty"; }
+    Mod+F { spawn "zen-browser"; }
+    Alt+T { spawn "telegram-desktop"; }
+    Ctrl+Q { spawn "hyprpicker" "--autocopy"; }
+    Ctrl+Shift+Escape { spawn "resources"; }
+
+    // screenshot
+    Print { screenshot show-pointer=false; }
+    Ctrl+Print { screenshot-screen show-pointer=false; }
+
+    // ocr
+    Home { spawn "bash" "-c" r#"grim -g "$(slurp)" - | tesseract - - -l $(tesseract --list-langs | awk 'NR>1' | paste -sd+) | wl-copy"#; }
+
+    // basicc operations
+    Mod+W { close-window; }
+    Mod+U { quit; }
+    Mod+S { toggle-window-floating; }
+    Alt+F11 { fullscreen-window; }
+    
+    // Focus
+    Mod+Left  { focus-column-left; }
+    Mod+Right { focus-column-right; }
+    Mod+Up    { focus-window-or-workspace-up; }
+    Mod+Down  { focus-window-or-workspace-down; }
+
+    // Move Windows
+    Mod+Alt+Ctrl+Left  { move-column-left; }
+    Mod+Alt+Ctrl+Right { move-column-right; }
+    Mod+Alt+Ctrl+Up    { move-window-up; }
+    Mod+Alt+Ctrl+Down  { move-window-down; }
+
+    // Resize 
+    Mod+Alt+Left  { set-column-width "-0.5%"; }
+    Mod+Alt+Right { set-column-width "+0.5%"; }
+    Mod+Alt+Down  { set-window-height "+0.5%"; }
+    Mod+Alt+Up    { set-window-height "-0.5%"; }
+    
+    // Mouse wheel workspace scroll
+    Mod+WheelScrollDown { focus-column-left; }
+    Mod+WheelScrollUp  { focus-column-right; }
+    
+    // Layout
+    Mod+P { maximize-column; }
+    Mod+Alt+P { expand-column-to-available-width; }
+    Mod+G { consume-window-into-column; }
+    Mod+J { expel-window-from-column; }
+    
+    // Workspaces 
+    Mod+1 { focus-workspace 1; }
+    Mod+2 { focus-workspace 2; }
+    Mod+3 { focus-workspace 3; }
+    Mod+4 { focus-workspace 4; }
+    Mod+5 { focus-workspace 5; }
+    Mod+6 { focus-workspace 6; }
+    Mod+7 { focus-workspace 7; }
+    Mod+8 { focus-workspace 8; }
+    Mod+9 { focus-workspace 9; }
+
+    Mod+Shift+1 { move-column-to-workspace 1; }
+    Mod+Shift+2 { move-column-to-workspace 2; }
+    Mod+Shift+3 { move-column-to-workspace 3; }
+    Mod+Shift+4 { move-column-to-workspace 4; }
+    Mod+Shift+5 { move-column-to-workspace 5; }
+    Mod+Shift+6 { move-column-to-workspace 6; }
+    Mod+Shift+7 { move-column-to-workspace 7; }
+    Mod+Shift+8 { move-column-to-workspace 8; }
+    Mod+Shift+9 { move-column-to-workspace 9; }
+
+    // -- Audio 
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "2%+"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "2%-"; }
+    XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+    XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+
+    Alt+XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SOURCE@" "5%+"; }
+    Alt+XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SOURCE@" "5%-"; }
+
+    // -- Media Control --
+    XF86AudioNext allow-when-locked=true { spawn "playerctl" "next"; }
+    XF86AudioPrev allow-when-locked=true { spawn "playerctl" "previous"; }
+    XF86AudioPlay allow-when-locked=true { spawn "playerctl" "play-pause"; }
+
+    // -- Hardware --
+    XF86ScreenSaver { power-off-monitors; } 
+    XF86Launch3 { spawn "asusctl" "aura" "-n"; } // Often maps to code 211 (ROG Key)
+    XF86Launch4 { spawn "asusctl" "aura" "-p"; } // Often maps to code 248 (Fan/Aura)
+}

@@ -1,0 +1,72 @@
+#!/bin/bash
+
+CONFIG_FILE="$HOME/.config/secpack/config.yaml"
+
+if [[ "$1" == "-u" ]]; then
+    action="uninstall"
+else
+    action="install"
+fi
+
+category=$(yq 'keys | .[]' $CONFIG_FILE | tr -d '"' | gum choose)
+
+for manager in $(yq ".$category | keys | .[]" $CONFIG_FILE 2>/dev/null | tr -d '"'); do
+    echo "Processing $manager packages..."
+    
+    case "$manager:$action" in
+        "pacman:install")
+            packages=$(yq ".$category.$manager[]" $CONFIG_FILE | tr -d '"' | tr '\n' ' ')
+            echo "Installing: $packages"
+            [ -n "$packages" ] && paru -S --asexplicit --sudoloop --needed --noconfirm --removemake $packages
+            ;;
+        "pacman:uninstall")
+            packages=$(yq ".$category.$manager[]" $CONFIG_FILE | tr -d '"' | tr '\n' ' ')
+            [ -n "$packages" ] && paru -R $packages
+            ;;
+        "pipx:install")
+            yq ".$category.$manager[]" $CONFIG_FILE | tr -d '"' | while read pkg; do
+                [ -n "$pkg" ] && pipx install $pkg
+            done
+            ;;
+        "pipx:uninstall")
+            yq ".$category.$manager[]" $CONFIG_FILE | tr -d '"' | while read pkg; do
+                [ -n "$pkg" ] && pipx uninstall $pkg
+            done
+            ;;
+        "go:install")
+            export GOBIN=~/.local/bin
+            yq ".$category.$manager[]" $CONFIG_FILE | tr -d '"' | while read pkg; do
+                [ -n "$pkg" ] && GOPATH=$(mktemp -d) go install $pkg@latest
+            done
+            ;;
+        "go:uninstall")
+            echo "Go packages require manual removal"
+            ;;
+        "url:install")
+            yq ".$category.$manager[]" $CONFIG_FILE | tr -d '"' | while read pkg; do
+                [ -n "$pkg" ] && {
+                    if stew list | grep -q "$pkg"; then
+                      stew up "$(stew list | grep "$pkg" | cut -d':' -f1)"
+                    else
+                      stew i "$pkg"
+                    fi
+                }
+            done
+            ;;
+        "url:uninstall")
+            yq ".$category.$manager[]" $CONFIG_FILE | tr -d '"' | while read pkg; do
+                [ -n "$pkg" ] && stew un $(stew list | grep "$pkg" | cut -d':' -f1)
+            done
+            ;;
+        "cargo:install")
+            yq ".$category.$manager[]" $CONFIG_FILE | tr -d '"' | while read pkg; do
+                [ -n "$pkg" ] && cargo install $pkg
+            done
+            ;;
+        "cargo:uninstall")
+            yq ".$category.$manager[]" $CONFIG_FILE | tr -d '"' | while read pkg; do
+                [ -n "$pkg" ] && cargo uninstall $pkg
+            done
+            ;;
+    esac
+done

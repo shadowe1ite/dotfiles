@@ -1,0 +1,13 @@
+{{- $basePath := .home.zen.release_path }}
+{{- $exts := .extensions.main -}}
+
+{{- if ne .chezmoi.username .user }}
+  {{- $exts = .extensions.private -}}
+{{ end }}
+
+{{- range $exts }}
+["{{ joinPath $basePath "extensions" .file }}"]
+type = "file"
+url = "https://addons.mozilla.org/firefox/downloads/latest/{{ .id }}/latest.xpi"
+refreshPeriod = "168h"
+{{- end }}

@@ -1,0 +1,69 @@
+hardware:
+  - brightnessctl
+  - thermald
+  - earlyoom
+  - power-profiles-daemon
+  - asusctl
+
+containers:
+  - docker
+  - docker-compose
+  - podman
+  - distrobox
+  - distroshelf
+
+pkgmanagers:
+  - downgrade
+  - rust
+  - go
+  - python-pipx
+  - stew-bin
+  - uv
+
+python:
+  - python
+  - python-pip
+  - python-packaging
+
+man:
+  - man-db
+  - man-pages
+
+network:
+  - net-tools
+  - wireless_tools
+  - network-manager-applet
+  - blueman
+  - cloudflare-warp-bin
+
+utils:
+  - wget
+  - unzip
+  - zip
+  - tar
+  - unrar
+  - 7zip
+  - grc
+  - plocate
+  - jq
+  - yq
+  - fzf
+  - bat
+  - binder_linux-dkms
+  - imagemagick
+  - zoxide
+  - eza
+  - starship
+  - tmux
+  - xdg-user-dirs
+  - tmux-plugin-manager
+  - ydotool
+  - zbar 
+
+shell:
+  - zsh
+  - nushell
+
+secrets:
+  - pass
+  - gnome-keyring

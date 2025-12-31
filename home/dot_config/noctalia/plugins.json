@@ -1,0 +1,37 @@
+{
+    "sources": [
+        {
+            "name": "Official Noctalia Plugins",
+            "url": "https://github.com/noctalia-dev/noctalia-plugins"
+        },
+        {
+            "enabled": true,
+            "name": "elite plugins",
+            "url": "https://github.com/shadowe1ite/noctalia-plugins"
+        }
+    ],
+    "states": {
+        "lyrics": {
+            "enabled": true
+        },
+        "mini-docker": {
+            "enabled": true
+        },
+        "myplugin": {
+            "enabled": true
+        },
+        "privacy-indicator": {
+            "enabled": true
+        },
+        "qs-hyprview": {
+            "enabled": true
+        },
+        "quickshell-overview": {
+            "enabled": true
+        },
+        "todo": {
+            "enabled": true
+        }
+    },
+    "version": 1
+}

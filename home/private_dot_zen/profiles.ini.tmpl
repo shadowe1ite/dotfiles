@@ -1,0 +1,12 @@
+[General]
+StartWithLastProfile=1
+Version=2
+
+[Install{{ .home.zen.release_id }}]
+Default={{ .home.zen.release_path }}
+Locked=1
+
+[Profile0]
+Name=default
+IsRelative=1
+Path={{ .home.zen.release_path }}

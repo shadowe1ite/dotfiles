@@ -1,0 +1,8 @@
+{{- $chassis := "unknown" -}}
+{{- if eq .chezmoi.os "linux" -}}
+    {{- if lookPath "hostnamectl" -}}
+        {{- $data := output "hostnamectl" "--json=short" | mustFromJson -}}
+        {{- $chassis = $data.Chassis -}}
+    {{- end -}}
+{{- end -}}
+{{- $chassis -}}

@@ -1,0 +1,84 @@
+extensions:
+  main:
+    - file: "uBlock0@raymondhill.net.xpi"
+      id: "ublock-origin"
+
+    - file: "addon@darkreader.org.xpi"
+      id: "darkreader"
+    
+    - file: "rexxargupta@gmail.com.xpi"
+      id: "trufflehog"
+    
+    - file: "{f1423c11-a4e2-4709-a0f8-6d6a68c83d08}.xpi"
+      id: "hacktools"
+    
+    - file: "pentestkit@DenisPodgurskii.xpi"
+      id: "owasp-penetration-testing-kit"
+    
+    - file: "foxyproxy@eric.h.jung.xpi"
+      id: "foxyproxy-standard"
+    
+    - file: "@retire.js.xpi"
+      id: "retire-js"
+    
+    - file: "firefox-extension@shodan.io.xpi"
+      id: "shodan-addon"
+    
+    - file: "DOMLoggerPP@mizu.re.xpi"
+      id: "domloggerpp"
+    
+    - file: "wayback_machine@mozilla.org.xpi"
+      id: "wayback-machine_new"
+    
+    - file: "wappalyzer@crunchlabz.com.xpi"
+      id: "wappalyzer"
+    
+    - file: "browserpass@maximbaz.com.xpi"
+      id: "browserpass-ce"
+  
+    - file: "jid1-5Fs7iTLscUaZBgwr@jetpack.xpi"
+      id: "happy-bonobo-disable-webrtc"
+  
+    - file: "{609cb0d9-5824-49d9-a306-a3284414158f}.xpi"
+      id: "csrf-spotter"
+  
+    - file: "{07414fb5-d993-468f-ba39-dd1ac8438b4a}.xpi"
+      id: "easy-xss"
+  
+    - file: "{1018e4d6-728f-4b20-ad56-37578a4de76b}.xpi"
+      id: "flagfox"
+  
+    - file: "{675d13f1-7c9e-40a7-bbd3-2c4f41723f70}.xpi"
+      id: "google-dork-builder"
+  
+    - file: "hackbar@chewbaka.xpi"
+      id: "hackbar-free"
+  
+    - file: "{ed102056-8b4f-43a9-99cd-6d1b25abe87e}.xpi"
+      id: "http-header-live"
+  
+    - file: "jsonview@brh.numbera.com.xpi"
+      id: "jsonview"
+  
+    - file: "{19a009db-0c90-4357-abc0-649278804d04}.xpi"
+      id: "knoxss-community-edition"
+  
+    - file: "{0c8fbd76-bdeb-4c52-9b24-d587ce7b9dc3}.xpi"
+      id: "resurrect-pages"
+  
+    - file: "{a6c4a591-f1b2-4f03-b3ff-767e5bedf4e7}.xpi"
+      id: "user-agent-string-switcher"
+  
+    - file: "{c45c406e-ab73-11d8-be73-000a95be3b12}.xpi"
+      id: "web-developer"
+  
+    - file: "@xmlformatter.xpi"
+      id: "xml-viewer"
+
+  private:
+    - file: "uBlock0@raymondhill.net.xpi"
+      id: "ublock-origin"
+
+    - file: "browserpass@maximbaz.com.xpi"
+      id: "browserpass-ce"
+

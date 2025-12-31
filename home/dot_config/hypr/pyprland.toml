@@ -1,0 +1,17 @@
+[pyprland]
+plugins = [
+  "scratchpads",
+]
+
+[workspaces_follow_focus]
+max_workspaces = 9
+
+[expose]
+include_special = false
+
+[scratchpads.sptlrx]
+command = '''alacritty --class sptlrx -e zsh -lc 'unset TMUX; tmux -u has-session -t music && tmux -u attach -t music || { tmux -u new-session -d -s music -n main "zsh -lc \\"cava; exec zsh\\""; tmux -u split-window -h -p 70 -t music:main "zsh -lc \\"sptlrx; exec zsh\\""; tmux -u attach -t music; }' '''
+class = "sptlrx"
+size = "70% 40%"
+position = "15% 5%"
+animation = "fromTop"

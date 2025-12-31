@@ -1,0 +1,36 @@
+# core
+exec-once = gnome-keyring-daemon --start --components=secrets
+exec-once = ~/.config/hypr/scripts/desktop-portal
+exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+exec-once = dbus-update-activation-environment --systemd --all
+exec-once = systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+exec-once = systemctl --user start hyprpolkitagent # remove on next qs release
+
+# apps
+{{- if .packages.quickshell }}
+source = ~/.config/hypr/modules/quickshell-new.conf 
+{{- else }}
+source = ~/.config/hypr/modules/legacy.conf 
+{{- end }}
+
+exec-once = hypridle
+exec-once = wl-paste --type text --watch bash -c 'cliphist store'
+exec-once = wl-paste --type image --watch bash -c 'cliphist store'
+exec-once = wl-clip-persist --clipboard regular
+exec-once = udiskie --no-automount --smart-tray
+
+{{ if .packages.games -}}
+# Controller alert
+exec-once = dualsensectl monitor add "notify-send 'Controller Connected' '🎮 DualSense controller is now ready' -i input-gaming"
+exec-once = dualsensectl monitor remove "notify-send 'Controller Disconnected' '🎮 DualSense controller has been removed' -i input-gaming"
+{{- end }}
+
+# theme
+exec-once = gsettings set org.gnome.desktop.interface gtk-theme $theme
+exec-once = gsettings set org.gnome.desktop.interface icon-theme $icon
+exec-once = gsettings set org.gnome.desktop.interface font-name $font
+exec-once = gsettings set org.gnome.desktop.interface document-font-name $font
+exec-once = gsettings set org.gnome.desktop.interface monospace-font-name $font
+exec-once = gsettings set org.gnome.desktop.wm.preferences titlebar-font $font
+exec-once = gsettings set org.cinnamon.desktop.default-applications.terminal exec $terminal
+exec-once = gsettings set org.gnome.desktop.wm.preferences button-layout 'appmenu:maximize,close'

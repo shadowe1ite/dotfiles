@@ -1,0 +1,113 @@
+[config]
+caching = false
+
+[templates.tmux]
+input_path = '~/.config/matugen/templates/colors-tmux.conf'
+output_path = '~/.config/tmux/tmux.conf'
+post_hook = 'tmux source ~/.config/tmux/tmux.conf &'
+
+[templates.starship]
+input_path = '~/.config/matugen/templates/colors-starship.toml'
+output_path = '~/.config/starship.toml'
+
+[templates.alacritty]
+input_path = '~/.config/matugen/templates/terminals/colors-alacritty.toml'
+output_path = '~/.config/alacritty/material.toml'
+
+[templates.gtk3]
+input_path = '~/.config/matugen/templates/colors-gtk.css'
+output_path = '~/.config/gtk-3.0/colors.css'
+
+[templates.gtk4]
+input_path = '~/.config/matugen/templates/colors-gtk.css'
+output_path = '~/.config/gtk-4.0/colors.css'
+colors_to_compare = [
+  { name = "Fluent-teal-dark", color = "#159a80" },
+  { name = "Fluent-green-dark", color = "#a1bf80" },
+  { name = "Fluent-yellow-dark", color = "#f3c863" },
+  { name = "Fluent-orange-dark", color = "#eba96a" },
+  { name = "Fluent-red-dark", color = "#e27c7c" },
+  { name = "Fluent-pink-dark", color = "#ec87a9" },
+  { name = "Fluent-purple-dark", color = "#9b7fcb" },
+  { name = "Fluent-dark", color = "#5294e2" }
+]
+compare_to = "{{colors.primary.default.hex}}"
+post_hook="gsettings set org.gnome.desktop.interface icon-theme '{{closest_color}}' && sed -i 's/^Theme=.*/Theme={{closest_color}}/' ~/.config/kdeglobals"
+
+[templates.qt5ct]
+input_path = '~/.config/matugen/templates/colors-qt.conf'
+output_path = '~/.config/qt5ct/colors/meterial.conf'
+
+[templates.qt6ct]
+input_path = '~/.config/matugen/templates/colors-qt.conf'
+output_path = '~/.config/qt6ct/colors/meterial.conf'
+
+[templates.kvantum]
+input_path = '~/.config/matugen/templates/kvantum/colors-kvantum.kvconfig'
+output_path = '~/.config/Kvantum/meterial/meterial.kvconfig'
+
+[templates.kvantum-svg]
+input_path = "~/.config/matugen/templates/kvantum/colors-kvantum.svg"
+output_path = "~/.config/Kvantum/meterial/meterial.svg"
+
+[templates.niri]
+input_path = '~/.config/matugen/templates/colors-niri.kdl'
+output_path = '~/.config/niri/modules/theme.kdl'
+
+[templates.hyprland]
+input_path = '~/.config/matugen/templates/colors-hyprland.conf'
+output_path = '~/.config/hypr/modules/material.conf'
+post_hook = 'asusctl aura static -c "{{colors.primary_container.default.hex_stripped | auto_lightness: 30.0 }}"'
+
+[templates.telegram]
+input_path = "~/.config/matugen/templates/colors-telegram.tdesktop-theme"
+output_path = "~/.config/telegram-desktop/themes/colors.tdesktop-theme"
+post_hook = '~/.config/matugen/scripts/telegram-reload.sh "{{colors.surface.default.hex}}"'
+
+[templates.vesktop]
+input_path = "~/.config/matugen/templates/colors-discord.css"
+output_path = "~/.config/vesktop/themes/meterial.css"
+
+[templates.cava]
+input_path = '~/.config/matugen/templates/colors-cava'
+output_path = '~/.config/cava/config'
+post_hook = 'pkill -USR2 cava'
+
+[templates.quickshell]
+input_path = '~/.config/matugen/templates/colors-quickshell.json'
+output_path = '~/.local/state/quickshell/user/generated/colors.json'
+
+[templates.spicetify]
+input_path = '~/.config/matugen/templates/colors-spotify.ini'
+output_path = '~/.config/spicetify/Themes/Comfy/color.ini'
+post_hook = '~/.config/matugen/scripts/spotify-reload.sh &'
+
+[templates.zenChrome]
+input_path = '~/.config/matugen/templates/zen/colors-zenChrome.css'
+output_path = '~/.zen/default/chrome/sine-mods/material/userChrome.css'
+
+[templates.zenContent]
+input_path = '~/.config/matugen/templates/zen/colors-zenContent.css'
+output_path = '~/.zen/default/chrome/sine-mods/material/userContent.css'
+
+[templates.zenLogo]
+input_path = '~/.config/matugen/templates/zen/colors-zenLogo.svg'
+output_path = '~/.zen/default/chrome/zen-logo.svg'
+post_hook = '~/.config/matugen/scripts/zen-reload.sh &'
+
+[templates.vscode]
+input_path = '~/.config/matugen/templates/colors-vscode.json'
+output_path = '~/.vscode/extensions/rakib13332.material-code-3.0.6/build/dark.json'
+
+[templates.fcitx5-panel]
+input_path = '~/.config/matugen/templates/fcitx5/panel.svg'
+output_path = '~/.local/share/fcitx5/themes/material/panel.svg'
+
+[templates.fcitx5-hilight]
+input_path = '~/.config/matugen/templates/fcitx5/highlight.svg'
+output_path = '~/.local/share/fcitx5/themes/material/highlight.svg'
+post_hook = 'sh -c "pgrep -x fcitx5 >/dev/null && fcitx5 -rd || true"'
+
+[templates.obsidian]
+input_path = '~/.config/matugen/templates/colors-obsidian.css'
+output_path = '~/Documents/notes/.obsidian/snippets/matugen-theme.css'

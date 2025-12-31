@@ -1,0 +1,47 @@
+layout {
+
+    background-color "#141318"  
+    
+    focus-ring {
+        active-color   "#cdbdff"
+        inactive-color "#141318"
+        urgent-color   "#ffb4ab"
+    }
+
+    border {
+        active-color   "#cdbdff"
+        inactive-color "#141318"
+        urgent-color   "#ffb4ab"
+    }
+
+    shadow {
+        color "#00000070"
+    }
+
+    tab-indicator {
+        active-color   "#cdbdff"
+        inactive-color "#4b3e76"
+        urgent-color   "#ffb4ab"
+    }
+
+    insert-hint {
+        color "#cdbdff80"
+    }
+}
+
+recent-windows {
+    highlight {
+        active-color "#cdbdff"
+        urgent-color "#ffb4ab"
+        corner-radius 16
+    }
+}
+
+spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "gtk-theme" "adw-gtk3-dark"
+spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "icon-theme" "Fluent-teal-dark"
+spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "font-name" "SauceCodePro Nerd Font Mono"
+spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "document-font-name" "SauceCodePro Nerd Font Mono"
+spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "monospace-font-name" "SauceCodePro Nerd Font Mono"
+spawn-at-startup "gsettings" "set" "org.gnome.desktop.wm.preferences" "titlebar-font" "SauceCodePro Nerd Font Mono"
+spawn-at-startup "gsettings" "set" "org.cinnamon.desktop.default-applications.terminal" "exec" "alacritty"
+spawn-at-startup "gsettings" "set" "org.gnome.desktop.wm.preferences" "button-layout" "appmenu:maximize,close"

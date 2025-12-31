@@ -1,0 +1,31 @@
+input {
+    keyboard {
+
+        //repeat-rate 35
+        //repeat-delay 200
+
+        xkb {
+            layout "us"
+        }
+        numlock
+    }
+
+    touchpad {
+        natural-scroll
+        scroll-factor 0.5
+        dwt
+        tap
+    }
+
+    mouse {
+        accel-speed 0.0
+        accel-profile "adaptive"
+    }
+
+    focus-follows-mouse
+}
+
+cursor {
+    hide-after-inactive-ms 5000
+    hide-when-typing
+}

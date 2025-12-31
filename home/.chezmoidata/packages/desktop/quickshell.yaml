@@ -1,0 +1,10 @@
+quickshell:
+  - quickshell-git
+
+qt:
+  - qt6-5compat
+
+utils:
+  - upower
+  - ddcutil
+  - wlsunset

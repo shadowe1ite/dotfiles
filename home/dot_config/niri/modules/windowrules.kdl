@@ -1,0 +1,166 @@
+window-rule {
+    geometry-corner-radius 12
+    clip-to-geometry true
+    open-focused true
+}
+
+window-rule {
+  match title="^(file_progress)$"
+  match title="^(confirm)$"
+  match title="^(dialog)$"
+  match title="^(download)$"
+  match title="^(notification )$"
+  match title="^(error)$"
+  match title="^(splash)$"
+  match title="^(nwg-look)$"
+  match title="^(confirmreset)$"
+  match title="^(Delete profile)$"
+  match title="^File Operation Progress$"
+  match title="^Confirm to replace files$"
+  match title="^KDE Connect URL handler$"
+  match title="^(Open File)(.*)$"
+  match title="^(Select a File)(.*)$"
+  match title="^(Choose wallpaper)(.*)$"
+  match title="^(Open Folder)(.*)$"
+  match title="^(Save As)(.*)$"
+  match title="^(Library)(.*)$"
+  match title="^(File Upload)(.*)$"
+  match title="^(hyprland-share-picker)$"
+  match title="^(.*)-Google$"
+  match title="^(.*)System Update$"
+  match app-id="^xdm-app$"
+  match app-id="org.gnome.Calendar"
+  match app-id="org.gnome.Calculator"
+  match app-id="org.gnome.TextEditor"
+  match app-id="org.gnome.seahorse.Application"
+
+  open-floating true
+}
+
+window-rule {
+    match is-floating=true
+    border {
+      off 
+    }
+    focus-ring {
+      off
+    }
+}
+
+window-rule {
+    match app-id="org.telegram.desktop"
+    block-out-from "screen-capture"
+    open-floating true
+    default-column-width { fixed 448; }
+    default-window-height { fixed 612; }
+    default-floating-position x=1462 y=10
+}
+
+window-rule {
+    match app-id="zen"
+    open-on-workspace "browser"
+}
+
+window-rule {
+    match app-id="org.kde.dolphin"
+    open-on-workspace "files"
+}
+
+window-rule {
+    match app-id="com.github.neithern.g4music"
+    match app-id="org.nicotine_plus.Nicotine"
+    match app-id="spotify"
+    open-on-workspace "music"
+}
+
+window-rule {
+    match app-id="vesktop"
+    open-on-workspace "chat"
+    open-focused false
+    default-column-width { proportion 1.0; }
+    default-window-height { proportion 1.0; }
+}
+
+window-rule {
+    match title="Picture-in-Picture"
+    open-floating true
+    default-column-width { proportion 0.3; }
+    default-window-height { proportion 0.3; }
+}
+
+window-rule {
+    match app-id="burp-StartBurp"
+    exclude title=".*Temporary Project.*"
+    open-floating true
+}
+
+window-rule {
+    match app-id="burp-StartBurp"
+    exclude title=".*Burp Suite Professional.*"
+    open-floating true
+}
+
+window-rule {
+    match app-id="mpv"
+    open-floating true
+    default-column-width { proportion 0.35; }
+    default-window-height { proportion 0.35; }
+}
+
+window-rule {
+    match title="Spotify.*"
+    default-column-width { fixed 800; }
+    default-window-height { fixed 950; }
+}
+
+window-rule {
+    match app-id="org.pulseaudio.pavucontrol"
+    open-floating true
+    default-column-width { fixed 960; }
+    default-window-height { fixed 481; }
+    default-floating-position x=950 y=72
+}
+
+window-rule {
+    match app-id="com.obsproject.Studio"
+    open-floating true
+    default-column-width { fixed 880; }
+    default-window-height { fixed 721; }
+}
+
+window-rule {
+    match app-id="org.gnome.Evince"
+    default-column-width { fixed 729; }
+    default-window-height { fixed 1013; }
+}
+
+window-rule {
+    match title=".*Google Pixel 3 XL.*"
+    match app-id="Genymotion Player"
+    open-floating true
+    default-column-width { fixed 493; }
+    default-window-height { fixed 910; }
+    default-floating-position x=1396 y=134
+}
+
+window-rule {
+    match app-id="viewnior"
+    open-floating true
+    default-column-width { fixed 1403; }
+    default-window-height { fixed 848; }
+}
+
+window-rule {
+    match app-id="net.nokyan.Resources"
+    open-floating true
+    default-column-width { fixed 788; }
+    default-window-height { fixed 896; }
+}
+
+window-rule {
+    match app-id="org.quickshell"
+    match title="Noctalia"
+    open-floating true
+    default-column-width { fixed 820; }
+    default-window-height { fixed 910; }
+}

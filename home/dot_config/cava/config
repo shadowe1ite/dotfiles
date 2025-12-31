@@ -1,0 +1,7 @@
+[input]
+method = pipewire
+source = auto
+
+[color]
+background = '#141318'
+foreground = '#cdbdff'

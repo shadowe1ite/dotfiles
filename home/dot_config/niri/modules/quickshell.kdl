@@ -1,0 +1,30 @@
+spawn-at-startup "systemctl" "--user" "start" "hyprpolkitagent" // remove on next qs release
+spawn-at-startup "qs" "-c" "noctalia-shell"
+
+binds {
+    // Brightness
+    XF86MonBrightnessUp   allow-when-locked=true { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "brightness" "increase"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "brightness" "decrease"; }
+
+    // Launchers / UI
+    Mod+Space { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
+    //Mod+Super_L { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "bar" "toggle"; } // fix once the issue #605 and pr #2456 closed
+    
+    Mod+E { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "emoji"; }
+    Mod+V { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "clipboard"; }
+    Alt+M { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "wallpaper" "toggle"; }
+
+    // Notifications / Panels
+    Ctrl+Shift+Grave { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "notifications" "dismissAll"; }
+    Mod+Semicolon    { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "notifications" "toggleHistory"; }
+    Mod+Apostrophe   { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "controlCenter" "toggle"; }
+    Mod+L            { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "calendar" "toggle"; }
+
+    // Recording
+    Ctrl+Alt+R { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "screenRecorder" "toggle"; }
+}
+
+layer-rule {
+  match namespace="^noctalia-overview*"
+  place-within-backdrop true
+}

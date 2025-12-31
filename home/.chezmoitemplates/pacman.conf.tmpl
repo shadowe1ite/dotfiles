@@ -1,0 +1,46 @@
+[options]
+HoldPkg = pacman glibc
+Architecture = auto
+Color
+ILoveCandy
+CheckSpace
+VerbosePkgLists
+ParallelDownloads = 10
+IgnorePkg = jack2
+DownloadUser = alpm
+
+SigLevel = Required DatabaseOptional
+LocalFileSigLevel = Optional
+
+{{- if eq .chezmoi.osRelease.id "cachyos" }}
+[cachyos-v3]
+Include = /etc/pacman.d/cachyos-v3-mirrorlist
+
+[cachyos-core-v3]
+Include = /etc/pacman.d/cachyos-v3-mirrorlist
+
+[cachyos-extra-v3]
+Include = /etc/pacman.d/cachyos-v3-mirrorlist
+
+[cachyos]
+Include = /etc/pacman.d/cachyos-mirrorlist
+{{- end }}
+
+[core]
+Include = /etc/pacman.d/mirrorlist
+
+[extra]
+Include = /etc/pacman.d/mirrorlist
+
+[multilib]
+Include = /etc/pacman.d/mirrorlist
+
+[chaotic-aur]
+Include = /etc/pacman.d/chaotic-mirrorlist
+
+[blackarch]
+Include = /etc/pacman.d/blackarch-mirrorlist
+
+[athena]
+SigLevel = Optional TrustedOnly
+Include = /etc/pacman.d/athena-mirrorlist

@@ -1,0 +1,45 @@
+{{- $zenReleaseId := mozillaInstallHash "/opt/zen-browser-bin" -}}
+{{- $zenReleasePath := "default" -}}
+
+{{- $email := "alansedp@gmail.com" -}}
+{{- $name := "ALAN S" -}}
+{{- $user := "shadow" -}}
+
+encryption = "gpg"
+
+[data]
+    email   = "{{ $email }}"
+    name    = "{{ $name }}"
+    user    = "{{ $user }}"
+    disk    = "CT500P3SSD8"
+    storage = "/mnt/storage"
+
+[data.sddm]
+    silent_variant = "catppuccin-mocha"
+
+[data.packages]
+    quickshell = true
+    legacy     = false
+    editing    = false
+    games      = true
+
+[data.home.zen]
+    release_id   = "{{ $zenReleaseId }}"
+    release_path = "{{ $zenReleasePath }}"
+    sineMode     = true
+
+{{ if eq .chezmoi.username $user -}}
+[gpg]
+    recipient = "{{ $email }}"
+    args      = ["--quiet"]
+{{- end }}
+
+[git]
+    autoCommit = true
+    autoPush   = false
+
+[diff]
+  exclude = [
+    "externals",
+    "scripts"
+  ]

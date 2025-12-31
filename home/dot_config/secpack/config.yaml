@@ -1,0 +1,92 @@
+web:
+  pacman:
+    - jdk21-openjdk
+    - burpsuite-pro
+    - ffuf-bin
+    - sqlmap
+    - nmap
+    - netcat
+    - metasploit
+    - theharvester-git
+    - feroxbuster-bin
+    - httprobe
+    - waybackurls
+    - amass
+    - 403jump-git
+    - dirsearch
+    - arjun
+    - findomain
+    - assetfinder
+    - sublist3r
+    - subbrute
+    - aquatone
+    - gowitness
+  
+  pipx:
+    - subcat
+    - waymore
+  
+  go:
+    - github.com/tomnomnom/gf
+    - github.com/haccer/subjack
+  
+  url:
+    - projectdiscovery/nuclei
+    - projectdiscovery/httpx
+    - projectdiscovery/subfinder
+    - lc/gau
+    - hahwul/dalfox
+    - trufflesecurity/trufflehog
+
+reverse:
+  pacman:
+    - gdb
+    - radare2
+    - ghidra 
+    - ida-free 
+    - ghex
+    - pwndbg-git
+    - python-pwntools 
+    - python-tabulate 
+    - python-pycryptodome 
+    - edb-debugger
+    - binwalk
+    - imhex
+    - binsider
+    - ltrace
+    - strace
+
+stegno:
+  pacman:
+    - steghide
+    - binwalk
+    - perl-image-exiftool
+    - stegseek
+    - sonic-visualiser
+    - foremost 
+
+
+crypto:
+  pacman:
+    - hashcat
+    - hashcat-utils
+    - intel-compute-runtime
+    - intel-opencl-runtime
+    - cuda
+    - john
+
+  cargo:
+    - ciphey
+
+forensic:
+  pacman:
+    - pdf-parser
+    - peepdf
+
+network:
+  pacman:
+    - nmap
+    - netcat
+    - wireshark-qt 
+    - bind
+    - tcpdump

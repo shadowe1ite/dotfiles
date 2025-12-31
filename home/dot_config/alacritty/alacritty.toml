@@ -1,0 +1,26 @@
+[general]
+import = ["~/.config/alacritty/material.toml"]
+
+[window]
+padding = { x = 20, y = 1 }
+decorations_theme_variant = "Dark"
+
+[font]
+size = 13.0
+
+[font.normal]
+family = "JetBrainsMono Nerd Font"
+style = "Regular"
+
+[scrolling]
+multiplier = 2
+
+[cursor]
+style = { shape = "Beam", blinking = "Always" }
+blink_interval = 500
+blink_timeout = 0
+unfocused_hollow = false
+thickness = 0.15
+
+[mouse]
+hide_when_typing = true
