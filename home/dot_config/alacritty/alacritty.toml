@@ -3,6 +3,7 @@ import = ["~/.config/alacritty/material.toml"]
 
 [window]
 padding = { x = 20, y = 1 }
+decorations = "Full"
 decorations_theme_variant = "Dark"
 
 [font]
