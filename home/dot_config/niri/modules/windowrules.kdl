@@ -33,6 +33,7 @@ window-rule {
   match app-id="org.gnome.Calculator"
   match app-id="org.gnome.TextEditor"
   match app-id="org.gnome.seahorse.Application"
+  match app-id="net.nokyan.Resources"
 
   open-floating true
 }
@@ -148,13 +149,6 @@ window-rule {
     open-floating true
     default-column-width { fixed 1403; }
     default-window-height { fixed 848; }
-}
-
-window-rule {
-    match app-id="net.nokyan.Resources"
-    open-floating true
-    default-column-width { fixed 788; }
-    default-window-height { fixed 896; }
 }
 
 window-rule {
