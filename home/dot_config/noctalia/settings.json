@@ -98,6 +98,7 @@
                     "followFocusedScreen": false,
                     "groupedBorderOpacity": 1,
                     "hideUnoccupied": true,
+                    "iconScale": 0.8,
                     "id": "Workspace",
                     "labelMode": "none",
                     "showApplications": false,
@@ -112,6 +113,7 @@
                     "showCpuUsage": false,
                     "showDiskUsage": false,
                     "showGpuTemp": false,
+                    "showLoadAverage": false,
                     "showMemoryAsPercent": false,
                     "showMemoryUsage": false,
                     "showNetworkStats": true,
@@ -150,6 +152,7 @@
                     "showCpuUsage": true,
                     "showDiskUsage": true,
                     "showGpuTemp": false,
+                    "showLoadAverage": false,
                     "showMemoryAsPercent": false,
                     "showMemoryUsage": true,
                     "showNetworkStats": false,
@@ -493,7 +496,7 @@
         "audioCodec": "aac",
         "audioSource": "default_output",
         "colorRange": "limited",
-        "copyToClipboard": true,
+        "copyToClipboard": false,
         "directory": "/home/shadow/Videos/Captures",
         "frameRate": 60,
         "quality": "very_high",
@@ -504,6 +507,7 @@
     "sessionMenu": {
         "countdownDuration": 10000,
         "enableCountdown": true,
+        "largeButtonsLayout": "grid",
         "largeButtonsStyle": false,
         "position": "center",
         "powerOptions": [
@@ -547,7 +551,7 @@
         "showHeader": true,
         "showNumberLabels": true
     },
-    "settingsVersion": 35,
+    "settingsVersion": 36,
     "systemMonitor": {
         "cpuCriticalThreshold": 90,
         "cpuPollingInterval": 3000,
@@ -562,6 +566,7 @@
         "gpuCriticalThreshold": 90,
         "gpuPollingInterval": 3000,
         "gpuWarningThreshold": 80,
+        "loadAvgPollingInterval": 3000,
         "memCriticalThreshold": 100,
         "memPollingInterval": 3000,
         "memWarningThreshold": 80,
