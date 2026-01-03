@@ -2,19 +2,6 @@
 {{- $EndBranch := "main" -}}
 
 {{ if ne .chezmoi.osRelease.id "raspbian" }}
-#[".config/quickshell"]
-#type = "archive"
-#url = "https://api.github.com/repos/{{ $EndId }}/dots-hyprland/tarball/{{ $EndBranch }}"
-#exact = false
-#include = ["*/dots/.config/quickshell/**"]
-#stripComponents = 4
-#refreshperiod = "24h"
-#
-#[".config/quickshell/ii/modules/common/widgets/shapes"]
-#stripComponents = 1
-#type = "archive"
-#url = "https://github.com/end-4/rounded-polygon-qmljs/archive/refs/heads/master.zip"
-#refreshperiod = "24h"
 
 [".config/quickshell/noctalia-shell"]
 type = "git-repo"
