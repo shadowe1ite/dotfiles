@@ -34,6 +34,7 @@ window-rule {
   match app-id="org.gnome.TextEditor"
   match app-id="org.gnome.seahorse.Application"
   match app-id="net.nokyan.Resources"
+  match app-id="org.gnome.Loupe"
 
   open-floating true
 }
@@ -142,13 +143,6 @@ window-rule {
     default-column-width { fixed 493; }
     default-window-height { fixed 910; }
     default-floating-position x=1396 y=134
-}
-
-window-rule {
-    match app-id="viewnior"
-    open-floating true
-    default-column-width { fixed 1403; }
-    default-window-height { fixed 848; }
 }
 
 window-rule {
