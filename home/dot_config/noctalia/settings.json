@@ -1,16 +1,18 @@
 {
     "appLauncher": {
+        "autoPasteClipboard": false,
         "customLaunchPrefix": "",
         "customLaunchPrefixEnabled": false,
         "enableClipPreview": true,
         "enableClipboardHistory": true,
         "iconMode": "tabler",
-        "ignoreMouseInput": false,
+        "ignoreMouseInput": true,
         "pinnedExecs": [
         ],
         "position": "top_center",
         "screenshotAnnotationTool": "satty -f -",
         "showCategories": true,
+        "showIconBackground": true,
         "sortByMostUsed": true,
         "terminalCommand": "alacritty -e",
         "useApp2Unit": false,
@@ -75,6 +77,11 @@
                         "removeMargins": false
                     },
                     "id": "plugin:privacy-indicator"
+                },
+                {
+                    "defaultSettings": {
+                    },
+                    "id": "plugin:ce96f7:hackerbox"
                 },
                 {
                     "defaultSettings": {
@@ -229,7 +236,6 @@
     },
     "colorSchemes": {
         "darkMode": true,
-        "generateTemplatesForPredefined": true,
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
         "matugenSchemeType": "scheme-tonal-spot",
@@ -415,6 +421,7 @@
         "shadowDirection": "bottom_right",
         "shadowOffsetX": 2,
         "shadowOffsetY": 3,
+        "showChangelogOnStartup": true,
         "showHibernateOnLockScreen": false,
         "showScreenCorners": true,
         "showSessionButtonsOnLockScreen": false
@@ -431,6 +438,8 @@
     "location": {
         "analogClockInCalendar": true,
         "firstDayOfWeek": -1,
+        "hideWeatherCityName": false,
+        "hideWeatherTimezone": false,
         "name": "malappuram",
         "showCalendarEvents": true,
         "showCalendarWeather": true,
@@ -444,7 +453,7 @@
         "bluetoothDetailsViewMode": "grid",
         "bluetoothHideUnnamedDevices": false,
         "bluetoothRssiPollIntervalMs": 10000,
-        "bluetoothRssiPollingEnabled": true,
+        "bluetoothRssiPollingEnabled": false,
         "wifiDetailsViewMode": "grid",
         "wifiEnabled": true
     },
@@ -608,18 +617,23 @@
         "walker": false,
         "wezterm": false,
         "yazi": false,
-        "zed": false
+        "zed": false,
+        "zenBrowser": false
     },
     "ui": {
+        "bluetoothDetailsViewMode": "grid",
+        "bluetoothHideUnnamedDevices": false,
         "boxBorderEnabled": false,
         "fontDefault": "SauceCodePro Nerd Font Mono",
         "fontDefaultScale": 1,
         "fontFixed": "JetBrainsMono Nerd Font Mono",
         "fontFixedScale": 1,
+        "networkPanelView": "wifi",
         "panelBackgroundOpacity": 1,
         "panelsAttachedToBar": true,
         "settingsPanelMode": "window",
-        "tooltipsEnabled": true
+        "tooltipsEnabled": true,
+        "wifiDetailsViewMode": "grid"
     },
     "wallpaper": {
         "directory": "/home/shadow/Pictures/Wallpapers",

@@ -11,15 +11,15 @@
         }
     ],
     "states": {
+        "ce96f7:hackerbox": {
+            "enabled": true,
+            "sourceUrl": "https://github.com/shadowe1ite/noctalia-plugins"
+        },
         "lyrics": {
             "enabled": true,
             "sourceUrl": "https://github.com/noctalia-dev/noctalia-plugins"
         },
         "mini-docker": {
-            "enabled": true,
-            "sourceUrl": "https://github.com/noctalia-dev/noctalia-plugins"
-        },
-        "myplugin": {
             "enabled": true,
             "sourceUrl": "https://github.com/noctalia-dev/noctalia-plugins"
         },
