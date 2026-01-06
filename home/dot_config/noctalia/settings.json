@@ -96,8 +96,15 @@
             ],
             "left": [
                 {
-                    "displayMode": "onhover",
-                    "id": "VPN"
+                    "defaultSettings": {
+                        "checkInterval": 300,
+                        "githubToken": "",
+                        "maxNotifications": 30,
+                        "reasonFilters": [
+                        ],
+                        "showOnlyUnread": false
+                    },
+                    "id": "plugin:github-notifications"
                 },
                 {
                     "characterCount": 2,

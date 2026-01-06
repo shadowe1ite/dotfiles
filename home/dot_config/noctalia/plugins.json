@@ -11,7 +11,11 @@
         }
     ],
     "states": {
-        "ce96f7:hackerbox": {
+        "hackerbox": {
+            "enabled": true,
+            "sourceUrl": "https://github.com/shadowe1ite/noctalia-plugins"
+        },
+        "github-notifications": {
             "enabled": true,
             "sourceUrl": "https://github.com/shadowe1ite/noctalia-plugins"
         },
