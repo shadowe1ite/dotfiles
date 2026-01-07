@@ -47,14 +47,16 @@
             "center": [
                 {
                     "defaultSettings": {
-                        "completedCount": 0,
-                        "count": 0,
-                        "showBackground": true,
-                        "showCompleted": true,
-                        "todos": [
-                        ]
+                        "hideInactive": false,
+                        "removeMargins": false
                     },
-                    "id": "plugin:todo"
+                    "id": "plugin:privacy-indicator"
+                },
+                {
+                    "defaultSettings": {
+                        "refreshInterval": 5000
+                    },
+                    "id": "plugin:mini-docker"
                 },
                 {
                     "customFont": "SauceCodePro Nerd Font Propo",
@@ -66,22 +68,13 @@
                     "usePrimaryColor": true
                 },
                 {
-                    "defaultSettings": {
-                        "refreshInterval": 5000
-                    },
-                    "id": "plugin:mini-docker"
-                },
-                {
-                    "defaultSettings": {
-                        "hideInactive": false,
-                        "removeMargins": false
-                    },
-                    "id": "plugin:privacy-indicator"
-                },
-                {
-                    "defaultSettings": {
-                    },
-                    "id": "plugin:ce96f7:hackerbox"
+                    "colorizeDistroLogo": false,
+                    "colorizeSystemIcon": "secondary",
+                    "customIconPath": "",
+                    "enableColorization": true,
+                    "icon": "ghost-3-filled",
+                    "id": "ControlCenter",
+                    "useDistroLogo": false
                 },
                 {
                     "defaultSettings": {
@@ -95,17 +88,6 @@
                 }
             ],
             "left": [
-                {
-                    "defaultSettings": {
-                        "checkInterval": 300,
-                        "githubToken": "",
-                        "maxNotifications": 30,
-                        "reasonFilters": [
-                        ],
-                        "showOnlyUnread": false
-                    },
-                    "id": "plugin:github-notifications"
-                },
                 {
                     "characterCount": 2,
                     "colorizeIcons": false,
@@ -134,6 +116,17 @@
                     "showNetworkStats": true,
                     "useMonospaceFont": true,
                     "usePrimaryColor": false
+                },
+                {
+                    "defaultSettings": {
+                        "checkInterval": 300,
+                        "githubToken": "",
+                        "maxNotifications": 30,
+                        "reasonFilters": [
+                        ],
+                        "showOnlyUnread": false
+                    },
+                    "id": "plugin:github-notifications"
                 },
                 {
                     "hideMode": "hidden",
@@ -200,18 +193,13 @@
                     ]
                 },
                 {
+                    "displayMode": "onhover",
+                    "id": "Network"
+                },
+                {
                     "hideWhenZero": false,
                     "id": "NotificationHistory",
                     "showUnreadBadge": true
-                },
-                {
-                    "colorizeDistroLogo": false,
-                    "colorizeSystemIcon": "primary",
-                    "customIconPath": "",
-                    "enableColorization": true,
-                    "icon": "leaf-2",
-                    "id": "ControlCenter",
-                    "useDistroLogo": false
                 }
             ]
         }
@@ -236,7 +224,7 @@
                 "id": "timer-card"
             },
             {
-                "enabled": true,
+                "enabled": false,
                 "id": "weather-card"
             }
         ]
@@ -265,7 +253,7 @@
                 "id": "brightness-card"
             },
             {
-                "enabled": false,
+                "enabled": true,
                 "id": "audio-card"
             },
             {
@@ -319,7 +307,7 @@
     },
     "desktopWidgets": {
         "enabled": true,
-        "gridSnap": false,
+        "gridSnap": true,
         "monitorWidgets": [
             {
                 "name": "eDP-1",
@@ -328,56 +316,20 @@
                         "hideMode": "hidden",
                         "id": "MediaPlayer",
                         "roundedCorners": true,
+                        "scale": 1,
                         "showAlbumArt": true,
                         "showBackground": true,
                         "showButtons": true,
                         "showVisualizer": true,
                         "visualizerType": "linear",
-                        "visualizerVisibility": "with-background",
-                        "x": 752.796875,
-                        "y": 51.6640625
+                        "x": 760,
+                        "y": 60
                     },
                     {
                         "id": "Weather",
                         "showBackground": false,
-                        "x": 5.3984375,
-                        "y": 993.4140625
-                    },
-                    {
-                        "": null,
-                        "__0": null,
-                        "__1": null,
-                        "__2": null,
-                        "__3": null,
-                        "__4": null,
-                        "__5": null,
-                        "__6": null,
-                        "clockStyle": "binary",
-                        "column": 0,
-                        "columnChanged": null,
-                        "customFont": "",
-                        "format": "HH:mm\\nd MMMM yyyy",
-                        "hasModelChildren": false,
-                        "hideMode": "",
-                        "id": "Clock",
-                        "index": 2,
-                        "minimalMode": false,
-                        "model": null,
-                        "modelData": null,
-                        "modelDataChanged": null,
-                        "modelIndexChanged": null,
-                        "objectName": "",
-                        "objectNameChanged": null,
-                        "row": 2,
-                        "rowChanged": null,
-                        "scale": 1.1758191548637789,
-                        "showBackground": true,
-                        "useCustomFont": false,
-                        "usePrimaryColor": true,
-                        "visualizerType": "",
-                        "visualizerVisibility": "",
-                        "x": 1649.67578125,
-                        "y": 112.92187499999994
+                        "x": 20,
+                        "y": 980
                     }
                 ]
             }
@@ -460,7 +412,7 @@
         "bluetoothDetailsViewMode": "grid",
         "bluetoothHideUnnamedDevices": false,
         "bluetoothRssiPollIntervalMs": 10000,
-        "bluetoothRssiPollingEnabled": false,
+        "bluetoothRssiPollingEnabled": true,
         "wifiDetailsViewMode": "grid",
         "wifiEnabled": true
     },
