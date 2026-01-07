@@ -251,6 +251,10 @@
             },
             {
                 "enabled": true,
+                "id": "weather-card"
+            },
+            {
+                "enabled": true,
                 "id": "brightness-card"
             },
             {
@@ -258,11 +262,7 @@
                 "id": "audio-card"
             },
             {
-                "enabled": true,
-                "id": "weather-card"
-            },
-            {
-                "enabled": true,
+                "enabled": false,
                 "id": "media-sysmon-card"
             }
         ],
