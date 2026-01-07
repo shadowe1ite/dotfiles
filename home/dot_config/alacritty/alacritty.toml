@@ -8,10 +8,9 @@ decorations_theme_variant = "Dark"
 
 [font]
 size = 13.0
-
-[font.normal]
-family = "JetBrainsMono Nerd Font"
-style = "Regular"
+normal = { family = "Cascadia Mono NF", style = "Regular" }
+bold = { family = "Cascadia Mono NF", style = "Bold" }
+italic = { family = "Cascadia Mono NF", style = "Italic" }
 
 [scrolling]
 multiplier = 2

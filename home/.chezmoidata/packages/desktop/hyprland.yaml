@@ -41,6 +41,7 @@ fonts:
   - ttf-sourcecodepro-nerd
   - ttf-jetbrains-mono-nerd
   - ttf-hack-nerd
+  - ttf-cascadia-code
   - noto-fonts-emoji
 
 clipboard:
