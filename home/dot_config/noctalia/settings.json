@@ -129,6 +129,7 @@
                     "id": "plugin:github-notifications"
                 },
                 {
+                    "compactMode": true,
                     "compactShowAlbumArt": true,
                     "compactShowVisualizer": false,
                     "hideMode": "hidden",
