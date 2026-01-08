@@ -1,209 +1,437 @@
 {
   "name": "Matugen",
-  "author":  "matugen",
-  "dark": true,
+  "author": "matugen",
+  "dark":  true,
   "ui": {
     "*": {
       "arc": "5",
-      "background": "{{colors.surface.default.hex}}",
+      "background": "{{colors.surface. default.hex}}",
       "foreground": "{{colors.on_surface.default. hex}}",
       "disabledBackground": "{{colors.surface_container.default.hex}}",
-      "disabledForeground": "{{colors. outline.default.hex}}",
-      "inactiveBackground": "{{colors.surface_container.default.hex}}",
-      "inactiveForeground": "{{colors. on_surface_variant.default.hex}}",
+      "disabledForeground": "{{colors.outline.default.hex}}",
+      "inactiveBackground": "{{colors.surface_container. default.hex}}",
+      "inactiveForeground": "{{colors.on_surface_variant.default.hex}}",
       "selectionBackground": "{{colors.primary_container.default.hex}}",
-      "selectionForeground": "{{colors. on_primary_container.default.hex}}",
+      "selectionForeground":  "{{colors.on_primary_container. default.hex}}",
       "selectionInactiveBackground": "{{colors.surface_variant.default.hex}}",
       "selectionInactiveForeground": "{{colors.on_surface_variant.default.hex}}",
-      "acceleratorForeground": "{{colors.primary. default.hex}}",
-      "acceleratorSelectionForeground":  "{{colors.on_primary_container.default.hex}}"
+      "acceleratorForeground": "{{colors.primary.default.hex}}",
+      "acceleratorSelectionForeground":  "{{colors.on_primary_container. default.hex}}"
     },
+    
     "Component": {
       "accentColor": "{{colors.primary.default.hex}}",
       "borderColor": "{{colors.outline.default.hex}}",
       "disabledBorderColor": "{{colors. outline_variant.default.hex}}",
-      "focusColor": "{{colors. primary.default.hex}}",
-      "focusedBorderColor": "{{colors.primary. default.hex}}",
+      "focusColor": "{{colors. primary. default.hex}}",
+      "focusedBorderColor":  "{{colors.primary. default.hex}}",
       "focusWidth": "1",
-      "innerFocusWidth": "0"
+      "innerFocusWidth": "0",
+      "errorFocusColor": "{{colors. error.default.hex}}",
+      "warningFocusColor": "{{colors. tertiary.default.hex}}",
+      "errorBorderColor": "{{colors.error.default.hex}}",
+      "warningBorderColor": "{{colors.tertiary.default.hex}}"
     },
+    
+    "Actions": {
+      "Blue": "{{colors.primary. default.hex}}",
+      "Green": "{{colors. tertiary.default.hex}}",
+      "Grey": "{{colors. outline.default.hex}}",
+      "GreyInline": "{{colors. outline_variant.default.hex}}",
+      "Red": "{{colors.error. default.hex}}",
+      "Yellow": "{{colors. tertiary.default. hex}}"
+    },
+    
+    "Objects": {
+      "Blue": "{{colors.primary.default. hex}}",
+      "Green": "{{colors.tertiary. default.hex}}",
+      "Grey":  "{{colors.outline.default.hex}}",
+      "Pink": "{{colors. tertiary.default.hex}}",
+      "Purple": "{{colors. secondary.default.hex}}",
+      "Red": "{{colors.error.default. hex}}",
+      "RedStatus": "{{colors. error.default.hex}}",
+      "Yellow": "{{colors.tertiary.default.hex}}",
+      "YellowDark": "{{colors.tertiary_container.default.hex}}"
+    },
+    
     "Button": {
       "background": "{{colors. surface_container_high.default.hex}}",
-      "foreground":  "{{colors.on_surface. default.hex}}",
+      "foreground": "{{colors.on_surface. default.hex}}",
       "focusedBorderColor": "{{colors.primary. default.hex}}",
-      "hoverBackground": "{{colors.surface_container_highest.default.hex}}",
-      "pressedBackground": "{{colors.surface_variant.default.hex}}",
-      "default. background": "{{colors.primary. default.hex}}",
-      "default. foreground": "{{colors.on_primary. default.hex}}",
-      "default. hoverBackground": "{{colors.primary_container.default.hex}}",
-      "default.pressedBackground":  "{{colors.primary_container.default. hex}}",
-      "default.focusedBorderColor":  "{{colors.primary.default.hex}}",
+      "hoverBackground": "{{colors. surface_container_highest.default.hex}}",
+      "pressedBackground": "{{colors.surface_variant. default.hex}}",
+      "selectedBackground": "{{colors.primary_container. default.hex}}",
+      "selectedForeground": "{{colors.on_primary_container.default. hex}}",
+      "disabledBackground": "{{colors. surface_container.default.hex}}",
+      "disabledText": "{{colors. outline.default.hex}}",
+      "default. background": "{{colors.primary.default.hex}}",
+      "default.foreground": "{{colors.on_primary. default.hex}}",
+      "default. hoverBackground": "{{colors.primary_container.default. hex}}",
+      "default.pressedBackground": "{{colors.primary_container.default. hex}}",
+      "default.focusedBorderColor": "{{colors. primary.default.hex}}",
       "toolbar.hoverBackground": "{{colors.surface_container_highest.default. hex}}",
-      "toolbar.pressedBackground": "{{colors.surface_variant. default.hex}}"
+      "toolbar.pressedBackground": "{{colors.surface_variant. default.hex}}",
+      "toolbar. selectedBackground": "{{colors.primary_container.default.hex}}"
     },
+    
     "CheckBox": {
+      "background": "{{colors.surface. default.hex}}",
+      "foreground": "{{colors. on_surface.default.hex}}",
       "icon. borderColor": "{{colors.outline.default. hex}}",
       "icon.background": "{{colors. surface. default.hex}}",
       "icon. selectedBackground": "{{colors.primary. default.hex}}",
       "icon. checkmarkColor": "{{colors. on_primary.default. hex}}",
-      "icon.focusedBorderColor": "{{colors. primary.default.hex}}",
-      "icon.hoverBackground": "{{colors.surface_container. default.hex}}"
+      "icon.focusedBorderColor": "{{colors.primary.default.hex}}",
+      "icon.focusedBackground": "{{colors. surface_container.default.hex}}",
+      "icon.hoverBackground": "{{colors.surface_container. default.hex}}",
+      "icon. pressedBackground": "{{colors.surface_container_high.default.hex}}",
+      "icon.selectedFocusedBorderColor": "{{colors. primary.default.hex}}",
+      "icon.selectedHoverBackground": "{{colors.primary_container.default.hex}}",
+      "icon.selectedPressedBackground": "{{colors.primary_container. default.hex}}",
+      "icon. disabledBackground": "{{colors.surface_container.default.hex}}",
+      "icon.disabledBorderColor": "{{colors.outline_variant.default.hex}}",
+      "icon.disabledCheckmarkColor": "{{colors.outline. default.hex}}"
     },
+    
+    "CheckBoxMenuItem": {
+      "background": "{{colors.surface_container. default.hex}}",
+      "foreground": "{{colors. on_surface.default.hex}}",
+      "selectionBackground": "{{colors.primary_container.default.hex}}",
+      "selectionForeground":  "{{colors.on_primary_container. default.hex}}",
+      "acceleratorForeground": "{{colors.on_surface_variant.default.hex}}",
+      "acceleratorSelectionForeground": "{{colors.on_primary_container.default. hex}}"
+    },
+    
     "ComboBox": {
       "background": "{{colors.surface_container.default.hex}}",
-      "buttonBackground": "{{colors. surface_container. default.hex}}",
-      "buttonEditableBackground": "{{colors. surface_container.default.hex}}",
-      "buttonArrowColor": "{{colors. on_surface.default. hex}}",
-      "buttonHoverArrowColor": "{{colors.primary. default.hex}}"
+      "foreground": "{{colors.on_surface.default.hex}}",
+      "disabledBackground": "{{colors.surface_container.default.hex}}",
+      "disabledForeground": "{{colors.outline.default.hex}}",
+      "buttonBackground": "{{colors.surface_container. default.hex}}",
+      "buttonEditableBackground": "{{colors.surface_container. default.hex}}",
+      "buttonArrowColor": "{{colors.on_surface. default.hex}}",
+      "buttonDisabledArrowColor": "{{colors. outline. default.hex}}",
+      "buttonHoverArrowColor":  "{{colors.primary.default.hex}}",
+      "buttonPressedArrowColor": "{{colors.primary.default.hex}}",
+      "popupBackground": "{{colors.surface_container.default.hex}}",
+      "selectionBackground": "{{colors.primary_container.default.hex}}",
+      "selectionForeground":  "{{colors.on_primary_container. default.hex}}"
     },
+    
+    "EditorPane": {
+      "background": "{{colors.surface_container_low.default.hex}}",
+      "foreground": "{{colors.on_surface. default.hex}}",
+      "caretForeground":  "{{colors.on_surface.default.hex}}",
+      "selectionBackground": "{{colors.primary_container.default.hex}}",
+      "selectionForeground":  "{{colors.on_primary_container. default.hex}}",
+      "inactiveBackground": "{{colors.surface_container. default.hex}}",
+      "inactiveForeground": "{{colors.on_surface_variant.default.hex}}"
+    },
+    
+    "FormattedTextField": {
+      "background": "{{colors.surface_container_low.default.hex}}",
+      "foreground": "{{colors.on_surface.default.hex}}",
+      "caretForeground":  "{{colors.on_surface.default. hex}}",
+      "selectionBackground":  "{{colors.primary_container.default. hex}}",
+      "selectionForeground": "{{colors.on_primary_container.default.hex}}",
+      "inactiveBackground":  "{{colors.surface_container.default. hex}}",
+      "inactiveForeground": "{{colors.on_surface_variant.default.hex}}"
+    },
+    
     "Label": {
-      "background": "{{colors.surface.default. hex}}",
-      "foreground": "{{colors.on_surface.default.hex}}",
-      "disabledForeground": "{{colors.outline.default. hex}}"
+      "background": "{{colors.surface. default.hex}}",
+      "foreground": "{{colors. on_surface.default.hex}}",
+      "disabledForeground": "{{colors. outline.default.hex}}",
+      "disabledBackground":  "{{colors.surface. default.hex}}"
     },
+    
     "List": {
-      "background":  "{{colors.surface. default.hex}}",
+      "background": "{{colors.surface. default.hex}}",
+      "foreground": "{{colors. on_surface.default.hex}}",
       "selectionBackground": "{{colors.primary_container.default.hex}}",
       "selectionForeground":  "{{colors.on_primary_container. default.hex}}",
-      "selectionInactiveBackground": "{{colors.surface_variant.default.hex}}",
-      "selectionInactiveForeground": "{{colors.on_surface_variant.default. hex}}"
+      "selectionInactiveBackground": "{{colors. surface_variant.default.hex}}",
+      "selectionInactiveForeground":  "{{colors.on_surface_variant. default.hex}}",
+      "dropCellBackground": "{{colors.primary_container.default. hex}}",
+      "dropCellForeground": "{{colors.on_primary_container.default. hex}}",
+      "dropLineColor": "{{colors. primary.default.hex}}"
     },
+    
     "Menu": {
-      "background": "{{colors.surface_container.default.hex}}",
-      "foreground": "{{colors.on_surface.default.hex}}",
-      "selectionBackground": "{{colors.primary_container.default.hex}}",
-      "selectionForeground":  "{{colors.on_primary_container. default.hex}}",
-      "acceleratorForeground":  "{{colors.on_surface_variant.default.hex}}"
+      "background": "{{colors.surface_container. default.hex}}",
+      "foreground": "{{colors. on_surface.default.hex}}",
+      "selectionBackground": "{{colors. primary_container.default.hex}}",
+      "selectionForeground": "{{colors.on_primary_container.default. hex}}",
+      "acceleratorForeground":  "{{colors.on_surface_variant. default.hex}}",
+      "acceleratorSelectionForeground": "{{colors. on_primary_container.default.hex}}",
+      "disabledForeground": "{{colors. outline.default.hex}}"
     },
+    
     "MenuBar": {
       "background": "{{colors.surface. default.hex}}",
       "foreground": "{{colors. on_surface.default.hex}}",
       "hoverBackground": "{{colors.surface_container. default.hex}}",
       "selectionBackground": "{{colors.primary_container.default.hex}}",
-      "selectionForeground":  "{{colors.on_primary_container. default.hex}}"
+      "selectionForeground":  "{{colors.on_primary_container. default.hex}}",
+      "borderColor": "{{colors. outline_variant.default.hex}}",
+      "underlineSelectionBackground": "{{colors. primary_container.default.hex}}",
+      "underlineSelectionColor": "{{colors. primary.default.hex}}",
+      "underlineSelectionHeight": "2"
     },
+    
     "MenuItem": {
       "background": "{{colors.surface_container. default.hex}}",
       "foreground": "{{colors. on_surface.default.hex}}",
-      "selectionBackground": "{{colors.primary_container.default.hex}}",
-      "selectionForeground":  "{{colors.on_primary_container. default.hex}}",
-      "acceleratorForeground":  "{{colors.on_surface_variant. default.hex}}"
+      "selectionBackground": "{{colors. primary_container.default.hex}}",
+      "selectionForeground": "{{colors.on_primary_container.default. hex}}",
+      "acceleratorForeground": "{{colors.on_surface_variant.default.hex}}",
+      "acceleratorSelectionForeground": "{{colors.on_primary_container.default. hex}}",
+      "disabledForeground": "{{colors.outline.default.hex}}",
+      "checkBackground": "{{colors. primary. default.hex}}",
+      "checkMargins": "2,2,2,2"
     },
+    
+    "OptionPane": {
+      "background": "{{colors.surface. default.hex}}",
+      "foreground": "{{colors. on_surface.default.hex}}",
+      "messageForeground": "{{colors.on_surface.default.hex}}",
+      "warningIcon. foreground": "{{colors.tertiary.default.hex}}",
+      "errorIcon.foreground":  "{{colors.error.default.hex}}",
+      "informationIcon.foreground": "{{colors. primary.default.hex}}",
+      "questionIcon.foreground":  "{{colors.primary.default.hex}}"
+    },
+    
     "Panel": {
       "background": "{{colors.surface. default.hex}}",
-      "foreground": "{{colors.on_surface. default.hex}}"
+      "foreground": "{{colors. on_surface.default.hex}}"
     },
-    "PopupMenu": {
-      "background": "{{colors.surface_container.default.hex}}",
-      "foreground": "{{colors.on_surface.default.hex}}",
-      "borderColor": "{{colors.outline_variant.default.hex}}"
-    },
-    "ProgressBar": {
-      "background": "{{colors.surface_container. default.hex}}",
-      "foreground": "{{colors. primary.default.hex}}",
-      "selectionBackground": "{{colors.on_primary. default.hex}}",
-      "selectionForeground":  "{{colors.primary.default.hex}}"
-    },
-    "RadioButton": {
-      "icon.borderColor": "{{colors.outline. default.hex}}",
-      "icon. background": "{{colors. surface.default.hex}}",
-      "icon.selectedBackground":  "{{colors.primary.default.hex}}",
-      "icon.centerDiameter": "8",
-      "icon.focusedBorderColor": "{{colors. primary.default.hex}}"
-    },
-    "ScrollBar": {
-      "background": "{{colors.surface. default.hex}}",
-      "thumb":  "{{colors.surface_container_highest.default.hex}}",
-      "thumbInactiveColor": "{{colors. surface_container_high.default.hex}}",
-      "track": "{{colors. surface_container_low.default.hex}}",
-      "hoverThumbColor": "{{colors.outline.default.hex}}",
-      "pressedThumbColor":  "{{colors.outline_variant.default. hex}}"
-    },
-    "ScrollPane": {
-      "background": "{{colors.surface.default.hex}}"
-    },
-    "Separator":  {
-      "foreground": "{{colors.outline_variant.default.hex}}"
-    },
-    "Slider": {
-      "trackColor": "{{colors. surface_container_highest.default.hex}}",
-      "thumbColor": "{{colors.primary.default.hex}}",
-      "tickColor": "{{colors.outline.default. hex}}",
-      "focusedColor": "{{colors. primary.default.hex}}"
-    },
-    "Spinner": {
-      "background": "{{colors. surface_container. default.hex}}",
-      "buttonBackground": "{{colors. surface_container.default.hex}}",
-      "buttonArrowColor": "{{colors.on_surface.default.hex}}"
-    },
-    "SplitPane": {
-      "background": "{{colors.surface.default. hex}}"
-    },
-    "TabbedPane": {
-      "background": "{{colors.surface. default.hex}}",
-      "foreground": "{{colors.on_surface. default.hex}}",
-      "focusColor": "{{colors. primary.default.hex}}",
-      "selectedBackground": "{{colors. surface_container. default.hex}}",
-      "selectedForeground": "{{colors.on_surface. default.hex}}",
-      "underlineColor": "{{colors.primary.default.hex}}",
-      "inactiveUnderlineColor": "{{colors.outline. default.hex}}",
-      "hoverColor": "{{colors. surface_container_high.default.hex}}",
-      "contentAreaColor": "{{colors.surface_container_low.default.hex}}"
-    },
-    "Table": {
-      "background": "{{colors.surface.default. hex}}",
-      "foreground": "{{colors.on_surface.default.hex}}",
-      "selectionBackground": "{{colors.primary_container.default.hex}}",
-      "selectionForeground":  "{{colors.on_primary_container. default.hex}}",
-      "selectionInactiveBackground": "{{colors. surface_variant.default.hex}}",
-      "selectionInactiveForeground":  "{{colors.on_surface_variant. default.hex}}",
-      "gridColor": "{{colors. outline_variant.default.hex}}",
-      "alternateRowColor": "{{colors.surface_container_low.default.hex}}"
-    },
-    "TableHeader":  {
-      "background": "{{colors. surface_container.default.hex}}",
-      "foreground": "{{colors.on_surface.default.hex}}",
-      "separatorColor": "{{colors.outline_variant.default.hex}}"
-    },
-    "TextArea": {
-      "background": "{{colors.surface_container_low.default.hex}}",
-      "foreground": "{{colors.on_surface. default.hex}}",
-      "caretForeground": "{{colors.on_surface.default.hex}}",
-      "selectionBackground": "{{colors.primary_container.default.hex}}",
-      "selectionForeground":  "{{colors.on_primary_container. default.hex}}",
-      "inactiveBackground": "{{colors.surface_container. default.hex}}"
-    },
-    "TextField": {
+    
+    "PasswordField": {
       "background": "{{colors.surface_container_low.default.hex}}",
       "foreground": "{{colors.on_surface.default.hex}}",
       "caretForeground":  "{{colors.on_surface.default. hex}}",
       "selectionBackground":  "{{colors.primary_container.default. hex}}",
       "selectionForeground": "{{colors.on_primary_container.default.hex}}"
     },
+    
+    "PopupMenu": {
+      "background": "{{colors.surface_container. default.hex}}",
+      "foreground": "{{colors. on_surface.default.hex}}",
+      "borderColor": "{{colors.outline_variant. default.hex}}",
+      "borderInsets": "4,1,4,1"
+    },
+    
+    "ProgressBar": {
+      "background": "{{colors.surface_container. default.hex}}",
+      "foreground": "{{colors. primary.default.hex}}",
+      "selectionBackground": "{{colors.on_primary. default.hex}}",
+      "selectionForeground": "{{colors.primary.default.hex}}"
+    },
+    
+    "RadioButton": {
+      "background": "{{colors.surface. default.hex}}",
+      "foreground": "{{colors. on_surface.default.hex}}",
+      "icon.borderColor": "{{colors.outline.default. hex}}",
+      "icon.background":  "{{colors.surface.default.hex}}",
+      "icon.selectedBackground": "{{colors.primary. default.hex}}",
+      "icon. focusedBorderColor": "{{colors. primary.default.hex}}",
+      "icon.hoverBackground": "{{colors.surface_container.default.hex}}",
+      "icon.pressedBackground":  "{{colors.surface_container_high.default.hex}}",
+      "icon.selectedHoverBackground": "{{colors.primary_container.default.hex}}",
+      "icon.selectedPressedBackground": "{{colors.primary_container. default.hex}}",
+      "icon. centerDiameter": "8",
+      "icon.centerDiameterSelected": "8",
+      "icon. disabledBackground":  "{{colors.surface_container.default. hex}}",
+      "icon.disabledBorderColor":  "{{colors.outline_variant.default. hex}}"
+    },
+    
+    "RadioButtonMenuItem": {
+      "background": "{{colors.surface_container.default.hex}}",
+      "foreground": "{{colors.on_surface.default.hex}}",
+      "selectionBackground": "{{colors.primary_container.default.hex}}",
+      "selectionForeground":  "{{colors.on_primary_container. default.hex}}",
+      "acceleratorForeground": "{{colors.on_surface_variant.default.hex}}",
+      "acceleratorSelectionForeground":  "{{colors.on_primary_container. default.hex}}"
+    },
+    
+    "ScrollBar": {
+      "background": "{{colors.surface. default.hex}}",
+      "thumb": "{{colors. surface_container_highest.default.hex}}",
+      "thumbInactiveColor": "{{colors. surface_container_high.default.hex}}",
+      "track": "{{colors. surface_container_low.default.hex}}",
+      "hoverThumbColor": "{{colors.outline.default.hex}}",
+      "pressedThumbColor":  "{{colors.outline_variant.default. hex}}",
+      "hoverTrackColor":  "{{colors.surface_container. default.hex}}",
+      "pressedTrackColor": "{{colors.surface_container. default.hex}}",
+      "width": "10",
+      "thumbInsets": "2,2,2,2",
+      "thumbArc": "999",
+      "trackArc": "999"
+    },
+    
+    "ScrollPane": {
+      "background": "{{colors.surface.default. hex}}",
+      "foreground": "{{colors.on_surface. default.hex}}"
+    },
+    
+    "Separator": {
+      "foreground": "{{colors.outline_variant.default.hex}}",
+      "background": "{{colors.surface. default.hex}}",
+      "height": "1",
+      "stripeWidth": "1",
+      "stripeIndent": "0"
+    },
+    
+    "Slider": {
+      "background": "{{colors. surface. default.hex}}",
+      "foreground": "{{colors.on_surface. default.hex}}",
+      "trackColor": "{{colors. surface_container_highest.default.hex}}",
+      "thumbColor": "{{colors.primary.default.hex}}",
+      "tickColor": "{{colors.outline.default. hex}}",
+      "focusedColor": "{{colors. primary.default.hex}}",
+      "hoverThumbColor": "{{colors.primary_container.default. hex}}",
+      "pressedThumbColor":  "{{colors.primary_container.default. hex}}",
+      "disabledTrackColor": "{{colors.surface_container.default.hex}}",
+      "disabledThumbColor": "{{colors.outline. default.hex}}"
+    },
+    
+    "Spinner": {
+      "background": "{{colors.surface_container. default.hex}}",
+      "foreground": "{{colors. on_surface.default.hex}}",
+      "buttonBackground": "{{colors.surface_container. default.hex}}",
+      "buttonArrowColor": "{{colors.on_surface.default.hex}}",
+      "buttonHoverArrowColor":  "{{colors.primary.default.hex}}",
+      "buttonPressedArrowColor": "{{colors.primary.default. hex}}",
+      "buttonDisabledArrowColor": "{{colors.outline. default.hex}}"
+    },
+    
+    "SplitPane": {
+      "background": "{{colors.surface.default. hex}}",
+      "foreground": "{{colors.on_surface.default.hex}}",
+      "dividerDraggingColor": "{{colors.primary. default.hex}}",
+      "oneTouchHoverArrowColor": "{{colors.primary.default.hex}}"
+    },
+    
+    "TabbedPane": {
+      "background": "{{colors.surface.default. hex}}",
+      "foreground": "{{colors.on_surface.default.hex}}",
+      "focusColor": "{{colors. primary.default.hex}}",
+      "selectedBackground": "{{colors. surface_container.default. hex}}",
+      "selectedForeground": "{{colors. on_surface.default.hex}}",
+      "underlineColor": "{{colors.primary.default.hex}}",
+      "inactiveUnderlineColor": "{{colors.outline.default.hex}}",
+      "disabledUnderlineColor": "{{colors.outline_variant.default.hex}}",
+      "hoverColor": "{{colors. surface_container_high.default.hex}}",
+      "hoverForeground":  "{{colors.on_surface. default.hex}}",
+      "contentAreaColor": "{{colors.surface_container_low.default.hex}}",
+      "tabSeparatorColor": "{{colors.outline_variant.default.hex}}",
+      "tabSelectionHeight": "3",
+      "cardTabSelectionHeight": "3",
+      "showTabSeparators": "false",
+      "tabSeparatorsFullHeight": "false",
+      "hasFullBorder": "false"
+    },
+    
+    "Table": {
+      "background": "{{colors.surface.default. hex}}",
+      "foreground": "{{colors.on_surface.default.hex}}",
+      "selectionBackground": "{{colors.primary_container.default.hex}}",
+      "selectionForeground": "{{colors. on_primary_container.default.hex}}",
+      "selectionInactiveBackground": "{{colors. surface_variant.default.hex}}",
+      "selectionInactiveForeground":  "{{colors.on_surface_variant. default.hex}}",
+      "gridColor": "{{colors. outline_variant.default.hex}}",
+      "alternateRowColor": "{{colors.surface_container_low.default.hex}}",
+      "focusCellBackground": "{{colors. primary_container.default.hex}}",
+      "focusCellForeground":  "{{colors.on_primary_container. default.hex}}",
+      "dropCellBackground": "{{colors.primary_container.default.hex}}",
+      "dropCellForeground": "{{colors.on_primary_container.default.hex}}",
+      "dropLineColor": "{{colors.primary. default.hex}}",
+      "dropLineShortColor": "{{colors.error.default.hex}}",
+      "sortIconColor": "{{colors.on_surface.default.hex}}"
+    },
+    
+    "TableHeader": {
+      "background": "{{colors.surface_container. default.hex}}",
+      "foreground": "{{colors. on_surface.default.hex}}",
+      "separatorColor": "{{colors.outline_variant.default.hex}}",
+      "bottomSeparatorColor": "{{colors.outline_variant.default.hex}}",
+      "hoverBackground": "{{colors. surface_container_high.default.hex}}",
+      "hoverForeground":  "{{colors.on_surface.default. hex}}",
+      "pressedBackground":  "{{colors.surface_variant.default.hex}}",
+      "pressedForeground":  "{{colors.on_surface. default.hex}}",
+      "focusBackground": "{{colors. surface_container_high.default.hex}}",
+      "focusForeground": "{{colors. on_surface.default.hex}}"
+    },
+    
+    "TextArea": {
+      "background": "{{colors.surface_container_low.default.hex}}",
+      "foreground":  "{{colors.on_surface.default. hex}}",
+      "caretForeground": "{{colors.on_surface. default.hex}}",
+      "selectionBackground": "{{colors.primary_container. default.hex}}",
+      "selectionForeground": "{{colors.on_primary_container.default.hex}}",
+      "inactiveBackground": "{{colors.surface_container.default.hex}}",
+      "inactiveForeground":  "{{colors.on_surface_variant. default.hex}}"
+    },
+    
+    "TextField": {
+      "background": "{{colors.surface_container_low.default.hex}}",
+      "foreground": "{{colors.on_surface.default.hex}}",
+      "caretForeground":  "{{colors.on_surface.default. hex}}",
+      "selectionBackground":  "{{colors.primary_container.default. hex}}",
+      "selectionForeground": "{{colors.on_primary_container.default.hex}}",
+      "inactiveBackground":  "{{colors.surface_container.default. hex}}",
+      "inactiveForeground": "{{colors.on_surface_variant.default.hex}}",
+      "placeholderForeground": "{{colors.outline.default.hex}}"
+    },
+    
     "TextPane": {
       "background": "{{colors.surface_container_low.default.hex}}",
       "foreground": "{{colors.on_surface.default.hex}}",
       "caretForeground":  "{{colors.on_surface.default. hex}}",
       "selectionBackground":  "{{colors.primary_container.default. hex}}",
       "selectionForeground": "{{colors.on_primary_container.default.hex}}",
-      "inactiveBackground": "{{colors.surface_container.default.hex}}"
+      "inactiveBackground":  "{{colors.surface_container.default. hex}}",
+      "inactiveForeground": "{{colors.on_surface_variant.default.hex}}"
     },
+    
+    "TitledBorder": {
+      "titleColor": "{{colors.on_surface.default. hex}}",
+      "border": "{{colors. outline_variant.default.hex}}"
+    },
+    
     "ToggleButton": {
-      "background": "{{colors. surface_container_high.default.hex}}",
-      "foreground": "{{colors.on_surface. default.hex}}",
-      "selectedBackground": "{{colors. primary. default.hex}}",
-      "selectedForeground": "{{colors.on_primary.default.hex}}",
-      "toolbar.selectedBackground": "{{colors. primary_container.default.hex}}"
+      "background": "{{colors.surface_container_high.default.hex}}",
+      "foreground":  "{{colors.on_surface.default. hex}}",
+      "selectedBackground": "{{colors.primary. default.hex}}",
+      "selectedForeground": "{{colors.on_primary. default.hex}}",
+      "disabledSelectedBackground": "{{colors.surface_container. default.hex}}",
+      "pressedBackground": "{{colors. surface_variant.default.hex}}",
+      "hoverBackground": "{{colors.surface_container_highest.default. hex}}",
+      "toolbar. selectedBackground": "{{colors.primary_container. default.hex}}",
+      "toolbar. selectedForeground":  "{{colors.on_primary_container. default.hex}}",
+      "toolbar.hoverBackground":  "{{colors.surface_container_high.default.hex}}",
+      "toolbar.pressedBackground":  "{{colors.surface_variant. default.hex}}",
+      "tab.underlineColor": "{{colors.primary.default. hex}}",
+      "tab.disabledUnderlineColor": "{{colors.outline. default.hex}}",
+      "tab. selectedBackground": "{{colors. surface_container.default. hex}}",
+      "tab.hoverBackground": "{{colors.surface_container_high.default. hex}}"
     },
+    
     "ToolBar": {
       "background": "{{colors.surface. default.hex}}",
-      "foreground": "{{colors. on_surface.default.hex}}"
+      "foreground": "{{colors. on_surface.default.hex}}",
+      "dockingBackground": "{{colors. surface_container. default.hex}}",
+      "floatingBackground": "{{colors. surface_container. default.hex}}",
+      "borderHandleColor": "{{colors.outline_variant.default.hex}}",
+      "hoverButtonGroupBackground": "{{colors. surface_container. default.hex}}"
     },
+    
     "ToolTip": {
       "background": "{{colors.inverse_surface.default.hex}}",
       "foreground": "{{colors.inverse_on_surface.default. hex}}",
-      "borderColor": "{{colors.outline.default.hex}}"
+      "borderColor": "{{colors.outline. default.hex}}"
     },
+    
     "Tree": {
       "background": "{{colors.surface.default. hex}}",
       "foreground": "{{colors.on_surface.default.hex}}",
@@ -211,15 +439,128 @@
       "selectionForeground": "{{colors. on_primary_container.default.hex}}",
       "selectionInactiveBackground": "{{colors. surface_variant.default.hex}}",
       "selectionInactiveForeground":  "{{colors.on_surface_variant. default.hex}}",
-      "hash": "{{colors. outline_variant.default.hex}}"
+      "textBackground": "{{colors. surface. default.hex}}",
+      "textForeground": "{{colors.on_surface.default.hex}}",
+      "selectionBorderColor": "{{colors.primary. default.hex}}",
+      "hash": "{{colors. outline_variant.default.hex}}",
+      "dropCellBackground": "{{colors.primary_container.default.hex}}",
+      "dropCellForeground": "{{colors.on_primary_container.default.hex}}",
+      "dropLineColor": "{{colors.primary. default.hex}}",
+      "icon.expandedColor": "{{colors. on_surface.default. hex}}",
+      "icon.collapsedColor": "{{colors.on_surface.default.hex}}",
+      "icon.leafColor": "{{colors.on_surface. default.hex}}",
+      "icon. closedColor": "{{colors.on_surface.default.hex}}",
+      "icon.openColor": "{{colors.on_surface. default.hex}}"
     },
-    "EditorPane": {
-      "background": "{{colors.surface_container_low.default.hex}}",
-      "foreground":  "{{colors.on_surface.default. hex}}",
-      "caretForeground": "{{colors.on_surface. default.hex}}",
-      "selectionBackground": "{{colors.primary_container. default.hex}}",
-      "selectionForeground": "{{colors.on_primary_container.default.hex}}",
-      "inactiveBackground": "{{colors.surface_container. default.hex}}"
-    }
+    
+    "RootPane": {
+      "background": "{{colors.surface.default.hex}}",
+      "foreground":  "{{colors.on_surface.default. hex}}"
+    },
+    
+    "Viewport": {
+      "background": "{{colors.surface.default. hex}}",
+      "foreground": "{{colors.on_surface.default.hex}}"
+    },
+    
+    
+    "Burp. burpOrange": "{{colors.primary.default.hex}}",
+    "Burp.primaryButtonBackground": "{{colors. primary. default.hex}}",
+    "Burp.primaryButtonForeground": "{{colors.on_primary.default.hex}}",
+    "Burp.tabFlashColour": "{{colors. primary.default.hex}}",
+    "Burp.taskListEntry": "{{colors. surface_container.default. hex}}",
+    "Burp. taskListEntryBackground": "{{colors. surface_container.default.hex}}",
+    "Burp.taskListEntrySelectedHighlight": "{{colors.primary. default.hex}}",
+    "Burp.collapsibleSidebarSelectedLabelBackground": "{{colors. primary. default.hex}}",
+    "Burp.collapsibleSidebarBackground": "{{colors. surface_container.default.hex}}",
+    "Burp. dualEmptyPanelLeftBackground": "{{colors.surface_container. default.hex}}",
+    "Burp.textEditorBackground": "{{colors.surface_container_low.default. hex}}",
+    "Burp. textEditorForeground": "{{colors.on_surface. default.hex}}",
+    "Burp.textEditorCurrentLineBackground": "{{colors.surface_container. default.hex}}",
+    "Burp.searchBarBorder": "{{colors.primary.default.hex}}",
+    "Burp.tableFilterBarBorder": "{{colors.primary.default. hex}}",
+    "Burp. backgrounder": "{{colors. surface_container. default.hex}}",
+    
+    "Burp.issueHigh": "{{colors. error.default.hex}}",
+    "Burp.issueHighBackground": "{{colors. error_container.default.hex}}",
+    "Burp.issueHighForeground": "{{colors. on_error_container.default.hex}}",
+    "Burp.issueMedium": "{{colors. tertiary.default.hex}}",
+    "Burp.issueMediumBackground": "{{colors.tertiary_container.default.hex}}",
+    "Burp.issueMediumForeground":  "{{colors.on_tertiary_container.default.hex}}",
+    "Burp.issueLow": "{{colors. secondary.default.hex}}",
+    "Burp.issueLowBackground": "{{colors.secondary_container.default.hex}}",
+    "Burp.issueLowForeground": "{{colors.on_secondary_container.default.hex}}",
+    "Burp.issueInfo": "{{colors. primary.default.hex}}",
+    "Burp.issueInfoBackground": "{{colors.primary_container.default.hex}}",
+    "Burp.issueInfoForeground":  "{{colors.on_primary_container. default.hex}}",
+    
+    "Burp.scanTaskBackground": "{{colors. surface_container. default.hex}}",
+    "Burp.scanTaskForeground": "{{colors.on_surface.default.hex}}",
+    "Burp.scanTaskSelectedBackground": "{{colors.primary_container.default.hex}}",
+    "Burp.scanTaskSelectedForeground":  "{{colors.on_primary_container. default.hex}}",
+    "Burp.scanTaskBorder": "{{colors.outline. default.hex}}",
+    "Burp.auditItemBackground": "{{colors.surface_container. default.hex}}",
+    "Burp.auditItemForeground": "{{colors.on_surface.default.hex}}",
+    
+    "Burp.taskCardBackground": "{{colors.surface_container. default.hex}}",
+    "Burp.taskCardForeground": "{{colors.on_surface.default.hex}}",
+    "Burp.taskCardSelectedBackground": "{{colors.primary_container.default.hex}}",
+    "Burp.taskCardSelectedForeground":  "{{colors.on_primary_container. default.hex}}",
+    "Burp.taskCardBorder": "{{colors.outline.default. hex}}",
+    "Burp. taskCardHoverBackground": "{{colors. surface_container_high.default.hex}}",
+    
+    "Burp.alertHigh": "{{colors.error.default. hex}}",
+    "Burp. alertHighBackground": "{{colors.error_container.default.hex}}",
+    "Burp.alertMedium": "{{colors.tertiary. default.hex}}",
+    "Burp.alertMediumBackground": "{{colors.tertiary_container.default.hex}}",
+    "Burp.alertLow": "{{colors.secondary.default. hex}}",
+    "Burp. alertLowBackground":  "{{colors.secondary_container.default. hex}}",
+    "Burp. alertInfo": "{{colors.primary.default.hex}}",
+    "Burp.alertInfoBackground":  "{{colors.primary_container.default. hex}}",
+    
+    "Burp.intruderPayloadHighlight": "{{colors.tertiary_container.default.hex}}",
+    "Burp.repeaterTabForeground": "{{colors.on_surface.default.hex}}",
+    "Burp.repeaterTabBackground": "{{colors.surface_container.default.hex}}",
+    
+    "BurpPalette.mono0": "{{colors. surface.default.hex}}",
+    "BurpPalette.mono1": "{{colors.surface_container_lowest.default.hex}}",
+    "BurpPalette.mono2": "{{colors.surface_container_low.default.hex}}",
+    "BurpPalette.mono3": "{{colors.surface_container. default.hex}}",
+    "BurpPalette. mono4": "{{colors.surface_container_high.default. hex}}",
+    "BurpPalette.mono5": "{{colors. surface_container_highest.default.hex}}",
+    "BurpPalette.mono6": "{{colors.outline_variant.default.hex}}",
+    "BurpPalette.mono7":  "{{colors.outline.default.hex}}",
+    "BurpPalette.mono8": "{{colors.on_surface_variant. default.hex}}",
+    "BurpPalette. mono9": "{{colors.on_surface.default.hex}}",
+    "BurpPalette.mono10": "{{colors.on_surface. default.hex}}",
+    "BurpPalette. mono11": "{{colors.on_surface.default.hex}}",
+    "BurpPalette.blue1": "{{colors. surface_container_low.default.hex}}",
+    "BurpPalette.blue4": "{{colors. surface_container_high.default.hex}}",
+    
+    "ColourPalette.mono0": "{{colors.surface.default. hex}}",
+    "ColourPalette.mono1":  "{{colors.surface_container_lowest.default.hex}}",
+    "ColourPalette. mono2": "{{colors.surface_container_low.default. hex}}",
+    "ColourPalette.mono3":  "{{colors.surface_container.default. hex}}",
+    "ColourPalette.mono4":  "{{colors.surface_container_high. default.hex}}",
+    "ColourPalette.mono5": "{{colors.surface_container_highest.default.hex}}",
+    "ColourPalette.mono6": "{{colors.outline_variant.default.hex}}",
+    "ColourPalette.mono7": "{{colors.outline. default.hex}}",
+    "ColourPalette.mono8": "{{colors.on_surface_variant.default.hex}}",
+    "ColourPalette.background5": "{{colors. surface. default.hex}}",
+    "ColourPalette.blue1": "{{colors.surface_container_low.default.hex}}",
+    
+    "DesignSystemPalette.grey0": "{{colors.surface.default. hex}}",
+    "DesignSystemPalette.grey1": "{{colors.surface_container_lowest.default.hex}}",
+    "DesignSystemPalette.grey2": "{{colors. surface_container_low.default.hex}}",
+    "DesignSystemPalette.grey3":  "{{colors.surface_container.default. hex}}",
+    "DesignSystemPalette.grey4": "{{colors.surface_container_high.default.hex}}",
+    "DesignSystemPalette.grey5": "{{colors. surface_container_highest.default.hex}}",
+    "DesignSystemPalette.grey6":  "{{colors.outline_variant.default. hex}}",
+    "DesignSystemPalette.grey7": "{{colors.outline.default. hex}}",
+    "DesignSystemPalette.grey8": "{{colors.on_surface_variant.default.hex}}",
+    "DesignSystemPalette.grey9": "{{colors. on_surface.default.hex}}",
+    "DesignSystemPalette. grey10": "{{colors.on_surface.default.hex}}",
+    "DesignSystemPalette.grey11":  "{{colors.on_surface.default. hex}}",
+    "DesignSystemPalette.grey12": "{{colors.on_surface.default. hex}}"
   }
 }
