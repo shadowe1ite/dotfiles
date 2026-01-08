@@ -110,82 +110,82 @@ hbox#titlebar {
   display: none !important;
 }
 
-/* CSD */
-#navigator-toolbox[zen-right-side="true"] > #zen-sidebar-top-buttons > .titlebar-buttonbox-container > .titlebar-buttonbox {
-    margin-top: 11px !important;
-}
-
-.titlebar-buttonbox {
-    margin-right: 10px;
-    padding-right: 0px !important;
-}
-
-.titlebar-button {
-    padding: 0px !important;
-    min-height: 16px !important;
-    min-width: 16px !important;
-    height: 16px !important;
-    align-self: center;
-    margin-left: 14px !important;
-    border-radius: 50px;
-    transition: all 100ms;
-}
-
-.titlebar-min {
-    background-color: #fdbe04 !important;
-}
-
-.titlebar-max, .titlebar-restore {
-    background-color: #38c76a !important;
-}
-
-.titlebar-close {
-    background-color: #fd5f51 !important;
-}
-
-.titlebar-button > image {
-    visibility: collapse !important;
-}
-
-/* Inactive window state */
-.titlebar-button:-moz-window-inactive {
-    background-color: #4C4C50 !important;
-}
-
-@media (-moz-bool-pref: "theme.zen-minimal-exit-menu.enable-icon-visibility"){
-    .titlebar-button:hover > image {
-        visibility: visible !important;
-        max-height: 12px !important;
-        max-width: 12px !important;
-        position: relative !important;
-        left: 0 !important;
-        filter: brightness(0) invert(1) !important;
-    }
-}
-
-@media (-moz-bool-pref: "theme.zen-minimal-exit-menu.enable-macos-identic") {
-    /* Keep original colors on hover, don't dim */
-}
-
-@media not (-moz-bool-pref: "theme.zen-minimal-exit-menu.enable-macos-identic") {
-    .titlebar-button {
-        background-color: #323238 !important;
-    }
-    
-    .titlebar-min:hover {
-        background-color: #fdbe04 !important;
-    }
-
-    .titlebar-max:hover, .titlebar-restore:hover {
-        background-color: #38c76a !important;
-    }
-
-    .titlebar-close:hover {
-        background-color: #fd5f51 !important;
-    }
-    
-    .titlebar-button:hover {
-        min-height: 20px !important;
-    }
-}
-/* CSD END */
+///* CSD */
+//#navigator-toolbox[zen-right-side="true"] > #zen-sidebar-top-buttons > .titlebar-buttonbox-container > .titlebar-buttonbox {
+//    margin-top: 11px !important;
+//}
+//
+//.titlebar-buttonbox {
+//    margin-right: 10px;
+//    padding-right: 0px !important;
+//}
+//
+//.titlebar-button {
+//    padding: 0px !important;
+//    min-height: 16px !important;
+//    min-width: 16px !important;
+//    height: 16px !important;
+//    align-self: center;
+//    margin-left: 14px !important;
+//    border-radius: 50px;
+//    transition: all 100ms;
+//}
+//
+//.titlebar-min {
+//    background-color: #fdbe04 !important;
+//}
+//
+//.titlebar-max, .titlebar-restore {
+//    background-color: #38c76a !important;
+//}
+//
+//.titlebar-close {
+//    background-color: #fd5f51 !important;
+//}
+//
+//.titlebar-button > image {
+//    visibility: collapse !important;
+//}
+//
+///* Inactive window state */
+//.titlebar-button:-moz-window-inactive {
+//    background-color: #4C4C50 !important;
+//}
+//
+//@media (-moz-bool-pref: "theme.zen-minimal-exit-menu.enable-icon-visibility"){
+//    .titlebar-button:hover > image {
+//        visibility: visible !important;
+//        max-height: 12px !important;
+//        max-width: 12px !important;
+//        position: relative !important;
+//        left: 0 !important;
+//        filter: brightness(0) invert(1) !important;
+//    }
+//}
+//
+//@media (-moz-bool-pref: "theme.zen-minimal-exit-menu.enable-macos-identic") {
+//    /* Keep original colors on hover, don't dim */
+//}
+//
+//@media not (-moz-bool-pref: "theme.zen-minimal-exit-menu.enable-macos-identic") {
+//    .titlebar-button {
+//        background-color: #323238 !important;
+//    }
+//    
+//    .titlebar-min:hover {
+//        background-color: #fdbe04 !important;
+//    }
+//
+//    .titlebar-max:hover, .titlebar-restore:hover {
+//        background-color: #38c76a !important;
+//    }
+//
+//    .titlebar-close:hover {
+//        background-color: #fd5f51 !important;
+//    }
+//    
+//    .titlebar-button:hover {
+//        min-height: 20px !important;
+//    }
+//}
+///* CSD END */
