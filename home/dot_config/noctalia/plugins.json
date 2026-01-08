@@ -12,11 +12,12 @@
     ],
     "states": {
         "github-notifications": {
-            "enabled": true
+            "enabled": true,
+            "sourceUrl": "https://github.com/noctalia-dev/noctalia-plugins"
         },
         "hackerbox": {
             "enabled": true,
-            "sourceUrl": "https://github.com/shadowe1ite/noctalia-plugins"
+            "sourceUrl": "https://github.com/noctalia-dev/noctalia-plugins"
         },
         "lyrics": {
             "enabled": true,

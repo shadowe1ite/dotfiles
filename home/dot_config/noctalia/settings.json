@@ -553,7 +553,7 @@
         "foot": false,
         "fuzzel": false,
         "ghostty": false,
-        "gtk": false,
+        "gtk": true,
         "helix": false,
         "hyprland": false,
         "kcolorscheme": false,

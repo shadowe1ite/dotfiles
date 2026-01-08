@@ -18,13 +18,21 @@ output_path = '~/.config/alacritty/material.toml'
 input_path = '~/.config/matugen/templates/terminals/colors-ghostty'
 output_path = '~/.config/ghostty/themes/material'
 
-[templates.gtk3]
-input_path = '~/.config/matugen/templates/colors-gtk.css'
-output_path = '~/.config/gtk-3.0/colors.css'
+#[templates.gtk3]
+#input_path = '~/.config/matugen/templates/colors-gtk.css'
+#output_path = '~/.config/gtk-3.0/gtk.css'
+#
+#[templates.gtk4]
+#input_path = '~/.config/matugen/templates/colors-gtk.css'
+#output_path = '~/.config/gtk-4.0/gtk.css'
 
-[templates.gtk4]
-input_path = '~/.config/matugen/templates/colors-gtk.css'
-output_path = '~/.config/gtk-4.0/colors.css'
+[templates.qt5ct]
+input_path = '~/.config/matugen/templates/colors-qt.conf'
+output_path = '~/.config/qt5ct/colors/meterial.conf'
+
+[templates.qt6ct]
+input_path = '~/.config/matugen/templates/colors-qt.conf'
+output_path = '~/.config/qt6ct/colors/meterial.conf'
 colors_to_compare = [
   { name = "Fluent-teal-dark", color = "#159a80" },
   { name = "Fluent-green-dark", color = "#a1bf80" },
@@ -38,13 +46,6 @@ colors_to_compare = [
 compare_to = "{{colors.primary.default.hex}}"
 post_hook="gsettings set org.gnome.desktop.interface icon-theme '{{closest_color}}' && sed -i 's/^Theme=.*/Theme={{closest_color}}/' ~/.config/kdeglobals"
 
-[templates.qt5ct]
-input_path = '~/.config/matugen/templates/colors-qt.conf'
-output_path = '~/.config/qt5ct/colors/meterial.conf'
-
-[templates.qt6ct]
-input_path = '~/.config/matugen/templates/colors-qt.conf'
-output_path = '~/.config/qt6ct/colors/meterial.conf'
 
 [templates.kvantum]
 input_path = '~/.config/matugen/templates/kvantum/colors-kvantum.kvconfig'
