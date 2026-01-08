@@ -116,3 +116,7 @@ post_hook = 'sh -c "pgrep -x fcitx5 >/dev/null && fcitx5 -rd || true"'
 [templates.obsidian]
 input_path = '~/.config/matugen/templates/colors-obsidian.css'
 output_path = '~/Documents/notes/.obsidian/snippets/matugen-theme.css'
+
+[templates.burp]
+input_path = "~/.config/matugen/templates/colors-burpsuite.json"
+output_path = "~/.config/burp/material.json"
