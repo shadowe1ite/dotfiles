@@ -225,7 +225,7 @@
                 "id": "timer-card"
             },
             {
-                "enabled": false,
+                "enabled": true,
                 "id": "weather-card"
             }
         ]
@@ -258,11 +258,11 @@
                 "id": "brightness-card"
             },
             {
-                "enabled": true,
+                "enabled": false,
                 "id": "audio-card"
             },
             {
-                "enabled": false,
+                "enabled": true,
                 "id": "media-sysmon-card"
             }
         ],
