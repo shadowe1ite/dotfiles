@@ -314,19 +314,6 @@
                 "name": "eDP-1",
                 "widgets": [
                     {
-                        "hideMode": "hidden",
-                        "id": "MediaPlayer",
-                        "roundedCorners": true,
-                        "scale": 1,
-                        "showAlbumArt": true,
-                        "showBackground": true,
-                        "showButtons": true,
-                        "showVisualizer": true,
-                        "visualizerType": "linear",
-                        "x": 760,
-                        "y": 60
-                    },
-                    {
                         "id": "Weather",
                         "showBackground": false,
                         "x": 20,
