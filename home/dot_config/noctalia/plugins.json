@@ -30,6 +30,9 @@
         "privacy-indicator": {
             "enabled": true,
             "sourceUrl": "https://github.com/noctalia-dev/noctalia-plugins"
+        },
+        "screen-recorder": {
+            "enabled": true
         }
     },
     "version": 1
