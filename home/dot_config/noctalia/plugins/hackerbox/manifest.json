@@ -1,0 +1,22 @@
+{
+  "id": "hackerbox",
+  "name": "hackerbox",
+  "version": "1.0.0",
+  "minNoctaliaVersion": "3.6.0",
+  "author": "shadowe1ite",
+  "license": "MIT",
+  "repository": "https://github.com/noctalia-dev/noctalia-plugins",
+  "description": "A set of tools useful for hackers/ctf players",
+  "entryPoints": {
+    "barWidget": "BarWidget.qml",
+    "panel": "Panel.qml",
+    "settings": "Settings.qml"
+  },
+  "dependencies": {
+    "plugins": []
+  },
+  "metadata": {
+    "defaultSettings": {
+    }
+  }
+}
