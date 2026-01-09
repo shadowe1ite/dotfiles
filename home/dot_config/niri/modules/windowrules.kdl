@@ -97,6 +97,12 @@ window-rule {
 }
 
 window-rule {
+    match app-id="burp-StartBurp"
+    exclude title=".*Burp Suite Professional.*"
+    open-floating true
+}
+
+window-rule {
     match app-id="mpv"
     open-floating true
     default-column-width { proportion 0.35; }
