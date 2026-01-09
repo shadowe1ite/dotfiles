@@ -21,7 +21,7 @@ binds {
     Mod+L            { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "calendar" "toggle"; }
 
     // Recording
-    Ctrl+Alt+R { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "screenRecorder" "toggle"; }
+    Ctrl+Alt+R { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "plugin:screen-recorder" "toggle"; }
 }
 
 layer-rule {
