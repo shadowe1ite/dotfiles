@@ -60,7 +60,7 @@
                     "errors":"ui",
                     "extension_file":"/home/shadow/.BurpSuite/matugen.py",
                     "extension_type":"python",
-                    "loaded":false,
+                    "loaded":true,
                     "name":"Matugen Nuclear Loader",
                     "output":"ui",
                     "use_ai":false
