@@ -61,7 +61,7 @@
                     "extension_file":"/home/shadow/.BurpSuite/matugen.py",
                     "extension_type":"python",
                     "loaded":true,
-                    "name":"Matugen Nuclear Loader",
+                    "name":"Matugen Theme Loader",
                     "output":"ui",
                     "use_ai":false
                 }
