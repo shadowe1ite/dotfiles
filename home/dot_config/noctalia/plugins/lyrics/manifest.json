@@ -1,0 +1,26 @@
+{
+  "id": "lyrics",
+  "name": "Lyrics",
+  "version": "1.0.2",
+  "minNoctaliaVersion": "3.6.0",
+  "author": "shadowe1ite",
+  "license": "GPLv3",
+  "description": "Displays synced lyrics from 'sptlrx' in the status bar.",
+  "entryPoints": {
+    "main": "Main.qml",
+    "barWidget": "BarWidget.qml",
+    "settings": "Settings.qml"
+  },
+  "dependencies": {
+    "plugins": []
+  },
+  "metadata": {
+    "defaultSettings": {
+      "widgetWidth": 300,
+      "scrollSpeed": 50,
+      "fontSize": 10,
+      "scrollMode": "always",
+      "hideWhenEmpty": true
+    }
+  }
+}
