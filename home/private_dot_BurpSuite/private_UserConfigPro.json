@@ -58,9 +58,9 @@
                 {
                     "auto_reload":false,
                     "errors":"ui",
-                    "extension_file":"~/.BurpSuite/matugen.py",
+                    "extension_file":"/home/shadow/.BurpSuite/matugen.py",
                     "extension_type":"python",
-                    "loaded":true,
+                    "loaded":false,
                     "name":"Matugen Nuclear Loader",
                     "output":"ui",
                     "use_ai":false
