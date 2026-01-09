@@ -1,6 +1,7 @@
 web:
   pacman:
     - jdk21-openjdk
+    - jython
     - burpsuite-pro
     - ffuf-bin
     - sqlmap
