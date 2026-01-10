@@ -14,7 +14,7 @@ binds {
     // ocr
     Home { spawn "bash" "-c" r#"grim -g "$(slurp)" - | tesseract - - -l $(tesseract --list-langs | awk 'NR>1' | paste -sd+) | wl-copy"#; }
 
-    // basicc operations
+    // basic operations
     Mod+W { close-window; }
     Mod+U { quit; }
     Mod+S { toggle-window-floating; }
@@ -41,10 +41,12 @@ binds {
     // Mouse wheel workspace scroll
     Mod+WheelScrollDown { focus-column-left; }
     Mod+WheelScrollUp  { focus-column-right; }
+    Mod+Alt+WheelScrollUp  { focus-window-or-workspace-up; }
+    Mod+Alt+WheelScrollDown  { focus-window-or-workspace-down; }
     
     // Layout
     Mod+P { maximize-column; }
-    Mod+Alt+P { expand-column-to-available-width; }
+    Mod+Alt+P { switch-preset-column-width; }
     Mod+G { consume-window-into-column; }
     Mod+J { expel-window-from-column; }
     

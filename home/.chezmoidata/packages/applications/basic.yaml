@@ -67,6 +67,7 @@ music:
   - spotx-git
   - sptlrx-bin 
   - cava
+  - picard
 
 hyprvisors:
   - libvirt
