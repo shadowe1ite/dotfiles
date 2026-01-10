@@ -1,0 +1,19 @@
+{
+    "panel": {
+        "title": "Minuteur",
+        "countdown": "Compte à rebours",
+        "stopwatch": "Chronomètre",
+        "start": "Démarrer",
+        "pause": "Pause",
+        "resume": "Reprendre",
+        "reset": "Réinitialiser"
+    },
+    "toast": {
+        "title": "Minuteur",
+        "finished": "Minuteur terminé !"
+    },
+    "settings": {
+        "compact-mode": "Mode compact",
+        "compact-mode-desc": "Masquer la barre de progression circulaire pour un aspect plus épuré"
+    }
+}

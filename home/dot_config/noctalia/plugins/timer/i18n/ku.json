@@ -1,0 +1,19 @@
+{
+    "panel": {
+        "title": "Demjimêr",
+        "countdown": "Jimartina Paşve",
+        "stopwatch": "Demgir",
+        "start": "Destpêkirin",
+        "pause": "Rawestandin",
+        "resume": "Berdewamkirin",
+        "reset": "Nûkirin"
+    },
+    "toast": {
+        "title": "Demjimêr",
+        "finished": "Demjimêr qediya!"
+    },
+    "settings": {
+        "compact-mode": "Moda Kompakt",
+        "compact-mode-desc": "Barê pêşveçûnê yê dorûber veşêre ji bo dîmenek paqijtir"
+    }
+}
