@@ -206,13 +206,6 @@
                     "hideWhenZero": false,
                     "id": "NotificationHistory",
                     "showUnreadBadge": true
-                },
-                {
-                    "defaultSettings": {
-                        "compactMode": false,
-                        "defaultDuration": 0
-                    },
-                    "id": "plugin:timer"
                 }
             ]
         }
