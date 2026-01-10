@@ -1,5 +1,5 @@
 window-rule {
-    geometry-corner-radius 18
+    geometry-corner-radius 0
     clip-to-geometry true
     open-focused true
 }
@@ -88,18 +88,6 @@ window-rule {
     open-floating true
     default-column-width { proportion 0.3; }
     default-window-height { proportion 0.3; }
-}
-
-window-rule {
-    match app-id="burp-StartBurp"
-    exclude title=".*Temporary Project.*"
-    open-floating true
-}
-
-window-rule {
-    match app-id="burp-StartBurp"
-    exclude title=".*Burp Suite Professional.*"
-    open-floating true
 }
 
 window-rule {
