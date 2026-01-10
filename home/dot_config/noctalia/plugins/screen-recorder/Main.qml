@@ -129,7 +129,7 @@ Item {
         var now = new Date()
         
         // Known Qt date/time format tokens sorted by length (longest first to match greedily)
-        var tokens = ['MMMM', 'dddd', 'yyyy', 'MMM', 'ddd', 'zzz', 'HH', 'hh', 'mm', 'ss', 
+        var tokens = ['unix', 'MMMM', 'dddd', 'yyyy', 'MMM', 'ddd', 'zzz', 'HH', 'hh', 'mm', 'ss', 
                       'yy', 'MM', 'dd', 'AP', 'ap', 'M', 'd', 'H', 'h', 'm', 's', 'z', 'A', 'a', 't'];
         
         // Escape literal text by wrapping non-token sequences in single quotes
@@ -160,8 +160,16 @@ Item {
                         escaped += "'" + literalBuffer + "'";
                         literalBuffer = "";
                     }
-                    // Add the token as-is
-                    escaped += token;
+
+                    if (token === 'unix') {
+                        // Replace 'unix' token with the actual timestamp literal
+                        // Do not wrap in quotes to avoid creating '' sequences which are interpreted as escaped quotes
+                        escaped += Math.floor(now.getTime() / 1000);
+                    } else {
+                        // Add other tokens as-is
+                        escaped += token;
+                    }
+
                     i += token.length;
                     matched = true;
                     break;

@@ -11,6 +11,14 @@
         }
     ],
     "states": {
+        "ce96f7:qs-hyprview": {
+            "enabled": true,
+            "sourceUrl": "https://github.com/shadowe1ite/noctalia-plugins"
+        },
+        "ce96f7:quickshell-overview": {
+            "enabled": true,
+            "sourceUrl": "https://github.com/shadowe1ite/noctalia-plugins"
+        },
         "github-notifications": {
             "enabled": true,
             "sourceUrl": "https://github.com/noctalia-dev/noctalia-plugins"
@@ -32,6 +40,10 @@
             "sourceUrl": "https://github.com/noctalia-dev/noctalia-plugins"
         },
         "screen-recorder": {
+            "enabled": true,
+            "sourceUrl": "https://github.com/noctalia-dev/noctalia-plugins"
+        },
+        "timer": {
             "enabled": true,
             "sourceUrl": "https://github.com/noctalia-dev/noctalia-plugins"
         }

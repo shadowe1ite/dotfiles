@@ -40,6 +40,7 @@ Hardware-accelerated screen recording for Noctalia using [gpu-screen-recorder](h
 Configure the plugin through the settings panel:
 
 - **Output Folder**: Where recordings will be saved (defaults to `~/Videos`)
+- **Filename Pattern**: Pattern for generated filenames. Supports standard Qt date format tokens (e.g., `yyyy`, `MM`, `dd` etc.) and `unix` for Unix timestamp.
 - **Video Source**: Choose between Portal (recommended) or Screen
 - **Frame Rate**: Target FPS (30, 60, 100, 120, 144, 165, 240)
 - **Video Quality**: Medium, High, Very High, or Ultra

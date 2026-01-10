@@ -1,13 +1,16 @@
 {
   "id": "screen-recorder",
   "name": "Screen Recorder",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "minNoctaliaVersion": "3.6.0",
   "author": "Noctalia Team",
   "license": "MIT",
   "repository": "https://github.com/noctalia-dev/noctalia-plugins",
   "description": "Hardware-accelerated screen recording using gpu-screen-recorder with customizable video and audio settings",
-  "tags": ["Bar", "Utility"],
+  "tags": [
+    "Bar",
+    "Utility"
+  ],
   "entryPoints": {
     "main": "Main.qml",
     "barWidget": "BarWidget.qml",
