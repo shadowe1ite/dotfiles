@@ -600,16 +600,30 @@
     "Burp.aiToastIcon": "{{colors.secondary.default.hex}}",
     "Burp.groupedTabBarDefaultTabBackground": "{{colors.surface_container.default.hex}}",
     "Burp.groupedTabBarGroupCountBackground": "{{colors.surface_container_high.default.hex}}",
+    
     "Burp.groupedTabBarGroupBlueAccent": "{{colors.primary.default.hex}}",
-    "Burp.groupedTabBarGroupBlueBackground": "{{colors.primary_container.default.hex}}",
+    "Burp.groupedTabBarGroupBlueBackground": "{{colors.surface_container_highest.default.hex}}",
+    
     "Burp.groupedTabBarGroupGreenAccent": "{{colors.tertiary.default.hex}}",
-    "Burp.groupedTabBarGroupGreenBackground": "{{colors.tertiary_container.default.hex}}",
+    "Burp.groupedTabBarGroupGreenBackground": "{{colors.surface_container_highest.default.hex}}",
+    
     "Burp.groupedTabBarGroupRedAccent": "{{colors.error.default.hex}}",
-    "Burp.groupedTabBarGroupRedBackground": "{{colors.error_container.default.hex}}",
+    "Burp.groupedTabBarGroupRedBackground": "{{colors.surface_container_highest.default.hex}}",
+    
     "Burp.groupedTabBarGroupPurpleAccent": "{{colors.secondary.default.hex}}",
-    "Burp.groupedTabBarGroupPurpleBackground": "{{colors.secondary_container.default.hex}}",
-    "Burp.groupedTabBarGroupGreyAccent": "{{colors.outline_variant.default.hex}}",
+    "Burp.groupedTabBarGroupPurpleBackground": "{{colors.surface_container_highest.default.hex}}",
+    
+    "Burp.groupedTabBarGroupGreyAccent": "{{colors.outline.default.hex}}",
     "Burp.groupedTabBarGroupGreyBackground": "{{colors.surface_container_highest.default.hex}}",
+    
+    "Burp.groupedTabBarGroupOrangeAccent": "{{colors.tertiary.default.hex}}",
+    "Burp.groupedTabBarGroupOrangeBackground": "{{colors.surface_container_highest.default.hex}}",
+    
+    "Burp.groupedTabBarGroupYellowAccent": "{{colors.tertiary.default.hex}}",
+    "Burp.groupedTabBarGroupYellowBackground": "{{colors.surface_container_highest.default.hex}}",
+    
+    "Burp.groupedTabBarGroupTealAccent": "{{colors.primary.default.hex}}",
+    "Burp.groupedTabBarGroupTealBackground": "{{colors.surface_container_highest.default.hex}}",
     "Burp.javaEditor.class": "{{colors.primary.default.hex}}",
     "Burp.javaEditor.interface": "{{colors.tertiary.default.hex}}",
     "Burp.javaEditor.method": "{{colors.error.default.hex}}",
