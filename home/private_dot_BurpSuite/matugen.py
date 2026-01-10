@@ -104,6 +104,7 @@ class BurpExtender(IBurpExtender, IExtensionStateListener):
             for window in Window.getWindows():
                 SwingUtilities.updateComponentTreeUI(window)
                 if window.isDisplayable():
+                    window.validate()
                     window.repaint()
             
             print("[-] UI Refresh Triggered.")
