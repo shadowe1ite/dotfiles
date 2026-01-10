@@ -71,6 +71,7 @@ window-rule {
 window-rule {
     match app-id="com.github.neithern.g4music"
     match app-id="org.nicotine_plus.Nicotine"
+    match app-id="org.musicbrainz.Picard"
     match app-id="spotify"
     open-on-workspace "music"
 }
