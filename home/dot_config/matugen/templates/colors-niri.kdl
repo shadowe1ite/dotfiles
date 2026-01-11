@@ -33,8 +33,11 @@ recent-windows {
     highlight {
         active-color "{{colors.primary.default.hex}}"
         urgent-color "{{colors.error.default.hex}}"
-        corner-radius 16
     }
+}
+
+overview {
+    backdrop-color "{{colors.surface.default.hex}}"
 }
 
 spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "gtk-theme" "adw-gtk3-dark"
