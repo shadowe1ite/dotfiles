@@ -25,11 +25,11 @@ layout {
 
   border {
     on
-    width 1
+    width 0
   }
 
   focus-ring {
     on
-    width 1 
+    width 2 
   }
 }
