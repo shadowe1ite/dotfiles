@@ -13,7 +13,7 @@ Item {
     if (!MediaService.currentPlayer)
       return "";
     if (!MediaService.isPlaying)
-      return MediaService.trackTitle ? "Music paused" : "";
+      return (MediaService.trackTitle && isKnownMusic) ? "Music paused" : "";
     if (isLoading)
       return "Loading...";
     if (!isKnownMusic)
@@ -39,6 +39,7 @@ Item {
 
   property var lyricsLines: []
   property int currentLineIndex: -1
+  property string lastPlayerName: ""
   readonly property int visibleLinesBefore: 4
   readonly property int visibleLinesAfter: 4
 
@@ -136,13 +137,41 @@ Item {
     }
 
     function onCurrentPlayerChanged() {
+      const currentPlayerName = MediaService.currentPlayer?.identity ?? "";
+
+      // Player closed
       if (!MediaService.currentPlayer) {
         root.isLoading = false;
+        root.isKnownMusic = false;
+        loadTimer.stop();
+        root.lastTitle = "";
+        root.lastLyric = "";
+        root.lastPlayerName = "";
+        root.clearLyrics();
+
+        // Stop sptlrx when no player
+        root.manualRestart = false;
+        sptlrxProc.running = false;
+        restartTimer.stop();
+        return;
+      }
+
+      // Player switched to a different one
+      if (root.lastPlayerName !== "" && currentPlayerName !== root.lastPlayerName) {
+        root.isLoading = false;
+        root.isKnownMusic = false;
         loadTimer.stop();
         root.lastTitle = "";
         root.lastLyric = "";
         root.clearLyrics();
+
+        // Restart sptlrx to pick up new player
+        root.manualRestart = true;
+        sptlrxProc.running = false;
       }
+
+      root.lastPlayerName = currentPlayerName;
+      handleTrackChange();
     }
 
     function onIsPlayingChanged() {

@@ -16,8 +16,8 @@
   },
   "metadata": {
     "defaultSettings": {
-      "widgetWidth": 300,
-      "scrollSpeed": 50,
+      "widgetWidth": 200,
+      "scrollSpeed": 95,
       "fontSize": 10,
       "scrollMode": "always",
       "hideWhenEmpty": true,
