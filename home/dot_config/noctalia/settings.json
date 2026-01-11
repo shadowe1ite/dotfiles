@@ -53,12 +53,6 @@
                     "id": "plugin:privacy-indicator"
                 },
                 {
-                    "defaultSettings": {
-                        "refreshInterval": 5000
-                    },
-                    "id": "plugin:mini-docker"
-                },
-                {
                     "customFont": "SauceCodePro Nerd Font Propo",
                     "formatHorizontal": "h:mm ap  dd.MM.yyyy",
                     "formatVertical": "HH mm - dd MM",
@@ -567,7 +561,7 @@
         "fontFixedScale": 1,
         "networkPanelView": "wifi",
         "panelBackgroundOpacity": 1,
-        "panelsAttachedToBar": false,
+        "panelsAttachedToBar": true,
         "settingsPanelMode": "window",
         "tooltipsEnabled": true,
         "wifiDetailsViewMode": "grid"
