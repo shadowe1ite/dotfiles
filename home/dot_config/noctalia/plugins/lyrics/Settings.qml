@@ -6,128 +6,152 @@ import qs.Services.System
 
 ColumnLayout {
     id: root
+
     property var pluginApi: null
 
-    property int draftWidth: pluginApi?.pluginSettings?.widgetWidth ?? 215
-    property int draftSpeed: pluginApi?.pluginSettings?.scrollSpeed ?? 70
-    property string draftMode: pluginApi?.pluginSettings?.scrollMode ?? "always"
-    property int draftFontSize: pluginApi?.pluginSettings?.fontSize ?? 10
-    property bool draftHideWhenEmpty: pluginApi?.pluginSettings?.hideWhenEmpty ?? true
-    property string draftFontFamily: pluginApi?.pluginSettings?.fontFamily ?? "Inter"
+    readonly property var defaults: pluginApi?.manifest?.metadata?.defaultSettings ?? {}
+
+    property int draftWidth: pluginApi?.pluginSettings?.widgetWidth ?? defaults.widgetWidth ?? 300
+    property int draftSpeed: pluginApi?.pluginSettings?.scrollSpeed ?? defaults.scrollSpeed ?? 50
+    property string draftMode: pluginApi?.pluginSettings?.scrollMode ?? defaults.scrollMode ?? "always"
+    property int draftFontSize: pluginApi?.pluginSettings?.fontSize ?? defaults.fontSize ?? 10
+    property bool draftHideWhenEmpty: pluginApi?.pluginSettings?.hideWhenEmpty ?? defaults.hideWhenEmpty ?? true
+    property string draftFontFamily: pluginApi?.pluginSettings?.fontFamily ?? defaults.fontFamily ?? ""
 
     spacing: Style.marginM
 
     function saveSettings() {
-        if (pluginApi) {
-            pluginApi.pluginSettings.widgetWidth = draftWidth;
-            pluginApi.pluginSettings.scrollSpeed = draftSpeed;
-            pluginApi.pluginSettings.scrollMode = draftMode;
-            pluginApi.pluginSettings.fontSize = draftFontSize;
-            pluginApi.pluginSettings.hideWhenEmpty = draftHideWhenEmpty;
-            // Save the selected font
-            pluginApi.pluginSettings.fontFamily = draftFontFamily;
-            pluginApi.saveSettings();
+        if (!pluginApi) {
+            Logger.e("Lyrics", "Cannot save: pluginApi is null");
+            return;
         }
+
+        pluginApi.pluginSettings.widgetWidth = draftWidth;
+        pluginApi.pluginSettings.scrollSpeed = draftSpeed;
+        pluginApi.pluginSettings.scrollMode = draftMode;
+        pluginApi.pluginSettings.fontSize = draftFontSize;
+        pluginApi.pluginSettings.hideWhenEmpty = draftHideWhenEmpty;
+        pluginApi.pluginSettings.fontFamily = draftFontFamily;
+
+        pluginApi.saveSettings();
+    }
+
+    NLabel {
+        label: "Typography"
+        Layout.fillWidth: true
     }
 
     NSearchableComboBox {
         label: "Font Family"
-        description: "Select the font for lyrics."
+        description: "Select the font for lyrics display."
         Layout.fillWidth: true
 
         model: FontService.availableFonts
-
         currentKey: draftFontFamily
-        placeholder: "Select a font..."
+        placeholder: "System Default"
         searchPlaceholder: "Search fonts..."
         popupHeight: 300
+        defaultValue: defaults.fontFamily ?? ""
 
         onSelected: key => draftFontFamily = key
     }
 
-    NLabel {
+    NValueSlider {
         label: "Font Size"
         description: "Text size in points."
-    }
-
-    RowLayout {
         Layout.fillWidth: true
-        NSlider {
-            Layout.fillWidth: true
-            from: 8
-            to: 32
-            value: draftFontSize
-            onValueChanged: draftFontSize = value
-        }
-        NText {
-            text: Math.round(draftFontSize) + "pt"
-        }
+
+        from: 8
+        to: 32
+        stepSize: 1
+        value: draftFontSize
+        text: Math.round(draftFontSize) + "pt"
+        defaultValue: defaults.fontSize ?? 10
+
+        onMoved: value => draftFontSize = Math.round(value)
     }
 
     NDivider {
         Layout.fillWidth: true
+        Layout.topMargin: Style.marginS
+        Layout.bottomMargin: Style.marginS
     }
 
     NLabel {
+        label: "Widget Appearance"
+        Layout.fillWidth: true
+    }
+
+    NValueSlider {
         label: "Widget Width"
-    }
-    RowLayout {
+        description: "Width of the lyrics widget in the bar."
         Layout.fillWidth: true
-        NSlider {
-            Layout.fillWidth: true
-            from: 100
-            to: 500
-            value: draftWidth
-            onValueChanged: draftWidth = value
-        }
-        NText {
-            text: Math.round(draftWidth) + "px"
-        }
+
+        from: 100
+        to: 500
+        stepSize: 10
+        value: draftWidth
+        text: Math.round(draftWidth) + "px"
+        defaultValue: defaults.widgetWidth ?? 300
+
+        onMoved: value => draftWidth = Math.round(value)
+    }
+
+    NToggle {
+        label: "Hide When Empty"
+        description: "Hide the widget when no lyrics are available."
+        Layout.fillWidth: true
+
+        checked: draftHideWhenEmpty
+        defaultValue: defaults.hideWhenEmpty ?? true
+
+        onToggled: newState => draftHideWhenEmpty = newState
+    }
+
+    NDivider {
+        Layout.fillWidth: true
+        Layout.topMargin: Style.marginS
+        Layout.bottomMargin: Style.marginS
     }
 
     NLabel {
-        label: "Scroll Speed"
-    }
-    RowLayout {
+        label: "Scrolling Behavior"
         Layout.fillWidth: true
-        NSlider {
-            Layout.fillWidth: true
-            from: 10
-            to: 200
-            value: draftSpeed
-            onValueChanged: draftSpeed = value
-        }
-        NText {
-            text: Math.round(draftSpeed) + " px/s"
-        }
     }
 
     NComboBox {
         label: "Scroll Mode"
+        description: "When to scroll long lyrics text."
         Layout.fillWidth: true
+
         model: [
-            {
-                name: "Always Scroll",
-                key: "always"
-            },
-            {
-                name: "Scroll on Hover",
-                key: "hover"
-            },
-            {
-                name: "Don't Scroll",
-                key: "none"
-            }
+            { name: "Always Scroll", key: "always" },
+            { name: "Scroll on Hover", key: "hover" },
+            { name: "Don't Scroll", key: "none" }
         ]
         currentKey: draftMode
+        defaultValue: defaults.scrollMode ?? "always"
+
         onSelected: key => draftMode = key
     }
 
-    NToggle {
-        label: "Hide when empty"
-        checked: draftHideWhenEmpty
-        onToggled: newState => {
-            draftHideWhenEmpty = newState;
-        }
+    NValueSlider {
+        label: "Scroll Speed"
+        description: "Speed of the scrolling animation."
+        Layout.fillWidth: true
+
+        from: 10
+        to: 200
+        stepSize: 5
+        value: draftSpeed
+        text: Math.round(draftSpeed) + " px/s"
+        defaultValue: defaults.scrollSpeed ?? 50
+        enabled: draftMode !== "none"
+
+        onMoved: value => draftSpeed = Math.round(value)
+    }
+
+    Item {
+        Layout.fillHeight: true
     }
 }

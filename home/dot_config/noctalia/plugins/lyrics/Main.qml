@@ -2,128 +2,183 @@ import QtQuick
 import Quickshell
 import Quickshell.Io
 import qs.Commons
+import qs.Services.Media
 
 Item {
-    id: root
+  id: root
 
-    property var pluginApi: null
-    property string lastLyric: ""
-    property bool isKnownMusic: false
-    property string lastTitle: ""
-    property string lastPlayer: ""
-    property bool manualRestart: false
-    property bool isLoading: false
-    property string playStatus: "Stopped"
+  property var pluginApi: null
 
-    property string currentLyric: {
-        if (playStatus === "Stopped" || playStatus === "")
-            return "No Lyrics";
-        if (playStatus === "Paused")
-            return isKnownMusic ? "Music paused" : "No Lyrics";
+  property string currentLyric: {
+    if (!MediaService.currentPlayer)
+      return "";
+    if (!MediaService.isPlaying)
+      return MediaService.trackTitle ? "Music paused" : "";
+    if (isLoading)
+      return "Loading...";
+    if (!isKnownMusic)
+      return "";
+    if (lastLyric !== "")
+      return lastLyric;
+    return "";
+  }
 
-        if (isLoading)
-            return "Wait Loading 🪿";
-        if (!isKnownMusic)
-            return "No Lyrics";
-        if (lastLyric !== "")
-            return lastLyric;
+  readonly property string trackTitle: MediaService.trackTitle
+  readonly property string trackArtist: MediaService.trackArtist
+  readonly property string trackAlbum: MediaService.trackAlbum
+  readonly property string artUrl: MediaService.trackArtUrl
+  readonly property bool isPlaying: MediaService.isPlaying
+  readonly property bool hasTrack: MediaService.trackTitle !== ""
 
-        return "Lyrics not found 🥲";
+  property bool isKnownMusic: false
+  property bool isLoading: false
+
+  property string lastLyric: ""
+  property string lastTitle: ""
+  property bool manualRestart: false
+
+  property var lyricsLines: []
+  property int currentLineIndex: -1
+  readonly property int visibleLinesBefore: 4
+  readonly property int visibleLinesAfter: 4
+
+  function addLyricLine(text) {
+    if (text === "" || text === lastLyric)
+      return;
+
+    var lines = lyricsLines.slice();
+    lines.push(text);
+
+    if (lines.length > 50)
+      lines.shift();
+
+    lyricsLines = lines;
+    currentLineIndex = lines.length - 1;
+  }
+
+  function clearLyrics() {
+    lyricsLines = [];
+    currentLineIndex = -1;
+  }
+
+  readonly property var previousLyrics: {
+    if (lyricsLines.length === 0 || currentLineIndex < 0)
+      return [];
+    var prev = [];
+    for (var i = Math.max(0, currentLineIndex - visibleLinesBefore); i < currentLineIndex; i++) {
+      prev.push(lyricsLines[i]);
     }
+    return prev;
+  }
 
-    Timer {
-        id: loadTimer
-        interval: 5000
-        repeat: false
-        onTriggered: root.isLoading = false
-    }
+  readonly property var upcomingLyrics: {
+    return [];
+  }
 
-    Process {
-        id: sptlrxProc
-        command: ["stdbuf", "-oL", "sptlrx", "-p", "mpris", "pipe"]
-        running: true
+  Timer {
+    id: loadTimer
+    interval: 5000
+    repeat: false
+    onTriggered: root.isLoading = false
+  }
 
-        stdout: SplitParser {
-            onRead: data => {
+  Timer {
+    id: restartTimer
+    interval: 3000
+    repeat: false
+    onTriggered: sptlrxProc.running = true
+  }
+
+  Process {
+    id: sptlrxProc
+    command: ["sptlrx", "-p", "mpris", "pipe"]
+    running: true
+
+    stdout: SplitParser {
+      onRead: data => {
+                if (!root.isKnownMusic)
+                return;
+
                 const cleanText = data.replace(/\x1B\[[0-9;]*[a-zA-Z]/g, "").trim();
 
-                if (!root.isKnownMusic)
-                    return;
-
-                if (cleanText !== "") {
-                    loadTimer.stop();
-                    root.isLoading = false;
-                    root.lastLyric = cleanText;
+                if (cleanText !== "" && cleanText !== root.lastLyric) {
+                  loadTimer.stop();
+                  root.isLoading = false;
+                  root.addLyricLine(cleanText);
+                  root.lastLyric = cleanText;
                 }
-            }
-        }
-
-        onExited: (code, status) => {
-            if (root.manualRestart) {
-                root.manualRestart = false;
-                sptlrxProc.running = true;
-            } else {
-                restartTimer.start();
-            }
-        }
+              }
     }
 
-    Timer {
-        id: restartTimer
-        interval: 3000
-        repeat: false
-        onTriggered: sptlrxProc.running = true
+    onRunningChanged: {
+      if (!running && !root.manualRestart) {
+        restartTimer.start();
+      }
     }
 
-    Process {
-        id: statusProc
-        command: ["playerctl", "metadata", "--format", "{{ playerName }}:::{{ status }}:::{{ xesam:artist }}:::{{ xesam:title }}", "-F"]
-        running: true
-
-        stdout: SplitParser {
-            onRead: data => {
-                const parts = data.trim().split(":::");
-                const playerName = parts[0] || "";
-                const status = parts[1] || "";
-                const artist = parts[2] || "";
-                const title = parts[3] || "";
-
-                root.playStatus = status;
-
-                if (!status || status === "Stopped") {
-                    root.isLoading = false;
-                    loadTimer.stop();
-                    return;
+    onExited: (code, status) => {
+                if (root.manualRestart) {
+                  root.manualRestart = false;
+                  sptlrxProc.running = true;
                 }
+              }
+  }
 
-                if (root.lastPlayer !== "" && root.lastPlayer !== playerName) {
-                    root.manualRestart = true;
-                    sptlrxProc.running = false;
+  Connections {
+    target: MediaService
 
-                    root.lastTitle = "";
-                    root.lastLyric = "";
-                }
-                root.lastPlayer = playerName;
-
-                if (title !== root.lastTitle) {
-                    root.lastTitle = title;
-                    root.isKnownMusic = (artist.trim() !== "");
-                    root.lastLyric = "";
-
-                    if (root.isKnownMusic) {
-                        root.isLoading = true;
-                        loadTimer.restart();
-                    } else {
-                        root.isLoading = false;
-                        loadTimer.stop();
-                    }
-                }
-
-                if (status !== "Playing") {
-                    root.isLoading = false;
-                    loadTimer.stop();
-                }
-            }
-        }
+    function onTrackTitleChanged() {
+      handleTrackChange();
     }
+
+    function onTrackArtistChanged() {
+      handleTrackChange();
+    }
+
+    function onCurrentPlayerChanged() {
+      if (!MediaService.currentPlayer) {
+        root.isLoading = false;
+        loadTimer.stop();
+        root.lastTitle = "";
+        root.lastLyric = "";
+        root.clearLyrics();
+      }
+    }
+
+    function onIsPlayingChanged() {
+      if (!MediaService.isPlaying) {
+        root.isLoading = false;
+        loadTimer.stop();
+      }
+    }
+  }
+
+  function handleTrackChange() {
+    const title = MediaService.trackTitle;
+    const artist = MediaService.trackArtist;
+
+    if (title !== root.lastTitle || artist !== root.trackArtist) {
+      root.lastTitle = title;
+      root.isKnownMusic = artist.trim() !== "";
+      root.lastLyric = "";
+      root.clearLyrics();
+
+      if (root.isKnownMusic) {
+        root.isLoading = true;
+        loadTimer.restart();
+
+        // Restart sptlrx to quickly pick up the new track
+        root.manualRestart = true;
+        sptlrxProc.running = false;
+      } else {
+        root.isLoading = false;
+        loadTimer.stop();
+      }
+    }
+  }
+
+  Component.onCompleted: {
+    Logger.i("Lyrics", "Plugin initialized");
+    handleTrackChange();
+  }
 }

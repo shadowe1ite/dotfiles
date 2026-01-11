@@ -23,7 +23,7 @@
         "cavaFrameRate": 30,
         "mprisBlacklist": [
         ],
-        "preferredPlayer": "",
+        "preferredPlayer": "Gapless",
         "visualizerType": "linear",
         "volumeOverdrive": false,
         "volumeStep": 5
@@ -72,6 +72,7 @@
                 },
                 {
                     "defaultSettings": {
+                        "fontFamily": "",
                         "fontSize": 10,
                         "hideWhenEmpty": true,
                         "scrollMode": "always",
