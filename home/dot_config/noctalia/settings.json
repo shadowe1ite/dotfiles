@@ -348,6 +348,7 @@
             "ghidra"
         ],
         "pinnedStatic": false,
+        "position": "bottom",
         "size": 1
     },
     "general": {
@@ -371,7 +372,7 @@
         "shadowOffsetY": 3,
         "showChangelogOnStartup": true,
         "showHibernateOnLockScreen": false,
-        "showScreenCorners": true,
+        "showScreenCorners": false,
         "showSessionButtonsOnLockScreen": false
     },
     "hooks": {
@@ -566,7 +567,7 @@
         "fontFixedScale": 1,
         "networkPanelView": "wifi",
         "panelBackgroundOpacity": 1,
-        "panelsAttachedToBar": true,
+        "panelsAttachedToBar": false,
         "settingsPanelMode": "window",
         "tooltipsEnabled": true,
         "wifiDetailsViewMode": "grid"
@@ -591,7 +592,7 @@
         "transitionEdgeSmoothness": 0.05,
         "transitionType": "random",
         "useSolidColor": false,
-        "useWallhaven": false,
+        "useWallhaven": true,
         "wallhavenApiKey": "",
         "wallhavenCategories": "111",
         "wallhavenOrder": "desc",
