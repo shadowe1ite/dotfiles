@@ -23,7 +23,7 @@
         "cavaFrameRate": 30,
         "mprisBlacklist": [
         ],
-        "preferredPlayer": "Gapless",
+        "preferredPlayer": "",
         "visualizerType": "linear",
         "volumeOverdrive": false,
         "volumeStep": 5
@@ -323,7 +323,7 @@
         "animationSpeed": 2,
         "backgroundOpacity": 1,
         "colorizeIcons": false,
-        "deadOpacity": 0.6,
+        "deadOpacity": 1,
         "displayMode": "auto_hide",
         "enabled": true,
         "floatingRatio": 1,
