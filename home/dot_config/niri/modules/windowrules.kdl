@@ -42,7 +42,7 @@ window-rule {
 window-rule {
     match is-floating=true
     border {
-      off 
+      on 
     }
     focus-ring {
       off
