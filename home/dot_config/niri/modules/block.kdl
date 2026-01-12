@@ -1,0 +1,12 @@
+// gemini generated this for me 💀. i am not even in to these stuffs 🫠
+
+window-rule {
+    match title=r#"(?i).*\b(youtube|gemini|chatgpt|gmail|hotstar|netflix) — Zen Browser.*"#
+    block-out-from "screencast"
+}
+
+window-rule {
+      match title=r#"(?i).*\b(porn|sex|xxx|nude|naked|erotic|nsfw|18\+|adult|hentai|ecchi|doujin|yaoi|yuri|fap|wank|masturbat|orgasm|cum|sperm|squirt|fuck|shag|screw|blowjob|handjob|titjob|rimjob|deepthroat|throat|anal|oral|creampie|bukkake|gangbang|threesome|orgy|groupsex|swinger|cuck|bondage|bdsm|domination|submission|fetish|kink|sadism|masochism|incest|taboo|milf|gilf|dilf|bimbo|sissy|shemale|tranny|futa|dick|cock|penis|phallus|boner|schlong|pussy|vagina|cunt|twat|clit|tits|boobs|breasts|nipples|ass|butt|booty|anus|rectum|skank|slut|whore|hooker|prostitut|escort|camgirl|onlyfans|fansly|chaturbate|mfc|myfreecams|pornhub|xvideos|xnxx|xhamster|redtube|youporn|brazzers|bangbros|naughty|strip|gonewild)\b.*"#
+    block-out-from "screencast"
+    opacity 0.0
+}
