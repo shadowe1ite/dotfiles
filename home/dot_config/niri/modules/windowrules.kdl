@@ -99,12 +99,6 @@ window-rule {
 }
 
 window-rule {
-    match title="Spotify.*"
-    default-column-width { fixed 800; }
-    default-window-height { fixed 950; }
-}
-
-window-rule {
     match app-id="org.pulseaudio.pavucontrol"
     open-floating true
     default-column-width { fixed 960; }
