@@ -69,6 +69,13 @@ window-rule {
 }
 
 window-rule {
+    match app-id="org.nicotine_plus.Nicotine"
+    match title="Nicotine+"
+    exclude title="(.*)Nicotine+"
+    open-floating false
+}
+
+window-rule {
     match app-id="com.github.neithern.g4music"
     match app-id="org.nicotine_plus.Nicotine"
     match app-id="org.musicbrainz.Picard"
