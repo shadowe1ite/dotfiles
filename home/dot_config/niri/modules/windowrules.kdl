@@ -141,3 +141,9 @@ window-rule {
     default-column-width { fixed 820; }
     default-window-height { fixed 910; }
 }
+
+window-rule {
+    match app-id="burp-StartBurp"
+    exclude title="Burp Suite Professional v(.*) -(.*)- licensed to (.*)"
+    open-floating true
+}
