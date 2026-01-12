@@ -120,3 +120,7 @@ output_path = '~/Documents/notes/.obsidian/snippets/matugen-theme.css'
 [templates.burp]
 input_path = "~/.config/matugen/templates/colors-burpsuite.json"
 output_path = "~/.config/burp/material.json"
+
+[templates.obs]
+input_path = "~/.config/matugen/templates/colors-obs.obt"
+output_path = "~/.config/obs-studio/themes/matugen.obt"
