@@ -193,7 +193,7 @@
             "volume": 1.0,
             "balance": 0.5,
             "enabled": true,
-            "muted": false,
+            "muted": true,
             "push-to-mute": false,
             "push-to-mute-delay": 0,
             "push-to-talk": false,
@@ -241,7 +241,7 @@
     "transition_duration": 300,
     "preview_locked": false,
     "scaling_enabled": false,
-    "scaling_level": -13,
+    "scaling_level": -16,
     "scaling_off_x": 0.0,
     "scaling_off_y": 0.0,
     "modules": {
@@ -257,6 +257,10 @@
             "autoStartRecordTimer": false,
             "pauseRecordTimer": true
         }
+    },
+    "resolution": {
+        "x": 1920,
+        "y": 1080
     },
     "version": 2
 }

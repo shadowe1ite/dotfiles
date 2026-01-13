@@ -66,304 +66,6 @@
         {
             "columns":[
                 {
-                    "id":"#",
-                    "sort":"ASCENDING",
-                    "sort-precedence":"PRIMARY",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":45
-                },
-                {
-                    "id":"Time",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":150
-                },
-                {
-                    "id":"Tool",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":75
-                },
-                {
-                    "id":"Method",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":60
-                },
-                {
-                    "id":"Protocol",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":false,
-                    "width":60
-                },
-                {
-                    "id":"Host",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":150
-                },
-                {
-                    "id":"Port",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":false,
-                    "width":45
-                },
-                {
-                    "id":"URL",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":false,
-                    "width":225
-                },
-                {
-                    "id":"IP",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":false,
-                    "width":120
-                },
-                {
-                    "id":"Path",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":150
-                },
-                {
-                    "id":"Query",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":150
-                },
-                {
-                    "id":"Param count",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":105
-                },
-                {
-                    "id":"Param names",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":false,
-                    "width":150
-                },
-                {
-                    "id":"Status code",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":90
-                },
-                {
-                    "id":"Length",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":60
-                },
-                {
-                    "id":"MIME type",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":false,
-                    "width":75
-                },
-                {
-                    "id":"Extension",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":false,
-                    "width":75
-                },
-                {
-                    "id":"Page title",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":false,
-                    "width":150
-                },
-                {
-                    "id":"Start response timer",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":150
-                },
-                {
-                    "id":"End response timer",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":false,
-                    "width":150
-                },
-                {
-                    "id":"Comment",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":112
-                },
-                {
-                    "id":"Connection ID",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":false,
-                    "width":90
-                }
-            ],
-            "id":"logger"
-        },
-        {
-            "columns":[
-                {
-                    "id":"Time",
-                    "sort":"DESCENDING",
-                    "sort-precedence":"PRIMARY",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":150
-                },
-                {
-                    "id":"Source",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":75
-                },
-                {
-                    "id":"Issue type",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":300
-                },
-                {
-                    "id":"Host",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":150
-                },
-                {
-                    "id":"Path",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":300
-                },
-                {
-                    "id":"Insertion point",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":150
-                },
-                {
-                    "id":"Severity",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":112
-                },
-                {
-                    "id":"Confidence",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":112
-                },
-                {
-                    "id":"Comment",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":150
-                }
-            ],
-            "id":"dashboardAllIssues"
-        },
-        {
-            "columns":[
-                {
-                    "id":"Time",
-                    "sort":"DESCENDING",
-                    "sort-precedence":"PRIMARY",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":247
-                },
-                {
-                    "id":"Type",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":98
-                },
-                {
-                    "id":"Source",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":123
-                },
-                {
-                    "id":"Message",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":431
-                }
-            ],
-            "id":"dashboardEventLog"
-        },
-        {
-            "columns":[
-                {
                     "id":"Time",
                     "sort":"UNSORTED",
                     "type":"native",
@@ -529,246 +231,40 @@
         {
             "columns":[
                 {
-                    "id":"#",
-                    "sort":"ASCENDING",
+                    "id":"Time",
+                    "sort":"DESCENDING",
                     "sort-precedence":"PRIMARY",
                     "type":"native",
                     "user-resized":false,
                     "visible":true,
-                    "width":45
+                    "width":507
                 },
                 {
-                    "id":"Host",
+                    "id":"Type",
                     "sort":"UNSORTED",
                     "type":"native",
                     "user-resized":false,
                     "visible":true,
-                    "width":187
+                    "width":202
                 },
                 {
-                    "id":"Method",
+                    "id":"Source",
                     "sort":"UNSORTED",
                     "type":"native",
                     "user-resized":false,
                     "visible":true,
-                    "width":60
+                    "width":253
                 },
                 {
-                    "id":"URL",
+                    "id":"Message",
                     "sort":"UNSORTED",
                     "type":"native",
                     "user-resized":false,
                     "visible":true,
-                    "width":225
-                },
-                {
-                    "id":"Params",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":60
-                },
-                {
-                    "id":"Edited",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":60
-                },
-                {
-                    "id":"Status code",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":90
-                },
-                {
-                    "id":"Length",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":60
-                },
-                {
-                    "id":"MIME type",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":75
-                },
-                {
-                    "id":"Extension",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":75
-                },
-                {
-                    "id":"Title",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":150
-                },
-                {
-                    "id":"Notes",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":112
-                },
-                {
-                    "id":"TLS",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":45
-                },
-                {
-                    "id":"IP",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":120
-                },
-                {
-                    "id":"Cookies",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":120
-                },
-                {
-                    "id":"Time",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":90
-                },
-                {
-                    "id":"Listener port",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":90
-                },
-                {
-                    "id":"Start response timer",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":90
-                },
-                {
-                    "id":"End response timer",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":false,
-                    "width":90
+                    "width":884
                 }
             ],
-            "id":"proxyHttpHistory"
-        },
-        {
-            "columns":[
-                {
-                    "id":"#",
-                    "sort":"ASCENDING",
-                    "sort-precedence":"PRIMARY",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":45
-                },
-                {
-                    "id":"URL",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":225
-                },
-                {
-                    "id":"Direction",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":112
-                },
-                {
-                    "id":"Edited",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":60
-                },
-                {
-                    "id":"Length",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":75
-                },
-                {
-                    "id":"Notes",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":112
-                },
-                {
-                    "id":"TLS",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":45
-                },
-                {
-                    "id":"Time",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":90
-                },
-                {
-                    "id":"Listener port",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":90
-                },
-                {
-                    "id":"WebSocket ID",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":105
-                }
-            ],
-            "id":"proxyWsHistory"
+            "id":"dashboardEventLog"
         },
         {
             "columns":[
@@ -795,7 +291,7 @@
                     "type":"native",
                     "user-resized":false,
                     "visible":true,
-                    "width":150
+                    "width":187
                 },
                 {
                     "id":"Params",
@@ -820,7 +316,7 @@
                     "type":"native",
                     "user-resized":false,
                     "visible":true,
-                    "width":60
+                    "width":75
                 },
                 {
                     "id":"MIME type",
@@ -836,15 +332,7 @@
                     "type":"native",
                     "user-resized":false,
                     "visible":true,
-                    "width":150
-                },
-                {
-                    "id":"Notes",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":150
+                    "width":165
                 },
                 {
                     "id":"Time requested",
@@ -852,10 +340,10 @@
                     "type":"native",
                     "user-resized":false,
                     "visible":true,
-                    "width":90
+                    "width":150
                 }
             ],
-            "id":"targetMap"
+            "id":"targetCrawlPath"
         },
         {
             "columns":[
@@ -970,46 +458,37 @@
         {
             "columns":[
                 {
-                    "id":"Host",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":150
-                },
-                {
-                    "id":"Method",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":60
-                },
-                {
-                    "id":"URL",
-                    "sort":"ASCENDING",
-                    "sort-precedence":"SECONDARY",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":187
-                },
-                {
-                    "id":"Params",
-                    "sort":"UNSORTED",
-                    "type":"native",
-                    "user-resized":false,
-                    "visible":true,
-                    "width":60
-                },
-                {
-                    "id":"Status code",
+                    "id":"#",
                     "sort":"ASCENDING",
                     "sort-precedence":"PRIMARY",
                     "type":"native",
                     "user-resized":false,
                     "visible":true,
-                    "width":97
+                    "width":89
+                },
+                {
+                    "id":"URL",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":443
+                },
+                {
+                    "id":"Direction",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":220
+                },
+                {
+                    "id":"Edited",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":118
                 },
                 {
                     "id":"Length",
@@ -1017,34 +496,50 @@
                     "type":"native",
                     "user-resized":false,
                     "visible":true,
-                    "width":75
+                    "width":148
                 },
                 {
-                    "id":"MIME type",
+                    "id":"Notes",
                     "sort":"UNSORTED",
                     "type":"native",
                     "user-resized":false,
                     "visible":true,
-                    "width":90
+                    "width":220
                 },
                 {
-                    "id":"Title",
+                    "id":"TLS",
                     "sort":"UNSORTED",
                     "type":"native",
                     "user-resized":false,
                     "visible":true,
-                    "width":165
+                    "width":89
                 },
                 {
-                    "id":"Time requested",
+                    "id":"Time",
                     "sort":"UNSORTED",
                     "type":"native",
                     "user-resized":false,
                     "visible":true,
-                    "width":150
+                    "width":177
+                },
+                {
+                    "id":"Listener port",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":177
+                },
+                {
+                    "id":"WebSocket ID",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":207
                 }
             ],
-            "id":"targetCrawlPath"
+            "id":"proxyWsHistory"
         },
         {
             "columns":[
@@ -1119,6 +614,353 @@
         {
             "columns":[
                 {
+                    "id":"Host",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":221
+                },
+                {
+                    "id":"Method",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":89
+                },
+                {
+                    "id":"URL",
+                    "sort":"ASCENDING",
+                    "sort-precedence":"SECONDARY",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":221
+                },
+                {
+                    "id":"Params",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":89
+                },
+                {
+                    "id":"Status code",
+                    "sort":"ASCENDING",
+                    "sort-precedence":"PRIMARY",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":143
+                },
+                {
+                    "id":"Length",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":89
+                },
+                {
+                    "id":"MIME type",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":133
+                },
+                {
+                    "id":"Title",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":221
+                },
+                {
+                    "id":"Notes",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":221
+                },
+                {
+                    "id":"Time requested",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":133
+                }
+            ],
+            "id":"targetMap"
+        },
+        {
+            "columns":[
+                {
+                    "id":"#",
+                    "sort":"ASCENDING",
+                    "sort-precedence":"PRIMARY",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":65
+                },
+                {
+                    "id":"Time",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":218
+                },
+                {
+                    "id":"Tool",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":109
+                },
+                {
+                    "id":"Method",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":87
+                },
+                {
+                    "id":"Protocol",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":false,
+                    "width":60
+                },
+                {
+                    "id":"Host",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":219
+                },
+                {
+                    "id":"Port",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":false,
+                    "width":45
+                },
+                {
+                    "id":"URL",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":false,
+                    "width":225
+                },
+                {
+                    "id":"IP",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":false,
+                    "width":120
+                },
+                {
+                    "id":"Path",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":218
+                },
+                {
+                    "id":"Query",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":218
+                },
+                {
+                    "id":"Param count",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":153
+                },
+                {
+                    "id":"Param names",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":false,
+                    "width":150
+                },
+                {
+                    "id":"Status code",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":131
+                },
+                {
+                    "id":"Length",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":87
+                },
+                {
+                    "id":"MIME type",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":false,
+                    "width":75
+                },
+                {
+                    "id":"Extension",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":false,
+                    "width":75
+                },
+                {
+                    "id":"Page title",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":false,
+                    "width":150
+                },
+                {
+                    "id":"Start response timer",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":218
+                },
+                {
+                    "id":"End response timer",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":false,
+                    "width":150
+                },
+                {
+                    "id":"Comment",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":163
+                },
+                {
+                    "id":"Connection ID",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":false,
+                    "width":90
+                }
+            ],
+            "id":"logger"
+        },
+        {
+            "columns":[
+                {
+                    "id":"Time",
+                    "sort":"DESCENDING",
+                    "sort-precedence":"PRIMARY",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":150
+                },
+                {
+                    "id":"Source",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":75
+                },
+                {
+                    "id":"Issue type",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":300
+                },
+                {
+                    "id":"Host",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":150
+                },
+                {
+                    "id":"Path",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":300
+                },
+                {
+                    "id":"Insertion point",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":150
+                },
+                {
+                    "id":"Severity",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":112
+                },
+                {
+                    "id":"Confidence",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":112
+                },
+                {
+                    "id":"Comment",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":150
+                }
+            ],
+            "id":"dashboardAllIssues"
+        },
+        {
+            "columns":[
+                {
                     "id":"Name",
                     "sort":"UNSORTED",
                     "type":"native",
@@ -1145,6 +987,165 @@
                 }
             ],
             "id":"wizardPanelRecentProjects"
+        },
+        {
+            "columns":[
+                {
+                    "id":"#",
+                    "sort":"DESCENDING",
+                    "sort-precedence":"SECONDARY",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":47
+                },
+                {
+                    "id":"Host",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":true,
+                    "visible":true,
+                    "width":240
+                },
+                {
+                    "id":"Method",
+                    "sort":"ASCENDING",
+                    "sort-precedence":"PRIMARY",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":63
+                },
+                {
+                    "id":"URL",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":237
+                },
+                {
+                    "id":"Params",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":63
+                },
+                {
+                    "id":"Edited",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":63
+                },
+                {
+                    "id":"Status code",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":95
+                },
+                {
+                    "id":"Length",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":63
+                },
+                {
+                    "id":"MIME type",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":79
+                },
+                {
+                    "id":"Extension",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":78
+                },
+                {
+                    "id":"Title",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":158
+                },
+                {
+                    "id":"Notes",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":118
+                },
+                {
+                    "id":"TLS",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":47
+                },
+                {
+                    "id":"IP",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":126
+                },
+                {
+                    "id":"Cookies",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":126
+                },
+                {
+                    "id":"Time",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":95
+                },
+                {
+                    "id":"Listener port",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":95
+                },
+                {
+                    "id":"Start response timer",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":true,
+                    "width":95
+                },
+                {
+                    "id":"End response timer",
+                    "sort":"UNSORTED",
+                    "type":"native",
+                    "user-resized":false,
+                    "visible":false,
+                    "width":90
+                }
+            ],
+            "id":"proxyHttpHistory"
         }
     ],
     "windows":[]
