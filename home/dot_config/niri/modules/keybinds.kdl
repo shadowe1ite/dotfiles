@@ -44,6 +44,10 @@ binds {
     Mod+Alt+WheelScrollUp  { focus-window-or-workspace-up; }
     Mod+Alt+WheelScrollDown  { focus-window-or-workspace-down; }
     
+    // touch pad
+    Mod+TouchpadScrollDown { focus-column-left; }
+    Mod+TouchpadScrollUp   { focus-column-right; }
+
     // Layout
     Mod+P { maximize-column; }
     Mod+Alt+P { switch-preset-column-width; }
