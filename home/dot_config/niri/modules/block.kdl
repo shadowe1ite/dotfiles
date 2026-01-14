@@ -7,10 +7,11 @@ window-rule {
 }
 
 window-rule {
-    match title=r#"(?i).*\b(youtube|gemini|chatgpt|gmail|hotstar|netflix|login|my account|register|sign up|sign in) — Zen Browser.*"#
+    match title=r#"(?i).*\b(youtube|gemini|chatgpt|gmail|hotstar|netflix|login|my account|register|sign up|sign in).* — Zen Browser.*"#
     match title="/home/.*/Videos.* — Dolphin"
     match title="/home/.*/Documents.* — Dolphin"
     match title="/home/.*/Downloads.* — Dolphin"
+    match title="/home/.*/Music.* — Dolphin"
     match title="trash:/ — Dolphin"
     block-out-from "screencast"
 }
