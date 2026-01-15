@@ -417,7 +417,7 @@
                     "wrap_text":false
                 }
             ],
-            "out_of_scope_history_logging_action":"disable",
+            "out_of_scope_history_logging_action":"prompt",
             "pause_tasks_at_startup_default":true,
             "show_learn_tab":true,
             "submit_feedback":true,

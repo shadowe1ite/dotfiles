@@ -1,16 +1,16 @@
 layout {
 
-    background-color "#0f1512"  
+    background-color "#151217"  
     
     focus-ring {
-        active-color   "#88d6bb"
-        inactive-color "#0f1512"
+        active-color   "#dbb9f9"
+        inactive-color "#151217"
         urgent-color   "#ffb4ab"
     }
 
     border {
-        active-color   "#0f1512"
-        inactive-color "#0f1512"
+        active-color   "#151217"
+        inactive-color "#151217"
         urgent-color   "#ffb4ab"
     }
 
@@ -19,25 +19,25 @@ layout {
     }
 
     tab-indicator {
-        active-color   "#88d6bb"
-        inactive-color "#00513f"
+        active-color   "#dbb9f9"
+        inactive-color "#563a70"
         urgent-color   "#ffb4ab"
     }
 
     insert-hint {
-        color "#88d6bb80"
+        color "#dbb9f980"
     }
 }
 
 recent-windows {
     highlight {
-        active-color "#88d6bb"
+        active-color "#dbb9f9"
         urgent-color "#ffb4ab"
     }
 }
 
 overview {
-    backdrop-color "#0f1512"
+    backdrop-color "#151217"
 }
 
 spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "gtk-theme" "adw-gtk3-dark"

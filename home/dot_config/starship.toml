@@ -9,14 +9,14 @@ $nix_shell$os $directory$container$git_branch $git_status$python$nodejs$bun$deno
 """
 
 [palettes.colors]
-primary = '#88d6bb'
-on_primary = '#00382b'
-secondary = '#b2ccc1'
-tertiary = '#a8cbe2'
+primary = '#dbb9f9'
+on_primary = '#3e2458'
+secondary = '#d0c1d9'
+tertiary = '#f3b7bd'
 error = '#ffb4ab'
-dir_bg = '#252b29'
-dir_fg = '#dee4df'
-os_color = '#88d6bb'
+dir_bg = '#2c292e'
+dir_fg = '#e8e0e8'
+os_color = '#dbb9f9'
 
 [custom.space]
 when = "! test $env"

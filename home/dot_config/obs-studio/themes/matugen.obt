@@ -10,43 +10,43 @@
     /* We map standard Catppuccin names to Matugen roles so the theme logic works automatically */
 
     /* Backgrounds: Mantle is low, Base is default, Crust is lowest */
-    --ctp_mantle: #171d1a;
-    --ctp_base: #0f1512;
-    --ctp_crust: #090f0d;
+    --ctp_mantle: #1e1a20;
+    --ctp_base: #151217;
+    --ctp_crust: #100d12;
 
     /* Text: Text is on_surface, Subtext is variant */
-    --ctp_text: #dee4df;
-    --ctp_subtext0: #bfc9c3;
-    --ctp_subtext1: #bfc9c3;
+    --ctp_text: #e8e0e8;
+    --ctp_subtext0: #ccc4ce;
+    --ctp_subtext1: #ccc4ce;
 
     /* UI Elements: Surface0/1/2 map to container levels */
-    --ctp_surface0: #252b29;
-    --ctp_surface1: #303633;
-    --ctp_surface2: #dee4df;
+    --ctp_surface0: #2c292e;
+    --ctp_surface1: #373339;
+    --ctp_surface2: #e8e0e8;
 
     /* Borders & Outlines */
-    --ctp_overlay0: #3f4945;
-    --ctp_overlay1: #89938e;
-    --ctp_overlay2: #89938e;
+    --ctp_overlay0: #4a454e;
+    --ctp_overlay1: #968e98;
+    --ctp_overlay2: #968e98;
 
     /* Accents & Highlights */
-    --ctp_blue: #88d6bb;
-    --ctp_lavender: #00513f;
-    --ctp_sapphire: #b2ccc1;
-    --ctp_sky: #a8cbe2;
-    --ctp_teal: #344c43;
-    --ctp_green: #88d6bb; /* Used for success/nominal states */
-    --ctp_yellow: #a8cbe2;
-    --ctp_peach: #284b5d;
+    --ctp_blue: #dbb9f9;
+    --ctp_lavender: #563a70;
+    --ctp_sapphire: #d0c1d9;
+    --ctp_sky: #f3b7bd;
+    --ctp_teal: #4e4356;
+    --ctp_green: #dbb9f9; /* Used for success/nominal states */
+    --ctp_yellow: #f3b7bd;
+    --ctp_peach: #653a40;
     --ctp_maroon: #ffb4ab;
     --ctp_red: #ffb4ab;
-    --ctp_mauve: #b2ccc1;
-    --ctp_pink: #a8cbe2;
-    --ctp_flamingo: #a3f2d7;
-    --ctp_rosewater: #cee9dd;
+    --ctp_mauve: #d0c1d9;
+    --ctp_pink: #f3b7bd;
+    --ctp_flamingo: #f0dbff;
+    --ctp_rosewater: #edddf6;
 
     /* Special OBS Selection */
-    --ctp_selection_background: #88d6bb;
+    --ctp_selection_background: #dbb9f9;
 
     /* --- INTERNAL MAPPINGS (Do not change) --- */
     /* These route the variables above into the OBS specific palette system */

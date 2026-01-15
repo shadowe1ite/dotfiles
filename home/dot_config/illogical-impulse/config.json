@@ -240,7 +240,8 @@
             "foot",
             "mpv",
             "code",
-            "obsidian"
+            "obsidian",
+            "alacritty"
         ],
         "pinnedOnStartup": false
     },
@@ -338,7 +339,7 @@
         "rows": 2,
         "scale": 0.24
     },
-    "panelFamily": "ii",
+    "panelFamily": "waffle",
     "policies": {
         "ai": 1,
         "weeb": 0
