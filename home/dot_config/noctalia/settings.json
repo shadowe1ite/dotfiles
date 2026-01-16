@@ -326,6 +326,18 @@
                         "showBackground": false,
                         "x": 20,
                         "y": 980
+                    },
+                    {
+                        "clockStyle": "analog",
+                        "customFont": "",
+                        "format": "HH:mm\\nd MMMM yyyy",
+                        "id": "Clock",
+                        "roundedCorners": true,
+                        "showBackground": true,
+                        "useCustomFont": false,
+                        "usePrimaryColor": true,
+                        "x": 1700,
+                        "y": 80
                     }
                 ]
             }
