@@ -66,6 +66,11 @@ ColumnLayout {
         pluginApi?.manifest?.metadata?.defaultSettings?.videoSource || 
         "portal"
 
+    property string editResolution:
+        pluginApi?.pluginSettings?.resolution ||
+        pluginApi?.manifest?.metadata?.defaultSettings?.resolution ||
+        "original"
+
     function saveSettings() {
         if (!pluginApi) {
             Logger.e("ScreenRecorder", "Cannot save: pluginApi is null")
@@ -83,6 +88,7 @@ ColumnLayout {
         pluginApi.pluginSettings.copyToClipboard = root.editCopyToClipboard
         pluginApi.pluginSettings.audioSource = root.editAudioSource
         pluginApi.pluginSettings.videoSource = root.editVideoSource
+        pluginApi.pluginSettings.resolution = root.editResolution
 
         pluginApi.saveSettings()
 
@@ -281,6 +287,37 @@ ColumnLayout {
             currentKey: root.editColorRange
             onSelected: key => root.editColorRange = key
             defaultValue: pluginApi?.manifest?.metadata?.defaultSettings?.colorRange || "limited"
+        }
+
+        // Resolution
+        NComboBox {
+            label: pluginApi.tr("settings.video.resolution")
+            description: pluginApi.tr("settings.video.resolution-desc")
+            model: [
+                {
+                    "key": "original",
+                    "name": pluginApi.tr("settings.video.resolution-original")
+                },
+                {
+                    "key": "1920x1080",
+                    "name": "1920x1080 (Full HD)"
+                },
+                {
+                    "key": "2560x1440",
+                    "name": "2560x1440 (QHD)"
+                },
+                {
+                    "key": "3840x2160",
+                    "name": "3840x2160 (4K)"
+                },
+                {
+                    "key": "1280x720",
+                    "name": "1280x720 (HD)"
+                }
+            ]
+            currentKey: root.editResolution
+            onSelected: key => root.editResolution = key
+            defaultValue: pluginApi?.manifest?.metadata?.defaultSettings?.resolution || "original"
         }
     }
 

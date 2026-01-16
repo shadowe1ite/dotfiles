@@ -65,6 +65,7 @@ Item {
     readonly property bool copyToClipboard: pluginApi?.pluginSettings?.copyToClipboard ?? false
     readonly property string audioSource: pluginApi?.pluginSettings?.audioSource || "default_output"
     readonly property string videoSource: pluginApi?.pluginSettings?.videoSource || "portal"
+    readonly property string resolution: pluginApi?.pluginSettings?.resolution || "original"
 
     function buildTooltip() {
         if (!isAvailable) {
@@ -215,7 +216,8 @@ Item {
             return `-ac ${audioCodec} -a ${audioSource}`
         })()
 
-        var flags = `-w ${videoSource} -f ${frameRate} -k ${videoCodec} ${audioFlags} -q ${quality} -cursor ${showCursor ? "yes" : "no"} -cr ${colorRange} -o "${outputPath}"`
+        var resolutionFlag = (resolution !== "original") ? `-s ${resolution}` : ""
+        var flags = `-w ${videoSource} -f ${frameRate} -k ${videoCodec} ${audioFlags} -q ${quality} -cursor ${showCursor ? "yes" : "no"} -cr ${colorRange} ${resolutionFlag} -o "${outputPath}"`
         var command = `
     _gpuscreenrecorder_flatpak_installed() {
     flatpak list --app | grep -q "com.dec05eba.gpu_screen_recorder"

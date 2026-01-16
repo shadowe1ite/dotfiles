@@ -1,7 +1,7 @@
 {
   "id": "screen-recorder",
   "name": "Screen Recorder",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "minNoctaliaVersion": "3.6.0",
   "author": "Noctalia Team",
   "license": "MIT",
@@ -32,7 +32,8 @@
       "showCursor": true,
       "copyToClipboard": false,
       "audioSource": "default_output",
-      "videoSource": "portal"
+      "videoSource": "portal",
+      "resolution": "original"
     }
   }
 }

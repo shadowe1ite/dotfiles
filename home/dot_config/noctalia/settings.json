@@ -356,7 +356,7 @@
         ],
         "pinnedStatic": false,
         "position": "bottom",
-        "size": 1
+        "size": 1.2
     },
     "general": {
         "allowPanelsOnScreenWithoutBar": true,
