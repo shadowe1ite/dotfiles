@@ -31,17 +31,6 @@
 .config/noctalia/plugins/github-notifications
 {{- end }}
 
-{{- if eq .home.zen.sineMode false }}
-.zen/{{ .home.zen.release_path }}/chrome/JS
-.zen/{{ .home.zen.release_path }}/chrome/sine-mods
-#.zen/{{ .home.zen.release_path }}/chrome/utils
-{{ end }}
-
-{{- if eq .home.zen.sineMode true }}
-.zen/{{ .home.zen.release_path }}/chrome/userChrome.css
-.zen/{{ .home.zen.release_path }}/chrome/userContent.css
-{{ end }}
-
 {{- if ne .chezmoi.osRelease.id "arch" }}
 .chezmoiscripts/00-prepare.sh
 .chezmoiscripts/06a-setup-nvidia.sh

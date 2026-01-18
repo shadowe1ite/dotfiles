@@ -26,7 +26,6 @@ encryption = "gpg"
 [data.home.zen]
     release_id   = "{{ $zenReleaseId }}"
     release_path = "{{ $zenReleasePath }}"
-    sineMode     = false
 
 {{ if eq .chezmoi.username $user -}}
 [gpg]

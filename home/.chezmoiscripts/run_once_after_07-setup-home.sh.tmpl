@@ -56,11 +56,9 @@ gum spin --title "Enabling virsh starting..." -- sudo virsh net-start default
 gum spin --title "Creating new Warp registration..." -- echo 'y' | warp-cli registration new
 gum spin --title "Connecting to Warp..." -- warp-cli connect
 
-{{- if .home.zen.sineMode }}
 gum spin --title "Downloading config.js" -- sudo curl -L -o /opt/zen-browser-bin/config.js https://raw.githubusercontent.com/MrOtherGuy/fx-autoconfig/refs/heads/master/program/config.js
 
 gum spin --title "Downloading config-prefs.js" -- sudo curl -L -o /opt/zen-browser-bin/defaults/pref/config-prefs.js https://raw.githubusercontent.com/MrOtherGuy/fx-autoconfig/refs/heads/master/program/defaults/pref/config-prefs.js
-{{ end }}
 
 echo "$(gum style --foreground 10 "[SUCCESS]") Installation completed successfully!"
 echo
