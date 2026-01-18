@@ -89,11 +89,11 @@ post_hook = '~/.config/matugen/scripts/spotify-reload.sh &'
 
 [templates.zenChrome]
 input_path = '~/.config/matugen/templates/zen/colors-zenChrome.css'
-output_path = '~/.zen/default/chrome/sine-mods/material/userChrome.css'
+output_path = '~/.zen/default/chrome/userChrome.css'
 
 [templates.zenContent]
 input_path = '~/.config/matugen/templates/zen/colors-zenContent.css'
-output_path = '~/.zen/default/chrome/sine-mods/material/userContent.css'
+output_path = '~/.zen/default/chrome/userContent.css'
 
 [templates.zenLogo]
 input_path = '~/.config/matugen/templates/zen/colors-zenLogo.svg'

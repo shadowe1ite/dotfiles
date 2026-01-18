@@ -35,7 +35,7 @@
     }
 
     .search-wrapper .logo-and-wordmark .logo {
-      background: url("../../zen-logo.svg") no-repeat center !important;
+      background: url("zen-logo.svg") no-repeat center !important;
       display: inline-block !important;
       height: 82px !important;
       width: 82px !important;
