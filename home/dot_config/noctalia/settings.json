@@ -25,7 +25,6 @@
         ],
         "preferredPlayer": "",
         "visualizerType": "linear",
-        "volumeFeedback": false,
         "volumeOverdrive": false,
         "volumeStep": 5
     },
@@ -35,15 +34,12 @@
         "density": "comfortable",
         "exclusive": true,
         "floating": false,
-        "hideOnOverview": false,
         "marginHorizontal": 5,
         "marginVertical": 5,
         "monitors": [
         ],
         "outerCorners": true,
         "position": "top",
-        "screenOverrides": [
-        ],
         "showCapsule": true,
         "showOutline": false,
         "useSeparateOpacity": false,
@@ -125,7 +121,6 @@
                     "showMemoryAsPercent": false,
                     "showMemoryUsage": false,
                     "showNetworkStats": true,
-                    "showSwapUsage": false,
                     "useMonospaceFont": true,
                     "usePrimaryColor": false
                 },
@@ -181,7 +176,6 @@
                     "showMemoryAsPercent": false,
                     "showMemoryUsage": true,
                     "showNetworkStats": false,
-                    "showSwapUsage": false,
                     "useMonospaceFont": true,
                     "usePrimaryColor": false
                 },
@@ -193,7 +187,6 @@
                 {
                     "deviceNativePath": "",
                     "displayMode": "alwaysShow",
-                    "hideIfIdle": false,
                     "hideIfNotDetected": true,
                     "id": "Battery",
                     "showNoctaliaPerformance": true,
@@ -218,7 +211,6 @@
                 },
                 {
                     "hideWhenZero": false,
-                    "hideWhenZeroUnread": false,
                     "id": "NotificationHistory",
                     "showUnreadBadge": true
                 }
@@ -248,10 +240,9 @@
     },
     "colorSchemes": {
         "darkMode": true,
-        "generationMethod": "tonal-spot",
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
-        "monitorForColors": "",
+        "matugenSchemeType": "scheme-tonal-spot",
         "predefinedScheme": "Gruvbox",
         "schedulingMode": "off",
         "useWallpaperColors": true
@@ -365,6 +356,7 @@
         ],
         "onlySameOutput": true,
         "pinnedApps": [
+            "Alacritty",
             "zen",
             "org.kde.dolphin",
             "burpsuite-pro",
@@ -372,8 +364,7 @@
             "gimp",
             "vesktop",
             "org.gnome.TextEditor",
-            "ghidra",
-            "Alacritty"
+            "ghidra"
         ],
         "pinnedStatic": false,
         "position": "bottom",
@@ -387,13 +378,11 @@
         "boxRadiusRatio": 1,
         "compactLockScreen": false,
         "dimmerOpacity": 0,
-        "enableLockScreenCountdown": true,
         "enableShadows": true,
         "forceBlackScreenCorners": true,
         "iRadiusRatio": 1,
         "language": "",
         "lockOnSuspend": true,
-        "lockScreenCountdownDuration": 10000,
         "radiusRatio": 1,
         "scaleRatio": 1,
         "screenRadiusRatio": 1,
@@ -403,8 +392,7 @@
         "showChangelogOnStartup": true,
         "showHibernateOnLockScreen": false,
         "showScreenCorners": true,
-        "showSessionButtonsOnLockScreen": false,
-        "telemetryEnabled": false
+        "showSessionButtonsOnLockScreen": false
     },
     "hooks": {
         "darkModeChange": "",
@@ -413,8 +401,6 @@
         "performanceModeEnabled": "~/.config/hypr/scripts/gamemode",
         "screenLock": "",
         "screenUnlock": "",
-        "session": "",
-        "startup": "",
         "wallpaperChange": "pgrep -x zen-bin && qs -c noctalia-shell ipc call wallpaper toggle"
     },
     "location": {
@@ -452,7 +438,6 @@
         "backgroundOpacity": 1,
         "criticalUrgencyDuration": 15,
         "enableKeyboardLayoutToast": true,
-        "enableMediaToast": false,
         "enabled": true,
         "location": "top_right",
         "lowUrgencyDuration": 3,
@@ -538,7 +523,7 @@
         "showHeader": true,
         "showNumberLabels": true
     },
-    "settingsVersion": 42,
+    "settingsVersion": 39,
     "systemMonitor": {
         "cpuCriticalThreshold": 90,
         "cpuPollingInterval": 3000,
@@ -557,8 +542,6 @@
         "memPollingInterval": 3000,
         "memWarningThreshold": 80,
         "networkPollingInterval": 3000,
-        "swapCriticalThreshold": 90,
-        "swapWarningThreshold": 80,
         "tempCriticalThreshold": 95,
         "tempPollingInterval": 3000,
         "tempWarningThreshold": 60,
@@ -566,9 +549,32 @@
         "warningColor": "#eeb8ca"
     },
     "templates": {
-        "activeTemplates": [
-        ],
-        "enableUserTheming": true
+        "alacritty": false,
+        "cava": false,
+        "code": false,
+        "discord": false,
+        "emacs": false,
+        "enableUserTemplates": true,
+        "foot": false,
+        "fuzzel": false,
+        "ghostty": false,
+        "gtk": true,
+        "helix": false,
+        "hyprland": false,
+        "kcolorscheme": false,
+        "kitty": false,
+        "mango": false,
+        "niri": false,
+        "pywalfox": false,
+        "qt": false,
+        "spicetify": false,
+        "telegram": false,
+        "vicinae": false,
+        "walker": false,
+        "wezterm": false,
+        "yazi": false,
+        "zed": false,
+        "zenBrowser": false
     },
     "ui": {
         "bluetoothDetailsViewMode": "grid",
@@ -586,7 +592,6 @@
         "wifiDetailsViewMode": "grid"
     },
     "wallpaper": {
-        "automationEnabled": false,
         "directory": "/home/shadow/Pictures/Wallpapers",
         "enableMultiMonitorDirectories": false,
         "enabled": true,
@@ -597,7 +602,9 @@
         ],
         "overviewEnabled": true,
         "panelPosition": "bottom_center",
+        "randomEnabled": false,
         "randomIntervalSec": 300,
+        "recursiveSearch": true,
         "setWallpaperOnAllMonitors": true,
         "solidColor": "#1a1a2e",
         "transitionDuration": 1500,
@@ -605,7 +612,6 @@
         "transitionType": "random",
         "useSolidColor": false,
         "useWallhaven": false,
-        "viewMode": "recursive",
         "wallhavenApiKey": "",
         "wallhavenCategories": "111",
         "wallhavenOrder": "desc",
