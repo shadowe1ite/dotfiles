@@ -414,6 +414,7 @@
         "screenLock": "",
         "screenUnlock": "",
         "session": "",
+        "startup": "",
         "wallpaperChange": "pgrep -x zen-bin && qs -c noctalia-shell ipc call wallpaper toggle"
     },
     "location": {
@@ -566,10 +567,6 @@
     },
     "templates": {
         "activeTemplates": [
-            {
-                "enabled": true,
-                "id": "gtk"
-            }
         ],
         "enableUserTheming": true
     },
@@ -601,7 +598,6 @@
         "overviewEnabled": true,
         "panelPosition": "bottom_center",
         "randomIntervalSec": 300,
-        "recursiveSearch": true,
         "setWallpaperOnAllMonitors": true,
         "solidColor": "#1a1a2e",
         "transitionDuration": 1500,
@@ -609,6 +605,7 @@
         "transitionType": "random",
         "useSolidColor": false,
         "useWallhaven": false,
+        "viewMode": "recursive",
         "wallhavenApiKey": "",
         "wallhavenCategories": "111",
         "wallhavenOrder": "desc",
