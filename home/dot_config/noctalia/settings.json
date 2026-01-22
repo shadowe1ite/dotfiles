@@ -25,6 +25,7 @@
         ],
         "preferredPlayer": "",
         "visualizerType": "linear",
+        "volumeFeedback": false,
         "volumeOverdrive": false,
         "volumeStep": 5
     },
@@ -41,6 +42,8 @@
         ],
         "outerCorners": true,
         "position": "top",
+        "screenOverrides": [
+        ],
         "showCapsule": true,
         "showOutline": false,
         "useSeparateOpacity": false,
@@ -122,6 +125,7 @@
                     "showMemoryAsPercent": false,
                     "showMemoryUsage": false,
                     "showNetworkStats": true,
+                    "showSwapUsage": false,
                     "useMonospaceFont": true,
                     "usePrimaryColor": false
                 },
@@ -177,6 +181,7 @@
                     "showMemoryAsPercent": false,
                     "showMemoryUsage": true,
                     "showNetworkStats": false,
+                    "showSwapUsage": false,
                     "useMonospaceFont": true,
                     "usePrimaryColor": false
                 },
@@ -188,6 +193,7 @@
                 {
                     "deviceNativePath": "",
                     "displayMode": "alwaysShow",
+                    "hideIfIdle": false,
                     "hideIfNotDetected": true,
                     "id": "Battery",
                     "showNoctaliaPerformance": true,
@@ -242,9 +248,10 @@
     },
     "colorSchemes": {
         "darkMode": true,
+        "generationMethod": "tonal-spot",
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
-        "matugenSchemeType": "scheme-tonal-spot",
+        "monitorForColors": "",
         "predefinedScheme": "Gruvbox",
         "schedulingMode": "off",
         "useWallpaperColors": true
@@ -358,7 +365,6 @@
         ],
         "onlySameOutput": true,
         "pinnedApps": [
-            "Alacritty",
             "zen",
             "org.kde.dolphin",
             "burpsuite-pro",
@@ -366,7 +372,8 @@
             "gimp",
             "vesktop",
             "org.gnome.TextEditor",
-            "ghidra"
+            "ghidra",
+            "Alacritty"
         ],
         "pinnedStatic": false,
         "position": "bottom",
@@ -380,11 +387,13 @@
         "boxRadiusRatio": 1,
         "compactLockScreen": false,
         "dimmerOpacity": 0,
+        "enableLockScreenCountdown": true,
         "enableShadows": true,
         "forceBlackScreenCorners": true,
         "iRadiusRatio": 1,
         "language": "",
         "lockOnSuspend": true,
+        "lockScreenCountdownDuration": 10000,
         "radiusRatio": 1,
         "scaleRatio": 1,
         "screenRadiusRatio": 1,
@@ -528,7 +537,7 @@
         "showHeader": true,
         "showNumberLabels": true
     },
-    "settingsVersion": 41,
+    "settingsVersion": 42,
     "systemMonitor": {
         "cpuCriticalThreshold": 90,
         "cpuPollingInterval": 3000,
@@ -547,6 +556,8 @@
         "memPollingInterval": 3000,
         "memWarningThreshold": 80,
         "networkPollingInterval": 3000,
+        "swapCriticalThreshold": 90,
+        "swapWarningThreshold": 80,
         "tempCriticalThreshold": 95,
         "tempPollingInterval": 3000,
         "tempWarningThreshold": 60,
@@ -560,7 +571,7 @@
                 "id": "gtk"
             }
         ],
-        "enableUserTemplates": true
+        "enableUserTheming": true
     },
     "ui": {
         "bluetoothDetailsViewMode": "grid",
@@ -578,6 +589,7 @@
         "wifiDetailsViewMode": "grid"
     },
     "wallpaper": {
+        "automationEnabled": false,
         "directory": "/home/shadow/Pictures/Wallpapers",
         "enableMultiMonitorDirectories": false,
         "enabled": true,
@@ -588,7 +600,6 @@
         ],
         "overviewEnabled": true,
         "panelPosition": "bottom_center",
-        "randomEnabled": false,
         "randomIntervalSec": 300,
         "recursiveSearch": true,
         "setWallpaperOnAllMonitors": true,
