@@ -558,7 +558,7 @@
         "activeTemplates": [
             {
                 "enabled": true,
-                "id": "gtk"
+                "id": "pywalfox"
             }
         ],
         "enableUserTemplates": true

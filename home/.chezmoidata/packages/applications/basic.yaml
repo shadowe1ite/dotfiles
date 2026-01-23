@@ -9,7 +9,9 @@ network:
 
 browser:
   - zen-browser-bin
+  - firefox-bin
   - browserpass-firefox
+  - python-pywalfox
 
 social:
   - telegram-desktop-bin
