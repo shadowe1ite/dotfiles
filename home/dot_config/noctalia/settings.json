@@ -249,7 +249,7 @@
     },
     "colorSchemes": {
         "darkMode": true,
-        "generationMethod": "tonal-spot",
+        "generationMethod": "rainbow",
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
         "monitorForColors": "eDP-1",
@@ -367,13 +367,12 @@
         "onlySameOutput": true,
         "pinnedApps": [
             "Alacritty",
-            "zen",
-            "org.kde.dolphin",
-            "burpsuite-pro",
-            "com.github.neithern.g4music",
             "gimp",
+            "org.kde.dolphin",
             "vesktop",
+            "com.github.neithern.g4music",
             "org.gnome.TextEditor",
+            "burpsuite-pro",
             "ghidra",
             "firefox"
         ],
