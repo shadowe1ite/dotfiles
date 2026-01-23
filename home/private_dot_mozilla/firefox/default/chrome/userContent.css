@@ -1,0 +1,7 @@
+@media (prefers-color-scheme: dark) {
+  @-moz-document url("about:newtab"), url("about:home") {
+    .personalize-button, .customize-homepage-button {
+      display: none !important;
+    }
+  }
+}
