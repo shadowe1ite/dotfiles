@@ -15,8 +15,8 @@ extensions:
     - file: "pentestkit@DenisPodgurskii.xpi"
       id: "owasp-penetration-testing-kit"
     
-    - file: "foxyproxy@eric.h.jung.xpi"
-      id: "foxyproxy-standard"
+    - file: "PwnFox@bi.tk.xpi"
+      id: "pwnfox"
     
     - file: "@retire.js.xpi"
       id: "retire-js"
