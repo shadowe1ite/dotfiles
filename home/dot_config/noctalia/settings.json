@@ -34,6 +34,7 @@
         "density": "comfortable",
         "exclusive": true,
         "floating": false,
+        "hideOnOverview": false,
         "marginHorizontal": 5,
         "marginVertical": 5,
         "monitors": [
@@ -211,6 +212,7 @@
                 },
                 {
                     "hideWhenZero": false,
+                    "hideWhenZeroUnread": false,
                     "id": "NotificationHistory",
                     "showUnreadBadge": true
                 }
@@ -392,7 +394,8 @@
         "showChangelogOnStartup": true,
         "showHibernateOnLockScreen": false,
         "showScreenCorners": true,
-        "showSessionButtonsOnLockScreen": false
+        "showSessionButtonsOnLockScreen": false,
+        "telemetryEnabled": false
     },
     "hooks": {
         "darkModeChange": "",
@@ -401,6 +404,7 @@
         "performanceModeEnabled": "~/.config/hypr/scripts/gamemode",
         "screenLock": "",
         "screenUnlock": "",
+        "session": "",
         "wallpaperChange": "pgrep -x zen-bin && qs -c noctalia-shell ipc call wallpaper toggle"
     },
     "location": {
@@ -438,6 +442,7 @@
         "backgroundOpacity": 1,
         "criticalUrgencyDuration": 15,
         "enableKeyboardLayoutToast": true,
+        "enableMediaToast": false,
         "enabled": true,
         "location": "top_right",
         "lowUrgencyDuration": 3,
@@ -523,7 +528,7 @@
         "showHeader": true,
         "showNumberLabels": true
     },
-    "settingsVersion": 39,
+    "settingsVersion": 41,
     "systemMonitor": {
         "cpuCriticalThreshold": 90,
         "cpuPollingInterval": 3000,
@@ -549,32 +554,13 @@
         "warningColor": "#eeb8ca"
     },
     "templates": {
-        "alacritty": false,
-        "cava": false,
-        "code": false,
-        "discord": false,
-        "emacs": false,
-        "enableUserTemplates": true,
-        "foot": false,
-        "fuzzel": false,
-        "ghostty": false,
-        "gtk": true,
-        "helix": false,
-        "hyprland": false,
-        "kcolorscheme": false,
-        "kitty": false,
-        "mango": false,
-        "niri": false,
-        "pywalfox": false,
-        "qt": false,
-        "spicetify": false,
-        "telegram": false,
-        "vicinae": false,
-        "walker": false,
-        "wezterm": false,
-        "yazi": false,
-        "zed": false,
-        "zenBrowser": false
+        "activeTemplates": [
+            {
+                "enabled": true,
+                "id": "gtk"
+            }
+        ],
+        "enableUserTemplates": true
     },
     "ui": {
         "bluetoothDetailsViewMode": "grid",
@@ -616,11 +602,11 @@
         "wallhavenCategories": "111",
         "wallhavenOrder": "desc",
         "wallhavenPurity": "100",
-        "wallhavenQuery": "",
+        "wallhavenQuery": "cats",
         "wallhavenRatios": "",
-        "wallhavenResolutionHeight": "",
+        "wallhavenResolutionHeight": "1080",
         "wallhavenResolutionMode": "atleast",
-        "wallhavenResolutionWidth": "",
+        "wallhavenResolutionWidth": "1920",
         "wallhavenSorting": "toplist",
         "wallpaperChangeMode": "random"
     }

@@ -12,7 +12,8 @@
     "start-recording": "Screen recorder (start recording)",
     "started": "Recording started.",
     "stop-recording": "Screen recorder (stop recording)",
-    "stopping": "Stopping recording…"
+    "stopping": "Stopping recording…",
+    "open-file": "Open file"
   },
   "name": "Screen Recorder",
   "settings": {

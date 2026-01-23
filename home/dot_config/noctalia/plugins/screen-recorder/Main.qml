@@ -89,6 +89,14 @@ Item {
         (isRecording || isPending) ? stopRecording() : startRecording()
     }
 
+    // Open recording file
+    function openFile(path) {
+        if (!path) {
+            return
+        }
+        Quickshell.execDetached(["xdg-open", path])
+    }
+
     // Copy file to clipboard as file reference
     function copyFileToClipboard(filePath) {
         if (!filePath) {
@@ -309,7 +317,9 @@ Item {
                 isRecording = false
                 monitorTimer.running = false
                 if (exitCode === 0) {
-                    ToastService.showNotice(pluginApi.tr("messages.saved"), outputPath, "video")
+                    // ToastService.showNotice(pluginApi.tr("messages.saved"), outputPath, "video")
+                    ToastService.showNotice(pluginApi.tr("messages.saved"), outputPath, "video", 3000, pluginApi.tr("messages.open-file"), () => openFile(outputPath))
+
                     if (copyToClipboard) {
                         copyFileToClipboard(outputPath)
                     }
@@ -327,7 +337,9 @@ Item {
                 hasActiveRecording = false
             } else if (!isPending && exitCode === 0 && outputPath) {
                 // Fallback: if process exited successfully with an outputPath, handle it
-                ToastService.showNotice(pluginApi.tr("messages.saved"), outputPath, "video")
+                // ToastService.showNotice(pluginApi.tr("messages.saved"), outputPath, "video")
+                ToastService.showNotice(pluginApi.tr("messages.saved"), outputPath, "video", 3000, pluginApi.tr("messages.open-file"), () => openFile(outputPath))
+    
                 if (copyToClipboard) {
                     copyFileToClipboard(outputPath)
                 }
