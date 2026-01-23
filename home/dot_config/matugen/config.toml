@@ -59,7 +59,6 @@ output_path = '~/.config/niri/modules/theme.kdl'
 [templates.hyprland]
 input_path = '~/.config/matugen/templates/colors-hyprland.conf'
 output_path = '~/.config/hypr/modules/material.conf'
-post_hook = 'asusctl aura static -c "{{colors.primary_container.default.hex_stripped | auto_lightness: 30.0 }}"'
 
 [templates.telegram]
 input_path = "~/.config/matugen/templates/colors-telegram.tdesktop-theme"
