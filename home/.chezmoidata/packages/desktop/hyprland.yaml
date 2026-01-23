@@ -34,9 +34,6 @@ audio:
 terminal:
   - alacritty
 
-wallpaper:
-  - matugen-bin
-
 fonts:
   - ttf-sourcecodepro-nerd
   - ttf-jetbrains-mono-nerd
