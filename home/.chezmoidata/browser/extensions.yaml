@@ -18,8 +18,8 @@ extensions:
     - file: "pentestkit@DenisPodgurskii.xpi"
       id: "owasp-penetration-testing-kit"
     
-    - file: "PwnFox@bi.tk.xpi"
-      id: "pwnfox"
+    - file: "PwnFoxy@la1n23.lol.xpi"
+      id: "pwnfoxy"
     
     - file: "@retire.js.xpi"
       id: "retire-js"
