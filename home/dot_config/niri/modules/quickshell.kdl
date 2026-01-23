@@ -9,7 +9,7 @@ binds {
     // Launchers / UI
     Mod+Space { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
     //Mod+Super_L { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "bar" "toggle"; } // fix once the issue #605 and pr #2456 closed
-    Mod+Alt+Space { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "plugin:translator" "toggle" "malayalam"; }
+    Mod+Alt+Space { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "plugin:translator" "toggle" "malayalam" ""; }
     Ctrl+Mod+Alt+Space { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "plugin:translator" "toggle" "english"; }
 
     Mod+E { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "emoji"; }
