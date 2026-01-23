@@ -366,7 +366,8 @@
             "gimp",
             "vesktop",
             "org.gnome.TextEditor",
-            "ghidra"
+            "ghidra",
+            "firefox"
         ],
         "pinnedStatic": false,
         "position": "bottom",
