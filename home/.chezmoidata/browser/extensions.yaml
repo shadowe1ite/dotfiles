@@ -6,6 +6,9 @@ extensions:
     - file: "addon@darkreader.org.xpi"
       id: "darkreader"
     
+    - file: "pywalfox@frewacom.org.xpi"
+      id: "pywalfox" 
+
     - file: "rexxargupta@gmail.com.xpi"
       id: "trufflehog"
     

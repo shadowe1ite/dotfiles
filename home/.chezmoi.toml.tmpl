@@ -1,5 +1,7 @@
 {{- $zenReleaseId := mozillaInstallHash "/opt/zen-browser-bin" -}}
 {{- $zenReleasePath := "default" -}}
+{{- $fireFoxReleaseId := mozillaInstallHash "/opt/firefox-bin" -}}
+{{- $fireFoxReleasePath := "default" -}}
 
 {{- $email := "alansedp@gmail.com" -}}
 {{- $name := "ALAN S" -}}
@@ -26,6 +28,10 @@ encryption = "gpg"
 [data.home.zen]
     release_id   = "{{ $zenReleaseId }}"
     release_path = "{{ $zenReleasePath }}"
+
+[data.home.firefox]
+    release_id   = "{{ $fireFoxReleaseId }}"
+    release_path = "{{ $fireFoxReleasePath }}"
 
 {{ if eq .chezmoi.username $user -}}
 [gpg]

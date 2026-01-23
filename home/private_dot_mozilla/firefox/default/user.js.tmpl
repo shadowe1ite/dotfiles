@@ -1,0 +1,50 @@
+// bookmarks
+{{- if eq .chezmoi.username .user }}
+user_pref("browser.bookmarks.file", "{{ (joinPath .chezmoi.homeDir ".mozilla/firefox" .home.zen.release_path "bookmarks.html" ) | js }}");
+user_pref("browser.places.importBookmarksHTML", true);
+user_pref("browser.bookmarks.autoExportHTML", true);
+{{ end }}
+user_pref("browser.bookmarks.restore_default_bookmarks", false);
+user_pref("browser.toolbars.bookmarks.visibility", "always");
+
+{{- if eq .chezmoi.username .user }}
+// allow local traffic via proxy
+user_pref("network.proxy.allow_hijacking_localhost", true);
+{{ end }}
+
+// startup page
+user_pref("browser.startup.homepage", "about:home");
+user_pref("browser.newtabpage.enabled", true);
+user_pref("browser.newtabpage.activity-stream.showSearch", true);
+user_pref("browser.startup.homepage_override.mstone", "ignore");
+
+// ask download location 
+user_pref("browser.download.useDownloadDir", false);
+
+// auto reload essential tabs 
+user_pref("browser.sessionstore.restore_pinned_tabs_on_demand", true);
+
+// Vertical Tabs
+user_pref("sidebar.verticalTabs", true);
+user_pref("sidebar.verticalTabs.dragToPinPromo.dismissed", true);
+user_pref("sidebar.visibility", "expand-on-hover");
+
+// UI
+user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
+user_pref("browser.uiCustomization.navBarWhenVerticalTabs", "[\"sidebar-button\",\"back-button\",\"forward-button\",\"stop-reload-button\",\"customizableui-special-spring1\",\"vertical-spacer\",\"urlbar-container\",\"customizableui-special-spring2\",\"downloads-button\",\"fxa-toolbar-menu-button\",\"unified-extensions-button\"]");
+{{- if eq .chezmoi.username .user }}
+{{ else }}
+{{ end }}
+
+// disbale suggesions
+user_pref("browser.urlbar.suggest.trending", false);
+user_pref("browser.newtabpage.activity-stream.showSponsored", false);
+user_pref("browser.newtabpage.activity-stream.showSponsoredCheckboxes", false);
+user_pref("browser.newtabpage.activity-stream.showSponsoredTopSites", false);
+user_pref("browser.newtabpage.activity-stream.feeds.section.topstories", false);
+user_pref("browser.newtabpage.activity-stream.feeds.topsites", false);
+
+// Disable telemetry and data reporting
+user_pref("datareporting.healthreport.upload.enabled", false);
+user_pref("toolkit.telemetry.enabled", false);
+user_pref("toolkit.telemetry.unified", false);
