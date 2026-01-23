@@ -1,13 +1,13 @@
-background = #0e1416
+background = #0f1512
 foreground = #d5c4a1
 
 # Selection Colors
-selection-background = #dee3e5
-selection-foreground = #2b3133
+selection-background = #dee4de
+selection-foreground = #2c322e
 
 # Cursor Colors
-cursor-color = #82d3e2
-cursor-text = #006876
+cursor-color = #8dd5b3
+cursor-text = #1f6a4e
 
 palette = 0=#3c3836
 palette = 1=#fb4934
