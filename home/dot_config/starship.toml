@@ -14,8 +14,8 @@ on_primary = '#532200'
 secondary = '#e5bfaa'
 tertiary = '#cdc991'
 error = '#ffb4ab'
-dir_bg = '#2f2925'
-dir_fg = '#ece0db'
+dir_bg = '#2a2a2a'
+dir_fg = '#e2e2e2'
 os_color = '#ffb68d'
 
 [custom.space]

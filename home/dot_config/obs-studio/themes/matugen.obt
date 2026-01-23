@@ -10,24 +10,24 @@
     /* We map standard Catppuccin names to Matugen roles so the theme logic works automatically */
 
     /* Backgrounds: Mantle is low, Base is default, Crust is lowest */
-    --ctp_mantle: #201a17;
-    --ctp_base: #18120f;
-    --ctp_crust: #120d0a;
+    --ctp_mantle: #1b1b1b;
+    --ctp_base: #131313;
+    --ctp_crust: #0e0e0e;
 
     /* Text: Text is on_surface, Subtext is variant */
-    --ctp_text: #ece0db;
-    --ctp_subtext0: #d7c2b8;
-    --ctp_subtext1: #d7c2b8;
+    --ctp_text: #e2e2e2;
+    --ctp_subtext0: #c6c6c6;
+    --ctp_subtext1: #c6c6c6;
 
     /* UI Elements: Surface0/1/2 map to container levels */
-    --ctp_surface0: #2f2925;
-    --ctp_surface1: #3a3330;
-    --ctp_surface2: #ece0db;
+    --ctp_surface0: #2a2a2a;
+    --ctp_surface1: #353535;
+    --ctp_surface2: #e2e2e2;
 
     /* Borders & Outlines */
-    --ctp_overlay0: #52443c;
-    --ctp_overlay1: #9f8d84;
-    --ctp_overlay2: #9f8d84;
+    --ctp_overlay0: #474747;
+    --ctp_overlay1: #919191;
+    --ctp_overlay2: #919191;
 
     /* Accents & Highlights */
     --ctp_blue: #ffb68d;

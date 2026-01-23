@@ -1,6 +1,6 @@
 [colors.primary]
 foreground = "#d5c4a1"
-background = "#18120f"
+background = "#131313"
 
 [colors.normal]
 black   = "#3c3836"
@@ -23,12 +23,12 @@ cyan    = "#8ec07c"
 white   = "#fbf1c7"
 
 [colors.footer_bar]
-background = '#18120f'
+background = '#131313'
 foreground = '#ffdbc9'
 
 [colors.selection]
-text       = "#362f2c"
-background = "#ece0db"
+text       = "#303030"
+background = "#e2e2e2"
 
 [colors.cursor]
 text   = "#97480f"

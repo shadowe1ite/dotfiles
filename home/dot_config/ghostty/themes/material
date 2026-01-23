@@ -1,9 +1,9 @@
-background = #18120f
+background = #131313
 foreground = #d5c4a1
 
 # Selection Colors
-selection-background = #ece0db
-selection-foreground = #362f2c
+selection-background = #e2e2e2
+selection-foreground = #303030
 
 # Cursor Colors
 cursor-color = #ffb68d
