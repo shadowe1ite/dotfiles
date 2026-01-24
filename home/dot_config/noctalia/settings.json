@@ -6,7 +6,7 @@
         "customLaunchPrefixEnabled": false,
         "enableClipPreview": true,
         "enableClipboardHistory": true,
-        "enableSettingsSearch": true,
+        "enableSettingsSearch": false,
         "iconMode": "tabler",
         "ignoreMouseInput": true,
         "pinnedApps": [
@@ -249,7 +249,7 @@
     },
     "colorSchemes": {
         "darkMode": true,
-        "generationMethod": "rainbow",
+        "generationMethod": "tonal-spot",
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
         "monitorForColors": "eDP-1",
