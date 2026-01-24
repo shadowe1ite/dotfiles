@@ -58,10 +58,20 @@
                 {
                     "auto_reload":false,
                     "errors":"ui",
-                    "extension_file":"/home/shadow/.BurpSuite/matugen.py",
+                    "extension_file":"/home/shadow/.BurpSuite/extensions/matugen.py",
                     "extension_type":"python",
                     "loaded":true,
                     "name":"Matugen Theme Loader",
+                    "output":"ui",
+                    "use_ai":false
+                },
+                {
+                    "auto_reload":false,
+                    "errors":"ui",
+                    "extension_file":"/home/shadow/.BurpSuite/extensions/PwnFoxy-1.2.0.jar",
+                    "extension_type":"java",
+                    "loaded":true,
+                    "name":"PwnFoxy",
                     "output":"ui",
                     "use_ai":false
                 }
@@ -417,7 +427,7 @@
                     "wrap_text":false
                 }
             ],
-            "out_of_scope_history_logging_action":"prompt",
+            "out_of_scope_history_logging_action":"disable",
             "pause_tasks_at_startup_default":true,
             "show_learn_tab":true,
             "submit_feedback":true,
