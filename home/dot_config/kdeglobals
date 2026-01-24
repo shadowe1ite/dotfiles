@@ -5,7 +5,7 @@ BackgroundNormal=#00000000
 TerminalApplication=alacritty
 
 [Icons]
-Theme=Fluent-orange-dark
+Theme=Fluent-green-dark
 
 [KDE]
 widgetStyle=kvantum
