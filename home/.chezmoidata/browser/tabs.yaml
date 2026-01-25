@@ -1,61 +1,51 @@
-tabs:
-  main:
-    essential:
-      - name: "Notion"
-        domain: "notion.com"
-      
-      - name: "Youtube"
-        domain: "youtube.com"
-      
-      - name: "Gmail"
-        domain: "gmail.com"
+zen:
+  tabs:
+    main:
+      essential:
+        - name: "Notion"
+          domain: "notion.com"
+        - name: "Youtube"
+          domain: "youtube.com"
+        - name: "Gmail"
+          domain: "gmail.com"
+        - name: "ChatGPT"
+          domain: "chatgpt.com"
+        - name: "Gemini"
+          domain: "gemini.google.com"
+        - name: "Copilot"
+          domain: "copilot.github.com"
 
-      - name: "ChatGPT"
-        domain: "chatgpt.com"
-      
-      - name: "Gemini"
-        domain: "gemini.google.com"
-      
-      - name: "Copilot"
-        domain: "copilot.github.com"
-      
-      - name: "HackTheBox"
-        domain: "hackthebox.eu"
-      
-      - name: "TryHackMe"
-        domain: "tryhackme.com"
-      
-      - name: "CtfTime"
-        domain: "ctftime.org"
-      
-      - name: "PsaRip"
-        domain: "psa.wf"
-      
-      - name: "YTS"
-        domain: "yts.bz"
-      
-      - name: "Letterboxd"
-        domain: "letterboxd.com"
+      pinned:
+        - name: "HackerOne"
+          domain: "hackerone.com"
+        - name: "BugCrowd"
+          domain: "bugcrowd.com/engagements"
+        - name: "YesWeHack"
+          domain: "yeswehack.com/programs"
 
-    pinned:
-      - name: "HackerOne"
-        domain: "hackerone.com"
 
-      - name: "BugCrowd"
-        domain: "bugcrowd.com/engagements"
+firefox:
+  tabs:
+    main:
+      pinned:
+        - name: "Youtube"
+          domain: "youtube.com"
+        - name: "Gmail"
+          domain: "gmail.com"
+        - name: "ChatGPT"
+          domain: "chatgpt.com"
+        - name: "Gemini"
+          domain: "gemini.google.com"
+        - name: "Copilot"
+          domain: "copilot.github.com"
+        - name: "YTS"
+          domain: "yts.bz"
 
-      - name: "YesWeHack"
-        domain: "yeswehack.com/programs"
-
-  private:
-    essential:
-      - name: "Notion"
-        domain: "notion.com"
-      
-      - name: "Reddit"
-        domain: "reddit.com"
-      
-      - name: "Gmail"
-        domain: "gmail.com"
-
-    pinned: []
+    private:
+      pinned:
+        - name: "Notion"
+          domain: "notion.com"
+        - name: "Reddit"
+          domain: "reddit.com"
+        - name: "Gmail"
+          domain: "gmail.com"

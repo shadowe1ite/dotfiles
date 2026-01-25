@@ -1,0 +1,30 @@
+{{- $essentials := .firefox.tabs.main.pinned -}}
+
+{{- if ne .chezmoi.username .user }}
+  {{- $essentials = .firefox.tabs.private.essential -}}
+{{- end }}
+
+{{- $tabs := list -}}
+{{- $faviconAPI := "https://www.google.com/s2/favicons" -}}
+{{- $size := "512" -}}
+
+{{- range $essentials }}
+  {{- $domain := .domain -}}
+  {{- $url := printf "https://%s" $domain -}}
+  {{- $curlCmd := printf "curl -sL '%s?domain=%s&sz=%s' | base64 -w0" $faviconAPI $domain $size -}}
+
+  {{- $favicon := output "gum" "spin"
+        "--title" (printf "Fetching %s Icon..." .name)
+        "--" "bash" "-c" $curlCmd -}}
+
+  {{- $tabs = append $tabs (dict
+    "entries" (list (dict "url" $url "title" .name))
+    "pinned" true
+    "image" (printf "data:image/png;base64,%s" $favicon)
+  ) -}}
+{{- end -}}
+
+{{ dict
+  "version" (list "sessionrestore" 1)
+  "windows" (list (dict "tabs" $tabs))
+| toJson | includeTemplate "toMozLz4" -}}

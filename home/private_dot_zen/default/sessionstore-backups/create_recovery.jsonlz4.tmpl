@@ -1,5 +1,5 @@
-{{- $essentials := .tabs.main.essential -}}
-{{- $pinned := .tabs.main.pinned -}}
+{{- $essentials := .zen.tabs.main.essential -}}
+{{- $pinned := .zen.tabs.main.pinned -}}
 
 {{- if ne .chezmoi.username .user }}
   {{- $essentials = .tabs.private.essential -}}
