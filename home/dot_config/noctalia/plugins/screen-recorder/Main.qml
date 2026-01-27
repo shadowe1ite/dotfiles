@@ -54,6 +54,7 @@ Item {
     }
 
     // Settings shortcuts
+    readonly property bool hideInactive: pluginApi?.pluginSettings?.hideInactive ?? false
     readonly property string directory: pluginApi?.pluginSettings?.directory || ""
     readonly property string filenamePattern: pluginApi?.pluginSettings?.filenamePattern || "recording_yyyyMMdd_HHmmss"
     readonly property string frameRate: pluginApi?.pluginSettings?.frameRate || "60"

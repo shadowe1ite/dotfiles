@@ -35,6 +35,8 @@
     "general": {
       "copy-to-clipboard": "Copy to clipboard",
       "copy-to-clipboard-description": "Copy the file to clipboard after recording finishes.",
+      "hide-when-inactive": "Hide when inactive",
+      "hide-when-inactive-description": "Hide the bar indicator when not recording",
       "output-folder": "Output folder",
       "output-folder-description": "Folder where screen recordings will be saved",
       "show-cursor": "Show cursor",

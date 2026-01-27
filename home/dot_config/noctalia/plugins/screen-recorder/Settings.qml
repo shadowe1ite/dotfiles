@@ -11,6 +11,11 @@ ColumnLayout {
 
     property var pluginApi: null
 
+    property bool editHideInactive:
+        pluginApi?.pluginSettings?.hideInactive ??
+        pluginApi?.manifest?.metadata?.defaultSettings?.hideInactive ??
+        false
+
     property string editDirectory: 
         pluginApi?.pluginSettings?.directory || 
         pluginApi?.manifest?.metadata?.defaultSettings?.directory || 
@@ -77,6 +82,7 @@ ColumnLayout {
             return
         }
 
+        pluginApi.pluginSettings.hideInactive = root.editHideInactive
         pluginApi.pluginSettings.directory = root.editDirectory
         pluginApi.pluginSettings.filenamePattern = root.editFilenamePattern
         pluginApi.pluginSettings.frameRate = root.editFrameRate
@@ -135,6 +141,15 @@ ColumnLayout {
         checked: root.editCopyToClipboard
         onToggled: root.editCopyToClipboard = checked
         defaultValue: pluginApi?.manifest?.metadata?.defaultSettings?.copyToClipboard ?? false
+    }
+
+    // Hide When Inactive Toggle
+    NToggle {
+        label: pluginApi.tr("settings.general.hide-when-inactive")
+        description: pluginApi.tr("settings.general.hide-when-inactive-description")
+        checked: root.editHideInactive
+        onToggled: root.editHideInactive = checked
+        defaultValue: pluginApi?.manifest?.metadata?.defaultSettings?.hideInactive ?? false
     }
 
     NDivider {
