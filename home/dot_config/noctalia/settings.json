@@ -358,7 +358,7 @@
         "backgroundOpacity": 1,
         "colorizeIcons": false,
         "deadOpacity": 1,
-        "displayMode": "auto_hide",
+        "displayMode": "always_visible",
         "enabled": true,
         "floatingRatio": 1,
         "inactiveIndicators": true,
@@ -366,19 +366,26 @@
         ],
         "onlySameOutput": true,
         "pinnedApps": [
-            "Alacritty",
-            "gimp",
-            "org.kde.dolphin",
-            "vesktop",
             "com.github.neithern.g4music",
-            "org.gnome.TextEditor",
+            "org.kde.dolphin",
+            "firefox",
             "burpsuite-pro",
+            "org.gnome.Evince",
+            "org.gnome.TextEditor",
+            "gimp",
             "ghidra",
-            "firefox"
+            "Firefox",
+            "org.telegram.desktop",
+            "org.gnome.Calculator",
+            "org.gnome.GHex",
+            "org.wireshark.Wireshark",
+            "io.github.nozwock.Packet",
+            "vesktop",
+            "Alacritty"
         ],
         "pinnedStatic": false,
         "position": "bottom",
-        "size": 1.2
+        "size": 1.4000000000000001
     },
     "general": {
         "allowPanelsOnScreenWithoutBar": true,
