@@ -1,5 +1,5 @@
 workspace "browser"
-workspace "files"
 workspace "music"
+workspace "files"
 workspace "chat"
 workspace "games"

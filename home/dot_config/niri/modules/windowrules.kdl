@@ -45,7 +45,7 @@ window-rule {
       on 
     }
     focus-ring {
-      off
+      on
     }
 }
 
@@ -87,8 +87,11 @@ window-rule {
 window-rule {
     match title="Picture-in-Picture"
     open-floating true
-    default-column-width { proportion 0.3; }
-    default-window-height { proportion 0.3; }
+    default-column-width { proportion 0.4; }
+    default-window-height { proportion 0.4; }
+    focus-ring {
+      off
+    }
 }
 
 window-rule {
@@ -96,6 +99,9 @@ window-rule {
     open-floating true
     default-column-width { proportion 0.35; }
     default-window-height { proportion 0.35; }
+    focus-ring {
+      off
+    }
 }
 
 window-rule {
