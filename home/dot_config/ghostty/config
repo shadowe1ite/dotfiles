@@ -1,7 +1,6 @@
 window-padding-x = 20
 window-padding-y = 1
 window-decoration = true
-theme = material 
 
 font-size = 13
 font-family = "JetBrainsMono Nerd Font"
@@ -11,3 +10,4 @@ mouse-hide-while-typing = true
 mouse-scroll-multiplier = 2
 
 gtk-single-instance = false
+theme = noctalia
