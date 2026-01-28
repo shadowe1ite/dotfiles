@@ -9,5 +9,10 @@ font-style = "Regular"
 mouse-hide-while-typing = true
 mouse-scroll-multiplier = 2
 
-gtk-single-instance = false
+gtk-single-instance = true
+quit-after-last-window-closed = true
+quit-after-last-window-closed-delay = 5m
+
+custom-shader = shaders/cursor_warp.glsl
+
 theme = noctalia
