@@ -111,7 +111,7 @@
                 "enabled":true,
                 "in_scope_only":false,
                 "interval":30,
-                "show_progress":true
+                "show_progress":false
             },
             "collaborator_server":{
                 "location":"",
