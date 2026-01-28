@@ -1,7 +1,7 @@
 binds {
 
     // Apps
-    Mod+Return { spawn "alacritty"; }
+    Mod+Return { spawn "sh" "-c" "ghostty || alacritty"; }
     Mod+F { spawn "zen-browser"; }
     Alt+T { spawn "telegram-desktop"; }
     Ctrl+Q { spawn "hyprpicker" "--autocopy"; }
