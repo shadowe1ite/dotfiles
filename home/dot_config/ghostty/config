@@ -9,3 +9,5 @@ font-style = "Regular"
 
 mouse-hide-while-typing = true
 mouse-scroll-multiplier = 2
+
+gtk-single-instance = false
