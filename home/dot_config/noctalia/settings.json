@@ -583,10 +583,6 @@
             {
                 "enabled": true,
                 "id": "pywalfox"
-            },
-            {
-                "enabled": true,
-                "id": "ghostty"
             }
         ],
         "enableUserTheming": true

@@ -6,7 +6,7 @@
 local M = {}
 
 M.base46 = {
-  theme = "gruvbox",
+  theme = "gruvchad",
   transparency = false,
   hl_override = {
     Normal               = { bg = "NONE" },
