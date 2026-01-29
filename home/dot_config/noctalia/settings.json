@@ -257,7 +257,7 @@
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
         "monitorForColors": "eDP-1",
-        "predefinedScheme": "Catppuccin",
+        "predefinedScheme": "Gruvbox",
         "schedulingMode": "off",
         "useWallpaperColors": false
     },
@@ -582,11 +582,11 @@
         "activeTemplates": [
             {
                 "enabled": true,
-                "id": "pywalfox"
+                "id": "ghostty"
             },
             {
                 "enabled": true,
-                "id": "ghostty"
+                "id": "pywalfox"
             }
         ],
         "enableUserTheming": true
