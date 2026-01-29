@@ -1,10 +1,10 @@
 {
-  "wallpaper": "",
+  "wallpaper": "/home/shadow/Pictures/Wallpapers/fav/Anime/IMG_20230626_230920_956.png",
   "alpha": "100",
   "colors": {
-    "color0": "#282828",
-    "color1": "#3c3836",
-    "color2": "#514c49",
+    "color0": "#18120f",
+    "color1": "#241e1b",
+    "color2": "#3a3330",
     "color3": "",
     "color4": "",
     "color5": "",
@@ -12,11 +12,11 @@
     "color7": "",
     "color8": "",
     "color9": "",
-    "color10": "#b8bb26",
-    "color11": "#fabd2f",
-    "color12": "#83a598",
-    "color13": "#5c5653",
+    "color10": "#ffb68d",
+    "color11": "#e5bfaa",
+    "color12": "#cdc991",
+    "color13": "#3f3834",
     "color14": "",
-    "color15": "#fbf1c7"
+    "color15": "#ece0db"
   }
 }

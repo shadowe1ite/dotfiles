@@ -15,4 +15,4 @@ quit-after-last-window-closed-delay = 5m
 
 custom-shader = shaders/cursor_warp.glsl
 
-theme = material
+theme = noctalia
