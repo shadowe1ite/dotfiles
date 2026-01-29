@@ -1,14 +1,14 @@
 // --- CONFIGURATION ---
 vec4 TRAIL_COLOR = iCurrentCursorColor; // can change to eg: vec4(0.2, 0.6, 1.0, 0.5);
-const float DURATION = 0.2; // total animation time
-const float TRAIL_SIZE = 0.8; // 0.0 = all corners move together. 1.0 = max smear (leading corners jump instantly)
-const float THRESHOLD_MIN_DISTANCE = 1.5; // min distance to show trail (units of cursor height)
-const float BLUR = 1.0; // blur size in pixels (for antialiasing)
-const float TRAIL_THICKNESS = 1.0;  // 1.0 = full cursor height, 0.0 = zero height, >1.0 = funky aah
-const float TRAIL_THICKNESS_X = 0.9;
+const float DURATION = 0.15; // Neovide is fast; low duration prevents "ghosting"
+const float TRAIL_SIZE = 0.6; // High enough to see the stretch, low enough to keep it cohesive
+const float THRESHOLD_MIN_DISTANCE = 0.05; // Almost always active for that fluid feel
+const float BLUR = 0.8; // Sharper edges look more like the original Neovide cursor
+const float TRAIL_THICKNESS = 1.0; 
+const float TRAIL_THICKNESS_X = 1.0;
 
-const float FADE_ENABLED = 0.0; // 1.0 to enable fade gradient along the trail, 0.0 to disable
-const float FADE_EXPONENT = 5.0; // exponent for fade gradient along the trail
+const float FADE_ENABLED = 0.0; 
+const float FADE_EXPONENT = 1.0;
 
 // --- CONSTANTS for easing functions ---
 const float PI = 3.14159265359;

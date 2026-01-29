@@ -3,7 +3,7 @@ window-padding-y = 1
 window-decoration = true
 
 font-size = 13
-font-family = "JetBrainsMono Nerd Font"
+font-family = "CaskaydiaCove Nerd Font"
 font-style = "Regular"
 
 mouse-hide-while-typing = true
@@ -15,4 +15,4 @@ quit-after-last-window-closed-delay = 5m
 
 custom-shader = shaders/cursor_warp.glsl
 
-theme = noctalia
+theme = material
