@@ -46,7 +46,7 @@ reverse:
     - ghidra 
     - ida-free 
     - ghex
-    - pwndbg-git
+    - pwndbg
     - python-pwntools 
     - python-tabulate 
     - python-pycryptodome 
