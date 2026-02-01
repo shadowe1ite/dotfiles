@@ -1,10 +1,11 @@
 require("nvchad.configs.lspconfig").defaults()
 
-local servers = { "html", "cssls", "gopls", "ts_ls", "qmlls", "pyright" }
+local servers = { "html", "cssls", "gopls", "ts_ls", "qmlls", "pyright", "markdown" }
 
 local lspconfig = require("lspconfig")
 
-vim.filetype.add({ extension = { js = "javascriptreact" } })
+vim.filetype.add({ extension = { js = "javascriptreact" }})
+vim.treesitter.language.register("html", "markdown")
 
 vim.env.QML_IMPORT_PATH = "/usr/lib/qt6/qml"
 vim.env.QML2_IMPORT_PATH = "/usr/lib/qt6/qml"
