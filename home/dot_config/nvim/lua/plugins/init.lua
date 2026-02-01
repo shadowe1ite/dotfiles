@@ -68,7 +68,7 @@ return {
    		ensure_installed = {
    			"vim", "lua", "vimdoc",
         "html", "css", "qmljs",
-        "markdown"
+        "markdown", "jinja2"
    		},
    	},
    },
