@@ -59,7 +59,7 @@ window-rule {
 }
 
 window-rule {
-    match app-id="zen"
+    match app-id="zen|Firefox"
     open-on-workspace "browser"
 }
 
