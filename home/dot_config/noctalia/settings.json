@@ -215,7 +215,7 @@
                 {
                     "deviceNativePath": "",
                     "displayMode": "graphic",
-                    "hideIfIdle": true,
+                    "hideIfIdle": false,
                     "hideIfNotDetected": true,
                     "id": "Battery",
                     "showNoctaliaPerformance": true,
