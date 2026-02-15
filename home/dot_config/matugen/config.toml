@@ -116,3 +116,7 @@ output_path = "~/.config/burp/material.json"
 [templates.obs]
 input_path = "~/.config/matugen/templates/colors-obs.obt"
 output_path = "~/.config/obs-studio/themes/matugen.obt"
+
+[templates.web]
+input_path = "~/.config/matugen/templates/colors-web"
+output_path = "~/web-color-rec"
