@@ -3,67 +3,67 @@
 @media (prefers-color-scheme: dark) {
 
   :root {
-    --zen-colors-primary: #2f2925 !important;
-    --zen-primary-color: #ffb68d !important;
-    --zen-colors-secondary: #2f2925 !important;
-    --zen-colors-tertiary: #3f3834 !important;
-    --zen-colors-border: #ffb68d !important;
-    --toolbarbutton-icon-fill: #ffb68d !important;
-    --lwt-text-color: #ece0db !important;
-    --toolbar-field-color: #ece0db !important;
-    --tab-selected-textcolor: #ffb68d !important;
-    --toolbar-field-focus-color: #ece0db !important;
-    --toolbar-color: #ece0db !important;
-    --newtab-text-primary-color: #ece0db !important;
-    --arrowpanel-color: #ece0db !important;
-    --arrowpanel-background: #18120f !important;
-    --sidebar-text-color: #ece0db !important;
-    --lwt-sidebar-text-color: #ece0db !important;
-    --lwt-sidebar-background-color: #18120f !important;
-    --toolbar-bgcolor: #2f2925 !important;
-    --newtab-background-color: #18120f !important;
-    --zen-themed-toolbar-bg: #18120f !important;
-    --zen-main-browser-background: #18120f !important;
-    --toolbox-bgcolor-inactive: #18120f !important;
+    --zen-colors-primary: #2b292d !important;
+    --zen-primary-color: #cdbdff !important;
+    --zen-colors-secondary: #2b292d !important;
+    --zen-colors-tertiary: #3a383c !important;
+    --zen-colors-border: #cdbdff !important;
+    --toolbarbutton-icon-fill: #cdbdff !important;
+    --lwt-text-color: #e6e1e6 !important;
+    --toolbar-field-color: #e6e1e6 !important;
+    --tab-selected-textcolor: #cdbdff !important;
+    --toolbar-field-focus-color: #e6e1e6 !important;
+    --toolbar-color: #e6e1e6 !important;
+    --newtab-text-primary-color: #e6e1e6 !important;
+    --arrowpanel-color: #e6e1e6 !important;
+    --arrowpanel-background: #141316 !important;
+    --sidebar-text-color: #e6e1e6 !important;
+    --lwt-sidebar-text-color: #e6e1e6 !important;
+    --lwt-sidebar-background-color: #141316 !important;
+    --toolbar-bgcolor: #2b292d !important;
+    --newtab-background-color: #141316 !important;
+    --zen-themed-toolbar-bg: #141316 !important;
+    --zen-main-browser-background: #141316 !important;
+    --toolbox-bgcolor-inactive: #141316 !important;
   }
 
   #permissions-granted-icon{
-    color: #18120f !important;
+    color: #141316 !important;
   }
 
   .sidebar-placesTree {
-    background-color: #18120f !important;
+    background-color: #141316 !important;
   }
 
   #zen-workspaces-button {
-    background-color: #18120f !important;
+    background-color: #141316 !important;
   }
 
   #TabsToolbar {
-    background-color: #18120f !important;
+    background-color: #141316 !important;
   }
 
   .urlbar-background {
-    background-color: #2f2925 !important;
+    background-color: #2b292d !important;
   }
 
   .content-shortcuts {
-    background-color: #2f2925 !important;
-    border-color: #ffb68d !important;
+    background-color: #2b292d !important;
+    border-color: #cdbdff !important;
   }
 
   .urlbarView-url {
-    color: #ffb68d !important;
+    color: #cdbdff !important;
   }
 
   #zenEditBookmarkPanelFaviconContainer {
-    background: #18120f !important;
+    background: #141316 !important;
   }
 
   toolbar .toolbarbutton-1 {
     &:not([disabled]) {
       &:is([open], [checked]) > :is(.toolbarbutton-icon, .toolbarbutton-text, .toolbarbutton-badge-stack){
-        fill: #18120f;
+        fill: #141316;
       }
     }
   }
@@ -102,7 +102,7 @@
 }
 
 hbox#titlebar {
-    background-color: #18120f !important;
+    background-color: #141316 !important;
     border-radius: 11px !important;
 }
 
