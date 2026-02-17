@@ -604,7 +604,8 @@
        state="1" />
     <group
        id="preferences"
-       state="1" />
+       state="1"
+       page="24" />
     <group
        id="gradienteditor" />
     <group
@@ -963,7 +964,7 @@
        unitType="2" />
     <group
        id="boot"
-       theme="colorful"
+       theme="custom"
        canvas="light">
       <group
          id="shown"
@@ -985,11 +986,11 @@
      id="desktop"
      style="fill:#000000;text-orientation:auto;font-size:74.66666667px;-inkscape-font-specification:Pacifico;font-family:Pacifico">
     <group
-       width="640"
-       height="480"
+       width="1916"
+       height="987"
        x="0"
        y="0"
-       maximized="1"
+       maximized="0"
        fullscreen="0"
        id="geometry" />
     <group
@@ -1105,15 +1106,15 @@
   <group
      id="theme"
      defaultPreferDarkTheme="1"
-     defaultIconTheme="Fluent-orange-dark"
+     defaultIconTheme="Fluent-purple-dark"
      defaultGtkTheme="adw-gtk3-dark"
      narrowSpinButton="1"
-     preferDarkTheme="1"
+     preferDarkTheme="0"
      darkTheme="1"
      symbolicIcons="1"
-     symbolicDefaultBaseColors="0"
+     symbolicDefaultBaseColors="1"
      symbolicDefaultHighColors="0"
-     gtkTheme="Adwaita"
+     gtkTheme="adw-gtk3"
      iconTheme="multicolor"
      syntax-color-theme="inkscape-dark">
     <group

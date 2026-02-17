@@ -81,19 +81,19 @@ base.color=#18120f
 alt.base.color=#201a17
 button.color=#3f3834
 light.color=#3f3834
-mid.light.color=#52443c
+mid.light.color=#52443d
 dark.color=#18120f
 mid.color=#201a17
-highlight.color=#ffb68d
-inactive.highlight.color=#ffb68d
+highlight.color=#ffb68f
+inactive.highlight.color=#ffb68f
 text.color=#ece0db
 window.text.color=#ece0db
 button.text.color=#ece0db
 disabled.text.color=#362f2c
 tooltip.text.color=#ece0db
 highlight.text.color=#ece0db
-link.color=#ffb68d
-link.visited.color=#cdc991
+link.color=#ffb68f
+link.visited.color=#cec891
 progress.indicator.text.color=#ece0db
 
 [Hacks]

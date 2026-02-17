@@ -6,8 +6,8 @@ selection-background = #ece0db
 selection-foreground = #362f2c
 
 # Cursor Colors
-cursor-color = #ffb68d
-cursor-text = #97480f
+cursor-color = #ffb68f
+cursor-text = #974813
 
 palette = 0=#3c3836
 palette = 1=#fb4934

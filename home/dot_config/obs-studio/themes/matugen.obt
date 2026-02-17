@@ -16,8 +16,8 @@
 
     /* Text: Text is on_surface, Subtext is variant */
     --ctp_text: #ece0db;
-    --ctp_subtext0: #d7c2b8;
-    --ctp_subtext1: #d7c2b8;
+    --ctp_subtext0: #d7c2b9;
+    --ctp_subtext1: #d7c2b9;
 
     /* UI Elements: Surface0/1/2 map to container levels */
     --ctp_surface0: #2f2925;
@@ -25,28 +25,28 @@
     --ctp_surface2: #ece0db;
 
     /* Borders & Outlines */
-    --ctp_overlay0: #52443c;
+    --ctp_overlay0: #52443d;
     --ctp_overlay1: #9f8d84;
     --ctp_overlay2: #9f8d84;
 
     /* Accents & Highlights */
-    --ctp_blue: #ffb68d;
-    --ctp_lavender: #763300;
-    --ctp_sapphire: #e5bfaa;
-    --ctp_sky: #cdc991;
-    --ctp_teal: #5c4131;
-    --ctp_green: #ffb68d; /* Used for success/nominal states */
-    --ctp_yellow: #cdc991;
-    --ctp_peach: #4a481d;
+    --ctp_blue: #ffb68f;
+    --ctp_lavender: #773200;
+    --ctp_sapphire: #e6beab;
+    --ctp_sky: #cec891;
+    --ctp_teal: #5c4132;
+    --ctp_green: #ffb68f; /* Used for success/nominal states */
+    --ctp_yellow: #cec891;
+    --ctp_peach: #4b481d;
     --ctp_maroon: #ffb4ab;
     --ctp_red: #ffb4ab;
-    --ctp_mauve: #e5bfaa;
-    --ctp_pink: #cdc991;
-    --ctp_flamingo: #ffdbc9;
-    --ctp_rosewater: #ffdbc9;
+    --ctp_mauve: #e6beab;
+    --ctp_pink: #cec891;
+    --ctp_flamingo: #ffdbca;
+    --ctp_rosewater: #ffdbca;
 
     /* Special OBS Selection */
-    --ctp_selection_background: #ffb68d;
+    --ctp_selection_background: #ffb68f;
 
     /* --- INTERNAL MAPPINGS (Do not change) --- */
     /* These route the variables above into the OBS specific palette system */

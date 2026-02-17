@@ -1,1 +1,8 @@
+// hight saturation
+accent_color = ["hsl({{colors.primary.default.hue}} 75% 55%)", "hsl({{colors.secondary.default.hue}} 75% 55%)"]
+
+// more same
+accent_color = ["hsl({{colors.primary.default.hue}} 63% 63%)", "hsl({{colors.secondary.default.hue}} 63% 63%)"]
+
+// matugen saturation
 accent_color = ["hsl({{colors.primary.default.hue}} {{colors.primary.default.saturation}}% {{colors.primary.default.lightness}}%)", "hsl({{colors.secondary.default.hue}} {{colors.secondary.default.saturation}}% {{colors.secondary.default.lightness}}%)"]
