@@ -41,21 +41,8 @@
 .chezmoiscripts/06a-setup-nvidia.sh
 {{ end }}
 
-{{ if eq .chezmoi.osRelease.id "raspbian" }}
-.chezmoiscripts/*
-.git-credentials
-.gdbinit
-.zen/
-.gnupg/
-.local/
-.vdirsyncer/
-.config/*
-.ssh/
-!.config/nvim
-{{ end }}
-
 {{ if or (eq .chezmoi.osRelease.id "raspbian") (eq .chezmoi.osRelease.id "ubuntu") }}
-.chezmoiscripts/
+.chezmoiscripts/*
 .git-credentials
 .gdbinit
 .mozilla
