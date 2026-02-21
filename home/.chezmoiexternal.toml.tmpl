@@ -1,7 +1,7 @@
 {{- $EndId := "end-4" -}}
 {{- $EndBranch := "main" -}}
 
-{{ if or (eq .chezmoi.osRelease.id "raspbian") (eq .chezmoi.osRelease.id "ubuntu") }}
+{{ if or (ne .chezmoi.osRelease.id "raspbian") (ne .chezmoi.osRelease.id "ubuntu") }}
 
 #[".config/quickshell/noctalia-shell"]
 #type = "git-repo"
