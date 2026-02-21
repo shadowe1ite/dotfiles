@@ -52,4 +52,10 @@ type = "archive-file"
 url = {{ gitHubLatestReleaseAssetURL "starship/starship" (printf "starship-%s-*-%s-*.tar.gz" $processor .chezmoi.os) | quote }}
 executable = true
 path = "starship"
+
+[".local/bin/nvim"]
+type = "file"
+url = "https://github.com/neovim/neovim/releases/download/stable/nvim.appimage"
+refreshPeriod = "672h"
+executable = true
 {{ end }}

@@ -1,3 +1,16 @@
+export PATH=$PATH:/home/shadow/.spicetify
+export PATH=/home/shadow/.pdtm/go/bin:$PATH
+export PATH=/home/shadow/go/bin:$PATH
+export PATH=$HOME/.cargo/bin:$PATH
+
+# Golang environment variables
+export GOROOT=/usr/lib/go
+export PATH=$PATH:$GOROOT/bin
+export PATH=$GOPATH/bin:$GOROOT/bin:$HOME/.local/bin:$PATH
+
+export PATH=$PATH:$HOME/.local/bin
+export PATH=$PATH:$HOME/.local/bin/.stew
+
 ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 # ZimFW init
@@ -83,8 +96,6 @@ alias cz="chezmoi"
 #alias httpx="httpx -no-color"
 
 # export
-export PATH=$PATH:$HOME/.local/bin
-export PATH=$PATH:$HOME/.local/bin/.stew
 export PATH=$PATH:/opt/metasploit/tools/exploit
 export PATH=$PATH:/usr/share/firmware-mod-kit
 export PATH=$PATH:/opt/android-sdk/build-tools/35.0.0/
@@ -160,17 +171,6 @@ fn cuser() {
   echo "[✓] User '$user' created !"
 }
 
-export PATH=$PATH:/home/shadow/.spicetify
-
-export PATH=/home/shadow/.pdtm/go/bin:$PATH
-export PATH=/home/shadow/go/bin:$PATH
-export PATH=$HOME/.cargo/bin:$PATH
-
 [ -f ~/explicit_filter.restore ] && rm ~/explicit_filter.restore
 
 [ -f /mnt/storage/scripts/.alias ] && source /mnt/storage/scripts/.alias
-
-# Golang environment variables
-export GOROOT=/usr/lib/go
-export PATH=$PATH:$GOROOT/bin
-export PATH=$GOPATH/bin:$GOROOT/bin:$HOME/.local/bin:$PATH
