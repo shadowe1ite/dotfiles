@@ -41,12 +41,14 @@ refreshPeriod = "168h"
 
 {{ if or (eq .chezmoi.osRelease.id "raspbian") (eq .chezmoi.osRelease.id "ubuntu") }}
 [".local/bin/fzf"]
-type = "archive"
-url = "https://github.com/junegunn/fzf/releases/download/v0.68.0/fzf-0.68.0-linux_amd64.tar.gz"
+type = "archive-file"
+url = {{ gitHubLatestReleaseAssetURL "junegunn/fzf" (printf "fzf-*-%s_%s.tar.gz" .chezmoi.os .chezmoi.arch) | quote  }}
 executable = true
+path = "fzf"
 
 [".local/bin/starship"]
-type = "archive"
-url = "https://github.com/starship/starship/releases/latest/download/starship-x86_64-unknown-linux-gnu.tar.gz"
+type = "archive-file"
+url = {{ gitHubLatestReleaseAssetURL "starship/starship" (printf "starship-%s-*-%s-*.tar.gz" $processor .chezmoi.os) | quote }}
 executable = true
+path = "starship"
 {{ end }}
