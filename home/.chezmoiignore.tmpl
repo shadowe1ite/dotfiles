@@ -2,7 +2,12 @@
 
 {{- if eq $chassis "vm" }}
 .chezmoiscripts/06-setup-second-disk.sh
+.chezmoiscripts/setup-remote.sh
 {{ end }}
+
+{{- if eq .chezmoi.username .user }}
+.chezmoiscripts/setup-remote.sh
+{{- end }}
 
 {{- if ne .chezmoi.username .user }}
 .chezmoiscripts/01-setup-gpg.sh
@@ -50,7 +55,7 @@
 {{ end }}
 
 {{ if or (eq .chezmoi.osRelease.id "raspbian") (eq .chezmoi.osRelease.id "ubuntu") }}
-.chezmoiscripts/*
+.chezmoiscripts/
 .git-credentials
 .gdbinit
 .mozilla
@@ -63,4 +68,5 @@
 !.config/nvim
 !.config/starship.toml
 !.config/tmux
+!.chezmoiscripts/setup-remote.sh
 {{ end }}
