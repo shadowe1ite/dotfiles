@@ -57,4 +57,10 @@ path = "starship"
 type = "file"
 url = {{ gitHubLatestReleaseAssetURL "neovim/neovim" (printf "nvim-linux-%s.appimage" $processor) | quote }}
 executable = true
+
+[".local/bin/zola"]
+type = "archive-file"
+url = {{ gitHubLatestReleaseAssetURL "getzola/zola" (printf "zola-*-%s-*%s*.tar.gz" $processor .chezmoi.os) | quote }}
+executable = true
+path = "zola"
 {{ end }}
