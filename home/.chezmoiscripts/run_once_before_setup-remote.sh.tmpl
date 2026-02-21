@@ -1,2 +1,12 @@
 #!/usr/bin/env bash
-sudo apt update -y && sudo apt install bat eza zoxide build-essential -y
+sudo apt update -y && sudo apt install bat eza zoxide tmux build-essential -y
+
+sudo tee /etc/motd > /dev/null <<'EOF'
+
+ ▗▄▄▖▗▖ ▗▖ ▗▄▖ ▗▄▄▄  ▗▄▖ ▗▖ ▗▖    ▗▄▄▄▖▗▖   ▗▄▄▄▖▗▄▄▄▖▗▄▄▄▖
+▐▌   ▐▌ ▐▌▐▌ ▐▌▐▌  █▐▌ ▐▌▐▌ ▐▌    ▐▌   ▐▌     █    █  ▐▌
+ ▝▀▚▖▐▛▀▜▌▐▛▀▜▌▐▌  █▐▌ ▐▌▐▌ ▐▌    ▐▛▀▀▘▐▌     █    █  ▐▛▀▀▘
+▗▄▄▞▘▐▌ ▐▌▐▌ ▐▌▐▙▄▄▀▝▚▄▞▘▐▙█▟▌    ▐▙▄▄▖▐▙▄▄▖▗▄█▄▖  █  ▐▙▄▄▖
+
+
+EOF
