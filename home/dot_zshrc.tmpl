@@ -116,8 +116,11 @@ fi
 
 # Fn
 nvim() {
+  if [[ -x "$HOME/.local/bin/nvim" ]]; then
+    "$HOME/.local/bin/nvim" "$@"
+  else
     command nvim "$@"
-    printf '\033[0 q'
+  fi
 }
 
 fn cuser() {
