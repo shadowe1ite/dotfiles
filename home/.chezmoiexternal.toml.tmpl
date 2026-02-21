@@ -55,7 +55,6 @@ path = "starship"
 
 [".local/bin/nvim"]
 type = "file"
-url = "https://github.com/neovim/neovim/releases/download/stable/nvim.appimage"
-refreshPeriod = "672h"
+url = {{ gitHubLatestReleaseAssetURL "neovim/neovim" (printf "nvim-linux-%s.appimage" $processor) | quote }}
 executable = true
 {{ end }}
