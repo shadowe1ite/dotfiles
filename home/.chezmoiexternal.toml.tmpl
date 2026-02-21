@@ -38,3 +38,15 @@ type = "git-repo"
 url = "https://github.com/coffinxp/GFpattren"
 refreshPeriod = "168h"
 {{ end }}
+
+{{ if or (eq .chezmoi.osRelease.id "raspbian") (eq .chezmoi.osRelease.id "ubuntu") }}
+[".local/bin/fzf"]
+type = "archive"
+url = "https://github.com/junegunn/fzf/releases/download/v0.68.0/fzf-0.68.0-linux_amd64.tar.gz"
+stripComponents = 0
+
+[".local/bin/starship"]
+type = "archive"
+url = "https://github.com/starship/starship/releases/latest/download/starship-x86_64-unknown-linux-gnu.tar.gz"
+stripComponents = 0
+{{ end }}
