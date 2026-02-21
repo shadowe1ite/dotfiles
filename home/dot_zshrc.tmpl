@@ -80,7 +80,6 @@ alias lfimap="/usr/share/lfimap/lfimap/lfimap.py"
 alias pwncat="PYTHONWARNINGS=ignore pwncat-cs"
 alias cdots="cd ~/.local/share/chezmoi"
 alias cz="chezmoi"
-alias up-end="sh ~/.local/share/chezmoi/home/.chezmoi.d/scripts/get-quickshell https://github.com/end-4/dots-hyprland.git main .config/quickshell"
 #alias httpx="httpx -no-color"
 
 # export
@@ -99,36 +98,15 @@ export DOTS="/opt/dots/"
 
 
 # sec
-export payloads=/mnt/storage/payloads/ 
-export rockyou=$payloads/SecLists/Passwords/Leaked-Databases/rockyou.txt
+if [[ -d /mnt/storage/payloads ]]; then
+  export payloads=/mnt/storage/payloads
+  export rockyou="$payloads/SecLists/Passwords/Leaked-Databases/rockyou.txt"
+fi
 
 # Fn
 nvim() {
     command nvim "$@"
     printf '\033[0 q'
-}
-
-fn hyprsync(){
-    packages=("hyprutils" "hyprlang" "hyprwayland-scanner" "aquamarine-git" "hyprland" "xdg-desktop-portal-hyprland" "hypridle" "hyprlock" "hyprpolkitagent")
-    hyprctl notify 0 5000 "rgb(FF642B)" "  Updating Hyprland Pkgs"
-    yay -Sy --noconfirm
-    for pkg in "${packages[@]}"; do
-        hyprctl notify 1 5000 "rgb(8AADF4)" "  Installing $pkg"
-        yay -Sydd --noconfirm "$pkg"
-        if [ $? -ne 0 ]; then
-            hyprctl notify 3 5000 "rgb(EF5350)" "  $pkg Failed to Install"
-        else
-            hyprctl notify 5 5000 "rgb(22DA6E)" "  $pkg Installed Successfully"
-        fi
-    done
-}
-
-fn syncdots() {
-  case "${1:--s}" in
-    -s) (cd "$DOTS" && stow --adopt -t "$HOME" */) ;; # Sync
-    -r) (cd "$DOTS" && stow -D -d "$DOTS" -t $HOME */) ;; # Remove
-    *) echo "Usage: dotfiles [-s | -r | -R]" && return 1 ;;
-  esac
 }
 
 fn cuser() {
@@ -183,15 +161,6 @@ fn cuser() {
 }
 
 export PATH=$PATH:/home/shadow/.spicetify
-#source "/usr/lib/emsdk/emsdk_env.sh"
-
-# bun completions
-[ -s "/home/shadow/.bun/_bun" ] && source "/home/shadow/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-[ -f /opt/miniconda/etc/profile.d/conda.sh ] && source /opt/miniconda/etc/profile.d/conda.sh
 
 export PATH=/home/shadow/.pdtm/go/bin:$PATH
 export PATH=/home/shadow/go/bin:$PATH
@@ -199,18 +168,9 @@ export PATH=$HOME/.cargo/bin:$PATH
 
 [ -f ~/explicit_filter.restore ] && rm ~/explicit_filter.restore
 
-source /mnt/storage/scripts/.alias
-
-[ ! -f "$HOME/.x-cmd.root/X" ] || . "$HOME/.x-cmd.root/X" # boot up x-cmd.
+[ -f /mnt/storage/scripts/.alias ] && source /mnt/storage/scripts/.alias
 
 # Golang environment variables
 export GOROOT=/usr/lib/go
 export PATH=$PATH:$GOROOT/bin
 export PATH=$GOPATH/bin:$GOROOT/bin:$HOME/.local/bin:$PATH
-
-## [Completion]
-## Completion scripts setup. Remove the following line to uninstall
-[[ -f /home/shadow/.dart-cli-completion/zsh-config.zsh ]] && . /home/shadow/.dart-cli-completion/zsh-config.zsh || true
-## [/Completion]
-#
-
