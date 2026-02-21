@@ -40,6 +40,7 @@ refreshPeriod = "168h"
 {{ end }}
 
 {{ if or (eq .chezmoi.osRelease.id "raspbian") (eq .chezmoi.osRelease.id "ubuntu") }}
+{{ $processor := output "uname" "-p" | trim }}
 [".local/bin/fzf"]
 type = "archive-file"
 url = {{ gitHubLatestReleaseAssetURL "junegunn/fzf" (printf "fzf-*-%s_%s.tar.gz" .chezmoi.os .chezmoi.arch) | quote  }}
