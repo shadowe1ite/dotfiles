@@ -1,4 +1,3 @@
-spawn-at-startup "systemctl" "--user" "start" "hyprpolkitagent" // remove on next qs release
 spawn-at-startup "qs" "-c" "noctalia-shell"
 
 binds {

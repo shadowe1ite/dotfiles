@@ -63,25 +63,6 @@
         "widgets": {
             "center": [
                 {
-                    "defaultSettings": {
-                        "hideInactive": false,
-                        "removeMargins": false
-                    },
-                    "id": "plugin:privacy-indicator"
-                },
-                {
-                    "defaultSettings": {
-                        "autoStartBreaks": false,
-                        "autoStartWork": false,
-                        "compactMode": false,
-                        "longBreakDuration": 15,
-                        "sessionsBeforeLongBreak": 4,
-                        "shortBreakDuration": 5,
-                        "workDuration": 25
-                    },
-                    "id": "plugin:pomodoro"
-                },
-                {
                     "clockColor": "none",
                     "customFont": "SauceCodePro Nerd Font Propo",
                     "formatHorizontal": "h:mm ap  dd.MM.yyyy",
@@ -330,7 +311,7 @@
                     "id": "Bluetooth"
                 },
                 {
-                    "id": "Notifications"
+                    "id": "AirplaneMode"
                 },
                 {
                     "id": "DarkMode"
@@ -628,6 +609,13 @@
                 "countdownEnabled": true,
                 "enabled": true,
                 "keybind": "6"
+            },
+            {
+                "action": "rebootToUefi",
+                "command": "",
+                "countdownEnabled": true,
+                "enabled": true,
+                "keybind": ""
             }
         ],
         "showHeader": true,
