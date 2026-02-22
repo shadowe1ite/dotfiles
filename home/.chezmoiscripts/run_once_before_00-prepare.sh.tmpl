@@ -5,8 +5,8 @@ echo -e "\033[34m[INFO]\033[0m Preparing installation..."
 {{ if eq .chezmoi.osRelease.id "arch" }}
 gum spin --title "Installing Arch Linux Keyring ..." -- sudo pacman -Sy --noconfirm archlinux-keyring
 gum spin --title "Installing basic utils..." -- sudo pacman -S --needed --noconfirm git base-devel
-gum spin --title "Cloning Build..." -- git clone https://aur.archlinux.org/paru-bin.git
-cd paru-bin
+git clone https://aur.archlinux.org/paru-git.git
+cd paru-git
 gum spin --title "Building binary..." -- makepkg -si --noconfirm
 {{ end }}
 

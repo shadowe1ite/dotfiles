@@ -4,9 +4,9 @@
   @-moz-document url-prefix("about:") {
     :root {
       --in-content-page-color: #e6e1e6 !important;
-      --color-accent-primary: #cdbdff !important;
-      --color-accent-primary-hover: #cbc3dc !important;
-      --color-accent-primary-active: #cbc3dc !important;
+      --color-accent-primary: #cabeff !important;
+      --color-accent-primary-hover: #cac3dc !important;
+      --color-accent-primary-active: #cac3dc !important;
       background-color: #141316 !important;
       --in-content-page-background: #141316 !important;
     }
@@ -22,7 +22,7 @@
       --newtab-element-hover-color: #2b292d !important;
       --newtab-text-primary-color: #e6e1e6 !important;
       --newtab-wordmark-color: #e6e1e6 !important;
-      --newtab-primary-action-background: #cdbdff !important;
+      --newtab-primary-action-background: #cabeff !important;
     }
 
     /* Attempt to hide the customize button */
@@ -31,7 +31,7 @@
     }
 
     .icon {
-      color: #cdbdff !important;
+      color: #cabeff !important;
     }
 
     .search-wrapper .logo-and-wordmark .logo {
@@ -51,11 +51,11 @@
     }
 
     .card-outer:is(:hover, :focus, .active):not(.placeholder) .card-title {
-      color: #cdbdff !important;
+      color: #cabeff !important;
     }
 
     .top-site-outer .search-topsite {
-      background-color: #cdbdff !important;
+      background-color: #cabeff !important;
     }
 
     .compact-cards .card-outer .card-context .card-context-icon.icon-download {
@@ -68,11 +68,11 @@
     :root {
       --zen-colors-tertiary: #141316 !important;
       --in-content-text-color: #e6e1e6 !important;
-      --link-color: #cdbdff !important;
-      --link-color-hover: #cbc3dc !important;
+      --link-color: #cabeff !important;
+      --link-color-hover: #cac3dc !important;
       --zen-colors-primary: #2b292d !important;
       --in-content-box-background: #2b292d !important;
-      --zen-primary-color: #cdbdff !important;
+      --zen-primary-color: #cabeff !important;
     }
 
     groupbox , moz-card{

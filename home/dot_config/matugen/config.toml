@@ -22,9 +22,13 @@ output_path = '~/.config/ghostty/themes/material'
 input_path = '~/.config/matugen/templates/colors-qt.conf'
 output_path = '~/.config/qt5ct/colors/meterial.conf'
 
-[templates.gtk]
-input_path = '~/.config/matugen/templates/noctalia-templates/gtk.css'
+[templates.gtk3]
+input_path = '~/.config/matugen/templates/noctalia-templates/gtk3.css'
 output_path = '~/.config/gtk-3.0/noctalia.css'
+
+[templates.gtk4]
+input_path = '~/.config/matugen/templates/noctalia-templates/gtk4.css'
+output_path = '~/.config/gtk-4.0/noctalia.css'
 post_hook = '~/.config/matugen/scripts/gtk-reload.py'
 
 [templates.qt6ct]
@@ -117,6 +121,6 @@ output_path = "~/.config/burp/material.json"
 input_path = "~/.config/matugen/templates/colors-obs.obt"
 output_path = "~/.config/obs-studio/themes/matugen.obt"
 
-[templates.web]
-input_path = "~/.config/matugen/templates/colors-web"
-output_path = "~/web-color-rec"
+#[templates.web]
+#input_path = "~/.config/matugen/templates/colors-web"
+#output_path = "~/web-color-rec"

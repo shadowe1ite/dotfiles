@@ -24,28 +24,28 @@ white   = "#fbf1c7"
 
 [colors.footer_bar]
 background = '#141316'
-foreground = '#e8ddff'
+foreground = '#e6deff'
 
 [colors.selection]
 text       = "#313033"
 background = "#e6e1e6"
 
 [colors.cursor]
-text   = "#6550a5"
-cursor = "#cdbdff"
+text   = "#6152a6"
+cursor = "#cabeff"
 
 [colors.search.matches]
-foreground = "#e8ddff"
-background = "#4d388b"
+foreground = "#e6deff"
+background = "#49398c"
 
 [colors.search.focused_match]
-foreground = "#6550a5"
-background = "#e8ddff"
+foreground = "#6152a6"
+background = "#e6deff"
 
 [colors.hints.start]
-foreground = "#e7def8"
-background = "#494458"
+foreground = "#e6dff9"
+background = "#484458"
 
 [colors.hints.end]
-foreground = "#e7def8"
-background = "#494458"
+foreground = "#e6dff9"
+background = "#484458"

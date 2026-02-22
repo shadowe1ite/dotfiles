@@ -84,16 +84,16 @@ light.color=#3a383c
 mid.light.color=#48454e
 dark.color=#141316
 mid.color=#1c1b1e
-highlight.color=#cdbdff
-inactive.highlight.color=#cdbdff
+highlight.color=#cabeff
+inactive.highlight.color=#cabeff
 text.color=#e6e1e6
 window.text.color=#e6e1e6
 button.text.color=#e6e1e6
 disabled.text.color=#313033
 tooltip.text.color=#e6e1e6
 highlight.text.color=#e6e1e6
-link.color=#cdbdff
-link.visited.color=#efb8c9
+link.color=#cabeff
+link.visited.color=#edb8cc
 progress.indicator.text.color=#e6e1e6
 
 [Hacks]
