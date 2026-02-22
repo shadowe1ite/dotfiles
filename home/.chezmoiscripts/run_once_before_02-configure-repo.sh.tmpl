@@ -27,7 +27,7 @@ gum spin --title "Populating archlinux keys..." -- sudo pacman-key --populate ar
 
 # --- Athena (always) ---
 if [[ ! -f /etc/pacman.d/athena-mirrorlist ]]; then
-  gum spin --title "Downloading Athena mirrorlist..." -- sudo curl -fsSL https://raw.githubusercontent.com/Athena-OS/athena/main/packages/os-specific/system/athena-mirrorlist/athena-mirrorlist \
+  gum spin --title "Downloading Athena mirrorlist..." -- sudo curl -fsSL https://raw.githubusercontent.com/Athena-OS/athena/refs/heads/main/src/os-specific/system/athena-mirrorlist/athena-mirrorlist \
     -o /etc/pacman.d/athena-mirrorlist
   if ! sudo pacman-key --list-keys A3F78B994C2171D5 >/dev/null 2>&1; then
     gum spin --title "Receiving Athena keys..." -- sudo pacman-key --recv-keys A3F78B994C2171D5 --keyserver keyserver.ubuntu.com
