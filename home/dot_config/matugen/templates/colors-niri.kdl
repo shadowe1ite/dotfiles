@@ -40,6 +40,11 @@ overview {
     backdrop-color "{{colors.surface.default.hex}}"
 }
 
+cursor {
+    xcursor-theme "Bibata-Modern-Ice"
+    xcursor-size 24
+}
+
 spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "gtk-theme" "adw-gtk3-dark"
 spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "icon-theme" "Fluent-teal-dark"
 spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "font-name" "SauceCodePro Nerd Font Mono"
