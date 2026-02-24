@@ -2,10 +2,12 @@
 sudo apt update -y
 
 {{ if eq .chezmoi.osRelease.id "ubuntu" }}
-sudo apt install zsh starship fzf neovim
+sudo apt install zsh starship fzf neovim eza tmux build-essential -y
 {{ end }}
 
 sudo apt install bat eza zoxide tmux build-essential -y
+
+sudo chsh -s $(which zsh) $USER
 
 sudo tee /etc/motd > /dev/null <<'EOF'
 
@@ -16,5 +18,3 @@ sudo tee /etc/motd > /dev/null <<'EOF'
 
 
 EOF
-
-sudo chsh -s $(which zsh) $USER
