@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
-sudo apt update -y && sudo apt install bat eza zoxide tmux build-essential -y
+sudo apt update -y
+
+{{ if eq .chezmoi.osRelease.id "ubuntu" }}
+sudo apt install zsh starship fzf neovim
+{{ end }}
+
+sudo apt install bat eza zoxide tmux build-essential -y
 
 sudo tee /etc/motd > /dev/null <<'EOF'
 

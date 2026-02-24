@@ -1,5 +1,4 @@
-{{- $EndId := "end-4" -}}
-{{- $EndBranch := "main" -}}
+{{ $processor := output "uname" "-p" | trim }}
 
 {{ if and (ne .chezmoi.osRelease.id "raspbian") (ne .chezmoi.osRelease.id "ubuntu") }}
 
@@ -39,11 +38,11 @@ url = "https://github.com/coffinxp/GFpattren"
 refreshPeriod = "168h"
 {{ end }}
 
-{{ if or (eq .chezmoi.osRelease.id "raspbian") (eq .chezmoi.osRelease.id "ubuntu") }}
-{{ $processor := output "uname" "-p" | trim }}
+{{ if eq .chezmoi.osRelease.id "ubuntu" }}
+
 [".local/bin/fzf"]
 type = "archive-file"
-url = {{ gitHubLatestReleaseAssetURL "junegunn/fzf" (printf "fzf-*-%s_%s.tar.gz" .chezmoi.os .chezmoi.arch) | quote  }}
+url = {{ gitHubLatestReleaseAssetURL "junegunn/fzf" (printf "fzf-*-%s_%s.tar.gz" .chezmoi.os .chezmoi.arch) | quote }}
 executable = true
 path = "fzf"
 
@@ -63,4 +62,13 @@ type = "archive-file"
 url = {{ gitHubLatestReleaseAssetURL "getzola/zola" (printf "zola-*-%s-*%s*.tar.gz" $processor .chezmoi.os) | quote }}
 executable = true
 path = "zola"
+
+{{ else if eq .chezmoi.osRelease.id "raspbian" }}
+
+[".local/bin/zola"]
+type = "archive-file"
+url = {{ gitHubLatestReleaseAssetURL "getzola/zola" (printf "zola-*-%s-*%s*.tar.gz" $processor .chezmoi.os) | quote }}
+executable = true
+path = "zola"
+
 {{ end }}
