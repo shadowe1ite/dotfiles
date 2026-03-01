@@ -92,7 +92,7 @@ Item {
 
   Process {
     id: sptlrxProc
-    command: ["sptlrx", "-p", "mpris", "pipe"]
+    command: ["lrcsnc"]
     running: true
 
     stdout: SplitParser {

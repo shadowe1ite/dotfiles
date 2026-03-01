@@ -3,24 +3,24 @@
 @media (prefers-color-scheme: dark) {
 
   :root {
-    --zen-colors-primary: #2b292d !important;
-    --zen-primary-color: #cabeff !important;
-    --zen-colors-secondary: #2b292d !important;
-    --zen-colors-tertiary: #3a383c !important;
-    --zen-colors-border: #cabeff !important;
-    --toolbarbutton-icon-fill: #cabeff !important;
-    --lwt-text-color: #e6e1e6 !important;
-    --toolbar-field-color: #e6e1e6 !important;
-    --tab-selected-textcolor: #cabeff !important;
-    --toolbar-field-focus-color: #e6e1e6 !important;
-    --toolbar-color: #e6e1e6 !important;
-    --newtab-text-primary-color: #e6e1e6 !important;
-    --arrowpanel-color: #e6e1e6 !important;
+    --zen-colors-primary: #2a292d !important;
+    --zen-primary-color: #c5c0ff !important;
+    --zen-colors-secondary: #2a292d !important;
+    --zen-colors-tertiary: #3a393c !important;
+    --zen-colors-border: #c5c0ff !important;
+    --toolbarbutton-icon-fill: #c5c0ff !important;
+    --lwt-text-color: #e5e1e6 !important;
+    --toolbar-field-color: #e5e1e6 !important;
+    --tab-selected-textcolor: #c5c0ff !important;
+    --toolbar-field-focus-color: #e5e1e6 !important;
+    --toolbar-color: #e5e1e6 !important;
+    --newtab-text-primary-color: #e5e1e6 !important;
+    --arrowpanel-color: #e5e1e6 !important;
     --arrowpanel-background: #141316 !important;
-    --sidebar-text-color: #e6e1e6 !important;
-    --lwt-sidebar-text-color: #e6e1e6 !important;
+    --sidebar-text-color: #e5e1e6 !important;
+    --lwt-sidebar-text-color: #e5e1e6 !important;
     --lwt-sidebar-background-color: #141316 !important;
-    --toolbar-bgcolor: #2b292d !important;
+    --toolbar-bgcolor: #2a292d !important;
     --newtab-background-color: #141316 !important;
     --zen-themed-toolbar-bg: #141316 !important;
     --zen-main-browser-background: #141316 !important;
@@ -44,16 +44,16 @@
   }
 
   .urlbar-background {
-    background-color: #2b292d !important;
+    background-color: #2a292d !important;
   }
 
   .content-shortcuts {
-    background-color: #2b292d !important;
-    border-color: #cabeff !important;
+    background-color: #2a292d !important;
+    border-color: #c5c0ff !important;
   }
 
   .urlbarView-url {
-    color: #cabeff !important;
+    color: #c5c0ff !important;
   }
 
   #zenEditBookmarkPanelFaviconContainer {

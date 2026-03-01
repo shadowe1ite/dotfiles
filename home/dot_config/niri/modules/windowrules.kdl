@@ -1,5 +1,5 @@
 window-rule {
-    geometry-corner-radius 16
+    //geometry-corner-radius 16
     clip-to-geometry true
     open-focused true
 }
@@ -146,4 +146,9 @@ window-rule {
     match app-id="burp-StartBurp"
     exclude title="Burp Suite Professional v(.*) -(.*)- licensed to (.*)"
     open-floating true
+}
+
+window-rule {
+  match app-id="Alacritty"
+  draw-border-with-background false
 }

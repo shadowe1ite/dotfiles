@@ -3,10 +3,10 @@
   /* Common variables affecting all pages */
   @-moz-document url-prefix("about:") {
     :root {
-      --in-content-page-color: #e6e1e6 !important;
-      --color-accent-primary: #cabeff !important;
-      --color-accent-primary-hover: #cac3dc !important;
-      --color-accent-primary-active: #cac3dc !important;
+      --in-content-page-color: #e5e1e6 !important;
+      --color-accent-primary: #c5c0ff !important;
+      --color-accent-primary-hover: #c8c4dc !important;
+      --color-accent-primary-active: #c8c4dc !important;
       background-color: #141316 !important;
       --in-content-page-background: #141316 !important;
     }
@@ -18,11 +18,11 @@
 
     :root {
       --newtab-background-color: #141316 !important;
-      --newtab-background-color-secondary: #2b292d !important;
-      --newtab-element-hover-color: #2b292d !important;
-      --newtab-text-primary-color: #e6e1e6 !important;
-      --newtab-wordmark-color: #e6e1e6 !important;
-      --newtab-primary-action-background: #cabeff !important;
+      --newtab-background-color-secondary: #2a292d !important;
+      --newtab-element-hover-color: #2a292d !important;
+      --newtab-text-primary-color: #e5e1e6 !important;
+      --newtab-wordmark-color: #e5e1e6 !important;
+      --newtab-primary-action-background: #c5c0ff !important;
     }
 
     /* Attempt to hide the customize button */
@@ -31,7 +31,7 @@
     }
 
     .icon {
-      color: #cabeff !important;
+      color: #c5c0ff !important;
     }
 
     .search-wrapper .logo-and-wordmark .logo {
@@ -51,11 +51,11 @@
     }
 
     .card-outer:is(:hover, :focus, .active):not(.placeholder) .card-title {
-      color: #cabeff !important;
+      color: #c5c0ff !important;
     }
 
     .top-site-outer .search-topsite {
-      background-color: #cabeff !important;
+      background-color: #c5c0ff !important;
     }
 
     .compact-cards .card-outer .card-context .card-context-icon.icon-download {
@@ -67,12 +67,12 @@
   @-moz-document url-prefix("about:preferences") {
     :root {
       --zen-colors-tertiary: #141316 !important;
-      --in-content-text-color: #e6e1e6 !important;
-      --link-color: #cabeff !important;
-      --link-color-hover: #cac3dc !important;
-      --zen-colors-primary: #2b292d !important;
-      --in-content-box-background: #2b292d !important;
-      --zen-primary-color: #cabeff !important;
+      --in-content-text-color: #e5e1e6 !important;
+      --link-color: #c5c0ff !important;
+      --link-color-hover: #c8c4dc !important;
+      --zen-colors-primary: #2a292d !important;
+      --in-content-box-background: #2a292d !important;
+      --zen-primary-color: #c5c0ff !important;
     }
 
     groupbox , moz-card{
@@ -81,8 +81,8 @@
 
     button,
     groupbox menulist {
-      background: #2b292d !important;
-      color: #e6e1e6 !important;
+      background: #2a292d !important;
+      color: #e5e1e6 !important;
     }
 
     .main-content {
@@ -139,15 +139,15 @@
       --fingerprinter-color: #ffb74d !important;
       --cryptominer-color: #64b5f6 !important;
       --tracker-color: #81c784 !important;
-      --in-content-primary-button-background-hover: #363438 !important;
-      --in-content-primary-button-text-color-hover: #e6e1e6 !important;
-      --in-content-primary-button-background: #363438 !important;
-      --in-content-primary-button-text-color: #e6e1e6 !important;
+      --in-content-primary-button-background-hover: #353438 !important;
+      --in-content-primary-button-text-color-hover: #e5e1e6 !important;
+      --in-content-primary-button-background: #353438 !important;
+      --in-content-primary-button-text-color: #e5e1e6 !important;
     }
 
 
     .card {
-      background-color: #2b292d !important;
+      background-color: #2a292d !important;
     }
   }
 }
