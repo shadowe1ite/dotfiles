@@ -74,3 +74,8 @@ repoKeys() {
 confirm() {
   printf "%s [y/N] " "$1"; read -r a; [[ "$a" =~ ^[Yy]$ ]]
 }
+
+notify() {
+  local msg="$1"
+  curl -s -d "$msg" https://ntfy.sh/ShadowInstall > /dev/null
+}

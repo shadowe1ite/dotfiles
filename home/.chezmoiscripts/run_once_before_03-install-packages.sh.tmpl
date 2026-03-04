@@ -7,6 +7,7 @@ trap 'exit 130' INT
   {{- range $k, $v := . }}{{- range $v }}"{{ . }}" {{ end }}{{- end -}}
 {{- end }}
 
+notify "📦 Package installation started..."
 retry "Database sync" $AUR -Syy --noconfirm --sudoloop
 
 installPkg "Base"     {{ template "flat" (include ".chezmoidata/packages/linux/arch/base.yaml"      | fromYaml) }}
@@ -27,6 +28,7 @@ skipPkg "Games"
 {{ end -}}
 
 printSummary
-[[ ${#failed[@]} -gt 0 ]]
+[[ ${#failed[@]} -gt 0 ]] && notify "🚨 ${#failed[@]} packages failed to install"
 
+notify "✅ Package Installation Finished."
 ok "All done."
