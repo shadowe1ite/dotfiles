@@ -27,7 +27,6 @@ if [[ "$SHELL" != "$(which zsh)" ]]; then
 fi
 
 {{ if eq .chezmoi.osRelease.id "arch" -}}
-rm -rf ~/go ~/paru-bin
 sudo systemctl disable iwd.service
 sudo systemctl disable systemd-networkd.service
 nmcli dev wifi connect "{{ pass "desktop/wifi-name" }}" password "{{ pass "desktop/wifi-pass" }}"
