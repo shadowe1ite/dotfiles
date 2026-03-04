@@ -21,6 +21,6 @@ sudo usermod -aG {{ . }} "$USER"
 {{ end -}}
 
 # mask autostart
-systemctl --user mask xdg-desktop-autostart.target
+systemctl --user mask xdg-desktop-autostart.target 2>/dev/null || warn "Could not mask xdg-desktop-autostart.target, no user session yet"
 
 ok "Finished services and groups"
