@@ -38,8 +38,8 @@ sudo virsh net-start default
 {{ end -}}
 {{ end -}}
 
-echo 'y' | warp-cli registration new
-warp-cli connect
+echo 'y' | warp-cli registration new || true
+warp-cli connect || true
 
 ok "Installation completed"
 
