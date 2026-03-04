@@ -1,6 +1,5 @@
 packages:
   - zsh
-  - starship
   - fzf
   - neovim
   - eza

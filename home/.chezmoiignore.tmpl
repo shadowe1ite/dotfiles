@@ -52,7 +52,9 @@
 .vdirsyncer/
 .config/*
 .ssh/
+{{ if eq .chezmoi.osRelease.id "ubuntu" }}
 !.config/nvim
+{{ end }}
 !.config/starship.toml
 !.config/tmux
 !.chezmoiscripts/setup-remote.sh
