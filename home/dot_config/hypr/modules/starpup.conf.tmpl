@@ -4,16 +4,10 @@ exec-once = ~/.config/hypr/scripts/desktop-portal
 exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 exec-once = dbus-update-activation-environment --systemd --all
 exec-once = systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-exec-once = systemctl --user start hyprpolkitagent # remove on next qs release
 
 # apps
-{{- if .packages.quickshell }}
 source = ~/.config/hypr/modules/quickshell-new.conf 
-{{- else }}
-source = ~/.config/hypr/modules/legacy.conf 
-{{- end }}
 
-exec-once = hypridle
 exec-once = wl-paste --type text --watch bash -c 'cliphist store'
 exec-once = wl-paste --type image --watch bash -c 'cliphist store'
 exec-once = wl-clip-persist --clipboard regular
