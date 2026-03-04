@@ -11,18 +11,20 @@ mkdir -p "$HOME/.config/Bitwarden CLI"
 touch "$HOME/.config/Bitwarden CLI/data.json"
 
 info "Logging in to Bitwarden"
+BW_SESSION=""
 for i in 1 2 3; do
-  BW_SESSION=$(bw login {{ .email }} --raw) && [[ -n "$BW_SESSION" ]] && break
+  BW_SESSION=$(bw login {{ .email }} --raw 2>/dev/null) || true
+  [[ -n "$BW_SESSION" ]] && break
   warn "Login failed (attempt $i/3)"
-  BW_SESSION=""
 done
 [[ -z "$BW_SESSION" ]] && { err "Bitwarden login failed. Exiting."; exit 1; }
+bw status --session "$BW_SESSION" | jq -e '.status == "unlocked"' >/dev/null 2>&1 || { err "Bitwarden session invalid. Exiting."; exit 1; }
 ok "Bitwarden login"
 
 info "Importing GPG keys"
 keys=$(bw list items --session "$BW_SESSION" --folderid "{{ $bwFolderId }}" \
   | jq -r '.[] | select(.notes | contains("BEGIN PGP")) | .notes')
-[[ -z "$keys" ]] && { err "No GPG keys found in Bitwarden. Exiting."; bw logout; exit 1; }
+[[ -z "$keys" ]] && { err "No GPG keys found. Exiting."; bw logout; exit 1; }
 echo "$keys" | gpg --import --batch --yes -q
 ok "GPG keys imported"
 
@@ -38,16 +40,21 @@ gpg-connect-agent reloadagent /bye >/dev/null
 
 info "Enter GPG password"
 for i in 1 2 3; do
-  gpg -q --pinentry-mode loopback --sign --default-key {{ .email }} --output /dev/null <<< "unlock" && break
+  gpg -q --pinentry-mode loopback --sign --default-key {{ .email }} --output /dev/null <<< "unlock" 2>/dev/null && break
   warn "Wrong password (attempt $i/3)"
 done
-gpg -q --pinentry-mode loopback --sign --default-key {{ .email }} --output /dev/null <<< "unlock" || { err "GPG unlock failed. Exiting."; bw logout; exit 1; }
+gpg -q --pinentry-mode loopback --sign --default-key {{ .email }} --output /dev/null <<< "unlock" 2>/dev/null || { err "GPG unlock failed. Exiting."; bw logout; exit 1; }
 
 info "Cloning password store"
 GH_TOKEN=$(bw --session "$BW_SESSION" get item "{{ $ghTokenId }}" | jq -r '.notes')
-[[ -z "$GH_TOKEN" ]] && { err "GitHub token not found in Bitwarden. Exiting."; bw logout; exit 1; }
-git clone "https://${GH_TOKEN}@github.com/shadowe1ite/.password-store.git" ~/.password-store
-ok "Password store cloned"
+[[ -z "$GH_TOKEN" ]] && { err "GitHub token not found. Exiting."; bw logout; exit 1; }
+if [[ -d ~/.password-store/.git ]]; then
+  step "Already exists, pulling"
+  git -C ~/.password-store pull
+else
+  git clone "https://${GH_TOKEN}@github.com/shadowe1ite/.password-store.git" ~/.password-store
+fi
+ok "Password store ready"
 
 info "Cleaning up"
 bw logout
