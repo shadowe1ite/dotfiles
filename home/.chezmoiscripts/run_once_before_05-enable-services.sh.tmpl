@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
-source "{{ .chezmoi.sourceDir }}/.chezmoiscripts/.lib/util.sh"
+{{ template "utils" . }}
 
 USER_SERVICES=(
 {{- with .services }}{{- with .user }}{{- range . }}"{{ . }}" {{ end }}{{- end }}{{- end -}}

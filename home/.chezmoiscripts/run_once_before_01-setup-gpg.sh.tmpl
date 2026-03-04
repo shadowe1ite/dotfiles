@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
-source "{{ .chezmoi.sourceDir }}/.chezmoiscripts/.lib/util.sh"
+{{ template "utils" . }}
 
 {{- $bwFolderId := "3bb893f4-9a06-4477-afe5-b33c00c20c5d" }}
 {{- $ghTokenId := "1b48a5cc-4f95-4704-a6e2-b33c011e4532" }}

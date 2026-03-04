@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
-source "{{ .chezmoi.sourceDir }}/.chezmoiscripts/.lib/util.sh"
+{{ template "utils" . }}
 
 if [[ -f /boot/grub/grub.cfg || -f /boot/grub2/grub.cfg ]]; then
   step "Adding nvidia_drm.modeset=1 to grub"

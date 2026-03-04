@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 trap 'exit 130' INT
-source "{{ .chezmoi.sourceDir }}/.chezmoiscripts/.lib/util.sh"
+{{ template "utils" . }}
 
 {{- define "flat" -}}
   {{- range $k, $v := . }}{{- range $v }}"{{ . }}" {{ end }}{{- end -}}
 {{- end }}
 
 tgMsg "📦 Package installation started..."
-retry "Database sync" paru -Syy --noconfirm --sudoloop
+retry "Database sync" $AUR -Syy --noconfirm --sudoloop
 
 installPkg "Base"     {{ template "flat" (include ".chezmoidata/packages/linux/arch/base.yaml"      | fromYaml) }}
 installPkg "Nvidia"   {{ template "flat" (include ".chezmoidata/packages/linux/arch/nvidia.yaml"    | fromYaml) }}
