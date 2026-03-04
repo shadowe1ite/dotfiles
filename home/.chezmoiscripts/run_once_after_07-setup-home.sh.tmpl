@@ -29,8 +29,8 @@ if [[ "$SHELL" != "$(which zsh)" ]]; then
 fi
 
 {{ if eq .chezmoi.osRelease.id "arch" -}}
-sudo systemctl disable iwd.service
-sudo systemctl disable systemd-networkd.service
+sudo systemctl disable iwd.service || true
+sudo systemctl disable systemd-networkd.service || true
 {{- if ne $chassis "vm" }}
 nmcli dev wifi connect "{{ pass "desktop/wifi-name" }}" password "{{ pass "desktop/wifi-pass" }}"
 sudo virsh net-autostart default
