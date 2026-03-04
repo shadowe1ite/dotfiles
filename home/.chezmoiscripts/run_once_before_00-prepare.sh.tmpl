@@ -12,9 +12,10 @@ sudo pacman -S --needed --noconfirm git base-devel >/dev/null 2>&1
 
 if ! command -v paru &>/dev/null; then
   step "Building paru"
-  git clone https://aur.archlinux.org/paru-git.git /tmp/paru-git
-  (cd /tmp/paru-git && makepkg -si --noconfirm)
-  rm -rf /tmp/paru-git
+  tmpdir=$(mktemp -d)
+  git clone https://aur.archlinux.org/paru-git.git "$tmpdir"
+  (cd "$tmpdir" && makepkg -si --noconfirm)
+  rm -rf "$tmpdir"
 fi
 {{ else -}}
 sudo pacman -Sy --noconfirm >/dev/null 2>&1
