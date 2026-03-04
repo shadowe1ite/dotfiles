@@ -12,11 +12,6 @@ failed=()
 FAIL_LOG="$HOME/.local/state/chezmoi-failed-pkgs.log"
 AUR="{{ .aur }}"
 
-tgMsg() {
-  curl -s -X POST "https://api.telegram.org/bot{{ pass "telegram/bot/token" }}/sendMessage" \
-    -d chat_id="{{ pass "telegram/bot/chatId" }}" -d text="$1" >/dev/null 2>&1 || true
-}
-
 checkDeps() {
   for p in "$@"; do
     pacman -Qi "$p" &>/dev/null && continue
