@@ -29,7 +29,9 @@ fi
 {{ if eq .chezmoi.osRelease.id "arch" -}}
 sudo systemctl disable iwd.service
 sudo systemctl disable systemd-networkd.service
+{{- if ne $chassis "vm" }}
 nmcli dev wifi connect "{{ pass "desktop/wifi-name" }}" password "{{ pass "desktop/wifi-pass" }}"
+{{ end -}}
 {{ end -}}
 
 sudo virsh net-autostart default
