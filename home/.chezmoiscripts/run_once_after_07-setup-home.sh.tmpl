@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 set -euo pipefail
-
-{{- $chassis := includeTemplate "sys-chassis.tmpl" . }}
 {{ template "utils" . }}
 
 STORAGE="{{ .storage | default "/mnt/storage" }}"
@@ -22,18 +20,23 @@ ok "Directories setup complete"
 
 {{- if eq .chezmoi.username .user }}
 
+if [[ "$SHELL" != "$(which zsh)" ]]; then
+  zsh -c 'source ~/.zshrc'
+  info "Changing shell to zsh"
+  sudo chsh -s "$(which zsh)" "$USER"
+fi
 
 {{ if eq .chezmoi.osRelease.id "arch" -}}
-sudo systemctl disable iwd.service || true
-sudo systemctl disable systemd-networkd.service || true
-nmcli dev wifi connect "{{ pass "desktop/wifi-name" }}" password "{{ pass "desktop/wifi-pass" }}" || true
+sudo systemctl disable iwd.service
+sudo systemctl disable systemd-networkd.service
+nmcli dev wifi connect "{{ pass "desktop/wifi-name" }}" password "{{ pass "desktop/wifi-pass" }}"
 {{ end -}}
 
-sudo virsh net-autostart default || true
-sudo virsh net-start default || true
+sudo virsh net-autostart default
+sudo virsh net-start default
 
-echo 'y' | warp-cli registration new || true
-warp-cli connect || true
+echo 'y' | warp-cli registration new
+warp-cli connect
 
 ok "Installation completed"
 
