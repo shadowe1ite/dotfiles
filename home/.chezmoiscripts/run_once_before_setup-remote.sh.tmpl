@@ -7,8 +7,11 @@ set -euo pipefail
 
 sudo apt update -y
 
+{{ if eq .chezmoi.osRelease.id "ubuntu" }}
 sudo apt install -y {{ template "flat" (include ".chezmoidata/packages/linux/ubuntu/ubuntu.yaml" | fromYaml).packages }}
+{{ else if eq .chezmoi.osRelease.id "raspbian" }}
 sudo apt install -y {{ template "flat" (include ".chezmoidata/packages/linux/rasbian/rasbian.yaml" | fromYaml).packages }}
+{{ end }}
 
 sudo chsh -s "$(which zsh)" "$USER"
 
