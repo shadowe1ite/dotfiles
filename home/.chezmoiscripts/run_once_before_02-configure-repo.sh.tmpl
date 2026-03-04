@@ -1,83 +1,61 @@
 #!/usr/bin/env bash
 set -euo pipefail
+source "{{ .chezmoi.sourceDir }}/.chezmoiscripts/.lib/util.sh"
 
 export PATH="$HOME/.local/bin:$PATH"
 
-# Abort early if already done
 {{- if ne .chezmoi.osRelease.id "cachyos" }}
 if [[ -f /etc/pacman.conf.bak ]]; then
-  echo "$(gum style --foreground 3 '[WARN]') pacman.conf.bak exists. Skipping rewrite."
+  warn "pacman.conf.bak exists. Skipping rewrite."
   exit 0
 fi
 {{- end }}
 
-echo "$(gum style --foreground 4 '[INFO]') Setting up repositories..."
+info "Setting:q up repositories"
 sudo cp /etc/pacman.conf /etc/pacman.conf.bak
 
-if [ ! -f "$HOME/.config/paru/paru.conf" ]; then
-  gum spin --title "Creating paru config directory..." -- mkdir -p "$HOME/.config/paru"
-  gum spin --title "Downloading paru.conf..." -- curl -fsSL "https://raw.githubusercontent.com/shadowe1ite/dotfiles/refs/heads/main/home/dot_config/paru/paru.conf" -o "$HOME/.config/paru/paru.conf"
+if [[ ! -f "$HOME/.config/paru/paru.conf" ]]; then
+  mkdir -p "$HOME/.config/paru"
+  curl -fsSL "https://raw.githubusercontent.com/shadowe1ite/dotfiles/refs/heads/main/home/dot_config/paru/paru.conf" \
+    -o "$HOME/.config/paru/paru.conf"
 fi
 
-gum spin --title "Running paru -Sya..." -- paru -Sya --noconfirm
+paru -Sya --noconfirm >/dev/null 2>&1
+sudo pacman-key --init
+sudo pacman-key --populate archlinux
 
-# Init keys (idempotent)
-gum spin --title "Initializing pacman keys..." -- sudo pacman-key --init
-gum spin --title "Populating archlinux keys..." -- sudo pacman-key --populate archlinux
-
-# --- Athena (always) ---
-if [[ ! -f /etc/pacman.d/athena-mirrorlist ]]; then
-  gum spin --title "Downloading Athena mirrorlist..." -- sudo curl -fsSL https://raw.githubusercontent.com/Athena-OS/athena/refs/heads/main/src/os-specific/system/athena-mirrorlist/athena-mirrorlist \
-    -o /etc/pacman.d/athena-mirrorlist
-  if ! sudo pacman-key --list-keys A3F78B994C2171D5 >/dev/null 2>&1; then
-    gum spin --title "Receiving Athena keys..." -- sudo pacman-key --recv-keys A3F78B994C2171D5 --keyserver keyserver.ubuntu.com
-    gum spin --title "Signing Athena keys..." -- sudo pacman-key --lsign A3F78B994C2171D5
-  fi
-  echo "$(gum style --foreground 10 '[SUCCESS]') Athena repo installed."
-else
-  echo "$(gum style --foreground 3 '[WARN]') Athena repo already present"
-fi
-
-# --- Chaotic (always) ---
 if [[ ! -f /etc/pacman.d/chaotic-mirrorlist ]]; then
-  gum spin --title "Receiving Chaotic keys..." -- sudo pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
-  gum spin --title "Signing Chaotic keys..." -- sudo pacman-key --lsign-key 3056513887B78AEB
-  gum spin --title "Installing Chaotic packages..." -- sudo pacman -U --noconfirm \
+  repoKeys "Chaotic" "3056513887B78AEB"
+  step "Installing Chaotic packages"
+  sudo pacman -U --noconfirm \
     'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' \
     'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
-  echo "$(gum style --foreground 10 '[SUCCESS]') Chaotic repo installed."
+  ok "Chaotic repo installed"
 else
-  echo "$(gum style --foreground 3 '[WARN]') Chaotic repo already present"
+  warn "Chaotic repo already present"
 fi
 
-# --- BlackArch ---
 if [[ ! -f /etc/pacman.d/blackarch-mirrorlist ]]; then
-  gum spin --title "Installing BlackArch keyring..." -- bash -c '
+  step "Installing BlackArch keyring"
+  bash -c '
     VERSION=$(curl -s https://www.blackarch.org/keyring/ | grep -oP "blackarch-keyring-\K[0-9]+" | head -n1)
-    TD=$(mktemp -d)
-    trap "rm -rf $TD" EXIT
-    cd "$TD"
+    TD=$(mktemp -d); trap "rm -rf $TD" EXIT; cd "$TD"
     curl -s -O "https://www.blackarch.org/keyring/blackarch-keyring-$VERSION.tar.gz"
     sudo tar xfz "blackarch-keyring-$VERSION.tar.gz" --strip-components=1 -C /usr/share/pacman/keyrings/
     sudo pacman-key --populate
   '
-  gum spin --title "Downloading BlackArch mirrorlist..." -- sudo curl -fsSL https://blackarch.org/blackarch-mirrorlist -o /etc/pacman.d/blackarch-mirrorlist
-  
-  if [ -f /etc/pacman.d/blackarch-mirrorlist.pacnew ]; then
-    gum spin --title "Applying .pacnew mirrorlist..." -- sudo mv /etc/pacman.d/blackarch-mirrorlist.pacnew /etc/pacman.d/blackarch-mirrorlist
-  fi
-  
-  echo "$(gum style --foreground 10 '[SUCCESS]') BlackArch repo installed."
+  sudo curl -fsSL https://blackarch.org/blackarch-mirrorlist -o /etc/pacman.d/blackarch-mirrorlist
+  [[ -f /etc/pacman.d/blackarch-mirrorlist.pacnew ]] && sudo mv /etc/pacman.d/blackarch-mirrorlist.pacnew /etc/pacman.d/blackarch-mirrorlist
+  ok "BlackArch repo installed"
 else
-  echo "$(gum style --foreground 3 '[WARN]') BlackArch repo already present"
+  warn "BlackArch repo already present"
 fi
 
-# Write pacman.conf (always includes all repos)
-gum spin --title "Writing pacman configuration..." -- sudo tee /etc/pacman.conf > /dev/null <<'EOF'
+sudo tee /etc/pacman.conf > /dev/null <<'EOF'
 {{ includeTemplate "pacman.conf.tmpl" . }}
 EOF
 
-gum spin --title "Syncing new repositories..." -- sudo pacman -Syy --noconfirm
-gum spin --title "Installing BlackArch mirrorlist package..." -- sudo pacman -S --noconfirm --needed blackarch-mirrorlist
+sudo pacman -Syy --noconfirm >/dev/null 2>&1
+sudo pacman -S --noconfirm --needed blackarch-mirrorlist >/dev/null 2>&1
 
-echo "$(gum style --foreground 10 '[SUCCESS]') Done. Backup at /etc/pacman.conf.bak"
+ok "Done. Backup at /etc/pacman.conf.bak"

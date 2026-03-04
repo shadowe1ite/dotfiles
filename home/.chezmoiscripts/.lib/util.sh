@@ -1,0 +1,80 @@
+#!/usr/bin/env bash
+
+R='\033[0;31m' G='\033[0;32m' Y='\033[0;33m' B='\033[0;34m' C='\033[0;36m' BG='\033[1;32m' D='\033[2m' N='\033[0m'
+
+info() { printf "${B}━━▶${N} %s\n" "$*"; }
+ok()   { printf "${BG}  ✔${N} %s\n" "$*"; }
+warn() { printf "${Y}  ⚠${N} %s\n" "$*"; }
+err()  { printf "${R}  ✘${N} %s\n" "$*"; }
+step() { printf "${D}  │${N} ${C}%s${N}\n" "$*"; }
+
+failed=()
+FAIL_LOG="$HOME/.local/state/chezmoi-failed-pkgs.log"
+
+tgMsg() {
+  curl -s -X POST "https://api.telegram.org/bot{{ pass "telegram/bot/token" }}/sendMessage" \
+    -d chat_id="{{ pass "telegram/bot/chatId" }}" -d text="$1" >/dev/null 2>&1 || true
+}
+
+checkDeps() {
+  for p in "$@"; do
+    pacman -Qi "$p" &>/dev/null && continue
+    step "Installing $p"
+    paru -S --noconfirm "$p" &>/dev/null
+  done
+}
+
+retry() {
+  local n="$1" max="${RETRY_MAX:-3}" i=0; shift
+  while (( i < max )); do "$@" 2>/dev/null && return 0; i=$((i+1)); done
+  err "$n failed after $max attempts"; return 1
+}
+
+installPkg() {
+  local g="$1"; shift; local -a p=("$@") m=() f=()
+  info "Installing $g (${#p[@]})"
+  pacman -Q jack2 &>/dev/null && paru -Rnsdd --noconfirm jack2 &>/dev/null
+  for x in "${p[@]}"; do pacman -Qi "$x" &>/dev/null || m+=("$x"); done
+  [[ ${#m[@]} -eq 0 ]] && { ok "$g — nothing to do"; return 0; }
+  step "${#m[@]} to install"
+  paru -S --asexplicit --sudoloop --needed --noconfirm --removemake "${m[@]}" 2>/dev/null && { ok "$g"; return 0; }
+  warn "$g batch failed, one by one"
+  for x in "${m[@]}"; do
+    retry "$x" paru -S --asexplicit --sudoloop --needed --noconfirm --removemake "$x" && { step "$x"; continue; }
+    err "$x"; f+=("$x"); failed+=("[$g] $x")
+  done
+  [[ ${#f[@]} -gt 0 ]] && { warn "$g done with ${#f[@]} failures"; return 1; }
+  ok "$g"
+}
+
+skipPkg() { warn "Skipping $1"; }
+
+printSummary() {
+  [[ ${#failed[@]} -eq 0 ]] && { ok "All packages installed"; return; }
+  err "${#failed[@]} failed:"
+  for p in "${failed[@]}"; do printf "  ${R}✗${N} %s\n" "$p"; done
+}
+
+enableSvc() {
+  local n="$1" s="$2"
+  if [[ "$s" == "user" ]]; then
+    systemctl --user is-enabled "$n" &>/dev/null && { step "already: $n"; return; }
+    systemctl --user enable --now "$n" &>/dev/null && { step "enabled: $n"; return; }
+  else
+    systemctl is-enabled "$n" &>/dev/null && { step "already: $n"; return; }
+    sudo systemctl enable --now "$n" &>/dev/null && { step "enabled: $n"; return; }
+  fi
+  err "FAILED: $n"
+}
+
+repoKeys() {
+  local n="$1" k="$2" s="${3:-keyserver.ubuntu.com}"
+  sudo pacman-key --list-keys "$k" >/dev/null 2>&1 && return
+  step "Receiving $n keys"
+  sudo pacman-key --recv-keys "$k" --keyserver "$s"
+  sudo pacman-key --lsign-key "$k"
+}
+
+confirm() {
+  printf "%s [y/N] " "$1"; read -r a; [[ "$a" =~ ^[Yy]$ ]]
+}

@@ -1,17 +1,26 @@
-#!/bin/env bash
+#!/usr/bin/env bash
+set -euo pipefail
+source "{{ .chezmoi.sourceDir }}/.chezmoiscripts/.lib/util.sh"
 
-echo -e "\033[34m[INFO]\033[0m Preparing installation..."
+info "Preparing installation"
 
-{{ if eq .chezmoi.osRelease.id "arch" }}
-gum spin --title "Installing Arch Linux Keyring ..." -- sudo pacman -Sy --noconfirm archlinux-keyring
-gum spin --title "Installing basic utils..." -- sudo pacman -S --needed --noconfirm git base-devel
-git clone https://aur.archlinux.org/paru-git.git
-cd paru-git
-gum spin --title "Building binary..." -- makepkg -si --noconfirm
-{{ end }}
+{{ if eq .chezmoi.osRelease.id "arch" -}}
+step "Installing keyring"
+sudo pacman -Sy --noconfirm archlinux-keyring >/dev/null 2>&1
+step "Installing base-devel"
+sudo pacman -S --needed --noconfirm git base-devel >/dev/null 2>&1
 
-{{ if ne .chezmoi.osRelease.id "arch" }}
-sudo pacman -Sy --noconfirm gum >/dev/null 2>&1
-{{ end }}
+if ! command -v paru &>/dev/null; then
+  step "Building paru"
+  git clone https://aur.archlinux.org/paru-git.git /tmp/paru-git
+  (cd /tmp/paru-git && makepkg -si --noconfirm)
+  rm -rf /tmp/paru-git
+fi
+{{ else -}}
+sudo pacman -Sy --noconfirm >/dev/null 2>&1
+{{ end -}}
 
-gum spin --title "Upgrading System" -- paru -Syyu --noconfirm
+step "Upgrading system"
+paru -Syyu --noconfirm >/dev/null 2>&1
+
+ok "Preparation complete"

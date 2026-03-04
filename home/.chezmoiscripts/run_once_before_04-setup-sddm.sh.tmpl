@@ -1,39 +1,33 @@
 #!/usr/bin/env bash
 set -euo pipefail
+source "{{ .chezmoi.sourceDir }}/.chezmoiscripts/.lib/util.sh"
 
 THEME_DIR="/usr/share/sddm/themes/silent"
-META_PATH="$THEME_DIR/metadata.desktop"
 
-echo "$(gum style --foreground 4 "[INFO]") Writing /etc/sddm.conf"
+info "Writing /etc/sddm.conf"
 sudo tee /etc/sddm.conf >/dev/null <<'EOF'
 {{ includeTemplate "sddm.conf" . }}
 EOF
-echo "$(gum style --foreground 10 "[SUCCESS]") /etc/sddm.conf done"
-bash /usr/share/sddm/themes/silent/change_avatar.sh {{ .user }} $HOME/.local/share/chezmoi/.github/pfp/main.png
-echo
+ok "/etc/sddm.conf done"
+
+bash "$THEME_DIR/change_avatar.sh" {{ .user }} "$HOME/.local/share/chezmoi/.github/pfp/main.png"
 
 if [[ ! -d "$THEME_DIR" ]]; then
-  echo "$(gum style --foreground 3 "[WARN]") Theme directory missing: $THEME_DIR"
-  echo "$(gum style --foreground 3 "[WARN]") Install the Silent theme package, then re-run."
+  warn "Theme directory missing: $THEME_DIR"
   exit 0
 fi
 
-echo "$(gum style --foreground 4 "[INFO]") Writing $META_PATH (variant: {{ or .sddm.silent_variant "rei" }})"
-sudo tee "$META_PATH" >/dev/null <<'EOF'
+info "Writing metadata (variant: {{ or .sddm.silent_variant "rei" }})"
+sudo tee "$THEME_DIR/metadata.desktop" >/dev/null <<'EOF'
 {{ includeTemplate "silent_metadata.desktop.tmpl" . }}
 EOF
-echo "$(gum style --foreground 10 "[SUCCESS]") $META_PATH done"
+ok "metadata.desktop done"
 
-echo
-
-echo "$(gum style --foreground 4 "[INFO]") Enabling sddm service"
 if systemctl is-enabled --quiet sddm 2>/dev/null; then
-  echo "$(gum style --foreground 3 "[WARN]") sddm already enabled"
+  warn "sddm already enabled"
 else
   sudo systemctl enable sddm
-  echo "$(gum style --foreground 10 "[SUCCESS]") Enabled sddm"
+  ok "Enabled sddm"
 fi
 
-echo
-
-echo "$(gum style --foreground 4 "[INFO]") Finished. Restart to apply now: sudo systemctl restart sddm (logs you out)"
+info "Restart to apply: sudo systemctl restart sddm"

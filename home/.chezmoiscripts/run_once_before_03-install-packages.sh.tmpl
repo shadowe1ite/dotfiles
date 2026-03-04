@@ -1,158 +1,34 @@
 #!/usr/bin/env bash
 set -euo pipefail
-
-# Ensure signals are properly forwarded
 trap 'exit 130' INT
+source "{{ .chezmoi.sourceDir }}/.chezmoiscripts/.lib/util.sh"
 
-{{ $base       := include ".chezmoidata/packages/system/base.yaml"          | fromYaml }}
-{{ $nvidia     := include ".chezmoidata/packages/system/nvidia.yaml"        | fromYaml }}
-{{ $hyprland   := include ".chezmoidata/packages/desktop/hyprland.yaml"     | fromYaml }}
-{{ $quickshell := include ".chezmoidata/packages/desktop/quickshell.yaml"   | fromYaml }}
-{{ $legacy     := include ".chezmoidata/packages/desktop/legacy.yaml"       | fromYaml }}
-{{ $user       := include ".chezmoidata/packages/applications/basic.yaml"   | fromYaml }}
-{{ $editing    := include ".chezmoidata/packages/applications/editing.yaml" | fromYaml }}
-{{ $games      := include ".chezmoidata/packages/applications/games.yaml"   | fromYaml }}
+{{- define "flat" -}}
+  {{- range $k, $v := . }}{{- range $v }}"{{ . }}" {{ end }}{{- end -}}
+{{- end }}
 
-{{- define "list" -}}{{- range $cat, $pkgs := . }}{{ range $pkgs }} {{ . }}{{ end }}{{ end -}}{{- end }}
+tgMsg "📦 Package installation started..."
+retry "Database sync" paru -Syy --noconfirm --sudoloop
 
-# Helper function to send telegram alert
-send_telegram_alert() {
-  local message=$1
-  curl -s -X POST "https://api.telegram.org/bot{{ pass "telegram/bot/token" }}/sendMessage" -d chat_id="{{ pass "telegram/bot/chatId" }}" -d text="🚨 ${message}" >/dev/null 2>&1 || true
-}
+installPkg "Base"     {{ template "flat" (include ".chezmoidata/packages/linux/arch/base.yaml"      | fromYaml) }}
+installPkg "Nvidia"   {{ template "flat" (include ".chezmoidata/packages/linux/arch/nvidia.yaml"    | fromYaml) }}
+installPkg "Desktop" {{ template "flat" (include ".chezmoidata/packages/linux/arch/desktop.yaml" | fromYaml) }}
+installPkg "User Applications" {{ template "flat" (include ".chezmoidata/packages/linux/arch/applications.yaml" | fromYaml) }}
 
-# Helper function for install or skip message
-install_pkg() {
-  local name=$1
-  local packages=$2
-  local retry_count=0
-  
-  while true; do
-    echo "$(gum style --foreground 4 "[INFO]") Installing ${name} packages"
+{{ if .packages.editing -}}
+installPkg "Editing" {{ template "flat" (include ".chezmoidata/packages/applications/editing.yaml" | fromYaml) }}
+{{ else -}}
+skipPkg "Editing"
+{{ end -}}
 
-    # Check if jack2 exists and remove it
-    if pacman -Q jack2 &>/dev/null; then
-      gum spin --title "Removing conflicting jack2..." -- paru -Rnsdd --noconfirm jack2
-    fi
+{{ if .packages.games -}}
+installPkg "Games" {{ template "flat" (include ".chezmoidata/packages/applications/games.yaml" | fromYaml) }}
+{{ else -}}
+skipPkg "Games"
+{{ end -}}
 
-    local temp_error=$(mktemp)
-    
-    if gum spin --title "Installing ${name} packages..." -- bash -c "paru -S --asexplicit --sudoloop --needed --noconfirm --removemake ${packages} 2>${temp_error}"; then
-      echo "$(gum style --foreground 10 "[SUCCESS]")"
-      rm -f "${temp_error}"
-      echo
-      break
-    else
-      echo "$(gum style --foreground 1 "[FAILED]") Error installing ${name} packages"
-      
-      if [[ -s "${temp_error}" ]]; then
-        cat "${temp_error}"
-        echo
-      fi
-      
-      rm -f "${temp_error}"
-      retry_count=$((retry_count + 1))
-      
-      if [[ $retry_count -lt 3 ]]; then
-        echo "$(gum style --foreground 3 "[RETRY]") Retrying... (attempt $((retry_count + 1))/3)"
-        continue
-      else
-        send_telegram_alert "Package installation failed for ${name}. Please check the computer to continue."
-        
-        if gum confirm "Retry installing ${name} packages?"; then
-          retry_count=0
-          continue
-        else
-          echo "$(gum style --foreground 3 "[WARN]") Skipping ${name} packages"
-          echo
-          break
-        fi
-      fi
-    fi
-  done
-}
+printSummary
+[[ ${#failed[@]} -gt 0 ]] && tgMsg "🚨 ${#failed[@]} packages failed to install"
 
-skip_pkg() {
-  local name=$1
-  echo "$(gum style --foreground 3 "[WARN]") Skipping ${name} packages"
-  echo
-}
-
-# Update database
-gum spin --title "Sending Telegram reminder" -- curl -s -X POST "https://api.telegram.org/bot{{ pass "telegram/bot/token" }}/sendMessage" -d chat_id="{{ pass "telegram/bot/chatId" }}" -d text="📦 Package installation started..."
-
-retry_count=0
-while true; do
-  echo "$(gum style --foreground 4 "[INFO]") Updating database"
-  
-  temp_error=$(mktemp)
-  
-  if gum spin --title "Updating database..." -- bash -c "paru -Syy --noconfirm --sudoloop 2>${temp_error}"; then
-    echo "$(gum style --foreground 10 "[SUCCESS]")"
-    rm -f "${temp_error}"
-    echo
-    break
-  else
-    echo "$(gum style --foreground 1 "[FAILED]") Error updating database"
-    
-    if [[ -s "${temp_error}" ]]; then
-      cat "${temp_error}"
-      echo
-    fi
-    
-    rm -f "${temp_error}"
-    retry_count=$((retry_count + 1))
-    
-    if [[ $retry_count -lt 3 ]]; then
-      echo "$(gum style --foreground 3 "[RETRY]") Retrying... (attempt $((retry_count + 1))/3)"
-      continue
-    else
-      send_telegram_alert "Database update failed. Please check the computer to continue."
-      
-      if gum confirm "Retry updating database?"; then
-        retry_count=0
-        continue
-      else
-        echo "$(gum style --foreground 3 "[WARN]") Continuing without database update"
-        echo
-        break
-      fi
-    fi
-  fi
-done
-
-# Install packages
-
-install_pkg "Base" "{{ template "list" $base }}"
-install_pkg "Nvidia" "{{ template "list" $nvidia }}"
-install_pkg "Hyprland" "{{ template "list" $hyprland }}"
-
-{{ if .packages.quickshell }}
-install_pkg "quickshell" "{{ template "list" $quickshell }}"
-{{ else }}
-skip_pkg "quickshell"
-{{ end }}
-
-{{ if .packages.legacy }}
-install_pkg "legacy" "{{ template "list" $legacy }}"
-{{ else }}
-skip_pkg "legacy"
-{{ end }}
-
-install_pkg "User" "{{ template "list" $user }}"
-
-{{ if .packages.editing }}
-install_pkg "Editing" "{{ template "list" $editing }}"
-{{ else }}
-skip_pkg "Editing"
-{{ end }}
-
-{{ if .packages.games }}
-install_pkg "Games" "{{ template "list" $games }}"
-{{ else }}
-skip_pkg "Games"
-{{ end }}
-
-gum spin --title "Sending Telegram reminder" -- curl -s -X POST "https://api.telegram.org/bot{{ pass "telegram/bot/token" }}/sendMessage" -d chat_id="{{ pass "telegram/bot/chatId" }}" -d text="✅ Package Installation Finished."
-
-echo "$(gum style --foreground 10 "[SUCCESS]") All done."
+tgMsg "✅ Package Installation Finished."
+ok "All done."

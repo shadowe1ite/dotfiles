@@ -1,64 +1,47 @@
-#!/bin/env bash
+#!/usr/bin/env bash
+set -euo pipefail
+source "{{ .chezmoi.sourceDir }}/.chezmoiscripts/.lib/util.sh"
 
-{{- $bw_folder_id := "3bb893f4-9a06-4477-afe5-b33c00c20c5d" }}
-{{- $github_token_id := "1b48a5cc-4f95-4704-a6e2-b33c011e4532" }}
+{{- $bwFolderId := "3bb893f4-9a06-4477-afe5-b33c00c20c5d" }}
+{{- $ghTokenId := "1b48a5cc-4f95-4704-a6e2-b33c011e4532" }}
 
-command -v bw  &>/dev/null || gum spin --title "Installing Bitwarden CLI..." -- paru -S --noconfirm bitwarden-cli
-command -v jq  &>/dev/null || gum spin --title "Installing jq..." -- paru -S --noconfirm jq
-command -v gpg &>/dev/null || gum spin --title "Installing GnuPG..." -- paru -S --noconfirm gnupg
-command -v git &>/dev/null || gum spin --title "Installing git..." -- paru -S --noconfirm git
-command -v pass &>/dev/null || gum spin --title "Installing pass..." -- paru -S --noconfirm pass
+checkDeps gnupg jq bitwarden-cli git pass
 
-# Ensure Bitwarden config dir exists (avoid warnings)
 mkdir -p "$HOME/.config/Bitwarden CLI"
 touch "$HOME/.config/Bitwarden CLI/data.json"
 
-# Login to Bitwarden with email from config
-echo
-echo "$(gum style --foreground 4 "[INFO]") Logging in to Bitwarden..."
+info "Logging in to Bitwarden"
 BW_SESSION=$(bw login {{ .email }} --raw)
-
-if [ -z "$BW_SESSION" ]; then
-  echo
-  echo "$(gum style --foreground 3 "[WARN]") Failed to log in to Bitwarden. Retrying..."
+if [[ -z "$BW_SESSION" ]]; then
+  warn "Login failed, retrying"
   BW_SESSION=$(bw login {{ .email }} --raw)
-  [ -z "$BW_SESSION" ] && { echo; echo "$(gum style --foreground 1 "[ERROR]") Login failed. Exiting."; exit 1; }
+  [[ -z "$BW_SESSION" ]] && { err "Login failed. Exiting."; exit 1; }
 fi
 
-# Import GPG keys
-echo
-echo "$(gum style --foreground 4 "[INFO]") Setting GPG keys...."
-gum spin --title "Importing GPG keys..." -- bash -c "bw list items --session \"$BW_SESSION\" --folderid \"{{ $bw_folder_id }}\" | jq -r '.[] | select(.notes | contains(\"BEGIN PGP\")) | .notes' | gpg --import --batch --yes -q"
+info "Importing GPG keys"
+bw list items --session "$BW_SESSION" --folderid "{{ $bwFolderId }}" \
+  | jq -r '.[] | select(.notes | contains("BEGIN PGP")) | .notes' \
+  | gpg --import --batch --yes -q
 
-# Trust the key
-echo
-echo "$(gum style --foreground 4 "[INFO]") Setting GPG key trust..."
-gum spin --title "Setting key trust level..." -- bash -c "echo -e \"trust\\n5\\ny\\n\" | gpg --batch --command-fd 0 --edit-key {{ .email }} >/dev/null 2>&1"
+info "Setting GPG key trust"
+echo -e "trust\n5\ny\n" | gpg --batch --command-fd 0 --edit-key {{ .email }} >/dev/null 2>&1
 
-# Configure GPG agent for passphrase caching
-echo
-echo "$(gum style --foreground 4 "[INFO]") Configuring GPG agent..."
 mkdir -p ~/.gnupg
-cat > ~/.gnupg/gpg-agent.conf << EOF
+cat > ~/.gnupg/gpg-agent.conf <<EOF
 default-cache-ttl 28800
 max-cache-ttl 86400
 EOF
 
-# Restart GPG agent and unlock key once
-gpg-connect-agent reloadagent /bye > /dev/null
-echo "$(gum style --foreground 4 "[INFO]") Enter GPG password"
+gpg-connect-agent reloadagent /bye >/dev/null
+info "Enter GPG password"
 gpg -q --pinentry-mode loopback --sign --default-key {{ .email }} --output /dev/null <<< "unlock"
 
-# Get token and clone
-echo
-echo "$(gum style --foreground 4 "[INFO]") Cloning password store..."
-GITHUB_TOKEN=$(gum spin --title "Getting GitHub token..." -- bash -c "bw --session \"$BW_SESSION\" get item \"{{ $github_token_id }}\" | jq -r '.notes'")
-gum spin --title "Cloning password store..." -- git clone "https://${GITHUB_TOKEN}@github.com/shadowe1ite/.password-store.git" ~/.password-store
+info "Cloning password store"
+GH_TOKEN=$(bw --session "$BW_SESSION" get item "{{ $ghTokenId }}" | jq -r '.notes')
+git clone "https://${GH_TOKEN}@github.com/shadowe1ite/.password-store.git" ~/.password-store
 
-# Cleanup
-echo
-echo "$(gum style --foreground 4 "[INFO]") Cleaning up..."
-gum spin --title "Logging out of Bitwarden..." -- bw logout
-gum spin --title "Removing Bitwarden CLI..." -- paru -Rns --noconfirm bitwarden-cli
-echo
-echo "$(gum style --foreground 10 "[SUCCESS]") GPG Setup completed"
+info "Cleaning up"
+bw logout
+paru -Rns --noconfirm bitwarden-cli >/dev/null 2>&1
+
+ok "GPG setup completed"

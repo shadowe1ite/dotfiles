@@ -1,10 +1,26 @@
-hyprland:
+wm:
+  - niri
   - hyprland
+
+niri:
+  - xdg-desktop-portal-gnome
+  - xdg-desktop-portal-gtk
+  - xwayland-satellite
+
+hyprland:
   - xdg-desktop-portal-hyprland
   - hypridle
   - hyprpicker
-  - hyprpolkitagent
   - hyprland-guiutils
+
+quickshell:
+  - noctalia-qs
+  - qt6-5compat
+
+utils:
+  - upower
+  - ddcutil
+  - wlsunset
 
 icons:
   - fluent-icon-theme-git

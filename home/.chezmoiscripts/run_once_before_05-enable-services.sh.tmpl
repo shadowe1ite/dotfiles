@@ -1,52 +1,23 @@
 #!/usr/bin/env bash
 set -euo pipefail
+source "{{ .chezmoi.sourceDir }}/.chezmoiscripts/.lib/util.sh"
 
 USER_SERVICES=(
-{{- with .services }}
-  {{- with .user }}
-    {{- range . }}"{{ . }}" {{ end -}}
-  {{- end -}}
-{{- end -}}
+{{- with .services }}{{- with .user }}{{- range . }}"{{ . }}" {{ end }}{{- end }}{{- end -}}
 )
 
 SYSTEM_SERVICES=(
-{{- with .services }}
-  {{- with .system }}
-    {{- range . }}"{{ . }}" {{ end -}}
-  {{- end -}}
-{{- end -}}
+{{- with .services }}{{- with .system }}{{- range . }}"{{ . }}" {{ end }}{{- end }}{{- end -}}
 )
 
-echo;echo "$(gum style --foreground 4 "[INFO]") Setting up services"
+info "User services (${#USER_SERVICES[@]})"
+for s in "${USER_SERVICES[@]}"; do enableSvc "$s" "user"; done
 
-echo;echo "$(gum style --foreground 5 "User services count:") $(gum style --foreground 1 "${#USER_SERVICES[@]}")"
-for s in "${USER_SERVICES[@]}"; do
-  if systemctl --user is-enabled "$s" &>/dev/null; then
-    echo "$(gum style --foreground 6 "already:") $s"
-  else
-    if systemctl --user enable --now "$s" &>/dev/null; then
-      echo "$(gum style --foreground 2 "enabled:") $s"
-    else
-      echo "$(gum style --foreground 1 "FAILED:") $s"
-    fi
-  fi
-done
-
-echo;echo "$(gum style --foreground 5 "System services count:") $(gum style --foreground 1 "${#SYSTEM_SERVICES[@]}")"
-for s in "${SYSTEM_SERVICES[@]}"; do
-  if systemctl is-enabled "$s" &>/dev/null; then
-    echo "$(gum style --foreground 6 "already:") $s"
-  else
-    if sudo systemctl enable --now "$s" &>/dev/null; then
-      echo "$(gum style --foreground 2 "enabled:") $s"
-    else
-      echo "$(gum style --foreground 1 "FAILED:") $s"
-    fi
-  fi
-done
+info "System services (${#SYSTEM_SERVICES[@]})"
+for s in "${SYSTEM_SERVICES[@]}"; do enableSvc "$s" "system"; done
 
 {{ range .groups -}}
-sudo usermod -aG {{ . }} $USER
+sudo usermod -aG {{ . }} "$USER"
 {{ end -}}
 
-echo;echo "$(gum style --foreground 10 "[SUCCESS]") Finished setting up services and groups"
+ok "Finished services and groups"

@@ -1,74 +1,51 @@
-#!/bin/env bash
+#!/usr/bin/env bash
+set -euo pipefail
+source "{{ .chezmoi.sourceDir }}/.chezmoiscripts/.lib/util.sh"
 
-# Base storage location - simple template variable
 STORAGE="{{ .storage | default "/mnt/storage" }}"
 
-# Handle special directories first
-[ -d $HOME/Documents ] && { echo "$(gum style --foreground 1 "Removing $HOME/Documents")"; rm -rf $HOME/Documents; }
-[ ! -d $HOME/Videos ] && { echo "$(gum style --foreground 2 "Creating $HOME/Videos")"; mkdir -p $HOME/Videos; }
-[ ! -d $HOME/Videos/Captures/Clips ] && { echo "$(gum style --foreground 2 "Creating $HOME/Videos/Captures/Clips")"; mkdir -p $HOME/Videos/Captures/Clips; }
-[ ! -d $HOME/Videos/Music/Clips ] && { echo "$(gum style --foreground 2 "Creating $HOME/Music/Clips")"; mkdir -p $HOME/Music/Clips; }
-[ ! -d $HOME/Pictures ] && { echo "$(gum style --foreground 4 "Creating $HOME/Pictures")"; mkdir -p $HOME/Pictures; }
-[ ! -d $HOME/Pictures/Screenshots ] && { echo "$(gum style --foreground 5 "Creating $HOME/Pictures/Screenshots")"; mkdir -p $HOME/Pictures/Screenshots; }
+set -euo pipefail
 
-# Create all symlinks with source existence check
-for link in \
-    "$STORAGE/Movies:$HOME/Videos/Movies" \
-    "$STORAGE/Music:$HOME/Music" \
-    "$STORAGE/courses:$HOME/Videos/courses" \
-    "$STORAGE/Documents:$HOME/Documents" \
-    "$STORAGE/wall:$HOME/Pictures/Wallpapers" \
-    "$STORAGE/code:$HOME/code"; do
-    
-    SRC=${link%:*}
-    DST=${link#*:}
-    
-    # Check if source exists
-    [ ! -d "$SRC" ] && { echo "$(gum style --foreground 1 "Error: $SRC doesn't exist")"; continue; }
-    
-    # Remove existing destination if it exists
-    [ -e "$DST" ] && { echo "$(gum style --foreground 3 "Removing existing $DST")"; rm -rf "$DST"; }
-    
-    # Create symlink
-    ln -sf "$SRC" "$DST" && echo "$(gum style --foreground 2 "Linked: $DST -> $SRC")"
-done
+mkdir -p "$HOME"/{Videos/Captures/Clips,Music/Clips,Pictures/Screenshots}
+rm -rf "$HOME/Documents"
+ln -sf "$STORAGE/Documents"  "$HOME/Documents"
+ln -sf "$STORAGE/Movies"     "$HOME/Videos/Movies"
+ln -sf "$STORAGE/Music"      "$HOME/Music"
+ln -sf "$STORAGE/courses"    "$HOME/Videos/courses"
+ln -sf "$STORAGE/wall"       "$HOME/Pictures/Wallpapers"
+ln -sf "$STORAGE/code"       "$HOME/code"
+
 xdg-user-dirs-update
-echo "$(gum style --foreground 10 "[SUCCESS]") Finished setting up directories"
+ok "Directories setup complete"
 
 {{- if eq .chezmoi.username .user }}
-# Check if current shell is already zsh
+
 if [[ "$SHELL" != "$(which zsh)" ]]; then
-    gum spin --title "Installing Zsh Plugins" -- zsh -c 'source ~/.zshrc'
-    echo "$(gum style --foreground 4 "[INFO]") Changing shell to zsh"
-    sudo chsh -s $(which zsh) $USER
+  zsh -c 'source ~/.zshrc'
+  info "Changing shell to zsh"
+  sudo chsh -s "$(which zsh)" "$USER"
 fi
 
-{{ if eq .chezmoi.osRelease.id "arch" }}
-gum spin --title "Cleaning Home..." -- rm -rf ~/go ~/paru-bin
-gum spin --title "Disabling iwd..." -- sudo systemctl disable iwd.service
-gum spin --title "Disabling Systemd Networkd..." --  sudo systemctl disable systemd-networkd.service
-gum spin --title "Connecting {{ pass "desktop/wifi-name" }}" -- nmcli dev wifi connect "{{ pass "desktop/wifi-name" }}" password "{{ pass "desktop/wifi-pass" }}"
-{{ end }}
+{{ if eq .chezmoi.osRelease.id "arch" -}}
+rm -rf ~/go ~/paru-bin
+sudo systemctl disable iwd.service
+sudo systemctl disable systemd-networkd.service
+nmcli dev wifi connect "{{ pass "desktop/wifi-name" }}" password "{{ pass "desktop/wifi-pass" }}"
+{{ end -}}
 
-gum spin --title "Enabling virsh autostart..." -- sudo virsh net-autostart default 
-gum spin --title "Enabling virsh starting..." -- sudo virsh net-start default
+sudo virsh net-autostart default
+sudo virsh net-start default
 
-gum spin --title "Creating new Warp registration..." -- echo 'y' | warp-cli registration new
-gum spin --title "Connecting to Warp..." -- warp-cli connect
+echo 'y' | warp-cli registration new
+warp-cli connect
 
-gum spin --title "Downloading config.js" -- sudo curl -L -o /opt/zen-browser-bin/config.js https://raw.githubusercontent.com/MrOtherGuy/fx-autoconfig/refs/heads/master/program/config.js
+ok "Installation completed"
 
-gum spin --title "Downloading config-prefs.js" -- sudo curl -L -o /opt/zen-browser-bin/defaults/pref/config-prefs.js https://raw.githubusercontent.com/MrOtherGuy/fx-autoconfig/refs/heads/master/program/defaults/pref/config-prefs.js
+tgMsg "🌸 All Done 🎉. Now reboot your system"
 
-echo "$(gum style --foreground 10 "[SUCCESS]") Installation completed successfully!"
-echo
-
-gum spin --title "Sending Telegram reminder" -- curl -s -X POST "https://api.telegram.org/bot{{ pass "telegram/bot/token" }}/sendMessage" -d chat_id="{{ pass "telegram/bot/chatId" }}" -d text="🌸 All Done 🎉. Now reboot your system"
-
-if gum confirm "Do you want to reboot your system now?" --default=true --affirmative="Yes" --negative="No"; then
-  echo "$(gum style --foreground 4 "[INFO]") Rebooting system..."
+if confirm "Reboot now?"; then
   reboot
 else
-  echo "$(gum style --foreground 3 "[INFO]") Reboot skipped. Please reboot manually when convenient."
+  info "Reboot skipped"
 fi
 {{- end }}

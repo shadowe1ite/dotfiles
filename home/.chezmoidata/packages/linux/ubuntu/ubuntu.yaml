@@ -1,0 +1,8 @@
+packages:
+  - zsh
+  - starship
+  - fzf
+  - neovim
+  - eza
+  - tmux
+  - build-essential

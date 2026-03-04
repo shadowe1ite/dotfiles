@@ -1,34 +1,20 @@
-#!/bin/env bash
-
+#!/usr/bin/env bash
 set -euo pipefail
+source "{{ .chezmoi.sourceDir }}/.chezmoiscripts/.lib/util.sh"
 
-DISK_MODEL="{{ .disk }}"
-MOUNT_POINT="{{ .storage }}"
+MODEL="{{ .disk }}"
+MNT="{{ .storage }}"
 
-gum style "Finding device with model: $DISK_MODEL..."
+step "Finding device: $MODEL"
+DEV=$(lsblk -dno NAME,MODEL | grep "$MODEL" | awk '{print "/dev/" $1}')
+[[ -z "$DEV" ]] && { err "Device '$MODEL' not found."; exit 1; }
 
-DEVICE=$(lsblk -dno NAME,MODEL | grep "$DISK_MODEL" | awk '{print "/dev/" $1}')
-if [ -z "$DEVICE" ]; then
-  gum style "Device with model '$DISK_MODEL' not found." --foreground 1
-  exit 1
-fi
+step "Device: $DEV"
+UUID=$(sudo blkid -s UUID -o value "$DEV")
+[[ -z "$UUID" ]] && { err "UUID not found for $DEV"; exit 1; }
 
-gum style "Device found: $DEVICE"
+[[ ! -d "$MNT" ]] && sudo mkdir -p "$MNT"
+mountpoint -q "$MNT" || sudo mount "$DEV" "$MNT"
+grep -q "$UUID" /etc/fstab || echo "UUID=$UUID $MNT ext4 defaults,rw,user,exec 0 2" | sudo tee -a /etc/fstab >/dev/null
 
-UUID=$(sudo blkid -s UUID -o value "$DEVICE")
-if [ -z "$UUID" ]; then
-  gum style "UUID not found for $DEVICE" --foreground 1
-  exit 1
-fi
-
-if [ ! -d "$MOUNT_POINT" ]; then
-  gum spin --title "Creating mount point $MOUNT_POINT..." -- sudo mkdir -p "$MOUNT_POINT"
-fi
-
-gum spin --title "Mounting $DEVICE to $MOUNT_POINT..." -- sudo mount "$DEVICE" "$MOUNT_POINT"
-
-if ! grep -q "$UUID" /etc/fstab; then
-  gum spin --title "Adding entry to /etc/fstab..." -- bash -c "echo 'UUID=$UUID $MOUNT_POINT ext4 defaults,rw,user,exec 0 2' | sudo tee -a /etc/fstab"
-fi
-
-echo "$(gum style --foreground 10 '[SUCCESS]') Setting up secondary disk"
+ok "Secondary disk setup complete"

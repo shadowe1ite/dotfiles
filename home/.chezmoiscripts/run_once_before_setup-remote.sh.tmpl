@@ -1,13 +1,16 @@
 #!/usr/bin/env bash
+set -euo pipefail
+
+{{- define "flat" -}}
+  {{- range . }}"{{ . }}" {{ end -}}
+{{- end }}
+
 sudo apt update -y
 
-{{ if eq .chezmoi.osRelease.id "ubuntu" }}
-sudo apt install zsh starship fzf neovim eza tmux build-essential -y
-{{ end }}
+sudo apt install -y {{ template "flat" (include ".chezmoidata/packages/linux/ubuntu/ubuntu.yaml" | fromYaml).packages }}
+sudo apt install -y {{ template "flat" (include ".chezmoidata/packages/linux/rasbian/rasbian.yaml" | fromYaml).packages }}
 
-sudo apt install zsh starship fzf bat eza zoxide tmux build-essential -y
-
-sudo chsh -s $(which zsh) $USER
+sudo chsh -s "$(which zsh)" "$USER"
 
 sudo tee /etc/motd > /dev/null <<'EOF'
 

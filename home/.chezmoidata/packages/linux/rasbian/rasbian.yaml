@@ -1,0 +1,9 @@
+packages:
+  - zsh
+  - starship
+  - fzf
+  - bat
+  - eza
+  - zoxide
+  - tmux
+  - build-essential
