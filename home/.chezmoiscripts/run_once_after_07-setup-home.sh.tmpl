@@ -33,11 +33,10 @@ sudo systemctl disable iwd.service
 sudo systemctl disable systemd-networkd.service
 {{- if ne $chassis "vm" }}
 nmcli dev wifi connect "{{ pass "desktop/wifi-name" }}" password "{{ pass "desktop/wifi-pass" }}"
-{{ end -}}
-{{ end -}}
-
 sudo virsh net-autostart default
 sudo virsh net-start default
+{{ end -}}
+{{ end -}}
 
 echo 'y' | warp-cli registration new
 warp-cli connect
