@@ -39,7 +39,7 @@ installPkg() {
     retry "$x" $AUR -S --asexplicit --sudoloop --needed --noconfirm --removemake "$x" && { step "$x"; continue; }
     err "$x"; f+=("$x"); failed+=("[$g] $x")
   done
-  [[ ${#f[@]} -gt 0 ]] && { warn "$g done with ${#f[@]} failures"; return 1; }
+  [[ ${#f[@]} -gt 0 ]] && { warn "$g done with ${#f[@]} failures"; return 0; }
   ok "$g"
 }
 
