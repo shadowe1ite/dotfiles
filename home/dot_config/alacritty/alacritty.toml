@@ -5,6 +5,7 @@ import = ["~/.config/alacritty/themes/noctalia.toml"]
 padding = { x = 20, y = 1 }
 decorations = "None"
 decorations_theme_variant = "Dark"
+opacity = 0.95
 
 [font]
 size = 13.0

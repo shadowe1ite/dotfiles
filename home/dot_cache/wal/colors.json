@@ -1,26 +1,26 @@
 {
-  "wallpaper": "/home/shadow/Pictures/Wallpapers/Wallpapers/Catppuccin/sh2-p.png",
+  "wallpaper": "/home/shadow/Pictures/Wallpapers/Wallpapers/Crimson/hee.jpg",
   "alpha": "100",
   "colors": {
-    "color0": "#141316",
+    "color0": "#181211",
     "color1": "",
     "color2": "",
-    "color3": "#c5c0ff",
+    "color3": "#ffb4a7",
     "color4": "",
-    "color5": "#ebb8cf",
+    "color5": "#ddc48c",
     "color6": "",
-    "color7": "#353438",
+    "color7": "#3b3332",
     "color8": "",
     "color9": "",
-    "color10": "#c5c0ff",
+    "color10": "#ffb4a7",
     "color11": "",
     "color12": "",
-    "color13": "#c8c4dc",
+    "color13": "#e7bdb5",
     "color14": "",
-    "color15": "#e5e1e6",
-    "color16": "#e5e1e6",
-    "color17": "#201f23",
+    "color15": "#ede0dd",
+    "color16": "#ede0dd",
+    "color17": "#251e1d",
     "color18": "",
-    "color19": "#141316"
+    "color19": "#181211"
   }
 }
