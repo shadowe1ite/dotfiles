@@ -12,7 +12,7 @@ touch "$HOME/.config/Bitwarden CLI/data.json"
 info "Logging in to Bitwarden"
 BW_STATUS=$(bw status 2>/dev/null | jq -r '.status' 2>/dev/null || echo "unauthenticated")
 if [[ "$BW_STATUS" == "unlocked" ]]; then
-  BW_SESSION=$(bw unlock --raw 2>/dev/null || true)
+  BW_SESSION=$(bw login {{ .email }} --raw 2>/dev/null || true)
 elif [[ "$BW_STATUS" == "locked" ]]; then
   BW_SESSION=$(bw unlock --raw)
 else
