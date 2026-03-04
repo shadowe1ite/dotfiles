@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
+
+{{- $chassis := includeTemplate "sys-chassis.tmpl" . }}
 {{ template "utils" . }}
 
 STORAGE="{{ .storage | default "/mnt/storage" }}"

@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-{{- $chassis := includeTemplate "sys-chassis.tmpl" . }}
 
 R='\033[0;31m' G='\033[0;32m' Y='\033[0;33m' B='\033[0;34m' C='\033[0;36m' BG='\033[1;32m' D='\033[2m' N='\033[0m'
 
