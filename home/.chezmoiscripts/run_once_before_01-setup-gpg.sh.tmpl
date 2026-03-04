@@ -16,12 +16,16 @@ if [[ "$BW_STATUS" == "unlocked" ]]; then
 elif [[ "$BW_STATUS" == "locked" ]]; then
   BW_SESSION=$(bw unlock --raw)
 else
-  BW_SESSION=$(bw login {{ .email }} --raw || true)
-  if [[ -z "$BW_SESSION" ]]; then
-    warn "Login failed, retrying"
+  BW_OK=false
+  for i in 1 2 3; do
     BW_SESSION=$(bw login {{ .email }} --raw || true)
-    [[ -z "$BW_SESSION" ]] && { err "Login failed. Exiting."; exit 1; }
-  fi
+    if [[ -n "$BW_SESSION" ]]; then
+      BW_OK=true
+      break
+    fi
+    warn "Login failed, retrying ($i/3)"
+  done
+  [[ "$BW_OK" != "true" ]] && { err "Login failed. Exiting."; exit 1; }
 fi
 
 info "Importing GPG keys"
