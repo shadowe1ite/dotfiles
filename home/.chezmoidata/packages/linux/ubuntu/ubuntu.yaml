@@ -1,7 +1,4 @@
 packages:
   - zsh
-  - fzf
-  - neovim
-  - eza
   - tmux
   - build-essential
