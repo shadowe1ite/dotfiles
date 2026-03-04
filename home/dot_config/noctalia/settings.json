@@ -479,7 +479,7 @@
         "shadowOffsetY": 3,
         "showChangelogOnStartup": true,
         "showHibernateOnLockScreen": false,
-        "showScreenCorners": true,
+        "showScreenCorners": false,
         "showSessionButtonsOnLockScreen": false,
         "telemetryEnabled": false
     },
@@ -524,7 +524,7 @@
         "bluetoothRssiPollingEnabled": true,
         "disableDiscoverability": false,
         "networkPanelView": "wifi",
-        "wifiDetailsViewMode": "list",
+        "wifiDetailsViewMode": "grid",
         "wifiEnabled": true
     },
     "nightLight": {
