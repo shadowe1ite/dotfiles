@@ -11,17 +11,20 @@ mkdir -p "$HOME/.config/Bitwarden CLI"
 touch "$HOME/.config/Bitwarden CLI/data.json"
 
 info "Logging in to Bitwarden"
-BW_SESSION=$(bw login {{ .email }} --raw)
-if [[ -z "$BW_SESSION" ]]; then
-  warn "Login failed, retrying"
-  BW_SESSION=$(bw login {{ .email }} --raw)
-  [[ -z "$BW_SESSION" ]] && { err "Login failed. Exiting."; exit 1; }
-fi
+for i in 1 2 3; do
+  BW_SESSION=$(bw login {{ .email }} --raw) && [[ -n "$BW_SESSION" ]] && break
+  warn "Login failed (attempt $i/3)"
+  BW_SESSION=""
+done
+[[ -z "$BW_SESSION" ]] && { err "Bitwarden login failed. Exiting."; exit 1; }
+ok "Bitwarden login"
 
 info "Importing GPG keys"
-bw list items --session "$BW_SESSION" --folderid "{{ $bwFolderId }}" \
-  | jq -r '.[] | select(.notes | contains("BEGIN PGP")) | .notes' \
-  | gpg --import --batch --yes -q
+keys=$(bw list items --session "$BW_SESSION" --folderid "{{ $bwFolderId }}" \
+  | jq -r '.[] | select(.notes | contains("BEGIN PGP")) | .notes')
+[[ -z "$keys" ]] && { err "No GPG keys found in Bitwarden. Exiting."; bw logout; exit 1; }
+echo "$keys" | gpg --import --batch --yes -q
+ok "GPG keys imported"
 
 info "Setting GPG key trust"
 echo -e "trust\n5\ny\n" | gpg --batch --command-fd 0 --edit-key {{ .email }} >/dev/null 2>&1
@@ -31,17 +34,23 @@ cat > ~/.gnupg/gpg-agent.conf <<EOF
 default-cache-ttl 28800
 max-cache-ttl 86400
 EOF
-
 gpg-connect-agent reloadagent /bye >/dev/null
+
 info "Enter GPG password"
-gpg -q --pinentry-mode loopback --sign --default-key {{ .email }} --output /dev/null <<< "unlock"
+for i in 1 2 3; do
+  gpg -q --pinentry-mode loopback --sign --default-key {{ .email }} --output /dev/null <<< "unlock" && break
+  warn "Wrong password (attempt $i/3)"
+done
+gpg -q --pinentry-mode loopback --sign --default-key {{ .email }} --output /dev/null <<< "unlock" || { err "GPG unlock failed. Exiting."; bw logout; exit 1; }
 
 info "Cloning password store"
 GH_TOKEN=$(bw --session "$BW_SESSION" get item "{{ $ghTokenId }}" | jq -r '.notes')
+[[ -z "$GH_TOKEN" ]] && { err "GitHub token not found in Bitwarden. Exiting."; bw logout; exit 1; }
 git clone "https://${GH_TOKEN}@github.com/shadowe1ite/.password-store.git" ~/.password-store
+ok "Password store cloned"
 
 info "Cleaning up"
 bw logout
-paru -Rns --noconfirm bitwarden-cli >/dev/null 2>&1
+$AUR -Rns --noconfirm bitwarden-cli >/dev/null 2>&1
 
 ok "GPG setup completed"
