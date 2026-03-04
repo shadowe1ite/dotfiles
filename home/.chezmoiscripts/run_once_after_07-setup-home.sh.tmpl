@@ -31,12 +31,11 @@ fi
 {{ if eq .chezmoi.osRelease.id "arch" -}}
 sudo systemctl disable iwd.service || true
 sudo systemctl disable systemd-networkd.service || true
-{{- if ne $chassis "vm" }}
-nmcli dev wifi connect "{{ pass "desktop/wifi-name" }}" password "{{ pass "desktop/wifi-pass" }}"
-sudo virsh net-autostart default
-sudo virsh net-start default
+nmcli dev wifi connect "{{ pass "desktop/wifi-name" }}" password "{{ pass "desktop/wifi-pass" }}" || true
 {{ end -}}
-{{ end -}}
+
+sudo virsh net-autostart default || true
+sudo virsh net-start default || true
 
 echo 'y' | warp-cli registration new || true
 warp-cli connect || true
