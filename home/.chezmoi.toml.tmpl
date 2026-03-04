@@ -7,6 +7,8 @@
 {{- $name := "ALAN S" -}}
 {{- $user := "shadow" -}}
 
+{{- $aur := promptChoiceOnce . "aur" "AUR helper" (list "paru" "yay") -}}
+
 encryption = "gpg"
 
 [data]
@@ -15,6 +17,7 @@ encryption = "gpg"
     user    = "{{ $user }}"
     disk    = "CT500P3SSD8"
     storage = "/mnt/storage"
+    aur     = "{{ $aur }}"
 
 [data.sddm]
     silent_variant = "catppuccin-mocha"
