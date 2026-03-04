@@ -11,7 +11,7 @@ if [[ -f /etc/pacman.conf.bak ]]; then
 fi
 {{- end }}
 
-info "Setting:q up repositories"
+info "Setting up repositories"
 sudo cp /etc/pacman.conf /etc/pacman.conf.bak
 
 if [[ ! -f "$HOME/.config/paru/paru.conf" ]]; then

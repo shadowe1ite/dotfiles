@@ -42,7 +42,7 @@ gpg-connect-agent reloadagent /bye >/dev/null
 info "Enter GPG password"
 GPG_OK=false
 for i in 1 2 3; do
-  if gpg -q --pinentry-mode loopback --sign --default-key {{ .email }} --output /dev/null <<< "unlock"; then
+  if gpg -q --pinentry-mode loopback --sign --default-key {{ .email }} --output /dev/null <<< "unlock" 2>/dev/null; then
     GPG_OK=true
     break
   fi
