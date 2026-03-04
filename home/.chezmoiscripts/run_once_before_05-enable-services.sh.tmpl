@@ -20,4 +20,7 @@ for s in "${SYSTEM_SERVICES[@]}"; do enableSvc "$s" "system"; done
 sudo usermod -aG {{ . }} "$USER"
 {{ end -}}
 
+# mask autostart
+systemctl --user mask xdg-desktop-autostart.target
+
 ok "Finished services and groups"
