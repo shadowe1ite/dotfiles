@@ -3,5 +3,5 @@ method = pipewire
 source = auto
 
 [color]
-background = '#111415'
-foreground = '#6ad3ff'
+background = '#13140f'
+foreground = '#b9d165'

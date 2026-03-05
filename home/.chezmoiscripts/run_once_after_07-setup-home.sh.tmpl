@@ -8,12 +8,12 @@ set -euo pipefail
 
 mkdir -p "$HOME"/{Videos/Captures/Clips,Music/Clips,Pictures/Screenshots}
 rm -rf "$HOME/Documents"
-ln -sf "$STORAGE/Documents"  "$HOME/Documents"
-ln -sf "$STORAGE/Movies"     "$HOME/Videos/Movies"
-ln -sf "$STORAGE/Music"      "$HOME/Music"
-ln -sf "$STORAGE/courses"    "$HOME/Videos/courses"
-ln -sf "$STORAGE/wall"       "$HOME/Pictures/Wallpapers"
-ln -sf "$STORAGE/code"       "$HOME/code"
+ln -sfn "$STORAGE/Documents" "$HOME/Documents"
+ln -sfn "$STORAGE/Movies" "$HOME/Videos/Movies"
+ln -sfn "$STORAGE/Music" "$HOME/Music"
+ln -sfn "$STORAGE/courses" "$HOME/Videos/courses"
+ln -sfn "$STORAGE/wall" "$HOME/Pictures/Wallpapers"
+ln -sfn "$STORAGE/code" "$HOME/code"
 
 xdg-user-dirs-update
 ok "Directories setup complete"
@@ -29,14 +29,15 @@ fi
 {{ if eq .chezmoi.osRelease.id "arch" -}}
 sudo systemctl disable iwd.service
 sudo systemctl disable systemd-networkd.service
-nmcli dev wifi connect "{{ pass "desktop/wifi-name" }}" password "{{ pass "desktop/wifi-pass" }}"
 {{ end -}}
 
 sudo virsh net-autostart default
 sudo virsh net-start default
 
-echo 'y' | warp-cli registration new
-warp-cli connect
+if ! warp-cli registration show >/dev/null 2>&1; then
+    echo 'y' | warp-cli registration new
+    warp-cli connect
+fi
 
 ok "Installation completed"
 

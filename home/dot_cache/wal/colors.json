@@ -1,26 +1,26 @@
 {
-  "wallpaper": "/home/shadow/Pictures/Wallpapers/Wallpapers/Crimson/rofi-blossoms.png",
+  "wallpaper": "/home/shadow/Pictures/Wallpapers/Wallpapers/Everforest/closeflower.jpg",
   "alpha": "100",
   "colors": {
-    "color0": "#111415",
+    "color0": "#13140f",
     "color1": "",
     "color2": "",
-    "color3": "#6ad3ff",
+    "color3": "#b9d165",
     "color4": "",
-    "color5": "#c6c2ea",
+    "color5": "#a1d0c5",
     "color6": "",
-    "color7": "#323537",
+    "color7": "#353530",
     "color8": "",
     "color9": "",
-    "color10": "#6ad3ff",
+    "color10": "#b9d165",
     "color11": "",
     "color12": "",
-    "color13": "#b4cad6",
+    "color13": "#c4caa9",
     "color14": "",
-    "color15": "#e1e2e5",
-    "color16": "#e1e2e5",
-    "color17": "#1d2022",
+    "color15": "#e4e3da",
+    "color16": "#e4e3da",
+    "color17": "#1f201b",
     "color18": "",
-    "color19": "#111415"
+    "color19": "#13140f"
   }
 }

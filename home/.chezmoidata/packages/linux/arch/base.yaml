@@ -29,6 +29,7 @@ man:
   - man-pages
 
 network:
+  - networkmanager
   - net-tools
   - wireless_tools
   - cloudflare-warp-bin
