@@ -410,7 +410,6 @@
         "onlySameOutput": true,
         "pinnedApps": [
             "org.gnome.Evince",
-            "gimp",
             "ghidra",
             "org.telegram.desktop",
             "org.gnome.Calculator",
