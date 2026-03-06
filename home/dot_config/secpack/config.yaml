@@ -75,9 +75,9 @@ crypto:
     - intel-opencl-runtime
     - cuda
     - john
-
-  cargo:
-    - ciphey
+    - hashid
+    - hash-identifier
+    - ares
 
 forensic:
   pacman:
