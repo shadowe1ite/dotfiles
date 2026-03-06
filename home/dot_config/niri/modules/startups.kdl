@@ -8,6 +8,7 @@ spawn-at-startup "wl-paste" "--type" "text" "--watch" "bash" "-c" "cliphist stor
 spawn-at-startup "wl-paste" "--type" "image" "--watch" "bash" "-c" "cliphist store"
 spawn-at-startup "wl-clip-persist" "--clipboard" "regular"
 spawn-at-startup "udiskie" "--no-automount" "--smart-tray"
+spawn-at-startup "kdeconnectd"
 
 // # Controller alert
 spawn-at-startup "sh" "-c" "dualsensectl monitor add \"notify-send 'Controller Connected' '🎮 DualSense controller is now ready' -i input-gaming\""

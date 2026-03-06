@@ -16,6 +16,7 @@ hyprland:
 quickshell:
   - noctalia-qs
   - qt6-5compat
+  - qt6-tools
 
 utils:
   - upower

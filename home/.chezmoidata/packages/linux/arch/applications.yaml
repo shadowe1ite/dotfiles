@@ -6,6 +6,7 @@ usb:
 
 network:
   - wireshark-qt
+  - kdeconnect
 
 browser:
   - firefox-bin
