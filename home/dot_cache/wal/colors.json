@@ -1,26 +1,26 @@
 {
-  "wallpaper": "/home/shadow/Pictures/Wallpapers/Wallpapers/Everforest/closeflower.jpg",
+  "wallpaper": "/home/shadow/Pictures/Wallpapers/Wallpapers/Oxocarbon/flowerssky.jpg",
   "alpha": "100",
   "colors": {
-    "color0": "#13140f",
+    "color0": "#171214",
     "color1": "",
     "color2": "",
-    "color3": "#b9d165",
+    "color3": "#ffafd4",
     "color4": "",
-    "color5": "#a1d0c5",
+    "color5": "#f2bb99",
     "color6": "",
-    "color7": "#353530",
+    "color7": "#393335",
     "color8": "",
     "color9": "",
-    "color10": "#b9d165",
+    "color10": "#ffafd4",
     "color11": "",
     "color12": "",
-    "color13": "#c4caa9",
+    "color13": "#e0bdcb",
     "color14": "",
-    "color15": "#e4e3da",
-    "color16": "#e4e3da",
-    "color17": "#1f201b",
+    "color15": "#ebe0e2",
+    "color16": "#ebe0e2",
+    "color17": "#241e20",
     "color18": "",
-    "color19": "#13140f"
+    "color19": "#171214"
   }
 }
