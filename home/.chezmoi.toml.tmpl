@@ -19,7 +19,9 @@ encryption = "gpg"
     user    = "{{ $user }}"
     disk    = "CT500P3SSD8"
     storage = "/mnt/storage"
+  {{ if eq .chezmoi.osRelease.id "arch" -}}
     aur     = "{{ $aur }}"
+  {{- end }}
 
 [data.sddm]
     silent_variant = "catppuccin-mocha"
