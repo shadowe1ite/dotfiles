@@ -10,7 +10,10 @@ step() { printf "${D}  │${N} ${C}%s${N}\n" "$*"; }
 
 failed=()
 FAIL_LOG="$HOME/.local/state/chezmoi-failed-pkgs.log"
+
+{{ if eq .chezmoi.osRelease.id "arch" -}}
 AUR="{{ .aur }}"
+{{- end }}
 
 checkDeps() {
   for p in "$@"; do

@@ -6,5 +6,5 @@ packages:
   - eza
   - zoxide
   - tmux
-  - neovim
+  - vim
   - build-essential
