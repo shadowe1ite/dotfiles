@@ -56,7 +56,8 @@ utils:
   - xdg-user-dirs
   - tmux-plugin-manager
   - ydotool
-  - zbar 
+  - zbar
+  - cmake
 
 shell:
   - zsh

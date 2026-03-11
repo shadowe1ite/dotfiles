@@ -60,7 +60,7 @@
                     "errors":"ui",
                     "extension_file":"/home/shadow/.BurpSuite/extensions/matugen.py",
                     "extension_type":"python",
-                    "loaded":true,
+                    "loaded":false,
                     "name":"Matugen Theme Loader",
                     "output":"ui",
                     "use_ai":false
@@ -70,7 +70,7 @@
                     "errors":"ui",
                     "extension_file":"/home/shadow/.BurpSuite/extensions/PwnFoxy-1.2.0.jar",
                     "extension_type":"java",
-                    "loaded":true,
+                    "loaded":false,
                     "name":"PwnFoxy",
                     "output":"ui",
                     "use_ai":false
@@ -429,7 +429,6 @@
             ],
             "out_of_scope_history_logging_action":"disable",
             "pause_tasks_at_startup_default":true,
-            "show_learn_tab":true,
             "submit_feedback":true,
             "suppress_confirm_on_close":false,
             "temporary_files_location":"",

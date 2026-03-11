@@ -654,6 +654,13 @@
                 "countdownEnabled": true,
                 "enabled": true,
                 "keybind": ""
+            },
+            {
+                "action": "userspaceReboot",
+                "command": "",
+                "countdownEnabled": true,
+                "enabled": false,
+                "keybind": ""
             }
         ],
         "showHeader": true,
@@ -706,7 +713,7 @@
         "fontDefaultScale": 1,
         "fontFixed": "JetBrainsMono Nerd Font Mono",
         "fontFixedScale": 1,
-        "panelBackgroundOpacity": 1,
+        "panelBackgroundOpacity": 0.9500000000000001,
         "panelsAttachedToBar": true,
         "settingsPanelMode": "window",
         "settingsPanelSideBarCardStyle": false,
