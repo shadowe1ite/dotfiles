@@ -1,0 +1,9 @@
+Host server.local
+      Hostname ssh.shadowelite.tech
+      ProxyCommand cloudflared access ssh --hostname %h
+      User elite
+
+Host pi.local
+      Hostname pi.shadowelite.tech
+      ProxyCommand cloudflared access ssh --hostname %h
+      User shadow

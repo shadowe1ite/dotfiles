@@ -36,6 +36,13 @@ stripComponents = 1
 type = "git-repo"
 url = "https://github.com/coffinxp/GFpattren"
 refreshPeriod = "168h"
+
+
+[".local/bin/cloudflared"]
+type = "file"
+url = {{ gitHubLatestReleaseAssetURL "cloudflare/cloudflared" (printf "cloudflared-%s-%s" .chezmoi.os .chezmoi.arch) | quote }}
+executable = true
+
 {{ end }}
 
 {{ if eq .chezmoi.osRelease.id "ubuntu" }}
@@ -70,10 +77,5 @@ type = "archive-file"
 url = {{ gitHubLatestReleaseAssetURL "getzola/zola" (printf "zola-*-%s-*%s*.tar.gz" $processor .chezmoi.os) | quote }}
 executable = true
 path = "zola"
-
-[".local/bin/cloudflared"]
-type = "file"
-url = {{ gitHubLatestReleaseAssetURL "cloudflare/cloudflared" (printf "cloudflared-%s-%s" .chezmoi.os .chezmoi.arch) | quote }}
-executable = true
 
 {{ end }}
