@@ -70,12 +70,4 @@ url = {{ gitHubLatestReleaseAssetURL "getzola/zola" (printf "zola-*-%s-*%s*.tar.
 executable = true
 path = "zola"
 
-{{ else if eq .chezmoi.osRelease.id "raspbian" }}
-
-[".local/bin/zola"]
-type = "archive-file"
-url = {{ gitHubLatestReleaseAssetURL "getzola/zola" (printf "zola-*-%s-*%s*.tar.gz" $processor .chezmoi.os) | quote }}
-executable = true
-path = "zola"
-
 {{ end }}
