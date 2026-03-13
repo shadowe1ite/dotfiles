@@ -46,12 +46,13 @@
 .git-credentials
 .gdbinit
 .mozilla
+.face
+.BurpSuite/
 .zen/
 .gnupg/
 .local/
-.vdirsyncer/
 .config/*
-.ssh/
+.cache/*
 {{ if eq .chezmoi.osRelease.id "ubuntu" }}
 !.config/nvim
 {{ end }}
