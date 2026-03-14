@@ -14,7 +14,7 @@ hyprland:
   - hyprland-guiutils
 
 quickshell:
-  - noctalia-qs
+  - noctalia-shell
   - qt6-5compat
   - qt6-tools
 
