@@ -2,17 +2,6 @@
 
 {{ if and (ne .chezmoi.osRelease.id "raspbian") (ne .chezmoi.osRelease.id "ubuntu") }}
 
-#[".config/quickshell/noctalia-shell"]
-#type = "git-repo"
-#url = "https://github.com/noctalia-dev/noctalia-shell"
-#refreshPeriod = "1m"
-
-[".config/quickshell/noctalia-shell"]
-type = "archive"
-url = "https://github.com/noctalia-dev/noctalia-shell/releases/latest/download/noctalia-latest.tar.gz"
-stripComponents = 1
-refreshPeriod = "168h"
-
 [".local/share/fonts"]
 type = "archive"
 url = "https://smc.org.in/downloads/fonts/raghumalayalamsans/raghumalayalamsans.zip"

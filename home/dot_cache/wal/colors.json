@@ -1,26 +1,26 @@
 {
-  "wallpaper": "/home/shadow/Pictures/Wallpapers/fav/Green/02. Solarized Dark.png",
+  "wallpaper": "/home/shadow/Pictures/Wallpapers/fav/Green/green.jpeg",
   "alpha": "100",
   "colors": {
-    "color0": "#111415",
+    "color0": "#121410",
     "color1": "",
     "color2": "",
-    "color3": "#51d7ef",
+    "color3": "#9ed67c",
     "color4": "",
-    "color5": "#bcc5eb",
+    "color5": "#a0cfcf",
     "color6": "",
-    "color7": "#323536",
+    "color7": "#343531",
     "color8": "",
     "color9": "",
-    "color10": "#51d7ef",
+    "color10": "#9ed67c",
     "color11": "",
     "color12": "",
-    "color13": "#b1cbd1",
+    "color13": "#bdcbaf",
     "color14": "",
-    "color15": "#e1e3e3",
-    "color16": "#e1e3e3",
-    "color17": "#1d2021",
+    "color15": "#e3e3dc",
+    "color16": "#e3e3dc",
+    "color17": "#1e201c",
     "color18": "",
-    "color19": "#111415"
+    "color19": "#121410"
   }
 }

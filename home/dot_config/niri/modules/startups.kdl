@@ -4,8 +4,6 @@ spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPL
 spawn-at-startup "dbus-update-activation-environment" "--systemd" "--all"
 spawn-at-startup "systemctl" "--user" "import-environment" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
 
-spawn-at-startup "wl-paste" "--type" "text" "--watch" "bash" "-c" "cliphist store"
-spawn-at-startup "wl-paste" "--type" "image" "--watch" "bash" "-c" "cliphist store"
 spawn-at-startup "wl-clip-persist" "--clipboard" "regular"
 spawn-at-startup "udiskie" "--no-automount" "--smart-tray"
 spawn-at-startup "kdeconnectd"

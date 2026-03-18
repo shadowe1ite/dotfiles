@@ -22,7 +22,6 @@ media:
   - filelight
   - kio-admin
   - nautilus
-  - packet
   - qt5-imageformats
   - ffmpegthumbs
   - loupe
