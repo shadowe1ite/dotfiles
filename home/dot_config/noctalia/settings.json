@@ -689,7 +689,7 @@
         "showHeader": true,
         "showKeybinds": true
     },
-    "settingsVersion": 57,
+    "settingsVersion": 59,
     "systemMonitor": {
         "batteryCriticalThreshold": 5,
         "batteryWarningThreshold": 20,
@@ -718,10 +718,6 @@
             {
                 "enabled": true,
                 "id": "ghostty"
-            },
-            {
-                "enabled": true,
-                "id": "pywalfox"
             },
             {
                 "enabled": true,
