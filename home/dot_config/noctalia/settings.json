@@ -775,9 +775,8 @@
         "transitionEdgeSmoothness": 0.05,
         "transitionType": [
             "random",
-            "fade",
-            "stripes",
             "disc",
+            "stripes",
             "wipe",
             "honeycomb"
         ],
