@@ -69,6 +69,7 @@ music:
   - picard
   - lrcsnc
   - spotiflac-bin
+  - nicotine+
 
 hyprvisors:
   - libvirt
