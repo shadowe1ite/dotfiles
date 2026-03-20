@@ -121,6 +121,10 @@ output_path = "~/.config/burp/material.json"
 input_path = "~/.config/matugen/templates/colors-obs.obt"
 output_path = "~/.config/obs-studio/themes/matugen.obt"
 
+[templates.pywalfox]
+input_path = "~/.config/matugen/templates/colors-pywalfox.json"
+output_path = "~/.cache/wal/colors.json"
+
 #[templates.web]
 #input_path = "~/.config/matugen/templates/colors-web"
 #output_path = "~/web-color-rec"
