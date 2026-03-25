@@ -2,8 +2,8 @@
 {{- $pinned := .zen.tabs.main.pinned -}}
 
 {{- if ne .chezmoi.username .user }}
-  {{- $essentials = .tabs.private.essential -}}
-  {{- $pinned = .tabs.private.pinned -}}
+  {{- $essentials = .zen.tabs.private.essential -}}
+  {{- $pinned = .zen.tabs.private.pinned -}}
 {{- end }}
 
 {{- $tabs := list -}}
