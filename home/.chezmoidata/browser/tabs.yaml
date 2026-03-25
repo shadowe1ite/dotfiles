@@ -32,6 +32,8 @@ zen:
         - name: "Gmail"
           domain: "gmail.com"
 
+      pinned:
+
 
 
 firefox:
