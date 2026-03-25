@@ -1,7 +1,7 @@
 {{- $essentials := .firefox.tabs.main.pinned -}}
 
 {{- if ne .chezmoi.username .user }}
-  {{- $essentials = .firefox.tabs.private.essential -}}
+  {{- $essentials = .firefox.tabs.private.pinned -}}
 {{- end }}
 
 {{- $tabs := list -}}

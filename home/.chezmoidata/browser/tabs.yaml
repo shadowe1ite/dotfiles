@@ -22,6 +22,16 @@ zen:
           domain: "bugcrowd.com/engagements"
         - name: "YesWeHack"
           domain: "yeswehack.com/programs"
+    
+    private:
+      essential:
+        - name: "Notion"
+          domain: "notion.com"
+        - name: "Reddit"
+          domain: "reddit.com"
+        - name: "Gmail"
+          domain: "gmail.com"
+
 
 
 firefox:
