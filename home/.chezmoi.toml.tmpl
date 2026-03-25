@@ -8,9 +8,9 @@
 {{- $name := "ALAN S" -}}
 {{- $user := "shadow" -}}
 
-{{ if eq .chezmoi.osRelease.id "arch" -}}
-{{- $aur := promptChoiceOnce . "aur" "AUR helper" (list "paru" "yay") -}}
-{{- end }}
+{{- if and (eq .chezmoi.osRelease.id "arch") (eq .chezmoi.username $user) -}}
+  {{- $aur := promptChoiceOnce . "aur" "AUR helper" (list "paru" "yay") -}}
+{{- end -}}
 
 encryption = "gpg"
 
