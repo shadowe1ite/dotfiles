@@ -33,9 +33,6 @@ sudo systemctl disable systemd-networkd.service
 sudo virsh net-autostart default
 sudo virsh net-start default
 
-{{ end }}
-{{ end }}
-
 if command -v warp-cli >/dev/null 2>&1; then
     if ! warp-cli registration show 2>/dev/null | grep -q "Account type"; then
         echo "Registering warp..."
@@ -51,7 +48,6 @@ fi
 
 ok "Installation completed"
 
-{{ if eq .chezmoi.username .user }}
 notify "⚙️ All Done 🎉. Now reboot your system"
 
 if confirm "Reboot now?"; then
@@ -59,4 +55,6 @@ if confirm "Reboot now?"; then
 else
   info "Reboot skipped"
 fi
+
+{{ end }}
 {{ end }}
