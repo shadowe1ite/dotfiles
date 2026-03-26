@@ -167,6 +167,7 @@ fn cuser() {
   fi
 
   sudo -u "$user" sh -c "cd /home/$user && chezmoi init --apply shadowe1ite"
+  gum spin --title "Installing Zsh Plugins" -- sudo -u "$user" zsh -c 'source ~/.zshrc'
 
   echo "[✓] User '$user' created !"
 }
