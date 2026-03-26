@@ -24,17 +24,25 @@ if [[ "$SHELL" != "$(which zsh)" ]]; then
   sudo chsh -s "$(which zsh)" "$USER"
 fi
 
+{{- if eq .chezmoi.username .user }}
 {{ if eq .chezmoi.osRelease.id "arch" -}}
+
 sudo systemctl disable iwd.service
 sudo systemctl disable systemd-networkd.service
-{{ end -}}
 
 sudo virsh net-autostart default
 sudo virsh net-start default
 
-if ! warp-cli registration show >/dev/null 2>&1; then
-    echo 'y' | warp-cli registration new
-    warp-cli connect
+{{ end -}}
+{{ end -}}
+
+if command -v warp-cli >/dev/null 2>&1; then
+    if ! warp-cli registration show >/dev/null 2>&1; then
+        echo 'y' | warp-cli registration new
+        warp-cli connect
+    fi
+else
+    echo "warp-cli is not installed. Skipping..."
 fi
 
 ok "Installation completed"
