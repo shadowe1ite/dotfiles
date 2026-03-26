@@ -36,13 +36,9 @@ sudo virsh net-start default
 {{ end -}}
 {{ end -}}
 
-if command -v warp-cli >/dev/null 2>&1; then
-    if ! warp-cli registration show >/dev/null 2>&1; then
-        echo 'y' | warp-cli registration new
-        warp-cli connect
-    fi
-else
-    echo "warp-cli is not installed. Skipping..."
+if ! warp-cli registration show >/dev/null 2>&1; then
+    echo 'y' | warp-cli registration new
+    warp-cli connect
 fi
 
 ok "Installation completed"
