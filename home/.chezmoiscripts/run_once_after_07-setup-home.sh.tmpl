@@ -24,8 +24,8 @@ if [[ "$SHELL" != "$(which zsh)" ]]; then
   sudo chsh -s "$(which zsh)" "$USER"
 fi
 
-{{- if eq .chezmoi.username .user }}
-{{ if eq .chezmoi.osRelease.id "arch" -}}
+{{ if eq .chezmoi.username .user }}
+{{ if eq .chezmoi.osRelease.id "arch" }}
 
 sudo systemctl disable iwd.service
 sudo systemctl disable systemd-networkd.service
@@ -47,6 +47,7 @@ fi
 
 ok "Installation completed"
 
+{{ if eq .chezmoi.username .user }}
 notify "⚙️ All Done 🎉. Now reboot your system"
 
 if confirm "Reboot now?"; then
@@ -54,3 +55,4 @@ if confirm "Reboot now?"; then
 else
   info "Reboot skipped"
 fi
+{{ end }}
