@@ -81,3 +81,6 @@ extensions:
     
     - file: "pywalfox@frewacom.org.xpi"
       id: "pywalfox"
+   
+    - file: "addon@darkreader.org.xpi"
+      id: "darkreader"
