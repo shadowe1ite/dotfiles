@@ -37,10 +37,14 @@ sudo virsh net-start default
 {{ end }}
 
 if command -v warp-cli >/dev/null 2>&1; then
-    if ! warp-cli registration show >/dev/null 2>&1; then
+    if ! warp-cli registration show 2>/dev/null | grep -q "Account type"; then
+        echo "Registering warp..."
         echo 'y' | warp-cli registration new
-        warp-cli connect
+    else
+        echo "Warp already registered, skipping..."
     fi
+
+    warp-cli connect
 else
     echo "warp-cli is not installed. Skipping..."
 fi
