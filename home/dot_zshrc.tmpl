@@ -167,9 +167,6 @@ fn cuser() {
   fi
 
   sudo -u "$user" sh -c "cd /home/$user && chezmoi init --apply shadowe1ite"
-  gum spin --title "Creating new Warp registration..." -- sudo -u "$user" bash -c "echo 'y' | warp-cli registration new"
-  gum spin --title "connecting to warp..." -- sudo -u "$user" bash -c "warp-cli connect"
-  gum spin --title "Installing Zsh Plugins" -- sudo -u "$user" zsh -c 'source ~/.zshrc'
 
   echo "[✓] User '$user' created !"
 }

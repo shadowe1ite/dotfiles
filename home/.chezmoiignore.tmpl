@@ -10,20 +10,20 @@
 {{- end }}
 
 {{- if ne .chezmoi.username .user }}
+.chezmoiscripts/00-prepare.sh
 .chezmoiscripts/01-setup-gpg.sh
 .chezmoiscripts/02-configure-repo.sh
 .chezmoiscripts/03-install-packages.sh
 .chezmoiscripts/04-setup-sddm.sh
 .chezmoiscripts/05-enable-services.sh
 .chezmoiscripts/06-setup-second-disk.sh
+.chezmoiscripts/06a-setup-nvidia.sh
 .chezmoiscripts/setup-remote.sh
 .gnupg
 .gnupg/**
 .config/spotify/*
 .gitconfig
 .git-credentials
-.chezmoiscripts/06a-setup-nvidia.sh
-.chezmoiscripts/00-prepare.sh
 .config/archinstall/creds.json
 .local/bin/flash
 .zen/{{ .home.zen.release_path }}/bookmarks.html

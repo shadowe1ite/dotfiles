@@ -18,8 +18,6 @@ ln -sfn "$STORAGE/code" "$HOME/code"
 xdg-user-dirs-update
 ok "Directories setup complete"
 
-{{- if eq .chezmoi.username .user }}
-
 if [[ "$SHELL" != "$(which zsh)" ]]; then
   zsh -c 'source ~/.zshrc'
   info "Changing shell to zsh"
@@ -48,4 +46,3 @@ if confirm "Reboot now?"; then
 else
   info "Reboot skipped"
 fi
-{{- end }}
