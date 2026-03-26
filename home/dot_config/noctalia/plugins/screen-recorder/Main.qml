@@ -107,6 +107,19 @@ Item {
     readonly property string customReplayDuration: pluginApi?.pluginSettings?.customReplayDuration || "30"
     readonly property string replayStorage: pluginApi?.pluginSettings?.replayStorage || "ram"
 
+    readonly property var codecResolutionLimits: ({
+            "h264": "4096x4096"
+        })
+
+    function buildResolutionFlag() {
+        if (resolution !== "original") {
+            return `-s ${resolution}`;
+        }
+
+        var maxResolution = codecResolutionLimits[videoCodec];
+        return maxResolution ? `-s ${maxResolution}` : "";
+    }
+
     function buildTooltip() {
         if (!isAvailable) {
             return pluginApi.tr("messages.not-installed");
@@ -279,7 +292,7 @@ Item {
             })();
 
         var actualFrameRate = (frameRate === "custom") ? customFrameRate : frameRate;
-        var resolutionFlag = (resolution !== "original") ? `-s ${resolution}` : "";
+        var resolutionFlag = buildResolutionFlag();
         var restoreFlag = restorePortalSession ? "-restore-portal-session yes" : "";
         var flags = `-w ${source} -f ${actualFrameRate} -k ${videoCodec} ${audioFlags} -q ${quality} -cursor ${showCursor ? "yes" : "no"} -cr ${colorRange} ${resolutionFlag} ${restoreFlag} -o "${outputPath}"`;
         var primePrefix = primeRun ? "prime-run " : "";
@@ -312,7 +325,7 @@ Item {
 
         ToastService.showNotice(pluginApi.tr("messages.stopping"), outputPath, "video");
 
-        Quickshell.execDetached(["sh", "-c", "pkill -SIGINT -f 'gpu-screen-recorder' || pkill -SIGINT -f 'com.dec05eba.gpu_screen_recorder'"]);
+        Quickshell.execDetached(["sh", "-c", "pkill -SIGINT -f '^(/nix/store/.*-gpu-screen-recorder|gpu-screen-recorder)' || pkill -SIGINT -f '^com.dec05eba.gpu_screen_recorder'"]);
 
         isRecording = false;
         isPending = false;
@@ -497,7 +510,7 @@ Item {
         running: false
         repeat: false
         onTriggered: {
-            Quickshell.execDetached(["sh", "-c", "pkill -9 -f 'gpu-screen-recorder' 2>/dev/null || pkill -9 -f 'com.dec05eba.gpu_screen_recorder' 2>/dev/null || true"]);
+            Quickshell.execDetached(["sh", "-c", "pkill -9 -f '^(/nix/store/.*-gpu-screen-recorder|gpu-screen-recorder)' 2>/dev/null || pkill -9 -f '^com.dec05eba.gpu_screen_recorder' 2>/dev/null || true"]);
         }
     }
 
@@ -544,7 +557,7 @@ Item {
 
         var actualDuration = (replayDuration === "custom") ? customReplayDuration : replayDuration;
         var actualFrameRate = (frameRate === "custom") ? customFrameRate : frameRate;
-        var resolutionFlag = (resolution !== "original") ? `-s ${resolution}` : "";
+        var resolutionFlag = buildResolutionFlag();
 
         const audioFlags = (() => {
                 if (audioSource === "none") {
@@ -582,7 +595,7 @@ Item {
         if (!isReplaying && !isReplayPending) return;
 
         // Send SIGINT to stop the replay daemon
-        Quickshell.execDetached(["sh", "-c", "pkill -SIGINT -f 'gpu-screen-recorder.*-r ' || pkill -SIGINT -f 'com.dec05eba.gpu_screen_recorder.*-r '"]);
+        Quickshell.execDetached(["sh", "-c", "pkill -SIGINT -f '^(/nix/store/.*-gpu-screen-recorder|gpu-screen-recorder).*-r ' || pkill -SIGINT -f '^com.dec05eba.gpu_screen_recorder.*-r '"]);
 
         isReplaying = false;
         isReplayPending = false;
@@ -599,7 +612,7 @@ Item {
         if (!isReplaying) return;
 
         // Send SIGUSR1 to save the replay buffer
-        Quickshell.execDetached(["sh", "-c", "pkill -SIGUSR1 -f 'gpu-screen-recorder.*-r ' || pkill -SIGUSR1 -f 'com.dec05eba.gpu_screen_recorder.*-r '"]);
+        Quickshell.execDetached(["sh", "-c", "pkill -SIGUSR1 -f '^(/nix/store/.*-gpu-screen-recorder|gpu-screen-recorder).*-r ' || pkill -SIGUSR1 -f '^com.dec05eba.gpu_screen_recorder.*-r '"]);
     }
 
     // Replay Process
@@ -736,7 +749,7 @@ Item {
         running: false
         repeat: false
         onTriggered: {
-            Quickshell.execDetached(["sh", "-c", "pkill -9 -f 'gpu-screen-recorder.*-r ' 2>/dev/null || pkill -9 -f 'com.dec05eba.gpu_screen_recorder.*-r ' 2>/dev/null || true"]);
+            Quickshell.execDetached(["sh", "-c", "pkill -9 -f '^(/nix/store/.*-gpu-screen-recorder|gpu-screen-recorder).*-r ' 2>/dev/null || pkill -9 -f '^com.dec05eba.gpu_screen_recorder.*-r ' 2>/dev/null || true"]);
         }
     }
 

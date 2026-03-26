@@ -109,10 +109,6 @@ input_path = '~/.config/matugen/templates/fcitx5/highlight.svg'
 output_path = '~/.local/share/fcitx5/themes/material/highlight.svg'
 post_hook = 'sh -c "pgrep -x fcitx5 >/dev/null && fcitx5 -rd || true"'
 
-[templates.obsidian]
-input_path = '~/.config/matugen/templates/colors-obsidian.css'
-output_path = '~/Documents/notes/.obsidian/snippets/matugen-theme.css'
-
 [templates.burp]
 input_path = "~/.config/matugen/templates/colors-burpsuite.json"
 output_path = "~/.config/burp/material.json"
@@ -124,7 +120,4 @@ output_path = "~/.config/obs-studio/themes/matugen.obt"
 [templates.pywalfox]
 input_path = "~/.config/matugen/templates/colors-pywalfox.json"
 output_path = "~/.cache/wal/colors.json"
-
-#[templates.web]
-#input_path = "~/.config/matugen/templates/colors-web"
-#output_path = "~/web-color-rec"
+post_hook = "pywalfox update"

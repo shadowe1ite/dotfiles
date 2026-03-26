@@ -153,11 +153,6 @@
                     "usePadding": false
                 },
                 {
-                    "defaultSettings": {
-                    },
-                    "id": "plugin:kde-connect"
-                },
-                {
                     "compactMode": true,
                     "hideMode": "hidden",
                     "hideWhenIdle": false,

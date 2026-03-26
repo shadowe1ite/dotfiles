@@ -78,4 +78,6 @@ extensions:
 
     - file: "browserpass@maximbaz.com.xpi"
       id: "browserpass-ce"
-
+    
+    - file: "pywalfox@frewacom.org.xpi"
+      id: "pywalfox"
