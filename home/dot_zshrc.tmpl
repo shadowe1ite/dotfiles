@@ -127,31 +127,33 @@ fn cuser() {
   if [ "$1" = "-d" ]; then
     user=$2
     [ -z "$user" ] && echo "Usage: cuser -d <username>" && return 1
-
     sudo pkill -9 -u "$user" 2>/dev/null
     sudo userdel -r "$user" 2>/dev/null && echo "[✓] $user deleted" || echo "[✗] Failed"
     return $?
   fi
-
   user=$1
   [ -z "$user" ] && echo "Usage: cuser <username> or cuser -d <username>" && return 1
-
-
   sudo useradd -m -s /bin/zsh "$user"
   sudo passwd "$user"
   sudo -u "$user" xdg-user-dirs-update
-  
+
+  # Set up user session environment for systemctl --user to work
+  sudo loginctl enable-linger "$user"
+  USER_UID=$(id -u "$user")
+  sudo mkdir -p /run/user/$USER_UID
+  sudo chown "$user:$user" /run/user/$USER_UID
+  sudo chmod 700 /run/user/$USER_UID
+
   if [ "$user" = "private" ]; then
       GITHUB_TOKEN=$(gum spin --title "Getting GitHub token..." -- pass show private/github-token)
       GITHUB_NAME=$(gum spin --title "Getting GitHub name..." -- pass show private/github-name)
       GITHUB_EMAIL=$(gum spin --title "Getting GitHub email..." -- pass show private/github-mail)
-  
+
       gum spin --title "Cloning password store..." -- sudo -u "$user" git clone https://$GITHUB_NAME:$GITHUB_TOKEN@github.com/$GITHUB_NAME/.password-store.git /home/$user/.password-store
-  
+
       gum spin --title "Importing GPG public key..." -- bash -c "pass show private/gpg-public | sudo -u '$user' gpg --import --batch --yes -q"
       gum spin --title "Importing GPG private key..." -- bash -c "pass show private/gpg-private | sudo -u '$user' gpg --import --batch --yes -q"
       gum spin --title "Setting GPG key trust..." -- sudo -u "$user" bash -c "echo -e 'trust\n5\ny\n' | gpg --batch --command-fd 0 --edit-key '7308EC4C8C044703C11DB74DECA9D568833590D2' >/dev/null 2>&1 || true"
-
       gum spin --title "Configuring Git user name..." -- sudo -u "$user" git config --global user.name "$GITHUB_NAME"
       gum spin --title "Configuring Git user email..." -- sudo -u "$user" git config --global user.email "$GITHUB_EMAIL"
       gum spin --title "Configuring Git credential helper..." -- sudo -u "$user" git config --global credential.helper store
@@ -159,20 +161,31 @@ fn cuser() {
       sudo -u "$user" bash -c "echo \"https://$GITHUB_TOKEN:$GITHUB_TOKEN@github.com\" > /home/$user/.git-credentials"
       bash /usr/share/sddm/themes/silent/change_avatar.sh $user $HOME/.local/share/chezmoi/.github/pfp/private.png
   fi
-
   if [ "$user" != "private" ]; then
       pfp=$(mktemp -d)
       gum spin --title "Generationg pfp..." -- dicebear dylan "$pfp" --format png --seed "$(uuidgen)" --backgroundColor 121317
       gum spin --title "Setting pfp..." -- bash /usr/share/sddm/themes/silent/change_avatar.sh "$user" "$(find "$pfp" -type f | head -n1)"
   fi
 
-  sudo -u "$user" sh -c "cd /home/$user && chezmoi init --apply shadowe1ite"
+  sudo -u "$user" \
+    XDG_RUNTIME_DIR=/run/user/$USER_UID \
+    DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$USER_UID/bus \
+    sh -c "cd /home/$user && chezmoi init --apply shadowe1ite"
+
   gum spin --title "Adding GitLab SSH key..." -- bash -c "pass show private/gitlab-ssh | sudo -u '$user' tee /home/$user/.ssh/id_ed25519_gitlab > /dev/null"
   sudo chmod 600 /home/$user/.ssh/id_ed25519_gitlab
-  gum spin --title "Creating new Warp registration..." -- sudo -u "$user" bash -c "echo 'y' | warp-cli registration new"
-  gum spin --title "connecting to warp..." -- sudo -u "$user" bash -c "warp-cli connect"
-  gum spin --title "Installing Zsh Plugins" -- sudo -u "$user" zsh -c 'source ~/.zshrc'
-
+  gum spin --title "Creating new Warp registration..." -- sudo -u "$user" \
+    XDG_RUNTIME_DIR=/run/user/$USER_UID \
+    DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$USER_UID/bus \
+    bash -c "echo 'y' | warp-cli registration new"
+  gum spin --title "connecting to warp..." -- sudo -u "$user" \
+    XDG_RUNTIME_DIR=/run/user/$USER_UID \
+    DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$USER_UID/bus \
+    bash -c "warp-cli connect"
+  gum spin --title "Installing Zsh Plugins" -- sudo -u "$user" \
+    XDG_RUNTIME_DIR=/run/user/$USER_UID \
+    DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$USER_UID/bus \
+    zsh -c 'source ~/.zshrc'
   echo "[✓] User '$user' created !"
 }
 
