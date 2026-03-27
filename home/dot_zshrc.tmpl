@@ -144,6 +144,13 @@ fn cuser() {
   sudo chown "$user:$user" /run/user/$USER_UID
   sudo chmod 700 /run/user/$USER_UID
 
+  # Start systemd user manager and wait for bus socket to be ready
+  sudo systemctl start user@$USER_UID.service
+  echo -n "[~] Waiting for user bus socket..."
+  timeout 15 bash -c "until sudo -u '$user' test -S /run/user/$USER_UID/bus 2>/dev/null; do sleep 0.5; done" \
+    && echo " ready!" \
+    || echo " timed out, continuing anyway"
+
   if [ "$user" = "private" ]; then
       GITHUB_TOKEN=$(gum spin --title "Getting GitHub token..." -- pass show private/github-token)
       GITHUB_NAME=$(gum spin --title "Getting GitHub name..." -- pass show private/github-name)
@@ -170,7 +177,14 @@ fn cuser() {
   sudo -u "$user" \
     XDG_RUNTIME_DIR=/run/user/$USER_UID \
     DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$USER_UID/bus \
-    sh -c "cd /home/$user && chezmoi init --apply shadowe1ite"
+    sh -c "cd /home/$user && chezmoi init --apply shadowe1ite" || true
+
+  # Restart user manager in case it crashed during provisioning (e.g. ydotool start-limit)
+  echo "[~] Restarting user manager to recover from any crashes during provisioning..."
+  sudo systemctl restart user@$USER_UID.service
+  timeout 15 bash -c "until sudo -u '$user' test -S /run/user/$USER_UID/bus 2>/dev/null; do sleep 0.5; done" \
+    && echo "[✓] User manager recovered" \
+    || echo "[!] Warning: user manager did not recover in time"
 
   gum spin --title "Adding GitLab SSH key..." -- bash -c "pass show private/gitlab-ssh | sudo -u '$user' tee /home/$user/.ssh/id_ed25519_gitlab > /dev/null"
   sudo chmod 600 /home/$user/.ssh/id_ed25519_gitlab
@@ -178,11 +192,11 @@ fn cuser() {
     XDG_RUNTIME_DIR=/run/user/$USER_UID \
     DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$USER_UID/bus \
     bash -c "echo 'y' | warp-cli registration new"
-  gum spin --title "connecting to warp..." -- sudo -u "$user" \
+  gum spin --title "Connecting to warp..." -- sudo -u "$user" \
     XDG_RUNTIME_DIR=/run/user/$USER_UID \
     DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$USER_UID/bus \
     bash -c "warp-cli connect"
-  gum spin --title "Installing Zsh Plugins" -- sudo -u "$user" \
+  gum spin --title "Installing Zsh Plugins..." -- sudo -u "$user" \
     XDG_RUNTIME_DIR=/run/user/$USER_UID \
     DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$USER_UID/bus \
     zsh -c 'source ~/.zshrc'

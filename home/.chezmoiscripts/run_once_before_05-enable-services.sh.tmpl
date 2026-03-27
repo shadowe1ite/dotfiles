@@ -19,16 +19,19 @@ SYSTEM_SERVICES=(
 )
 
 info "User services (${#USER_SERVICES[@]})"
+
 for s in "${USER_SERVICES[@]}"; do enableSvc "$s" "user"; done
 
 info "System services (${#SYSTEM_SERVICES[@]})"
+
 for s in "${SYSTEM_SERVICES[@]}"; do enableSvc "$s" "system"; done
 
 {{ range .groups -}}
-sudo usermod -aG {{ . }} "$USER"
+sudo -n usermod -aG {{ . }} "$(id -un)" 2>/dev/null || warn "Could not add $(id -un) to group {{ . }} (no sudo access yet, add manually or via cuser)"
 {{ end -}}
 
 # mask autostart
-systemctl --user mask xdg-desktop-autostart.target 2>/dev/null || warn "Could not mask xdg-desktop-autostart.target, no user session yet"
+systemctl --user mask xdg-desktop-autostart.target 2>/dev/null \
+  || warn "Could not mask xdg-desktop-autostart.target"
 
 ok "Finished services and groups"
