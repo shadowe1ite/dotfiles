@@ -158,8 +158,6 @@ fn cuser() {
       gum spin --title "Configuring Git editor..." -- sudo -u "$user" git config --global core.editor nvim
       sudo -u "$user" bash -c "echo \"https://$GITHUB_TOKEN:$GITHUB_TOKEN@github.com\" > /home/$user/.git-credentials"
       bash /usr/share/sddm/themes/silent/change_avatar.sh $user $HOME/.local/share/chezmoi/.github/pfp/private.png
-      gum spin --title "Adding GitLab SSH key..." -- bash -c "pass show private/gitlab-ssh | sudo -u '$user' tee /home/$user/.ssh/id_ed25519_gitlab > /dev/null"
-      sudo chmod 600 /home/$user/.ssh/id_ed25519_gitlab
   fi
 
   if [ "$user" != "private" ]; then
@@ -169,6 +167,8 @@ fn cuser() {
   fi
 
   sudo -u "$user" sh -c "cd /home/$user && chezmoi init --apply shadowe1ite"
+  gum spin --title "Adding GitLab SSH key..." -- bash -c "pass show private/gitlab-ssh | sudo -u '$user' tee /home/$user/.ssh/id_ed25519_gitlab > /dev/null"
+  sudo chmod 600 /home/$user/.ssh/id_ed25519_gitlab
   gum spin --title "Creating new Warp registration..." -- sudo -u "$user" bash -c "echo 'y' | warp-cli registration new"
   gum spin --title "connecting to warp..." -- sudo -u "$user" bash -c "warp-cli connect"
   gum spin --title "Installing Zsh Plugins" -- sudo -u "$user" zsh -c 'source ~/.zshrc'
