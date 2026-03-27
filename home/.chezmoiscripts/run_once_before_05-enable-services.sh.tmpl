@@ -2,10 +2,6 @@
 set -euo pipefail
 {{ template "utils" . }}
 
-if ! sudo -n true 2>/dev/null; then
-  echo "%wheel ALL=(ALL:ALL) ALL" | sudo EDITOR='tee -a' visudo >/dev/null
-fi
-
 USER_SERVICES=(
 {{- with .services }}{{- with .user }}{{- range . }}"{{ . }}" {{ end }}{{- end }}{{- end -}}
 )
