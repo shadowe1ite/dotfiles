@@ -3,6 +3,11 @@ Host server
       ProxyCommand cloudflared access ssh --hostname %h
       User elite
 
+Host bugs
+      Hostname bugs.{{ .domain }}
+      ProxyCommand cloudflared access ssh --hostname %h
+      User bugs
+
 Host pi
       Hostname pi.{{ .domain }}
       ProxyCommand cloudflared access ssh --hostname %h
