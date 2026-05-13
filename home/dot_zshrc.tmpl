@@ -85,7 +85,13 @@ alias pacman="pacman --color auto"
 alias zathura="zaread"
 alias sioyek="zaread"
 alias hyprpm="hyprpm -v"
-alias cat="bat -p"
+if command -v bat >/dev/null 2>&1; then
+    alias cat='bat -p'
+elif command -v batcat >/dev/null 2>&1; then
+    alias cat='batcat -p'
+else
+    alias cat='cat'
+fi
 alias icat="/bin/cat"
 alias psql="sudo -u postgres psql"
 alias proxychains='proxychains -q'

@@ -2,3 +2,6 @@ packages:
   - zsh
   - tmux
   - build-essential
+  - eza
+  - zoxide
+  - bat
