@@ -26,13 +26,13 @@ type = "git-repo"
 url = "https://github.com/coffinxp/GFpattren"
 refreshPeriod = "168h"
 
+{{ end }}
 
 [".local/bin/cloudflared"]
 type = "file"
 url = {{ gitHubLatestReleaseAssetURL "cloudflare/cloudflared" (printf "cloudflared-%s-%s" .chezmoi.os .chezmoi.arch) | quote }}
 executable = true
 
-{{ end }}
 
 {{ if eq .chezmoi.osRelease.id "ubuntu" }}
 
