@@ -1,3 +1,11 @@
+Host *
+    ServerAliveInterval 30
+    TCPKeepAlive yes
+    Compression yes
+    ControlMaster auto
+    ControlPath ~/.ssh/cm-%r@%h:%p
+    ControlPersist 10m
+
 Host server
       Hostname server.{{ .domain }}
       ProxyCommand cloudflared access ssh --hostname %h
