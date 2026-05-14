@@ -5,3 +5,5 @@ packages:
   - eza
   - zoxide
   - bat
+  - waypipe
+  - docker.io
