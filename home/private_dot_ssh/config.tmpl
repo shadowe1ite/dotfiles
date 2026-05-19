@@ -1,3 +1,6 @@
+Host *
+      AddKeysToAgent yes
+
 Host monitor
       #Hostname server.{{ .domain }}
       #ProxyCommand cloudflared access ssh --hostname %h

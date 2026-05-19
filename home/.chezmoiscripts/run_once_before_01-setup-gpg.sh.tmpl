@@ -2,7 +2,6 @@
 set -euo pipefail
 {{ template "utils" . }}
 {{- $bwFolderId := "3bb893f4-9a06-4477-afe5-b33c00c20c5d" }}
-{{- $ghTokenId := "1b48a5cc-4f95-4704-a6e2-b33c011e4532" }}
 
 checkDeps gnupg jq bitwarden-cli git pass
 
@@ -54,15 +53,26 @@ for i in 1 2 3; do
 done
 [[ "$GPG_OK" != "true" ]] && { err "GPG passphrase failed 3 times. Exiting."; bw logout >/dev/null 2>&1 || true; exit 1; }
 
-info "Cloning password store"
-GH_TOKEN=$(bw --session "$BW_SESSION" get item "{{ $ghTokenId }}" | jq -r '.notes')
-[[ -z "$GH_TOKEN" ]] && { err "GitHub token not found. Exiting."; bw logout; exit 1; }
+info "Bootstrapping SSH keys"
+mkdir -p ~/.ssh && chmod 700 ~/.ssh
+gpg -q --decrypt --batch "{{ .chezmoi.sourceDir }}/private_dot_ssh/encrypted_private_id_ed25519_main.asc" > ~/.ssh/id_ed25519_main
+chmod 600 ~/.ssh/id_ed25519_main
+cat > ~/.ssh/config <<'SSHEOF'
+Host main
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519_main
+  StrictHostKeyChecking accept-new
+SSHEOF
+chmod 600 ~/.ssh/config
+step "SSH key deployed from chezmoi source"
 
+info "Cloning password store"
 if [[ -d ~/.password-store/.git ]]; then
   step "Already exists, pulling"
   git -C ~/.password-store pull
 else
-  git clone "https://${GH_TOKEN}@github.com/shadowe1ite/.password-store.git" ~/.password-store
+  git clone "main:shadowe1ite/.password-store.git" ~/.password-store
 fi
 
 ok "Password store ready"
