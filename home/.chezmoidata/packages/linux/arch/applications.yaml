@@ -71,13 +71,6 @@ music:
   - spotiflac-bin
   - nicotine+
 
-hyprvisors:
-  - libvirt
-  - virt-manager
-  - qemu-full
-  - dnsmasq
-  - dmidecode
-
 lang:
   - fcitx5
   - e1ite/govarnam-schemes-git

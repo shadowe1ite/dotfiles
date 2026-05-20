@@ -12,7 +12,7 @@ failed=()
 FAIL_LOG="$HOME/.local/state/chezmoi-failed-pkgs.log"
 
 {{ if eq .chezmoi.osRelease.id "arch" -}}
-AUR="{{ .aur }}"
+AUR="yay"
 {{- end }}
 
 checkDeps() {

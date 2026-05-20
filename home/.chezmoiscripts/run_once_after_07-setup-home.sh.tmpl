@@ -30,9 +30,6 @@ fi
 sudo systemctl disable iwd.service
 sudo systemctl disable systemd-networkd.service
 
-sudo virsh net-autostart default
-sudo virsh net-start default
-
 if command -v warp-cli >/dev/null 2>&1; then
     if ! warp-cli registration show 2>/dev/null | grep -q "Account type"; then
         echo "Registering warp..."
