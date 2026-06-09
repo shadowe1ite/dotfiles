@@ -8,6 +8,7 @@ services:
     - ydotool.service
     - gpg-agent.socket
     - gcr-ssh-agent.socket
+    - ssh-add-keyring.service
   
   system:
     - thermald.service

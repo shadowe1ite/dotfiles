@@ -67,3 +67,4 @@ secrets:
   - pass
   - gnome-keyring
   - gcr
+  - libsecret-tools
