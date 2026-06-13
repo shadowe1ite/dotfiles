@@ -12,7 +12,7 @@ fi
 normal_user=$(awk -F: '($3>=1000)&&($3<60000)&&($7 !~ /(nologin|false)/){print $1; exit}' /etc/passwd || true)
 
 if [ -z "$normal_user" ]; then
-    new_user="{{ .user }}"
+    new_user="0cto"
     adduser --force-badname --disabled-password --gecos "" "$new_user"
     usermod -aG sudo "$new_user"
 
