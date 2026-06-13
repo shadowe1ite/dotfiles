@@ -1,7 +1,7 @@
-{{ $processor := output "uname" "-p" | trim }}
+{{ $archMap := dict "amd64" "x86_64" "arm64" "aarch64" "386" "i686" }}
+{{ $processor := get $archMap .chezmoi.arch | default .chezmoi.arch }}
 
 {{ if and (ne .chezmoi.osRelease.id "raspbian") (ne .chezmoi.osRelease.id "ubuntu") }}
-
 [".local/share/fonts"]
 type = "archive"
 url = "https://smc.org.in/downloads/fonts/raghumalayalamsans/raghumalayalamsans.zip"
@@ -26,16 +26,13 @@ type = "git-repo"
 url = "https://github.com/shadowe1ite/GFpattren"
 refreshPeriod = "168h"
 
-
 [".local/bin/cloudflared"]
 type = "file"
 url = {{ gitHubLatestReleaseAssetURL "cloudflare/cloudflared" (printf "cloudflared-%s-%s" .chezmoi.os .chezmoi.arch) | quote }}
 executable = true
-
 {{ end }}
 
 {{ if eq .chezmoi.osRelease.id "ubuntu" }}
-
 [".local/bin/fzf"]
 type = "archive-file"
 url = {{ gitHubLatestReleaseAssetURL "junegunn/fzf" (printf "fzf-*-%s_%s.tar.gz" .chezmoi.os .chezmoi.arch) | quote }}
@@ -58,5 +55,4 @@ type = "archive-file"
 url = {{ gitHubLatestReleaseAssetURL "getzola/zola" (printf "zola-*-%s-*%s*.tar.gz" $processor .chezmoi.os) | quote }}
 executable = true
 path = "zola"
-
 {{ end }}
