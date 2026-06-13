@@ -13,7 +13,7 @@ normal_user=$(awk -F: '($3>=1000)&&($3<60000)&&($7 !~ /(nologin|false)/){print $
 
 if [ -z "$normal_user" ]; then
     new_user="{{ .user }}"
-    adduser --disabled-password --gecos "" "$new_user"
+    adduser --force-badname --disabled-password --gecos "" "$new_user"
     usermod -aG sudo "$new_user"
 
     gen_pass=$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c 16)
@@ -39,6 +39,7 @@ if ! swapon --show | grep -q .; then
 fi
 
 sudo apt update -y
+
 {{ if eq .chezmoi.osRelease.id "ubuntu" }}
 sudo apt install -y {{ template "flat" (include ".chezmoidata/packages/linux/ubuntu/ubuntu.yaml" | fromYaml).packages }}
 {{ else if eq .chezmoi.osRelease.id "raspbian" }}
