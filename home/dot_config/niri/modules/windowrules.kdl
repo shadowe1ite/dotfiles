@@ -58,10 +58,10 @@ window-rule {
     default-floating-position x=1462 y=10
 }
 
-window-rule {
-    match app-id="zen|Firefox"
-    open-on-workspace "browser"
-}
+//window-rule {
+//    match app-id="zen|Firefox"
+//    open-on-workspace "browser"
+//}
 
 window-rule {
     match app-id="org.kde.dolphin"
