@@ -21,7 +21,7 @@ MenuBar=Disabled
 ToolButtonStyle=IconOnly
 
 [PreviewSettings]
-Plugins=appimagethumbnail,audiothumbnail,glycin-heif,comicbookthumbnail,cursorthumbnail,djvuthumbnail,ebookthumbnail,exrthumbnail,directorythumbnail,fontthumbnail,heif,imagethumbnail,jpegthumbnail,kraorathumbnail,windowsexethumbnail,windowsimagethumbnail,gsf-office,opendocumentthumbnail,svgthumbnail,ffmpegthumbs
+Plugins=appimagethumbnail,audiothumbnail,glycin-heif,comicbookthumbnail,cursorthumbnail,djvuthumbnail,ebookthumbnail,exrthumbnail,directorythumbnail,fontthumbnail,heif,imagethumbnail,jpegthumbnail,kraorathumbnail,windowsexethumbnail,windowsimagethumbnail,gsf-office,opendocumentthumbnail,svgthumbnail,ffmpegthumbs,gsthumbnail,mobithumbnail,rawthumbnail,blenderthumbnail
 
 [Toolbar mainToolBar]
 ToolButtonStyle=IconOnly
