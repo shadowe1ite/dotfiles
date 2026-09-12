@@ -11,6 +11,9 @@ order = [ "default" ]
     center = [ "clock", "control-center" ]
     end = [ "tray", "sysmon", "battery", "network", "notifications" ]
     margin_ends = 0
+    reserve_space = false
+    show_on_workspace_switch = false
+    smart_auto_hide = true
     start = [ "workspaces", "media" ]
     thickness = 40
 
@@ -142,20 +145,24 @@ screen_time_enabled = true
 builtin = "Noctalia"
 community_palette = "Oxocarbon"
 mode = "dark"
+pure_black_dark = true
 source = "wallpaper"
 wallpaper_scheme = "m3-content"
 
     [theme.templates]
     builtin_ids = [ "alacritty" ]
 
-[wallpaper.default]
-path = "/home/shadow/Pictures/Wallpapers/Wallpapers/Everforest/green.jpeg"
+[wallpaper]
+directory = "/home/shadow/Pictures/Wallpapers/fav"
 
-[wallpaper.last]
-path = "/home/shadow/Pictures/Wallpapers/Wallpapers/Everforest/green.jpeg"
+    [wallpaper.default]
+    path = "/home/shadow/Pictures/Wallpapers/fav/Green/17. Rosé Pine.jpg"
 
-[wallpaper.monitors.eDP-1]
-path = "/home/shadow/Pictures/Wallpapers/Wallpapers/Everforest/green.jpeg"
+    [wallpaper.last]
+    path = "/home/shadow/Pictures/Wallpapers/fav/Green/17. Rosé Pine.jpg"
+
+    [wallpaper.monitors.eDP-1]
+    path = "/home/shadow/Pictures/Wallpapers/fav/Green/17. Rosé Pine.jpg"
 
 [widget.clock]
 font_family = "SauceCodePro Nerd Font Propo"
