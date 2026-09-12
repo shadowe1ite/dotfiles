@@ -1,0 +1,168 @@
+config_version = 14
+
+[backdrop]
+enabled = true
+
+[bar]
+order = [ "default" ]
+
+    [bar.default]
+    capsule = true
+    end = [ "tray", "sysmon", "battery", "session", "notifications" ]
+    margin_ends = 0
+    start = [ "workspaces", "media" ]
+    thickness = 40
+
+[battery]
+warning_threshold = 25
+
+[desktop_widgets]
+schema_version = 2
+widget_order = []
+
+    [desktop_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [desktop_widgets.widget]
+
+[dock]
+background_opacity = 0.99999997764825821
+concave_edge_corners = false
+enabled = true
+icon_size = 50
+item_spacing = 0
+margin_edge = 5
+pinned = [
+    "org.gnome.Evince",
+    "org.kde.dolphin",
+    "ghidra",
+    "org.telegram.desktop",
+    "org.wireshark.Wireshark",
+    "com.github.neithern.g4music",
+    "org.gnome.TextEditor",
+    "burpsuite-pro",
+    "firefox",
+    "vesktop",
+    "Alacritty"
+]
+reserve_space = false
+show_dots = true
+smart_auto_hide = true
+
+[idle]
+behavior_order = [ "lock", "screen-off", "lock-and-suspend" ]
+
+    [idle.behavior.lock]
+    action = "lock"
+    enabled = true
+    timeout = 600.0
+
+    [idle.behavior.lock-and-suspend]
+    action = "lock_and_suspend"
+    enabled = true
+    timeout = 900.0
+
+    [idle.behavior.screen-off]
+    action = "screen_off"
+    enabled = true
+    timeout = 660.0
+
+[location]
+auto_locate = true
+
+[lockscreen_widgets]
+enabled = false
+schema_version = 2
+widget_order = [ "lockscreen-login-box@eDP-1" ]
+
+    [lockscreen_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 960.0
+    cy = 898.0
+    output = "eDP-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+[plugins]
+enabled = [ "noctalia/translator", "noctalia/screen_recorder" ]
+
+[shell]
+clipboard_image_action_command = "satty -f -"
+font_family = "SauceCodePro Nerd Font Mono"
+niri_overview_type_to_launch_enabled = true
+panel_anchor_bar = "default"
+polkit_agent = true
+screen_time_enabled = true
+
+    [shell.panel]
+    open_near_click_control_center = true
+
+    [shell.screen_corners]
+    enabled = true
+
+    [shell.screenshot]
+    save_to_file = false
+
+[theme]
+builtin = "Noctalia"
+mode = "dark"
+source = "wallpaper"
+wallpaper_scheme = "m3-content"
+
+    [theme.templates]
+    builtin_ids = [ "alacritty" ]
+
+[wallpaper.default]
+path = "/home/shadow/Pictures/Wallpapers/wallhaven_yq5v7l.jpg"
+
+[wallpaper.last]
+path = "/home/shadow/Pictures/Wallpapers/wallhaven_yq5v7l.jpg"
+
+[wallpaper.monitors.eDP-1]
+path = "/home/shadow/Pictures/Wallpapers/wallhaven_yq5v7l.jpg"
+
+[widget.media]
+capsule = true
+title_scroll = "on_hover"
+
+[widget.session]
+capsule = true
+
+[widget.clock]
+font_family = "SauceCodePro Nerd Font Propo"
+
+[widget.sysmon]
+font_family = "JetBrainsMono Nerd Font Mono"
+stat = "cpu_temp"
+
+[widget.tray]
+capsule = true
+
+[widget.workspaces]
+show_labels = false
