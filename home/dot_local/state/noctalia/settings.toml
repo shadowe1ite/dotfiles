@@ -8,7 +8,7 @@ order = [ "default" ]
 
     [bar.default]
     capsule = true
-    center = [ "clock", "control-center" ]
+    center = [ "clock", "control-center", "privacy" ]
     end = [ "tray", "sysmon", "battery", "network", "notifications" ]
     margin_ends = 0
     reserve_space = false
