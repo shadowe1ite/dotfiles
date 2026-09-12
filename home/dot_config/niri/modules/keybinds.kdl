@@ -7,9 +7,9 @@ binds {
     Ctrl+Q { spawn "hyprpicker" "--autocopy"; }
     Ctrl+Shift+Escape { spawn "resources"; }
 
-    // screenshot
-    Print { screenshot show-pointer=false; }
-    Ctrl+Print { screenshot-screen show-pointer=false; }
+    // screenshot (noctalia's own capture tool: region-select w/ freeze + annotator)
+    Print { spawn "noctalia" "msg" "screenshot-region"; }
+    Ctrl+Print { spawn "noctalia" "msg" "screenshot-fullscreen"; }
 
     // ocr
     Home { spawn "bash" "-c" r#"grim -g "$(slurp)" - | tesseract - - -l $(tesseract --list-langs | awk 'NR>1' | paste -sd+) | wl-copy"#; }

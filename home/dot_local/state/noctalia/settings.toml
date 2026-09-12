@@ -16,6 +16,9 @@ order = [ "default" ]
 [battery]
 warning_threshold = 25
 
+[calendar]
+enabled = true
+
 [desktop_widgets]
 schema_version = 2
 widget_order = []
@@ -127,10 +130,14 @@ screen_time_enabled = true
     enabled = true
 
     [shell.screenshot]
+    confirm_region = true
+    directory = "/home/shadow/Videos/Recordings"
+    remember_last_region = true
     save_to_file = false
 
 [theme]
 builtin = "Noctalia"
+community_palette = "Oxocarbon"
 mode = "dark"
 source = "wallpaper"
 wallpaper_scheme = "m3-content"
@@ -139,13 +146,19 @@ wallpaper_scheme = "m3-content"
     builtin_ids = [ "alacritty" ]
 
 [wallpaper.default]
-path = "/home/shadow/Pictures/Wallpapers/wallhaven_yq5v7l.jpg"
+path = "/home/shadow/Pictures/Wallpapers/Wallpapers/Everforest/closeflower.jpg"
 
 [wallpaper.last]
-path = "/home/shadow/Pictures/Wallpapers/wallhaven_yq5v7l.jpg"
+path = "/home/shadow/Pictures/Wallpapers/Wallpapers/Everforest/closeflower.jpg"
 
 [wallpaper.monitors.eDP-1]
-path = "/home/shadow/Pictures/Wallpapers/wallhaven_yq5v7l.jpg"
+path = "/home/shadow/Pictures/Wallpapers/Wallpapers/Everforest/closeflower.jpg"
+
+[widget.clock]
+font_family = "SauceCodePro Nerd Font Propo"
+format = "{:%-I:%M %P  %d.%m.%Y}"
+tooltip_format = "{:%H:%M %a, %b %d}"
+vertical_format = "{:%H %M - %d %m}"
 
 [widget.media]
 capsule = true
@@ -153,9 +166,6 @@ title_scroll = "on_hover"
 
 [widget.session]
 capsule = true
-
-[widget.clock]
-font_family = "SauceCodePro Nerd Font Propo"
 
 [widget.sysmon]
 font_family = "JetBrainsMono Nerd Font Mono"
