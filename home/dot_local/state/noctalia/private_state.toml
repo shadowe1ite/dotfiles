@@ -8,4 +8,5 @@ calendar_credentials_v1 = true
 applied_builtin_ids = "alacritty"
 
 [wallpaper_panel]
+flatten = true
 sort = "date_desc"

@@ -8,7 +8,8 @@ order = [ "default" ]
 
     [bar.default]
     capsule = true
-    end = [ "tray", "sysmon", "battery", "session", "notifications" ]
+    center = [ "clock", "control-center" ]
+    end = [ "tray", "sysmon", "battery", "network", "notifications" ]
     margin_ends = 0
     start = [ "workspaces", "media" ]
     thickness = 40
@@ -146,19 +147,22 @@ wallpaper_scheme = "m3-content"
     builtin_ids = [ "alacritty" ]
 
 [wallpaper.default]
-path = "/home/shadow/Pictures/Wallpapers/Wallpapers/Everforest/closeflower.jpg"
+path = "/home/shadow/Pictures/Wallpapers/Wallpapers/Everforest/green.jpeg"
 
 [wallpaper.last]
-path = "/home/shadow/Pictures/Wallpapers/Wallpapers/Everforest/closeflower.jpg"
+path = "/home/shadow/Pictures/Wallpapers/Wallpapers/Everforest/green.jpeg"
 
 [wallpaper.monitors.eDP-1]
-path = "/home/shadow/Pictures/Wallpapers/Wallpapers/Everforest/closeflower.jpg"
+path = "/home/shadow/Pictures/Wallpapers/Wallpapers/Everforest/green.jpeg"
 
 [widget.clock]
 font_family = "SauceCodePro Nerd Font Propo"
 format = "{:%-I:%M %P  %d.%m.%Y}"
 tooltip_format = "{:%H:%M %a, %b %d}"
 vertical_format = "{:%H %M - %d %m}"
+
+[widget.control-center]
+glyph = "brand-redhat"
 
 [widget.media]
 capsule = true
