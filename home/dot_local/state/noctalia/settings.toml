@@ -34,10 +34,12 @@ widget_order = []
 [dock]
 background_opacity = 0.99999997764825821
 concave_edge_corners = false
+cross_axis_padding = 0
 enabled = true
 icon_size = 50
 item_spacing = 0
-margin_edge = 5
+main_axis_padding = 0
+margin_edge = 9
 pinned = [
     "org.gnome.Evince",
     "org.kde.dolphin",

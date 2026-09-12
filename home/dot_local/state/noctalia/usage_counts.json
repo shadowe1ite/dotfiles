@@ -1,6 +1,7 @@
 {
   "Applications": {
     "/usr/share/applications/com.github.neithern.g4music.desktop": 2,
+    "/usr/share/applications/firefox.desktop": 1,
     "/usr/share/applications/org.kde.dolphin.desktop": 2,
     "/usr/share/applications/vmware-workstation.desktop": 1
   }
