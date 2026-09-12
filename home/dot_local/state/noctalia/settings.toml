@@ -39,7 +39,7 @@ enabled = true
 icon_size = 50
 item_spacing = 0
 main_axis_padding = 0
-margin_edge = 9
+margin_edge = 10
 pinned = [
     "org.gnome.Evince",
     "org.kde.dolphin",
