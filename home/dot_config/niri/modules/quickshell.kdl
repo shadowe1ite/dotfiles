@@ -1,31 +1,31 @@
-spawn-at-startup "qs" "-c" "noctalia-shell"
+spawn-at-startup "noctalia"
 
 binds {
     // Brightness
-    XF86MonBrightnessUp   allow-when-locked=true { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "brightness" "increase"; }
-    XF86MonBrightnessDown allow-when-locked=true { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "brightness" "decrease"; }
+    XF86MonBrightnessUp   allow-when-locked=true { spawn "noctalia" "msg" "brightness-up"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn "noctalia" "msg" "brightness-down"; }
 
     // Launchers / UI
-    Mod+Space { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
-    //Mod+Super_L { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "bar" "toggle"; } // fix once the issue #605 and pr #2456 closed
-    Mod+Alt+Space { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "plugin:translator" "toggle" "malayalam" ""; }
-    Ctrl+Mod+Alt+Space { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "plugin:translator" "toggle" "english"; }
+    Mod+Space { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
+    //Mod+Super_L { spawn "noctalia" "msg" "bar-toggle"; }
+    Mod+Alt+Space { spawn "noctalia" "msg" "panel-toggle" "launcher" "/tr ml "; } // translate to Malayalam - requires: noctalia msg plugins enable noctalia/translator
+    Ctrl+Mod+Alt+Space { spawn "noctalia" "msg" "panel-toggle" "launcher" "/tr en "; } // translate to English
 
-    Mod+E { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "emoji"; }
-    Mod+V { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "clipboard"; }
-    Alt+M { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "wallpaper" "toggle"; }
+    Mod+E { spawn "noctalia" "msg" "panel-toggle" "launcher" "/emo "; }
+    Mod+V { spawn "noctalia" "msg" "panel-toggle" "clipboard"; }
+    Alt+M { spawn "noctalia" "msg" "panel-toggle" "wallpaper"; }
 
     // Notifications / Panels
-    Ctrl+Shift+Grave { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "notifications" "dismissAll"; }
-    Mod+Semicolon    { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "notifications" "toggleHistory"; }
-    Mod+Apostrophe   { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "controlCenter" "toggle"; }
-    Mod+L            { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "calendar" "toggle"; }
+    Ctrl+Shift+Grave { spawn "noctalia" "msg" "notification-clear-active"; }
+    Mod+Semicolon    { spawn "noctalia" "msg" "panel-toggle" "control-center" "notifications"; }
+    Mod+Apostrophe   { spawn "noctalia" "msg" "panel-toggle" "control-center"; }
+    Mod+L            { spawn "noctalia" "msg" "panel-toggle" "control-center" "calendar"; }
 
-    // Recording
-    Ctrl+Alt+R { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "plugin:screen-recorder" "toggle"; }
+    // Recording - requires: noctalia msg plugins enable noctalia/screen_recorder
+    Ctrl+Alt+R { spawn "noctalia" "msg" "plugin" "noctalia/screen_recorder:service" "all" "toggle"; }
 }
 
 layer-rule {
-  match namespace="^noctalia-overview*"
+  match namespace="^noctalia-backdrop"
   place-within-backdrop true
 }
