@@ -3,6 +3,17 @@ set -euo pipefail
 {{ template "utils" . }}
 
 THEME_DIR="/usr/share/sddm/themes/silent"
+{{/* .chezmoi.sourceDir is <repo>/home because of .chezmoiroot, so the repo
+     root — and .github/ with it — is one level up. Deriving it beats
+     hardcoding ~/.local/share/chezmoi, which is wrong for any other checkout. */}}
+PFP={{ printf "%s/../.github/pfp/main.png" .chezmoi.sourceDir | quote }}
+
+if ! have sddm; then
+  warn "sddm is not installed, skipping display-manager setup"
+  exit 0
+fi
+
+sudoKeepAlive
 
 info "Writing /etc/sddm.conf"
 sudo tee /etc/sddm.conf >/dev/null <<'EOF'
@@ -10,11 +21,24 @@ sudo tee /etc/sddm.conf >/dev/null <<'EOF'
 EOF
 ok "/etc/sddm.conf done"
 
-bash "$THEME_DIR/change_avatar.sh" {{ .user }} "$HOME/.local/share/chezmoi/.github/pfp/main.png"
-
+# This whole block used to run *before* the directory check below, so on any
+# machine where sddm-silent-theme failed to install, bash exited 127 here and
+# took the script — and the apply — down with it.
 if [[ ! -d "$THEME_DIR" ]]; then
-  warn "Theme directory missing: $THEME_DIR"
+  warn "Theme directory missing: $THEME_DIR (is sddm-silent-theme installed?)"
+  warn "Leaving the default sddm theme in place"
   exit 0
+fi
+
+if [[ -x "$THEME_DIR/change_avatar.sh" || -f "$THEME_DIR/change_avatar.sh" ]]; then
+  if [[ -f "$PFP" ]]; then
+    info "Setting avatar"
+    bash "$THEME_DIR/change_avatar.sh" {{ .user | quote }} "$PFP" || warn "Could not set avatar"
+  else
+    warn "Avatar image not found at $PFP"
+  fi
+else
+  warn "change_avatar.sh not found in $THEME_DIR, skipping avatar"
 fi
 
 info "Writing metadata (variant: {{ or .sddm.silent_variant "rei" }})"
@@ -26,8 +50,7 @@ ok "metadata.desktop done"
 if systemctl is-enabled --quiet sddm 2>/dev/null; then
   warn "sddm already enabled"
 else
-  sudo systemctl enable sddm
-  ok "Enabled sddm"
+  sudo systemctl enable sddm && ok "Enabled sddm" || warn "Could not enable sddm"
 fi
 
 info "Restart to apply: sudo systemctl restart sddm"

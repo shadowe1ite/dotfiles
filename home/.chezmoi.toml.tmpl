@@ -2,15 +2,29 @@
 {{- $zenReleasePath := "default" -}}
 {{- $fireFoxReleaseId := mozillaInstallHash "/opt/firefox-bin" -}}
 {{- $fireFoxReleasePath := "default" -}}
-{{ $aur := "" }}
+{{- $aur := "" -}}
 
 {{- $email := "alansedp@gmail.com" -}}
 {{- $name := "ALAN S" -}}
 {{- $user := "shadow" -}}
 
 {{- if and (eq .chezmoi.osRelease.id "arch") (eq .chezmoi.username $user) -}}
-  {{- $aur := promptChoiceOnce . "aur" "AUR helper" (list "paru" "yay") -}}
+  {{- /* Two traps here. `:=` inside the if-block would declare a NEW variable
+         scoped to the block and throw the answer away, so this must be `=`.
+         And promptChoiceOnce treats an empty stored value as "already
+         answered", so a config written by the old broken template would pin
+         aur to "" forever — check the stored value ourselves instead. */ -}}
+  {{- $stored := "" -}}
+  {{- if hasKey . "aur" -}}{{- $stored = .aur -}}{{- end -}}
+  {{- if $stored -}}
+    {{- $aur = $stored -}}
+  {{- else -}}
+    {{- /* The trailing "yay" is the default: without it promptChoice returns
+           the literal prompt string in any non-interactive init. */ -}}
+    {{- $aur = promptChoice "AUR helper" (list "paru" "yay") "yay" -}}
+  {{- end -}}
 {{- end -}}
+{{- if not $aur -}}{{- $aur = "yay" -}}{{- end -}}
 
 encryption = "gpg"
 

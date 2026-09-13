@@ -4,6 +4,9 @@ set -euo pipefail
 
 export PATH="$HOME/.local/bin:$PATH"
 
+sudoKeepAlive
+checkDeps curl
+
 {{- if ne .chezmoi.osRelease.id "cachyos" }}
 if [[ -f /etc/pacman.conf.bak ]]; then
   warn "pacman.conf.bak exists. Skipping rewrite."
@@ -17,45 +20,77 @@ sudo cp /etc/pacman.conf /etc/pacman.conf.bak
 if [[ ! -f "$HOME/.config/paru/paru.conf" ]]; then
   mkdir -p "$HOME/.config/paru"
   curl -fsSL "https://raw.githubusercontent.com/shadowe1ite/dotfiles/refs/heads/main/home/dot_config/paru/paru.conf" \
-    -o "$HOME/.config/paru/paru.conf"
+    -o "$HOME/.config/paru/paru.conf" || warn "Could not fetch paru.conf, continuing"
 fi
 
-$AUR -Sya --noconfirm >/dev/null 2>&1
 sudo pacman-key --init
 sudo pacman-key --populate archlinux
 
 if [[ ! -f /etc/pacman.d/chaotic-mirrorlist ]]; then
-  repoKeys "Chaotic" "3056513887B78AEB"
-  step "Installing Chaotic packages"
-  sudo pacman -U --noconfirm \
-    'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' \
-    'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
-  ok "Chaotic repo installed"
+  if repoKeys "Chaotic" "3056513887B78AEB"; then
+    step "Installing Chaotic packages"
+    sudo pacman -U --noconfirm \
+      'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' \
+      'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst' \
+      && ok "Chaotic repo installed" || warn "Chaotic repo install failed, skipping"
+  else
+    warn "Could not fetch Chaotic signing key, skipping that repo"
+  fi
 else
   warn "Chaotic repo already present"
 fi
 
 if [[ ! -f /etc/pacman.d/blackarch-mirrorlist ]]; then
   step "Installing BlackArch keyring"
-  bash -c '
-    VERSION=$(curl -s https://www.blackarch.org/keyring/ | grep -oP "blackarch-keyring-\K[0-9]+" | head -n1)
-    TD=$(mktemp -d); trap "rm -rf $TD" EXIT; cd "$TD"
-    curl -s -O "https://www.blackarch.org/keyring/blackarch-keyring-$VERSION.tar.gz"
-    sudo tar xfz "blackarch-keyring-$VERSION.tar.gz" --strip-components=1 -C /usr/share/pacman/keyrings/
-    sudo pacman-key --populate
-  '
-  sudo curl -fsSL https://blackarch.org/blackarch-mirrorlist -o /etc/pacman.d/blackarch-mirrorlist
-  [[ -f /etc/pacman.d/blackarch-mirrorlist.pacnew ]] && sudo mv /etc/pacman.d/blackarch-mirrorlist.pacnew /etc/pacman.d/blackarch-mirrorlist
-  ok "BlackArch repo installed"
+  # Bail out loudly if the version scrape comes back empty — the old code would
+  # happily download "blackarch-keyring-.tar.gz" and feed the 404 page to tar.
+  BA_OK=false
+  BA_VERSION=$(curl -fsS --max-time 30 https://www.blackarch.org/keyring/ 2>/dev/null \
+    | grep -oP 'blackarch-keyring-\K[0-9]+' | head -n1 || true)
+  if [[ -z "$BA_VERSION" ]]; then
+    warn "Could not determine BlackArch keyring version, skipping BlackArch"
+  else
+    BA_TMP=$(mktemp -d)
+    if curl -fsS --max-time 120 -o "$BA_TMP/keyring.tar.gz" \
+         "https://www.blackarch.org/keyring/blackarch-keyring-$BA_VERSION.tar.gz" \
+       && sudo tar xfz "$BA_TMP/keyring.tar.gz" --strip-components=1 -C /usr/share/pacman/keyrings/ \
+       && sudo pacman-key --populate blackarch \
+       && sudo curl -fsSL --max-time 60 https://blackarch.org/blackarch-mirrorlist -o /etc/pacman.d/blackarch-mirrorlist; then
+      BA_OK=true
+    fi
+    rm -rf "$BA_TMP"
+  fi
+  if [[ "$BA_OK" == "true" ]]; then
+    [[ -f /etc/pacman.d/blackarch-mirrorlist.pacnew ]] \
+      && sudo mv /etc/pacman.d/blackarch-mirrorlist.pacnew /etc/pacman.d/blackarch-mirrorlist
+    ok "BlackArch repo installed"
+  else
+    warn "BlackArch setup failed, continuing without it"
+  fi
 else
   warn "BlackArch repo already present"
+  BA_OK=true
 fi
 
+info "Writing /etc/pacman.conf"
 sudo tee /etc/pacman.conf > /dev/null <<'EOF'
 {{ includeTemplate "pacman.conf.tmpl" . }}
 EOF
 
-sudo pacman -Syy --noconfirm >/dev/null 2>&1
-sudo pacman -S --noconfirm --needed blackarch-mirrorlist >/dev/null 2>&1
+# A repo section pointing at a mirrorlist that was never installed makes every
+# later pacman call fail, so drop the sections whose bootstrap did not complete.
+if [[ ! -f /etc/pacman.d/chaotic-mirrorlist ]]; then
+  warn "Removing [chaotic-aur] from pacman.conf (mirrorlist missing)"
+  sudo sed -i '/^\[chaotic-aur\]/,+1d' /etc/pacman.conf
+fi
+if [[ ! -f /etc/pacman.d/blackarch-mirrorlist ]]; then
+  warn "Removing [blackarch] from pacman.conf (mirrorlist missing)"
+  sudo sed -i '/^\[blackarch\]/,+1d' /etc/pacman.conf
+fi
+
+sudo pacman -Syy --noconfirm
+if [[ -f /etc/pacman.d/blackarch-mirrorlist ]]; then
+  sudo pacman -S --noconfirm --needed blackarch-mirrorlist || warn "blackarch-mirrorlist package not available"
+fi
 
 ok "Done. Backup at /etc/pacman.conf.bak"

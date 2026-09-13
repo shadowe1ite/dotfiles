@@ -1,8 +1,11 @@
+{{- /* hostnamectl exits non-zero without a working dbus (fresh chroot, some
+       containers). `output` aborts the whole template in that case, which takes
+       .chezmoiignore with it, so route it through a shell that always exits 0. */ -}}
 {{- $chassis := "unknown" -}}
 {{- if eq .chezmoi.os "linux" -}}
-    {{- if lookPath "hostnamectl" -}}
-        {{- $data := output "hostnamectl" "--json=short" | mustFromJson -}}
-        {{- $chassis = $data.Chassis -}}
-    {{- end -}}
+  {{- if lookPath "hostnamectl" -}}
+    {{- $data := output "sh" "-c" "hostnamectl --json=short 2>/dev/null || echo {}" | fromJson -}}
+    {{- with $data.Chassis -}}{{- $chassis = . -}}{{- end -}}
+  {{- end -}}
 {{- end -}}
 {{- $chassis -}}

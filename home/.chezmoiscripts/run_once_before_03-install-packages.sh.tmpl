@@ -7,8 +7,11 @@ trap 'exit 130' INT
   {{- range $k, $v := . }}{{- range $v }}"{{ . }}" {{ end }}{{- end -}}
 {{- end }}
 
+sudoKeepAlive
 notify "📦 Package installation started..."
-retry "Database sync" $AUR -Syy --noconfirm --sudoloop
+
+retry "Database sync" $AUR -Syy --noconfirm --sudoloop \
+  || warn "Database sync failed; continuing with the cached database"
 
 installPkg "Base"     {{ template "flat" (include ".chezmoidata/packages/linux/arch/base.yaml"      | fromYaml) }}
 installPkg "Nvidia"   {{ template "flat" (include ".chezmoidata/packages/linux/arch/nvidia.yaml"    | fromYaml) }}
@@ -16,19 +19,21 @@ installPkg "Desktop" {{ template "flat" (include ".chezmoidata/packages/linux/ar
 installPkg "User Applications" {{ template "flat" (include ".chezmoidata/packages/linux/arch/applications.yaml" | fromYaml) }}
 
 {{ if .packages.editing -}}
-installPkg "Editing" {{ template "flat" (include ".chezmoidata/packages/applications/editing.yaml" | fromYaml) }}
+installPkg "Editing" {{ template "flat" (include ".chezmoidata/packages/linux/arch/editing.yaml" | fromYaml) }}
 {{ else -}}
 skipPkg "Editing"
 {{ end -}}
 
 {{ if .packages.games -}}
-installPkg "Games" {{ template "flat" (include ".chezmoidata/packages/applications/games.yaml" | fromYaml) }}
+installPkg "Games" {{ template "flat" (include ".chezmoidata/packages/linux/arch/games.yaml" | fromYaml) }}
 {{ else -}}
 skipPkg "Games"
 {{ end -}}
 
 printSummary
-[[ ${#failed[@]} -gt 0 ]] && notify "🚨 ${#failed[@]} packages failed to install"
+if [[ ${#failed[@]} -gt 0 ]]; then
+  notify "🚨 ${#failed[@]} packages failed to install"
+fi
 
 notify "✅ Package Installation Finished."
 ok "All done."

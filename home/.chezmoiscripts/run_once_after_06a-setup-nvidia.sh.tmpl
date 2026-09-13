@@ -2,19 +2,65 @@
 set -euo pipefail
 {{ template "utils" . }}
 
-if [[ -f /boot/grub/grub.cfg || -f /boot/grub2/grub.cfg ]]; then
-  step "Adding nvidia_drm.modeset=1 to grub"
-  sudo sed -i 's/quiet/splash quiet nvidia_drm.modeset=1/g' /etc/default/grub
-  sudo grub-mkconfig -o /boot/grub/grub.cfg
+# This script used to run on every Arch machine: it blacklisted nouveau and
+# baked nvidia modules into the initramfs even with no NVIDIA card present,
+# which at best made mkinitcpio warn on every rebuild and at worst produced a
+# box that could not start a display.
+if ! have lspci; then
+  warn "pciutils not installed, cannot detect GPU; skipping nvidia setup"
+  exit 0
 fi
 
-step "Adding nvidia modules to mkinitcpio"
-sudo sed -i 's/MODULES=()/MODULES=(nvidia nvidia_modeset nvidia_uvm nvidia_drm)/g' /etc/mkinitcpio.conf
+if ! lspci -nn | grep -qiE '(VGA|3D|Display).*NVIDIA'; then
+  warn "No NVIDIA GPU detected; skipping nvidia setup"
+  exit 0
+fi
+
+if ! pacman -Qq nvidia-open nvidia nvidia-dkms nvidia-open-dkms &>/dev/null; then
+  warn "No nvidia driver package installed; skipping nvidia setup"
+  exit 0
+fi
+
+sudoKeepAlive
+info "NVIDIA GPU detected"
+
+if [[ -f /etc/default/grub ]] && { [[ -f /boot/grub/grub.cfg ]] || [[ -f /boot/grub2/grub.cfg ]]; }; then
+  if grep -q 'nvidia_drm.modeset=1' /etc/default/grub; then
+    step "grub already has nvidia_drm.modeset=1"
+  else
+    step "Adding nvidia_drm.modeset=1 to grub"
+    sudo cp /etc/default/grub /etc/default/grub.bak
+    sudo sed -i 's/\bquiet\b/splash quiet nvidia_drm.modeset=1/' /etc/default/grub
+    sudo grub-mkconfig -o /boot/grub/grub.cfg || warn "grub-mkconfig failed"
+  fi
+else
+  warn "GRUB not in use here; add nvidia_drm.modeset=1 to your bootloader's kernel cmdline manually"
+fi
+
+if grep -qE '^MODULES=.*nvidia' /etc/mkinitcpio.conf; then
+  step "mkinitcpio already lists nvidia modules"
+  NEED_INITRAMFS=false
+else
+  step "Adding nvidia modules to mkinitcpio"
+  sudo cp /etc/mkinitcpio.conf /etc/mkinitcpio.conf.bak
+  # Only rewrite an empty MODULES=(); appending to a populated one would
+  # silently drop whatever was already there.
+  if grep -qE '^MODULES=\(\s*\)' /etc/mkinitcpio.conf; then
+    sudo sed -i 's/^MODULES=(\s*)/MODULES=(nvidia nvidia_modeset nvidia_uvm nvidia_drm)/' /etc/mkinitcpio.conf
+    NEED_INITRAMFS=true
+  else
+    warn "MODULES= is not empty in /etc/mkinitcpio.conf; add these by hand:"
+    warn "  nvidia nvidia_modeset nvidia_uvm nvidia_drm"
+    NEED_INITRAMFS=false
+  fi
+fi
 
 step "Blacklisting nouveau"
-echo "blacklist nouveau" | sudo tee /etc/modprobe.d/blacklist.conf >/dev/null
+echo "blacklist nouveau" | sudo tee /etc/modprobe.d/nouveau-blacklist.conf >/dev/null
 
-step "Rebuilding initramfs"
-sudo mkinitcpio -P
+if [[ "$NEED_INITRAMFS" == "true" ]]; then
+  step "Rebuilding initramfs"
+  sudo mkinitcpio -P || warn "mkinitcpio reported errors; check the output above before rebooting"
+fi
 
 ok "Nvidia setup complete"

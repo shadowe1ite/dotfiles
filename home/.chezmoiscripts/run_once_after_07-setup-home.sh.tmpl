@@ -2,56 +2,87 @@
 set -euo pipefail
 {{ template "utils" . }}
 
-STORAGE="{{ .storage | default "/mnt/storage" }}"
+STORAGE={{ .storage | default "/mnt/storage" | quote }}
 
-set -euo pipefail
-
+info "Setting up home directories"
 mkdir -p "$HOME"/{Videos/Captures/Clips,Music/Clips,Pictures/Screenshots}
-rm -rf "$HOME/Documents"
-ln -sfn "$STORAGE/Documents" "$HOME/Documents"
-ln -sfn "$STORAGE/Movies" "$HOME/Videos/Movies"
-ln -sfn "$STORAGE/Music" "$HOME/Music"
-ln -sfn "$STORAGE/courses" "$HOME/Videos/courses"
-ln -sfn "$STORAGE/wall" "$HOME/Pictures/Wallpapers"
-ln -sfn "$STORAGE/code" "$HOME/code"
 
-xdg-user-dirs-update
+# link <target> <linkname> — only when the target actually exists, so a machine
+# without the secondary disk does not end up with a home full of dead symlinks.
+link() {
+  local target="$1" name="$2"
+  if [[ ! -e "$target" ]]; then
+    warn "skip $name — $target does not exist"
+    return 0
+  fi
+  if [[ -e "$name" && ! -L "$name" ]]; then
+    if [[ -d "$name" && -z "$(ls -A "$name" 2>/dev/null)" ]]; then
+      rmdir "$name"
+    else
+      warn "skip $name — real, non-empty path already there (not touching it)"
+      return 0
+    fi
+  fi
+  ln -sfn "$target" "$name" && step "$name -> $target"
+}
+
+link "$STORAGE/Documents" "$HOME/Documents"
+link "$STORAGE/Movies"    "$HOME/Videos/Movies"
+link "$STORAGE/Music"     "$HOME/Music"
+link "$STORAGE/courses"   "$HOME/Videos/courses"
+link "$STORAGE/wall"      "$HOME/Pictures/Wallpapers"
+link "$STORAGE/code"      "$HOME/code"
+
+have xdg-user-dirs-update && xdg-user-dirs-update || warn "xdg-user-dirs not installed"
 ok "Directories setup complete"
 
-{{ if eq .chezmoi.username .user }}
-{{ if eq .chezmoi.osRelease.id "arch" }}
+{{ if and (eq .chezmoi.username .user) (eq .chezmoi.osRelease.id "arch") }}
+sudoKeepAlive
 
-if [[ "$SHELL" != "$(which zsh)" ]]; then
-  zsh -c 'source ~/.zshrc'
-  info "Changing shell to zsh"
-  sudo chsh -s "$(which zsh)" "$USER"
+# The old version ran `zsh -c 'source ~/.zshrc'` here. A non-interactive shell
+# sourcing an interactive rc is fragile on a first boot (plugin managers not
+# bootstrapped yet) and any non-zero exit killed the script under `set -e`.
+if have zsh; then
+  ZSH_PATH=$(command -v zsh)
+  if [[ "$(getent passwd "$USER" | cut -d: -f7)" != "$ZSH_PATH" ]]; then
+    info "Changing login shell to zsh"
+    sudo chsh -s "$ZSH_PATH" "$USER" || warn "Could not change login shell"
+  else
+    step "Login shell is already zsh"
+  fi
+else
+  warn "zsh not installed, leaving login shell alone"
 fi
 
-sudo systemctl disable iwd.service
-sudo systemctl disable systemd-networkd.service
+# NetworkManager owns wifi here. These units are frequently not installed at
+# all on a fresh box, and `systemctl disable` on an unknown unit exits 1 —
+# which used to abort this script before the reboot prompt was ever reached.
+info "Disabling conflicting network services"
+disableSvc iwd.service
+disableSvc systemd-networkd.service
 
-if command -v warp-cli >/dev/null 2>&1; then
-    if ! warp-cli registration show 2>/dev/null | grep -q "Account type"; then
-        echo "Registering warp..."
-        echo 'y' | warp-cli registration new
-    else
-        echo "Warp already registered, skipping..."
-    fi
-
-    warp-cli connect
+if have warp-cli; then
+  if warp-cli registration show &>/dev/null && warp-cli registration show 2>/dev/null | grep -q "Account type"; then
+    step "Warp already registered"
+  else
+    info "Registering warp"
+    yes | warp-cli registration new &>/dev/null || warn "warp registration failed"
+  fi
+  warp-cli connect &>/dev/null || warn "warp connect failed"
 else
-    echo "warp-cli is not installed. Skipping..."
+  warn "warp-cli is not installed, skipping"
+fi
+
+if [[ -s "$FAIL_LOG" ]]; then
+  warn "Some packages failed earlier — see $FAIL_LOG"
 fi
 
 ok "Installation completed"
-
 notify "⚙️ All Done 🎉. Now reboot your system"
 
 if confirm "Reboot now?"; then
   reboot
 else
-  info "Reboot skipped"
+  info "Reboot skipped — remember to reboot before using the desktop"
 fi
-
-{{ end }}
 {{ end }}

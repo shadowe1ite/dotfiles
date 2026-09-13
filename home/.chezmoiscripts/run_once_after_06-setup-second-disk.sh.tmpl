@@ -2,19 +2,46 @@
 set -euo pipefail
 {{ template "utils" . }}
 
-MODEL="{{ .disk }}"
-MNT="{{ .storage }}"
+MODEL={{ .disk | quote }}
+MNT={{ .storage | quote }}
 
 step "Finding device: $MODEL"
-DEV=$(lsblk -dno NAME,MODEL | grep "$MODEL" | awk '{print "/dev/" $1}')
-[[ -z "$DEV" ]] && { err "Device '$MODEL' not found."; exit 1; }
 
+# `DEV=$(lsblk | grep "$MODEL" | awk ...)` under `set -o pipefail` exits the
+# script the instant grep finds nothing — so the friendly error below never
+# printed and every machine without this exact drive failed the apply.
+DEV=$(lsblk -dno NAME,MODEL 2>/dev/null | grep -F "$MODEL" | awk '{print "/dev/" $1}' | head -n1 || true)
+
+if [[ -z "$DEV" ]]; then
+  warn "Device '$MODEL' not found on this machine; skipping secondary disk setup"
+  exit 0
+fi
+
+sudoKeepAlive
 step "Device: $DEV"
-UUID=$(sudo blkid -s UUID -o value "$DEV")
-[[ -z "$UUID" ]] && { err "UUID not found for $DEV"; exit 1; }
 
-[[ ! -d "$MNT" ]] && sudo mkdir -p "$MNT"
-mountpoint -q "$MNT" || sudo mount "$DEV" "$MNT"
-grep -q "$UUID" /etc/fstab || echo "UUID=$UUID $MNT ext4 defaults,rw,user,exec 0 2" | sudo tee -a /etc/fstab >/dev/null
+UUID=$(sudo blkid -s UUID -o value "$DEV" 2>/dev/null || true)
+if [[ -z "$UUID" ]]; then
+  warn "No filesystem UUID on $DEV (unformatted?); skipping"
+  exit 0
+fi
+
+FSTYPE=$(sudo blkid -s TYPE -o value "$DEV" 2>/dev/null || echo ext4)
+step "Filesystem: $FSTYPE"
+
+[[ -d "$MNT" ]] || sudo mkdir -p "$MNT"
+
+if mountpoint -q "$MNT"; then
+  step "$MNT already mounted"
+else
+  sudo mount "$DEV" "$MNT" || { warn "Could not mount $DEV at $MNT"; exit 0; }
+fi
+
+if grep -q "$UUID" /etc/fstab; then
+  step "fstab entry already present"
+else
+  echo "UUID=$UUID $MNT $FSTYPE defaults,rw,user,exec 0 2" | sudo tee -a /etc/fstab >/dev/null
+  step "Added fstab entry"
+fi
 
 ok "Secondary disk setup complete"

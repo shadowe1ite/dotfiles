@@ -7,78 +7,156 @@ ok()   { printf "${BG}  ✔${N} %s\n" "$*"; }
 warn() { printf "${Y}  ⚠${N} %s\n" "$*"; }
 err()  { printf "${R}  ✘${N} %s\n" "$*"; }
 step() { printf "${D}  │${N} ${C}%s${N}\n" "$*"; }
+die()  { err "$*"; exit 1; }
 
 failed=()
 FAIL_LOG="$HOME/.local/state/chezmoi-failed-pkgs.log"
+mkdir -p "$(dirname "$FAIL_LOG")" 2>/dev/null || true
 
-{{ if eq .chezmoi.osRelease.id "arch" -}}
-AUR="yay"
-{{- end }}
+AUR="{{ .aur | default "yay" }}"
+
+have() { command -v "$1" >/dev/null 2>&1; }
+
+# Every script here runs a long chain of `sudo ... >/dev/null 2>&1`. Those
+# redirects swallow sudo's password prompt, so on a bare TTY the install just
+# sits there looking hung. Grab the timestamp once, visibly, then refresh it in
+# the background so nothing later has to ask again.
+sudoKeepAlive() {
+  have sudo || die "sudo is not installed"
+  if ! sudo -n true 2>/dev/null; then
+    info "Requesting sudo (needed for the rest of this script)"
+    sudo -v || die "sudo authentication failed"
+  fi
+  ( while true; do sudo -n true 2>/dev/null || exit 0; sleep 50; done ) >/dev/null 2>&1 &
+  SUDO_KEEPALIVE_PID=$!
+  trap 'kill "${SUDO_KEEPALIVE_PID:-}" 2>/dev/null || true' EXIT
+}
 
 checkDeps() {
+  local p missing=()
   for p in "$@"; do
-    pacman -Qi "$p" &>/dev/null && continue
-    step "Installing $p"
-    $AUR -S --noconfirm "$p" &>/dev/null
+    pacman -Qi "$p" &>/dev/null || missing+=("$p")
   done
+  [[ ${#missing[@]} -eq 0 ]] && return 0
+  step "Installing dependencies: ${missing[*]}"
+  $AUR -S --needed --noconfirm "${missing[@]}" \
+    || die "Could not install required dependencies: ${missing[*]}"
 }
 
 retry() {
   local n="$1" max="${RETRY_MAX:-3}" i=0; shift
-  while (( i < max )); do "$@" 2>/dev/null && return 0; i=$((i+1)); done
-  err "$n failed after $max attempts"; return 1
+  while (( i < max )); do
+    "$@" && return 0
+    i=$((i+1))
+    (( i < max )) && { warn "$n failed, retrying ($i/$max)"; sleep $(( i * 3 )); }
+  done
+  err "$n failed after $max attempts"
+  return 1
 }
 
 installPkg() {
   local g="$1"; shift; local -a p=("$@") m=() f=()
+  [[ ${#p[@]} -eq 0 ]] && { warn "$g — no packages defined"; return 0; }
   info "Installing $g (${#p[@]})"
   pacman -Q jack2 &>/dev/null && $AUR -Rnsdd --noconfirm jack2 &>/dev/null
   for x in "${p[@]}"; do pacman -Qi "$x" &>/dev/null || m+=("$x"); done
   [[ ${#m[@]} -eq 0 ]] && { ok "$g — nothing to do"; return 0; }
   step "${#m[@]} to install"
-  $AUR -S --asexplicit --sudoloop --needed --noconfirm --removemake "${m[@]}" 2>/dev/null && { ok "$g"; return 0; }
-  warn "$g batch failed, one by one"
+  $AUR -S --asexplicit --sudoloop --needed --noconfirm --removemake "${m[@]}" && { ok "$g"; return 0; }
+  warn "$g batch failed, retrying one by one"
   for x in "${m[@]}"; do
     retry "$x" $AUR -S --asexplicit --sudoloop --needed --noconfirm --removemake "$x" && { step "$x"; continue; }
-    err "$x"; f+=("$x"); failed+=("[$g] $x")
+    err "$x"
+    f+=("$x"); failed+=("[$g] $x")
+    printf '[%s] %s\n' "$g" "$x" >> "$FAIL_LOG" 2>/dev/null || true
   done
-  [[ ${#f[@]} -gt 0 ]] && { warn "$g done with ${#f[@]} failures"; return 0; }
-  ok "$g"
+  if [[ ${#f[@]} -gt 0 ]]; then
+    warn "$g done with ${#f[@]} failures"
+  else
+    ok "$g"
+  fi
+  return 0
 }
 
 skipPkg() { warn "Skipping $1"; }
 
 printSummary() {
-  [[ ${#failed[@]} -eq 0 ]] && { ok "All packages installed"; return; }
-  err "${#failed[@]} failed:"
+  if [[ ${#failed[@]} -eq 0 ]]; then
+    ok "All packages installed"
+    return 0
+  fi
+  err "${#failed[@]} failed (logged to $FAIL_LOG):"
+  local p
   for p in "${failed[@]}"; do printf "  ${R}✗${N} %s\n" "$p"; done
+  return 0
+}
+
+# Does this unit actually exist? `systemctl enable/disable` on an unknown unit
+# exits non-zero and, under `set -e`, takes the whole script down with it.
+unitExists() {
+  local u="$1" s="${2:-system}"
+  if [[ "$s" == "user" ]]; then
+    [[ -n "$(systemctl --user list-unit-files --no-legend "$u" 2>/dev/null)" ]]
+  else
+    [[ -n "$(systemctl list-unit-files --no-legend "$u" 2>/dev/null)" ]]
+  fi
 }
 
 enableSvc() {
   local n="$1" s="$2"
+  if ! unitExists "$n" "$s"; then
+    warn "not installed, skipping: $n"
+    return 0
+  fi
   if [[ "$s" == "user" ]]; then
-    systemctl --user is-enabled "$n" &>/dev/null && { step "already: $n"; return; }
-    systemctl --user enable --now "$n" &>/dev/null && { step "enabled: $n"; return; }
+    systemctl --user is-enabled "$n" &>/dev/null && { step "already: $n"; return 0; }
+    systemctl --user enable --now "$n" &>/dev/null && { step "enabled: $n"; return 0; }
   else
-    systemctl is-enabled "$n" &>/dev/null && { step "already: $n"; return; }
-    sudo systemctl enable --now "$n" &>/dev/null && { step "enabled: $n"; return; }
+    systemctl is-enabled "$n" &>/dev/null && { step "already: $n"; return 0; }
+    sudo systemctl enable --now "$n" &>/dev/null && { step "enabled: $n"; return 0; }
   fi
   err "FAILED: $n"
+  return 0
+}
+
+disableSvc() {
+  local n="$1"
+  unitExists "$n" || { step "not installed: $n"; return 0; }
+  systemctl is-enabled --quiet "$n" 2>/dev/null || { step "already disabled: $n"; return 0; }
+  sudo systemctl disable --now "$n" &>/dev/null && { step "disabled: $n"; return 0; }
+  warn "could not disable: $n"
+  return 0
 }
 
 repoKeys() {
   local n="$1" k="$2" s="${3:-keyserver.ubuntu.com}"
-  sudo pacman-key --list-keys "$k" >/dev/null 2>&1 && return
+  sudo pacman-key --list-keys "$k" >/dev/null 2>&1 && return 0
   step "Receiving $n keys"
-  sudo pacman-key --recv-keys "$k" --keyserver "$s"
-  sudo pacman-key --lsign-key "$k"
+  local ks
+  for ks in "$s" keys.openpgp.org pgp.mit.edu; do
+    sudo pacman-key --recv-keys "$k" --keyserver "$ks" >/dev/null 2>&1 && {
+      sudo pacman-key --lsign-key "$k" >/dev/null 2>&1
+      return 0
+    }
+    warn "keyserver $ks did not answer for $n"
+  done
+  return 1
 }
 
 confirm() {
-  printf "%s [y/N] " "$1"; read -r a; [[ "$a" =~ ^[Yy]$ ]]
+  local a
+  if [[ ! -t 0 ]]; then
+    warn "$1 — no terminal attached, assuming no"
+    return 1
+  fi
+  printf "%s [y/N] " "$1"
+  read -r a || return 1
+  [[ "$a" =~ ^[Yy]$ ]]
 }
 
+# Best-effort push notification. Must never be the reason an install dies.
 notify() {
-  local msg="$1"
-  curl -s -d "$msg" https://ntfy.sh/ShadowInstall > /dev/null
+  have curl || return 0
+  curl -fsS --max-time 10 -d "$1" https://ntfy.sh/ShadowInstall >/dev/null 2>&1 || true
+  return 0
 }

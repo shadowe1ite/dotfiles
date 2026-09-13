@@ -18,20 +18,36 @@ SYSTEM_SERVICES=(
 {{- with .services }}{{- with .system }}{{- range . }}"{{ . }}" {{ end }}{{- end }}{{- end -}}
 )
 
-info "User services (${#USER_SERVICES[@]})"
+sudoKeepAlive
 
-for s in "${USER_SERVICES[@]}"; do enableSvc "$s" "user"; done
+# Without a user systemd instance (no logind session on this tty) every
+# `systemctl --user` call fails; say so once instead of 9 identical errors.
+if systemctl --user is-system-running &>/dev/null || [[ -S "$XDG_RUNTIME_DIR/systemd/private" ]]; then
+  info "User services (${#USER_SERVICES[@]})"
+  for s in "${USER_SERVICES[@]}"; do enableSvc "$s" "user"; done
+else
+  warn "No user systemd instance on this session; skipping ${#USER_SERVICES[@]} user services"
+  warn "Re-run after logging in graphically: chezmoi state delete-bucket --bucket=scriptState && chezmoi apply"
+fi
 
 info "System services (${#SYSTEM_SERVICES[@]})"
-
 for s in "${SYSTEM_SERVICES[@]}"; do enableSvc "$s" "system"; done
 
+info "Groups"
 {{ range .groups -}}
-sudo -n usermod -aG {{ . }} "$(id -un)" 2>/dev/null || warn "Could not add $(id -un) to group {{ . }} (no sudo access yet, add manually or via cuser)"
-{{ end -}}
-
+if getent group {{ . | quote }} >/dev/null 2>&1; then
+  if id -nG "$(id -un)" | tr ' ' '\n' | grep -qx {{ . | quote }}; then
+    step "already in group: {{ . }}"
+  else
+    sudo usermod -aG {{ . | quote }} "$(id -un)" && step "added to group: {{ . }}" \
+      || warn "Could not add $(id -un) to group {{ . }}"
+  fi
+else
+  warn "Group {{ . }} does not exist (package not installed?), skipping"
+fi
+{{ end }}
 # mask autostart
-systemctl --user mask xdg-desktop-autostart.target 2>/dev/null \
+systemctl --user mask xdg-desktop-autostart.target &>/dev/null \
   || warn "Could not mask xdg-desktop-autostart.target"
 
 ok "Finished services and groups"

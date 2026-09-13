@@ -3,39 +3,53 @@ set -euo pipefail
 {{ template "utils" . }}
 {{- $bwFolderId := "3bb893f4-9a06-4477-afe5-b33c00c20c5d" }}
 
+sudoKeepAlive
 checkDeps gnupg jq bitwarden-cli git pass
 
 mkdir -p "$HOME/.config/Bitwarden CLI"
 touch "$HOME/.config/Bitwarden CLI/data.json"
 
 info "Logging in to Bitwarden"
+BW_SESSION=""
 BW_STATUS=$(bw status 2>/dev/null | jq -r '.status' 2>/dev/null || echo "unauthenticated")
-if [[ "$BW_STATUS" == "unlocked" ]]; then
-  BW_SESSION=$(bw login {{ .email }} --raw 2>/dev/null || true)
-elif [[ "$BW_STATUS" == "locked" ]]; then
-  BW_SESSION=$(bw unlock --raw)
-else
-  BW_OK=false
-  for i in 1 2 3; do
-    BW_SESSION=$(bw login {{ .email }} --raw || true)
-    if [[ -n "$BW_SESSION" ]]; then
-      BW_OK=true
-      break
-    fi
-    warn "Login failed, retrying ($i/3)"
-  done
-  [[ "$BW_OK" != "true" ]] && { err "Login failed. Exiting."; exit 1; }
-fi
+step "Vault status: $BW_STATUS"
+
+case "$BW_STATUS" in
+  unlocked)
+    # Already unlocked, but the CLI never hands back an existing session key.
+    # Re-locking is the only way to get one we can pass to `bw list`.
+    bw lock >/dev/null 2>&1 || true
+    BW_SESSION=$(bw unlock --raw || true)
+    ;;
+  locked)
+    for i in 1 2 3; do
+      BW_SESSION=$(bw unlock --raw || true)
+      [[ -n "$BW_SESSION" ]] && break
+      warn "Unlock failed, retrying ($i/3)"
+    done
+    ;;
+  *)
+    for i in 1 2 3; do
+      BW_SESSION=$(bw login {{ .email | quote }} --raw || true)
+      [[ -n "$BW_SESSION" ]] && break
+      warn "Login failed, retrying ($i/3)"
+    done
+    ;;
+esac
+
+[[ -n "$BW_SESSION" ]] || die "Could not obtain a Bitwarden session. Exiting."
+export BW_SESSION
 
 info "Importing GPG keys"
-bw list items --session "$BW_SESSION" --folderid "{{ $bwFolderId }}" \
-  | jq -r '.[] | select(.notes | contains("BEGIN PGP")) | .notes' \
-  | gpg --import --batch --yes -q
+KEYS=$(bw list items --session "$BW_SESSION" --folderid {{ $bwFolderId | quote }} \
+  | jq -r '.[] | select(.notes != null) | select(.notes | contains("BEGIN PGP")) | .notes')
+[[ -n "$KEYS" ]] || die "No PGP keys found in the Bitwarden folder"
+printf '%s\n' "$KEYS" | gpg --import --batch --yes -q
 
 info "Setting GPG key trust"
-echo -e "trust\n5\ny\n" | gpg --batch --command-fd 0 --edit-key {{ .email }} >/dev/null 2>&1
+printf 'trust\n5\ny\n' | gpg --batch --command-fd 0 --edit-key {{ .email | quote }} >/dev/null 2>&1 || true
 
-mkdir -p ~/.gnupg
+mkdir -p ~/.gnupg && chmod 700 ~/.gnupg
 cat > ~/.gnupg/gpg-agent.conf <<EOF
 default-cache-ttl 28800
 max-cache-ttl 86400
@@ -45,17 +59,20 @@ gpg-connect-agent reloadagent /bye >/dev/null
 info "Enter GPG password"
 GPG_OK=false
 for i in 1 2 3; do
-  if gpg -q --pinentry-mode loopback --sign --default-key {{ .email }} --output /dev/null <<< "unlock" 2>/dev/null; then
+  if gpg -q --sign --default-key {{ .email | quote }} --output /dev/null <<< "unlock" 2>/dev/null; then
     GPG_OK=true
     break
   fi
   warn "Wrong passphrase, try again ($i/3)"
 done
-[[ "$GPG_OK" != "true" ]] && { err "GPG passphrase failed 3 times. Exiting."; bw logout >/dev/null 2>&1 || true; exit 1; }
+if [[ "$GPG_OK" != "true" ]]; then
+  bw logout >/dev/null 2>&1 || true
+  die "GPG passphrase failed 3 times. Exiting."
+fi
 
 info "Bootstrapping SSH keys"
 mkdir -p ~/.ssh && chmod 700 ~/.ssh
-gpg -q --decrypt --batch "{{ .chezmoi.sourceDir }}/private_dot_ssh/encrypted_private_id_ed25519_main.asc" > ~/.ssh/id_ed25519_main
+gpg -q --decrypt --batch {{ printf "%s/private_dot_ssh/encrypted_private_id_ed25519_main.asc" .chezmoi.sourceDir | quote }} > ~/.ssh/id_ed25519_main
 chmod 600 ~/.ssh/id_ed25519_main
 cat > ~/.ssh/config <<'SSHEOF'
 Host main
@@ -70,15 +87,14 @@ step "SSH key deployed from chezmoi source"
 info "Cloning password store"
 if [[ -d ~/.password-store/.git ]]; then
   step "Already exists, pulling"
-  git -C ~/.password-store pull
+  git -C ~/.password-store pull || warn "Could not pull password store"
 else
-  git clone "main:shadowe1ite/.password-store.git" ~/.password-store
+  git clone "main:shadowe1ite/.password-store.git" ~/.password-store \
+    || warn "Could not clone password store (check the deploy key on GitHub)"
 fi
 
 ok "Password store ready"
 
 info "Cleaning up"
-bw logout
-$AUR -Rns --noconfirm bitwarden-cli >/dev/null 2>&1
-
+bw logout >/dev/null 2>&1 || true
 ok "GPG setup completed"

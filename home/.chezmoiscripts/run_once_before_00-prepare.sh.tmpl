@@ -4,24 +4,24 @@ set -euo pipefail
 
 info "Preparing installation"
 
-{{ if eq .chezmoi.osRelease.id "arch" -}}
-step "Installing keyring"
-sudo pacman -Sy --noconfirm archlinux-keyring >/dev/null 2>&1
-step "Installing base-devel"
-sudo pacman -S --needed --noconfirm git openssh base-devel >/dev/null 2>&1
+sudoKeepAlive
 
-if ! command -v $AUR &>/dev/null; then
+step "Refreshing keyring and build tools"
+# One transaction. `pacman -Sy` followed by a separate `-S` is a partial
+# upgrade: it desyncs the local db from the mirrors and is the classic way to
+# break a fresh Arch box before it has installed anything.
+sudo pacman -Syu --needed --noconfirm archlinux-keyring git curl openssh base-devel
+
+if ! have "$AUR"; then
   step "Building $AUR"
   tmpdir=$(mktemp -d)
-  git clone "https://aur.archlinux.org/${AUR}-bin.git" "$tmpdir"
-  (cd "$tmpdir" && makepkg -si --noconfirm)
-  rm -rf "$tmpdir"
+  trap 'rm -rf "$tmpdir"; kill "${SUDO_KEEPALIVE_PID:-}" 2>/dev/null || true' EXIT
+  git clone --depth 1 "https://aur.archlinux.org/${AUR}-bin.git" "$tmpdir"
+  ( cd "$tmpdir" && makepkg -si --noconfirm )
+  have "$AUR" || die "$AUR still not on PATH after building ${AUR}-bin"
 fi
-{{ else -}}
-sudo pacman -Sy --noconfirm >/dev/null 2>&1
-{{ end -}}
 
-step "Upgrading system"
-$AUR -Syyu --noconfirm >/dev/null 2>&1
+step "Upgrading system (this can take a while)"
+$AUR -Syu --noconfirm
 
 ok "Preparation complete"
