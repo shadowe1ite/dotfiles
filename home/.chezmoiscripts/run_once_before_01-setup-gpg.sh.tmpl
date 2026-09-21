@@ -40,40 +40,85 @@ esac
 [[ -n "$BW_SESSION" ]] || die "Could not obtain a Bitwarden session. Exiting."
 export BW_SESSION
 
-info "Importing GPG keys"
-KEYS=$(bw list items --session "$BW_SESSION" --folderid {{ $bwFolderId | quote }} \
-  | jq -r '.[] | select(.notes != null) | select(.notes | contains("BEGIN PGP")) | .notes')
-[[ -n "$KEYS" ]] || die "No PGP keys found in the Bitwarden folder"
-printf '%s\n' "$KEYS" | gpg --import --batch --yes -q
-
-info "Setting GPG key trust"
-printf 'trust\n5\ny\n' | gpg --batch --command-fd 0 --edit-key {{ .email | quote }} >/dev/null 2>&1 || true
+# chezmoi runs these scripts without a login shell, so nothing has exported
+# GPG_TTY. Without it pinentry has no terminal to draw on and every passphrase
+# check below fails instantly with "Inappropriate ioctl for device" — which
+# looks exactly like a wrong password, three times in a row, with no prompt.
+# We read the passphrase ourselves and hand it to gpg over the loopback
+# pinentry, so the prompt does not depend on the agent finding a tty at all.
+GPG_TTY=$(tty 2>/dev/null || true)
+[[ "$GPG_TTY" == /dev/* ]] || GPG_TTY=""
+export GPG_TTY
 
 mkdir -p ~/.gnupg && chmod 700 ~/.gnupg
 cat > ~/.gnupg/gpg-agent.conf <<EOF
 default-cache-ttl 28800
 max-cache-ttl 86400
+allow-loopback-pinentry
 EOF
-gpg-connect-agent reloadagent /bye >/dev/null
+gpg-connect-agent reloadagent /bye >/dev/null 2>&1 || true
+
+info "Importing GPG keys"
+KEYS=$(bw list items --session "$BW_SESSION" --folderid {{ $bwFolderId | quote }} \
+  | jq -r '.[] | select(.notes != null) | select(.notes | contains("BEGIN PGP")) | .notes')
+[[ -n "$KEYS" ]] || die "No PGP keys found in the Bitwarden folder"
+if ! IMPORT_ERR=$(printf '%s\n' "$KEYS" | gpg --import --batch --yes -q 2>&1); then
+  printf '%s\n' "$IMPORT_ERR" >&2
+  die "gpg could not import the keys from Bitwarden"
+fi
+
+# A Bitwarden note holding only the *public* block imports cleanly and then
+# fails at the first signature. Say so here instead of blaming the passphrase.
+GPG_KEY=$(gpg --list-secret-keys --with-colons {{ .email | quote }} 2>/dev/null \
+  | awk -F: '/^fpr:/ { print $10; exit }')
+[[ -n "$GPG_KEY" ]] || die "No secret key for {{ .email }} after import — the Bitwarden note needs the PRIVATE KEY BLOCK"
+step "Secret key $GPG_KEY"
+
+info "Setting GPG key trust"
+printf 'trust\n5\ny\n' | gpg --batch --command-fd 0 --edit-key "$GPG_KEY" >/dev/null 2>&1 || true
+
+# Passphrase on fd 3, the payload to sign on stdin, so neither clobbers the
+# other. Keeps the secret off the command line and out of `ps`.
+gpgUnlock() {
+  GPG_ERR=$(gpg -q --batch --yes --pinentry-mode loopback --passphrase-fd 3 \
+    --local-user "$GPG_KEY" --sign --output /dev/null 3<<<"$1" <<<"unlock" 2>&1)
+}
 
 info "Enter GPG password"
+[[ -r /dev/tty ]] || die "No terminal attached, cannot ask for the GPG passphrase"
 GPG_OK=false
+GPG_PASS=""
+GPG_ERR=""
 for i in 1 2 3; do
-  if gpg -q --sign --default-key {{ .email | quote }} --output /dev/null <<< "unlock" 2>/dev/null; then
+  printf '  │ Passphrase for %s: ' {{ .email | quote }} > /dev/tty
+  IFS= read -rs GPG_PASS < /dev/tty || true
+  printf '\n' > /dev/tty
+  if gpgUnlock "$GPG_PASS"; then
     GPG_OK=true
     break
   fi
   warn "Wrong passphrase, try again ($i/3)"
 done
 if [[ "$GPG_OK" != "true" ]]; then
+  # Not `[[ -n ... ]] && printf`: as a bare statement that returns 1 when
+  # GPG_ERR is empty, `set -e` would kill the script right here and swallow
+  # both the logout and the message below.
+  if [[ -n "$GPG_ERR" ]]; then
+    printf '%s\n' "$GPG_ERR" >&2
+  fi
   bw logout >/dev/null 2>&1 || true
   die "GPG passphrase failed 3 times. Exiting."
 fi
+ok "Key unlocked"
 
 info "Bootstrapping SSH keys"
 mkdir -p ~/.ssh && chmod 700 ~/.ssh
-gpg -q --decrypt --batch {{ printf "%s/private_dot_ssh/encrypted_private_id_ed25519_main.asc" .chezmoi.sourceDir | quote }} > ~/.ssh/id_ed25519_main
+gpg -q --batch --yes --pinentry-mode loopback --passphrase-fd 3 \
+  --decrypt {{ printf "%s/private_dot_ssh/encrypted_private_id_ed25519_main.asc" .chezmoi.sourceDir | quote }} \
+  > ~/.ssh/id_ed25519_main 3<<<"$GPG_PASS" \
+  || die "Could not decrypt the SSH key with this GPG key"
 chmod 600 ~/.ssh/id_ed25519_main
+unset GPG_PASS
 cat > ~/.ssh/config <<'SSHEOF'
 Host main
   HostName github.com
