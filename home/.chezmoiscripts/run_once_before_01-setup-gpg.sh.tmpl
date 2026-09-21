@@ -100,7 +100,12 @@ for i in 1 2 3; do
   warn "Wrong passphrase, try again ($i/3)"
 done
 if [[ "$GPG_OK" != "true" ]]; then
-  [[ -n "$GPG_ERR" ]] && printf '%s\n' "$GPG_ERR" >&2
+  # Not `[[ -n ... ]] && printf`: as a bare statement that returns 1 when
+  # GPG_ERR is empty, `set -e` would kill the script right here and swallow
+  # both the logout and the message below.
+  if [[ -n "$GPG_ERR" ]]; then
+    printf '%s\n' "$GPG_ERR" >&2
+  fi
   bw logout >/dev/null 2>&1 || true
   die "GPG passphrase failed 3 times. Exiting."
 fi
