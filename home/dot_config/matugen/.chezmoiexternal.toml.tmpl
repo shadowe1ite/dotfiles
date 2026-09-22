@@ -2,5 +2,7 @@
 type = "archive"
 url = "https://github.com/noctalia-dev/noctalia-shell/archive/refs/heads/main.tar.gz"
 stripComponents = 3
-include = ["*/Assets/Templates/**"]
+# noctalia 5.x renamed Assets/Templates -> assets/templates and regrouped the
+# files into per-app subdirectories, so gtk3.css now lives at gtk/gtk3.css.
+include = ["*/assets/templates/**"]
 refreshPeriod = "168h"
