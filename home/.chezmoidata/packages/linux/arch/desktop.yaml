@@ -1,17 +1,10 @@
 wm:
   - niri
-  - hyprland
 
 niri:
   - xdg-desktop-portal-gnome
   - xdg-desktop-portal-gtk
   - xwayland-satellite
-
-hyprland:
-  - xdg-desktop-portal-hyprland
-  - hypridle
-  - hyprpicker
-  - hyprland-guiutils
 
 quickshell:
   - noctalia
@@ -20,6 +13,7 @@ quickshell:
 
 utils:
   - upower
+  - hyprpicker
   - ddcutil
   - wlsunset
 
@@ -63,7 +57,7 @@ clipboard:
   - wl-clip-persist
   - cliphist
   - slurp
-  - grimblast-git
+  - grim
 
 display_manager:
   - sddm
