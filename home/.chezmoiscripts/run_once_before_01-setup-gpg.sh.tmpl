@@ -56,7 +56,16 @@ default-cache-ttl 28800
 max-cache-ttl 86400
 allow-loopback-pinentry
 EOF
+# gpg defaults to keyserver.ubuntu.com, which serves a stale copy of some
+# upstream release keys: it kept Mozilla's old signing subkey and never picked
+# up the current one, so `yay -S firefox-bin` imported the key, still could not
+# verify the tarball, and died with "unknown public key". keys.openpgp.org
+# tracks subkey rotations, so point dirmngr there before anything fetches keys.
+cat > ~/.gnupg/dirmngr.conf <<EOF
+keyserver hkps://keys.openpgp.org
+EOF
 gpg-connect-agent reloadagent /bye >/dev/null 2>&1 || true
+gpg-connect-agent killdirmngr /bye >/dev/null 2>&1 || true
 
 info "Importing GPG keys"
 KEYS=$(bw list items --session "$BW_SESSION" --folderid {{ $bwFolderId | quote }} \
