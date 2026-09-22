@@ -1,26 +1,26 @@
 {
-  "wallpaper": "/home/shadow/Pictures/Wallpapers/fav/Green/green.jpeg",
+  "wallpaper": "/home/shadow/Pictures/Wallpapers/fav/Anime/eye.png",
   "alpha": "100",
   "colors": {
-    "color0": "#121410",
+    "color0": "#151218",
     "color1": "",
     "color2": "",
-    "color3": "#9ed67c",
+    "color3": "#dbb8ff",
     "color4": "",
-    "color5": "#a0cfcf",
+    "color5": "#ffb0ce",
     "color6": "",
-    "color7": "#343531",
+    "color7": "#37333a",
     "color8": "",
     "color9": "",
-    "color10": "#9ed67c",
+    "color10": "#dbb8ff",
     "color11": "",
     "color12": "",
-    "color13": "#bdcbaf",
+    "color13": "#d4bee8",
     "color14": "",
-    "color15": "#e3e3dc",
-    "color16": "#e3e3dc",
-    "color17": "#1e201c",
+    "color15": "#e8e0e8",
+    "color16": "#e8e0e8",
+    "color17": "#221e24",
     "color18": "",
-    "color19": "#121410"
+    "color19": "#151218"
   }
 }
