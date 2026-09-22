@@ -1,3 +1,6 @@
+# TEMP: skip the Firefox session-restore file. Delete these two lines to re-enable.
+.mozilla/firefox/default/sessionstore-backups/recovery.jsonlz4
+
 {{- $chassis := includeTemplate "sys-chassis.tmpl" . }}
 
 {{- if eq $chassis "vm" }}

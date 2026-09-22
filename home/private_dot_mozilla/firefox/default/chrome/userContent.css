@@ -1,7 +1,17 @@
-@media (prefers-color-scheme: dark) {
-  @-moz-document url("about:newtab"), url("about:home") {
-    .personalize-button, .customize-homepage-button {
-      display: none !important;
-    }
+@-moz-document url("about:newtab"), url("about:home") {
+  /* The "Customize" pencil floating at the bottom right of the new tab page.
+     No pref controls it, so CSS is the only lever.
+
+     Firefox replaced the old .personalize-button with a
+     <menu class="personalizeButtonWrapper"> wrapper, which is why the previous
+     selectors quietly stopped matching and the pencil came back. The old names
+     stay below so this keeps working on older builds.
+
+     Hiding the wrapper also hides the customize panel it contains; the same
+     settings live in about:preferences#home. */
+  .personalizeButtonWrapper,
+  .personalize-button,
+  .customize-homepage-button {
+    display: none !important;
   }
 }
