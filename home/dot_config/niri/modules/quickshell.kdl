@@ -2,8 +2,8 @@ spawn-at-startup "noctalia"
 
 binds {
     // Brightness
-    XF86MonBrightnessUp   allow-when-locked=true { spawn "noctalia" "msg" "brightness-up"; }
-    XF86MonBrightnessDown allow-when-locked=true { spawn "noctalia" "msg" "brightness-down"; }
+    XF86MonBrightnessUp   allow-when-locked=true { spawn "noctalia" "msg" "brightness-up" "1"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn "noctalia" "msg" "brightness-down" "1"; }
 
     // Launchers / UI
     Mod+Space { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
