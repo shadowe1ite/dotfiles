@@ -8,7 +8,7 @@ order = [ "default" ]
 
     [bar.default]
     capsule = true
-    center = [ "clock", "control-center", "privacy" ]
+    center = [ "clock", "control-center", "privacy", "widget" ]
     end = [ "tray", "sysmon", "battery", "network", "notifications" ]
     margin_ends = 0
     reserve_space = false
@@ -130,7 +130,21 @@ widget_order = [ "lockscreen-login-box@eDP-1", "lockscreen-widget-00000000000000
     type = "clock"
 
         [lockscreen_widgets.widget.lockscreen-widget-0000000000000001.settings]
-        background_opacity = 1.0
+        background_opacity = 0.88
+
+[plugin_settings."shadow/habits"]
+panel_open_near_click = true
+panel_placement = "attached"
+
+    [plugin_settings."shadow/habits".habits]
+    AI = "sparkles | opencode, oc |, claude, claude code, kiro, gemini, codex, aider, crush, cursor-agent, copilot, qwen, ollama, chatgpt, perplexity"
+    Crypto = "key | hashcat, john, hashid, hash-identifier, ares"
+    Forensics = "fingerprint | pdf-parser, peepdf"
+    Network = "network | wireshark, tshark, tcpdump, dig, nslookup"
+    Reading = "book | zathura, okular, evince, papers, foliate, .pdf, .epub, .djvu"
+    "Reverse Engineering" = "cpu | gdb, pwndbg, radare2, r2, cutter, ghidra, ida, ida64, ghex, imhex, edb, pwn, binsider, binwalk, ltrace, strace"
+    Steganography = "photo-search | steghide, stegseek, exiftool, sonic visualiser, sonicvisualiser, foremost"
+    "Web Security" = "bug | burpsuite, burp suite, caido, ffuf, sqlmap, nmap, nc, ncat, netcat, msfconsole, metasploit, theharvester, feroxbuster, httprobe, waybackurls, amass, 403jump, dirsearch, arjun, findomain, assetfinder, sublist3r, subbrute, aquatone, gowitness, subcat, waymore, gf, subjack, nuclei, httpx, subfinder, gau, dalfox, trufflehog, curl"
 
 [plugins]
 enabled = [ "noctalia/translator", "noctalia/screen_recorder" ]
@@ -155,6 +169,41 @@ screen_time_enabled = true
     remember_last_region = true
     save_to_file = false
 
+    [[shell.session.actions]]
+    action = "lock"
+    countdown_seconds = 0.0
+    enabled = true
+    shortcut = "1"
+    variant = "default"
+
+    [[shell.session.actions]]
+    action = "logout"
+    countdown_seconds = 0.0
+    enabled = true
+    shortcut = "2"
+    variant = "default"
+
+    [[shell.session.actions]]
+    action = "lock_and_suspend"
+    countdown_seconds = 0.0
+    enabled = true
+    shortcut = "3"
+    variant = "default"
+
+    [[shell.session.actions]]
+    action = "reboot"
+    countdown_seconds = 0.0
+    enabled = true
+    shortcut = "4"
+    variant = "default"
+
+    [[shell.session.actions]]
+    action = "shutdown"
+    countdown_seconds = 15.0
+    enabled = true
+    shortcut = "5"
+    variant = "destructive"
+
 [theme]
 builtin = "Noctalia"
 community_palette = "Oxocarbon"
@@ -164,18 +213,19 @@ wallpaper_scheme = "m3-content"
 
     [theme.templates]
     builtin_ids = [ "alacritty" ]
+    community_ids = [ "opencode" ]
 
 [wallpaper]
 directory = "/home/shadow/Pictures/Wallpapers/fav"
 
     [wallpaper.default]
-    path = "/home/shadow/Pictures/Wallpapers/fav/Anime/eye.png"
+    path = "/home/shadow/Pictures/Wallpapers/fav/Green/lucky.png"
 
     [wallpaper.last]
-    path = "/home/shadow/Pictures/Wallpapers/fav/Anime/eye.png"
+    path = "/home/shadow/Pictures/Wallpapers/fav/Green/lucky.png"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/shadow/Pictures/Wallpapers/fav/Anime/eye.png"
+    path = "/home/shadow/Pictures/Wallpapers/fav/Green/lucky.png"
 
 [widget.clock]
 font_family = "SauceCodePro Nerd Font Propo"
@@ -199,6 +249,9 @@ stat = "cpu_temp"
 
 [widget.tray]
 capsule = true
+
+[widget.widget]
+type = "shadow/habits:widget"
 
 [widget.workspaces]
 show_labels = false

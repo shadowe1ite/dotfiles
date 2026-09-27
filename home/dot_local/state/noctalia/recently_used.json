@@ -1,5 +1,11 @@
 {
   "Applications": [
+    "/usr/share/applications/org.openrgb.OpenRGB.desktop",
+    "/usr/share/applications/typora.desktop",
+    "/home/shadow/.local/share/applications/burpsuite-pro.desktop",
+    "/usr/share/applications/caido.desktop",
+    "/usr/share/applications/com.ranfdev.DistroShelf.desktop",
+    "/usr/share/applications/org.wireshark.Wireshark.desktop",
     "/usr/share/applications/firefox.desktop",
     "/usr/share/applications/org.kde.dolphin.desktop",
     "/usr/share/applications/vmware-workstation.desktop",

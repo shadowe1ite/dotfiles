@@ -33,6 +33,14 @@ fi
 # Load Zim
 source "$ZIM_HOME/init.zsh"
 
+# Put the running command in the terminal title (the Noctalia habits plugin tracks CLI
+# tools like gdb/httpx/curl by title). Zim's termtitle restores the prompt title after.
+_habits_title_preexec() {
+  local cmd=${1//[[:cntrl:]]/ }
+  print -rn -- $'\e]0;'"${cmd[1,80]}"$'\a'
+}
+[[ $TERM != dumb ]] && { autoload -Uz add-zsh-hook; add-zsh-hook preexec _habits_title_preexec }
+
 # Shell integrations
 eval "$(starship init zsh)"
 eval "$(fzf --zsh)"

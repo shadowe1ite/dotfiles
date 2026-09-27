@@ -45,6 +45,7 @@ documents:
   - libreoffice-still
   - evince
   - pdfarranger
+  - typora
 
 annotation:
   - satty
