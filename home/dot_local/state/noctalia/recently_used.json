@@ -1,6 +1,11 @@
 {
   "Applications": [
+    "/usr/share/applications/org.gnome.Calendar.desktop",
     "/usr/share/applications/org.openrgb.OpenRGB.desktop",
+    "/usr/share/applications/jadx-gui.desktop",
+    "/usr/share/applications/genymotion.desktop",
+    "/usr/share/applications/gnome-online-accounts-gtk.desktop",
+    "/usr/share/applications/hermes-desktop.desktop",
     "/usr/share/applications/typora.desktop",
     "/home/shadow/.local/share/applications/burpsuite-pro.desktop",
     "/usr/share/applications/caido.desktop",

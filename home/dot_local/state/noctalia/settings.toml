@@ -23,6 +23,9 @@ warning_threshold = 25
 [calendar]
 enabled = true
 
+    [calendar.account.personal_google]
+    type = "google"
+
 [desktop_widgets]
 schema_version = 2
 widget_order = []

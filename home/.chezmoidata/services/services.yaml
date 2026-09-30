@@ -20,3 +20,4 @@ services:
     - warp-svc.service
     - libvirtd.service
     - virtlogd.service
+    - tailscale.service
