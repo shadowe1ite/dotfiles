@@ -14,7 +14,7 @@ order = [ "default" ]
     reserve_space = false
     show_on_workspace_switch = false
     smart_auto_hide = true
-    start = [ "workspaces", "media" ]
+    start = [ "workspaces", "media", "lyrics" ]
     thickness = 40
 
 [battery]
@@ -150,7 +150,7 @@ panel_placement = "attached"
     "Web Security" = "bug | burpsuite, burp suite, caido, ffuf, sqlmap, nmap, nc, ncat, netcat, msfconsole, metasploit, theharvester, feroxbuster, httprobe, waybackurls, amass, 403jump, dirsearch, arjun, findomain, assetfinder, sublist3r, subbrute, aquatone, gowitness, subcat, waymore, gf, subjack, nuclei, httpx, subfinder, gau, dalfox, trufflehog, curl"
 
 [plugins]
-enabled = [ "noctalia/translator", "noctalia/screen_recorder" ]
+enabled = [ "noctalia/translator", "noctalia/screen_recorder", "shadow/lyrics" ]
 
 [shell]
 clipboard_image_action_command = "satty -f -"
@@ -239,8 +239,15 @@ vertical_format = "{:%H %M - %d %m}"
 [widget.control-center]
 glyph = "brand-redhat"
 
+[widget.lyrics]
+max_length = 25
+scroll = "always"
+type = "shadow/lyrics:lyrics"
+when_paused = "hide"
+
 [widget.media]
 capsule = true
+max_length = 150
 title_scroll = "on_hover"
 
 [widget.session]
