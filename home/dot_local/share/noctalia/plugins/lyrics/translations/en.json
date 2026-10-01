@@ -1,0 +1,59 @@
+{
+  "settings": {
+    "offset": {
+      "label": "Timing offset (ms)",
+      "description": "Positive values show lines earlier, negative ones later."
+    },
+    "players": {
+      "label": "Only these players",
+      "description": "Follow only players whose name contains one of these, e.g. spotify. Leave empty to follow all."
+    },
+    "ignored_players": {
+      "label": "Ignored players",
+      "description": "Never follow players whose name contains one of these, e.g. firefox."
+    },
+    "mode": {
+      "label": "Show",
+      "lyrics": "Lyrics, track when there are none",
+      "track": "Track only"
+    },
+    "track_format": {
+      "label": "Track format",
+      "description": "Placeholders: {title}, {artist}, {album}, {player}"
+    },
+    "max_length": {
+      "label": "Max length",
+      "description": "Longer text gets cut off, in characters. 0 means no limit."
+    },
+    "scroll": {
+      "label": "Scroll long text",
+      "description": "Instead of cutting it off at the max length. Lyric lines scroll once, timed to the line; the track loops.",
+      "none": "Never",
+      "on_hover": "On hover",
+      "always": "Always"
+    },
+    "when_paused": {
+      "label": "When paused",
+      "track": "Show the track",
+      "lyric": "Keep the lyric line",
+      "hide": "Hide the widget"
+    },
+    "hide_when_idle": {
+      "label": "Hide when nothing is playing"
+    },
+    "show_glyph": {
+      "label": "Show icon"
+    },
+    "glyph": {
+      "label": "Icon"
+    }
+  },
+  "panel": {
+    "idle": "Nothing is playing",
+    "none": "",
+    "loading": "Searching for lyrics...",
+    "instrumental": "Instrumental",
+    "missing": "No lyrics found",
+    "error": "Couldn't reach LRCLIB"
+  }
+}

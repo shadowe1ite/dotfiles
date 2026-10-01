@@ -1,0 +1,118 @@
+id           = "shadow/lyrics"
+name         = "Lyrics"
+version      = "0.1.0"
+plugin_api   = 26
+author       = "shadow"
+license      = "MIT"
+icon         = "microphone-2"
+description  = "Synced lyrics for whatever is playing, right in the bar."
+tags         = ["music", "lyrics", "media", "mpris"]
+dependencies = ["busctl"]
+
+[[setting]]
+key             = "offset"
+type            = "int"
+label_key       = "settings.offset.label"
+description_key = "settings.offset.description"
+default         = 0
+min             = -5000
+max             = 5000
+
+[[setting]]
+key             = "players"
+type            = "string_list"
+label_key       = "settings.players.label"
+description_key = "settings.players.description"
+default         = []
+
+[[setting]]
+key             = "ignored_players"
+type            = "string_list"
+label_key       = "settings.ignored_players.label"
+description_key = "settings.ignored_players.description"
+default         = []
+
+[[service]]
+id    = "service"
+entry = "service.luau"
+
+[[widget]]
+id    = "lyrics"
+entry = "widget.luau"
+
+  [[widget.setting]]
+  key             = "mode"
+  type            = "select"
+  label_key       = "settings.mode.label"
+  description_key = "settings.mode.description"
+  default         = "lyrics"
+  options         = [
+    { value = "lyrics", label_key = "settings.mode.lyrics" },
+    { value = "track", label_key = "settings.mode.track" },
+  ]
+
+  [[widget.setting]]
+  key             = "track_format"
+  type            = "string"
+  label_key       = "settings.track_format.label"
+  description_key = "settings.track_format.description"
+  default         = "{title} - {artist}"
+
+  [[widget.setting]]
+  key             = "max_length"
+  type            = "int"
+  label_key       = "settings.max_length.label"
+  description_key = "settings.max_length.description"
+  default         = 45
+  min             = 0
+  max             = 300
+
+  [[widget.setting]]
+  key             = "scroll"
+  type            = "select"
+  label_key       = "settings.scroll.label"
+  description_key = "settings.scroll.description"
+  default         = "always"
+  options         = [
+    { value = "none", label_key = "settings.scroll.none" },
+    { value = "on_hover", label_key = "settings.scroll.on_hover" },
+    { value = "always", label_key = "settings.scroll.always" },
+  ]
+
+  [[widget.setting]]
+  key             = "when_paused"
+  type            = "select"
+  label_key       = "settings.when_paused.label"
+  default         = "track"
+  options         = [
+    { value = "track", label_key = "settings.when_paused.track" },
+    { value = "lyric", label_key = "settings.when_paused.lyric" },
+    { value = "hide", label_key = "settings.when_paused.hide" },
+  ]
+
+  [[widget.setting]]
+  key       = "hide_when_idle"
+  type      = "bool"
+  label_key = "settings.hide_when_idle.label"
+  default   = true
+
+  [[widget.setting]]
+  key       = "show_glyph"
+  type      = "bool"
+  label_key = "settings.show_glyph.label"
+  default   = true
+
+  [[widget.setting]]
+  key          = "glyph"
+  type         = "glyph"
+  label_key    = "settings.glyph.label"
+  default      = "music"
+  visible_when = { key = "show_glyph", values = ["true"] }
+
+[[panel]]
+id              = "panel"
+entry           = "panel.luau"
+width           = 520
+height          = 420
+placement       = "attached"
+open_near_click = true
