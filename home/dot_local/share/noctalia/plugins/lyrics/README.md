@@ -29,9 +29,12 @@ type = "shadow/lyrics:lyrics"
 - Right click plays/pauses the player the widget is showing.
 - Middle click opens the widget settings.
 
+The widget only shows lyrics: before the first line, during instrumental
+breaks or when a song has no lyrics it hides, since the media widget already
+shows the track. Set `mode` to `lyrics_track` to get the track in those gaps.
+
 Lines longer than `max_length` scroll smoothly. A lyric line scrolls once,
-paced so its end shows up while it's still being sung; the track loops. During
-instrumental breaks the widget shows the track.
+paced so its end shows up while it's still being sung; the track loops.
 
 The panel is just the lyrics, Spotify style: the line being sung is lit, the
 rest are dimmed and everything glides up as the song goes on. Click a line to
@@ -57,11 +60,11 @@ Widget:
 
 | Setting | Default | |
 |---|---|---|
-| `mode` | `lyrics` | `lyrics` (falls back to the track) or `track` |
+| `mode` | `lyrics` | `lyrics`, `lyrics_track` (the track when there's no line) or `track` |
 | `track_format` | `{title} - {artist}` | Also `{album}` and `{player}` |
 | `max_length` | `45` | In characters, `0` for no limit |
 | `scroll` | `always` | `none`, `on_hover` or `always` for text over `max_length` |
-| `when_paused` | `track` | `track`, `lyric` or `hide` |
+| `when_paused` | `hide` | `hide`, `lyric` or `track` |
 | `hide_when_idle` | `true` | Hide when no player is around |
 | `show_glyph` / `glyph` | `true` / `music` | |
 

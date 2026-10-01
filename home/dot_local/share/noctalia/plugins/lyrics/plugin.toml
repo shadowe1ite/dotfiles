@@ -48,6 +48,7 @@ entry = "widget.luau"
   default         = "lyrics"
   options         = [
     { value = "lyrics", label_key = "settings.mode.lyrics" },
+    { value = "lyrics_track", label_key = "settings.mode.lyrics_track" },
     { value = "track", label_key = "settings.mode.track" },
   ]
 
@@ -83,7 +84,7 @@ entry = "widget.luau"
   key             = "when_paused"
   type            = "select"
   label_key       = "settings.when_paused.label"
-  default         = "track"
+  default         = "hide"
   options         = [
     { value = "track", label_key = "settings.when_paused.track" },
     { value = "lyric", label_key = "settings.when_paused.lyric" },

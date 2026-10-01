@@ -205,10 +205,20 @@ local function render()
 
   local playing = player.status == "Playing"
   local lyric = nil
-  if mode == "lyrics" and (playing or whenPaused == "lyric") then
+  if mode ~= "track" and (playing or whenPaused == "lyric") then
     lyric = lyricText()
   end
-  local text = lyric or trackText()
+  local text = lyric
+  if text == nil and (mode ~= "lyrics" or (not playing and whenPaused == "track")) then
+    text = trackText()
+  end
+  if text == nil or text == "" then
+    -- nothing to sing right now, and the track is already in the media widget
+    strip = nil
+    barWidget.setVisible(false)
+    noctalia.setUpdateInterval(IDLE_MS)
+    return
+  end
 
   local items = {}
   if showGlyph then

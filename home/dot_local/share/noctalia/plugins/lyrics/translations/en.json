@@ -14,7 +14,9 @@
     },
     "mode": {
       "label": "Show",
-      "lyrics": "Lyrics, track when there are none",
+      "description": "The media widget already shows the track, so by default the widget hides while there's no line to show.",
+      "lyrics": "Lyrics only",
+      "lyrics_track": "Lyrics, the track when there's no line",
       "track": "Track only"
     },
     "track_format": {
