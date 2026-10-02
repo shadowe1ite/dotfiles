@@ -1,0 +1,4 @@
+{
+  "settings.habits.label": "Habits",
+  "settings.habits.description": "Habit name -> \"icon | pattern, pattern, ...\". Patterns match whole words (case-insensitive) in the focused window's app id or title. The icon is an optional Tabler name, e.g. \"bug | burpsuite, caido\"."
+}

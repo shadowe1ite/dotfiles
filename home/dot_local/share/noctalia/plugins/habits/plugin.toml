@@ -1,0 +1,36 @@
+id          = "shadow/habits"
+name        = "Habits"
+version     = "1.0.0"
+plugin_api  = 22
+author      = "shadow"
+icon        = "target"
+description = "Screen-time style tracker for app groups (niri)."
+tags        = ["productivity", "screen-time", "niri"]
+dependencies = ["niri"]
+
+# Habit name -> "[icon |] comma-separated patterns", matched case-insensitively against the
+# focused window's app id and title.
+[[setting]]
+key       = "habits"
+type      = "string_map"
+label_key = "settings.habits.label"
+description_key = "settings.habits.description"
+default   = { "AI" = "sparkles | opencode, oc |, claude, claude code, kiro, gemini, codex, aider, crush, cursor-agent, copilot, qwen, ollama, chatgpt, perplexity", "Bug Bounty" = "bug | burpsuite, burp suite, caido, ffuf, sqlmap, nmap, nc, ncat, netcat, msfconsole, metasploit, theharvester, feroxbuster, httprobe, waybackurls, amass, 403jump, dirsearch, arjun, findomain, assetfinder, sublist3r, subbrute, aquatone, gowitness, subcat, waymore, gf, subjack, nuclei, httpx, subfinder, gau, dalfox, trufflehog, curl", "Crypto" = "key | hashcat, john, hashid, hash-identifier, ares", "Forensics" = "fingerprint | pdf-parser, peepdf", "Network" = "network | wireshark, tshark, tcpdump, dig, nslookup", "Reading" = "book | zathura, okular, evince, papers, foliate, .pdf, .epub, .djvu", "Reverse Engineering" = "cpu | gdb, pwndbg, radare2, r2, cutter, ghidra, ida, ida64, ghex, imhex, edb, pwn, binsider, binwalk, ltrace, strace", "Steganography" = "photo-search | steghide, stegseek, exiftool, sonic visualiser, sonicvisualiser, foremost" }
+
+[[service]]
+id    = "tracker"
+entry = "tracker.luau"
+
+[[panel]]
+id     = "panel"
+entry  = "panel.luau"
+width  = 460
+height = 680
+
+[[widget]]
+id    = "widget"
+entry = "widget.luau"
+
+[[shortcut]]
+id    = "shortcut"
+entry = "shortcut.luau"
