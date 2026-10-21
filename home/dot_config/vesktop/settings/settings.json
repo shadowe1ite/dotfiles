@@ -242,9 +242,6 @@
         "KeepCurrentChannel": {
             "enabled": false
         },
-        "LastFMRichPresence": {
-            "enabled": false
-        },
         "LoadingQuotes": {
             "enabled": false
         },
@@ -264,9 +261,6 @@
             "enabled": false
         },
         "MessageLogger": {
-            "enabled": false
-        },
-        "MessageTags": {
             "enabled": false
         },
         "MutualGroupDMs": {
@@ -543,6 +537,12 @@
         "Settings": {
             "enabled": true,
             "settingsLocation": "aboveNitro"
+        },
+        "CustomCommands": {
+            "enabled": false
+        },
+        "MusicRichPresence": {
+            "enabled": false
         }
     },
     "notifications": {
@@ -555,6 +555,12 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1756965579983
+        "settingsSyncVersion": 1791871793406
+    },
+    "windowsMaterial": "none",
+    "nativeTitleBar": false,
+    "uiElements": {
+        "chatBarButtons": {},
+        "messagePopoverButtons": {}
     }
 }
