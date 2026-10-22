@@ -1,4 +1,4 @@
--- Panel: Claude-themed. A coral-tinted header card with the dancing mascot, the
+-- Panel: Claude-themed. A header with the dancing mascot (no background), the
 -- name and the status; the stream title; one row of controls (stop, an orange
 -- play/pause pill, open on the web, volume). The mascot animates from frame
 -- ticks, and only while the panel is open; nothing else moves.
@@ -9,7 +9,6 @@ local clawd = require("./clawd.luau")
 local FPS = noctalia.getConfig("fps") or "calm"
 local ANIM_MS = common.frameMs(FPS) -- 0 = animation off
 local PIXEL = 3                     -- the mascot is 60 x 48 px
-local CARD = "#D9775722"            -- Claude coral at ~13% for the header card
 local INK = "#1F1B16"               -- dark text/glyph on coral
 
 local isOpen = false
@@ -36,7 +35,7 @@ local function statusColor()
 end
 
 local function header(now, playing)
-  return ui.row({ gap = 12, align = "center", padding = 10, fill = CARD, radius = 14 }, {
+  return ui.row({ gap = 12, align = "center" }, {
     clawd.render(now, playing, PIXEL, ui),
     ui.column({ gap = 4, flexGrow = 1 }, {
       ui.label({ text = "Claude FM", fontSize = 18, fontWeight = "bold", color = common.CLAUDE }),
