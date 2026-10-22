@@ -1,24 +1,14 @@
--- Scene composer: rasterises a style's scene (sprite pose + offsets + prop
--- rects: back, attached to the sprite, front) onto a pixel canvas, then emits
--- it as a merged-run ui tree.
--- Noctalia's flow layout has no overlap or absolute positioning, so all
--- layering happens here, on the canvas. Pure module: sprite and ui are passed in.
+--!nonstrict
+-- Scene composer: rasterises a scene (a sprite pose or turn frame, shifted by
+-- dx/dy) onto a pixel canvas, then emits it as a merged-run ui tree. A view is a
+-- window in sprite-origin sub-pixels (the sprite is x 0..17, y 0..5).
+-- Pure module: sprite and ui are passed in.
 local scene = {}
 
 scene.PALETTE = {
   body = "#D97757",
   eye = "#141414",
-  dark = "#9C4F37",
-  light = "#F2B8A2",
-  accent = "#D97757",
-  metal = "#8E8E9A",
-  vinyl = "#4B4B57",
-  groove = "#C4C4D0",
 }
-
--- Views are windows in sprite-origin sub-pixels (the sprite is x 0..17, y 0..5).
-scene.VIEW_BAR = { x = -3, y = -1, w = 24, h = 7 }
-scene.VIEW_PANEL = { x = -7, y = -5, w = 32, h = 12 }
 
 local TURN_FRAMES = 13
 local LID = "lid" -- half body, half eye colour: toUi splits its row in two
@@ -47,26 +37,6 @@ local function newCanvas(view)
   return { w = view.w, h = view.h, rows = rows }
 end
 
--- ox/oy shift the rects (used by the attached layer, which rides on the sprite).
-local function paintRects(canvas, view, rects, ox, oy)
-  for _, r in ipairs(rects or {}) do
-    if scene.PALETTE[r.color] and finite(r.x) and finite(r.y) and finite(r.w) and finite(r.h) then
-      local x0, y0, w, h = round(r.x) + (ox or 0), round(r.y) + (oy or 0), round(r.w), round(r.h)
-      if w > 0 and h > 0 then
-        local xa = math.max(x0, view.x)
-        local xb = math.min(x0 + w - 1, view.x + view.w - 1)
-        local ya = math.max(y0, view.y)
-        local yb = math.min(y0 + h - 1, view.y + view.h - 1)
-        for y = ya, yb do
-          for x = xa, xb do
-            canvas.rows[y - view.y + 1][x - view.x + 1] = r.color
-          end
-        end
-      end
-    end
-  end
-end
-
 local function frameFor(sc, sprite)
   if sc.turnPhase ~= nil and finite(sc.turnPhase) then
     local idx = math.floor(sc.turnPhase * TURN_FRAMES) + 1
@@ -80,7 +50,6 @@ function scene.compose(sc, sprite, view)
   local canvas = newCanvas(view)
   local dx = finite(sc.dx) and round(sc.dx) or 0
   local dy = finite(sc.dy) and round(sc.dy) or 0
-  paintRects(canvas, view, sc.back)
 
   for sy, line in ipairs(sprite.grid(frameFor(sc, sprite))) do
     for sx = 1, #line do
@@ -95,8 +64,6 @@ function scene.compose(sc, sprite, view)
     end
   end
 
-  paintRects(canvas, view, sc.attached, dx, dy) -- rides on the sprite
-  paintRects(canvas, view, sc.front)
   return canvas
 end
 

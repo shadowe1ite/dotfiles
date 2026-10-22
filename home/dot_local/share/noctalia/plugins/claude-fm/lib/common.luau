@@ -1,7 +1,7 @@
+--!nonstrict
 -- Shared constants and helpers for the Claude FM entries.
 local M = {}
 
-M.ID = "shadowe1ite/claude-fm"
 M.PANEL_ID = "shadowe1ite/claude-fm:panel"
 
 -- clau.de/radio 302-redirects here; the direct id keeps us off the redirect.
@@ -11,7 +11,6 @@ M.SITE_URL = "https://clau.de/radio"
 
 -- Claude's orange accent.
 M.CLAUDE = "#D97757"
-M.CLAUDE_SOFT = "#D9775740"
 
 function M.socketPath()
   return noctalia.pluginDataDir() .. "/mpv.sock"
@@ -26,7 +25,6 @@ function M.playback()
   end
   return {
     status = type(p.status) == "string" and p.status or "stopped", -- stopped | loading | playing | paused
-    title = type(p.title) == "string" and p.title or "",
     volume = type(p.volume) == "number" and p.volume or 70,
   }
 end

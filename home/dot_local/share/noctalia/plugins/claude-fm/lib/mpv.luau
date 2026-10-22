@@ -1,10 +1,9 @@
+--!nonstrict
 -- Reading mpv's real state over its IPC socket and turning it into the radio's
--- status (stopped | loading | playing | paused). Pure module: the host passes
+-- status (stopped | loading | playing | paused). Asking mpv, instead of timing
+-- it, is what notices a pause or resume that comes from outside (media keys,
+-- playerctl) and a stream that is still buffering. Pure module: the host passes
 -- in the JSON decoder and the clock.
---
--- Why: the service used to guess. It flipped loading -> playing after a fixed 3 s
--- and never noticed a pause or resume that came from outside (media keys,
--- playerctl, MPRIS), so the UI could show "Live" while the radio was silent.
 local mpv = {}
 
 local GRACE_MS = 8000 -- mpv may take this long to create its socket and start
@@ -16,10 +15,9 @@ local PROPS = {
   { "pause", "paused" },
   { "paused-for-cache", "cache" },
   { "volume", "volume" },
-  { "media-title", "title" },
 }
 
--- One shell invocation, one socket connection, six replies. Prints NOSOCK when
+-- One shell invocation, one socket connection, five replies. Prints NOSOCK when
 -- mpv's socket does not exist (not started yet, or gone).
 function mpv.pollScript(sock)
   local cmds = {}
@@ -30,7 +28,7 @@ function mpv.pollScript(sock)
     .. " | timeout 2 socat -t 0.3 - \"UNIX-CONNECT:$S\"; else echo NOSOCK; fi"
 end
 
--- Poll output -> { idleActive, coreIdle, paused, cache, volume, title } (fields
+-- Poll output -> { idleActive, coreIdle, paused, cache, volume } (fields
 -- are nil when mpv says the property is unavailable), or nil when mpv did not
 -- answer at all.
 function mpv.parse(stdout, decode)
@@ -69,17 +67,6 @@ function mpv.derive(r, ctx)
     return "loading"
   end
   return "playing"
-end
-
--- mpv shows the URL as the title until stream metadata arrives.
-function mpv.cleanTitle(title, streamId)
-  if type(title) ~= "string" or title == "" then
-    return nil
-  end
-  if title:find("watch?v=", 1, true) or (streamId and title:find(streamId, 1, true)) then
-    return nil
-  end
-  return title
 end
 
 return mpv

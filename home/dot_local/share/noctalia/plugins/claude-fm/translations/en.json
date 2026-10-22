@@ -10,7 +10,7 @@
     },
     "fps": {
       "label": "Animation",
-      "description": "How smoothly the bar equalizer animates while playing. Lower is lighter on the CPU.",
+      "description": "How smoothly the bar equalizer and the panel mascot animate while playing. Lower is lighter on the CPU.",
       "smooth": "Smooth (20 fps)",
       "calm": "Calm (10 fps)",
       "off": "Off (static)"

@@ -1,8 +1,9 @@
+--!nonstrict
 -- Bar widget: a coral radio glyph plus a mini equalizer while playing.
 -- Click opens the panel; right-click toggles play/pause.
 local common = require("./lib/common.luau")
 
-local FRAME = common.frameMs(noctalia.getConfig("fps") or "calm")
+local FRAME = common.frameMs(noctalia.getConfig("fps"))
 local pb = common.playback()
 
 local function render()

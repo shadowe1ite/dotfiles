@@ -1,13 +1,13 @@
--- Panel: Claude-themed. A header with the dancing mascot (no background), the
--- name and the status; one row of controls (stop, an orange
--- play/pause pill, open on the web, volume). The mascot animates from frame
--- ticks, and only while the panel is open; nothing else moves.
+--!nonstrict
+-- Panel: Claude-themed. A header with the dancing mascot, the name and the
+-- status, then one row of controls (stop, an orange play/pause pill, open on the
+-- web, volume). The mascot animates from frame ticks, and only while the panel
+-- is open; nothing else moves.
 local common = require("./lib/common.luau")
 local choreo = require("./choreo.luau")
 local clawd = require("./clawd.luau")
 
-local FPS = noctalia.getConfig("fps") or "calm"
-local ANIM_MS = common.frameMs(FPS) -- 0 = animation off
+local ANIM_MS = common.frameMs(noctalia.getConfig("fps")) -- 0 = animation off
 local PIXEL = 3                     -- the mascot is 60 x 48 px
 local INK = "#1F1B16"               -- dark text/glyph on coral
 
@@ -74,11 +74,11 @@ local function controls(playing)
         if vol > 0 then
           lastNonZero = vol
           pb.volume = 0
-          common.request("setVolume", 0)
+          common.request("set-volume", 0)
         else
           local v = lastNonZero > 0 and lastNonZero or 70
           pb.volume = v
-          common.request("setVolume", v)
+          common.request("set-volume", v)
         end
       end,
     }, {
@@ -96,7 +96,7 @@ local function controls(playing)
           if nv > 0 then
             lastNonZero = nv
           end
-          common.request("setVolume", nv)
+          common.request("set-volume", nv)
         end,
       }),
     }),

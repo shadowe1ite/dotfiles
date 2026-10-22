@@ -1,9 +1,8 @@
--- Clawd sprite: exact glyph tables from Claude Code 2.1.308
--- (docs/clawd-glyphs.json) decoded from quadrant blocks into an 18x6 pixel grid.
--- Pure module: no host globals, no requires.
+--!nonstrict
+-- Clawd, the Claude Code mascot, as quadrant-block glyph tables decoded into an
+-- 18x6 pixel grid. Pure module: no host globals, no requires.
 local sprite = {}
 
-sprite.W = 18
 sprite.H = 6
 
 local CELLS = 9
@@ -11,7 +10,6 @@ local CELLS = 9
 local ARMS = {
   ["down"] = { r1L = " ▐", r1R = "", r2L = "▝▜", r2R = "█▀" },
   ["up"] = { r1L = "▗▟", r1R = "▄", r2L = " ▜", r2R = "█▘" },
-  ["one-up"] = { r1L = " ▐", r1R = "▄", r2L = "▝▜", r2R = "█▘" },
 }
 
 -- Eye-row cells, starting at column 2. "▂" is a closed lid: its cell's upper
@@ -27,8 +25,6 @@ local EYES = {
 
 local FEET = {
   ["both"] = " ▝▝   ▝▝ ",
-  ["left"] = " ▝▝      ",
-  ["right"] = "      ▝▝ ",
 }
 
 local BODY_ROW = "█████"

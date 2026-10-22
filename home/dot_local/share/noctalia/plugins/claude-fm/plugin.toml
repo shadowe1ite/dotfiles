@@ -1,13 +1,13 @@
 id           = "shadowe1ite/claude-fm"
 name         = "Claude FM"
-version      = "1.3.0"
-plugin_api   = 26
+version      = "1.4.0"
+plugin_api   = 32
 author       = "shadowe1ite"
 license      = "MIT"
 icon         = "radio"
-description  = "Listen to Claude FM, Anthropic's lo-fi radio. Lightweight audio-only playback via mpv, with a compact panel and a tiny bar equalizer."
-tags         = ["music", "media", "radio", "lofi"]
-dependencies = ["mpv", "socat"]
+description  = "Claude FM lo-fi radio via mpv: a bar equalizer, a compact panel with a dancing Clawd, and a control-center tile."
+tags         = ["music", "audio", "media", "animation", "bar", "panel", "service", "shortcut"]
+dependencies = ["mpv", "yt-dlp", "socat", "xdg-open"]
 
 [[setting]]
 key             = "volume"

@@ -1,3 +1,4 @@
+--!nonstrict
 -- Control center tile: shows play state, click toggles playback.
 local common = require("./lib/common.luau")
 

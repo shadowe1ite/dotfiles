@@ -1,16 +1,14 @@
--- Background service: owns the mpv process and reads mpv's REAL state over its
--- IPC socket (so pauses, resumes, buffering and exits that happen outside the
--- plugin are noticed), and publishes `playback` for the UI entries. Light: no
--- audio capture, and it wakes only as often as it needs to.
+--!nonstrict
+-- Background service: owns the mpv process, reads mpv's real state over its IPC
+-- socket (so pauses, resumes, buffering and exits that happen outside the
+-- plugin are noticed) and publishes `playback` for the UI entries. It wakes only
+-- as often as the state needs.
 local common = require("./lib/common.luau")
 local mpv = require("./lib/mpv.luau")
 
 local SOCK = common.socketPath()
 local DATA = noctalia.pluginDataDir()
 local STATE_PATH = DATA .. "/state.json"
--- Claude FM 1.1 ran cava while playing, and the host did not always stop it on a
--- restart: kill any leftover at load (this version never starts one).
-local OLD_CAVA_PATTERN = "cava -p " .. DATA .. "/cava.conf"
 
 local PARKED_MS = 60000
 local POLL_FIRST_MS = 300
@@ -21,11 +19,6 @@ local VOLUME_HOLD_MS = 1500 -- ignore mpv's volume this long after we set it
 
 local startedAt = noctalia.nowMs()
 local status = "stopped" -- stopped | loading | playing | paused
-local title = ""
-local showTitle = noctalia.getConfig("show_title")
-if showTitle == nil then
-  showTitle = true
-end
 
 -- Volume: the saved value wins only while the setting is unchanged since it
 -- was saved; changing the setting in the UI changes the volume.
@@ -48,7 +41,7 @@ local pollInFlight = false
 local pollStartedAt = 0
 
 local function publish()
-  noctalia.state.set("playback", { status = status, title = title, volume = volume })
+  noctalia.state.set("playback", { status = status, volume = volume })
 end
 
 local function persist()
@@ -77,9 +70,6 @@ local function setStatus(new)
     return
   end
   status = new
-  if new == "stopped" then
-    title = ""
-  end
   schedule()
   publish()
 end
@@ -88,13 +78,6 @@ end
 local function applyPoll(r, now)
   local changed = false
   if r ~= nil then
-    if showTitle then
-      local t = mpv.cleanTitle(r.title, common.STREAM_ID)
-      if t ~= nil and t ~= title then
-        title = t
-        changed = true
-      end
-    end
     if type(r.volume) == "number" and now - volumeSetAt > VOLUME_HOLD_MS then
       local v = math.floor(r.volume + 0.5)
       if v ~= volume then
@@ -137,7 +120,6 @@ local function launch()
   launchedAt = now
   nextPollAt = now + POLL_FIRST_MS
   pollInFlight = false
-  title = ""
   setStatus("loading")
   -- runStream keeps a long-lived process alive; `exec` makes the shell become
   -- mpv so stopping the stream stops mpv.
@@ -213,45 +195,38 @@ function update()
   schedule()
 end
 
+-- One command set for the UI entries and for IPC.
+local function dispatch(command, value)
+  if command == "play" then
+    play()
+  elseif command == "pause" then
+    pause()
+  elseif command == "toggle" then
+    toggle()
+  elseif command == "stop" then
+    stop()
+  elseif command == "set-volume" then
+    setVolume(value)
+  elseif command == "volume-up" then
+    setVolume(volume + 5)
+  elseif command == "volume-down" then
+    setVolume(volume - 5)
+  end
+end
+
 -- UI entries publish { action, value, at }.
 noctalia.state.watch("request", function(req)
   if type(req) ~= "table" or type(req.at) ~= "number" or req.at < startedAt then
     return
   end
-  local a = req.action
-  if a == "play" then
-    play()
-  elseif a == "pause" then
-    pause()
-  elseif a == "toggle" then
-    toggle()
-  elseif a == "stop" then
-    stop()
-  elseif a == "setVolume" then
-    setVolume(req.value)
-  elseif a == "volUp" then
-    setVolume(volume + 5)
-  elseif a == "volDown" then
-    setVolume(volume - 5)
-  end
+  dispatch(req.action, req.value)
 end)
 
 -- External control, e.g. a WM hotkey:
 --   noctalia msg plugin shadowe1ite/claude-fm:service all toggle
-function onIpc(event, _payload)
-  if event == "toggle" then
-    toggle()
-  elseif event == "play" then
-    play()
-  elseif event == "pause" then
-    pause()
-  elseif event == "stop" then
-    stop()
-  elseif event == "volume-up" then
-    setVolume(volume + 5)
-  elseif event == "volume-down" then
-    setVolume(volume - 5)
-  end
+--   noctalia msg plugin shadowe1ite/claude-fm:service all set-volume 40
+function onIpc(event, payload)
+  dispatch(event, payload)
 end
 
 -- A radio that survived a plugin or shell restart is still playing: adopt it
@@ -277,5 +252,4 @@ end
 
 publish()
 noctalia.setUpdateInterval(PARKED_MS)
-noctalia.runAsync({ "pkill", "-f", OLD_CAVA_PATTERN })
 adopt()
