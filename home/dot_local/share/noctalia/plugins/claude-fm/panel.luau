@@ -1,8 +1,8 @@
 --!nonstrict
--- Panel: Claude-themed. A header with the dancing mascot, the name and the
--- status, then one row of controls (stop, an orange play/pause pill, open on the
--- web, volume). The mascot animates from frame ticks, and only while the panel
--- is open; nothing else moves.
+-- Panel: Claude-themed. A header with the name and the status and the dancing
+-- mascot on the right, then one row of controls (stop, an orange play/pause
+-- pill, open on the web, volume). The mascot animates from frame ticks, and
+-- only while the panel is open; nothing else moves.
 local common = require("./lib/common.luau")
 local choreo = require("./choreo.luau")
 local clawd = require("./clawd.luau")
@@ -36,7 +36,6 @@ end
 
 local function header(now, playing)
   return ui.row({ gap = 12, align = "center" }, {
-    clawd.render(now, playing, PIXEL, ui),
     ui.column({ gap = 4, flexGrow = 1 }, {
       ui.label({ text = "Claude FM", fontSize = 18, fontWeight = "bold", color = common.CLAUDE }),
       ui.row({ gap = 6, align = "center" }, {
@@ -44,6 +43,7 @@ local function header(now, playing)
         ui.label({ text = statusText(), fontSize = 12, color = "on_surface_variant" }),
       }),
     }),
+    clawd.render(now, playing, PIXEL, ui),
   })
 end
 
