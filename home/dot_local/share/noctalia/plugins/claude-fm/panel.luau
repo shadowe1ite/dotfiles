@@ -1,5 +1,5 @@
 -- Panel: Claude-themed. A header with the dancing mascot (no background), the
--- name and the status; the stream title; one row of controls (stop, an orange
+-- name and the status; one row of controls (stop, an orange
 -- play/pause pill, open on the web, volume). The mascot animates from frame
 -- ticks, and only while the panel is open; nothing else moves.
 local common = require("./lib/common.luau")
@@ -111,10 +111,8 @@ function render()
   local now = noctalia.nowMs()
   lastRender = now
   local playing = pb.status == "playing"
-  local title = (pb.title ~= "" and common.isActive(pb.status)) and pb.title or "lo-fi beats to vibe with Claude"
   panel.render(ui.column({ padding = 14, gap = 12, align = "stretch" }, {
     header(now, playing),
-    ui.label({ text = title, fontSize = 12, maxLines = 2, color = "on_surface" }),
     controls(playing),
   }))
 end

@@ -8,10 +8,6 @@
       "label": "Autoplay on start",
       "description": "Start Claude FM automatically when the shell loads."
     },
-    "show_title": {
-      "label": "Show stream title",
-      "description": "Fetch and show the stream title from mpv while playing."
-    },
     "fps": {
       "label": "Animation",
       "description": "How smoothly the bar equalizer animates while playing. Lower is lighter on the CPU.",
