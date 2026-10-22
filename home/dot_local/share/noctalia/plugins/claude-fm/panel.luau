@@ -9,6 +9,7 @@ local clawd = require("./clawd.luau")
 
 local ANIM_MS = common.frameMs(noctalia.getConfig("fps")) -- 0 = animation off
 local PIXEL = 3                     -- the mascot is 60 x 48 px
+local MASCOT_INSET = 24             -- px between the mascot and the panel's right padding
 local INK = "#1F1B16"               -- dark text/glyph on coral
 
 local isOpen = false
@@ -43,7 +44,7 @@ local function header(now, playing)
         ui.label({ text = statusText(), fontSize = 12, color = "on_surface_variant" }),
       }),
     }),
-    clawd.render(now, playing, PIXEL, ui),
+    ui.row({ paddingH = MASCOT_INSET }, { clawd.render(now, playing, PIXEL, ui) }),
   })
 end
 
