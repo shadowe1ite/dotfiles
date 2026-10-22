@@ -3,7 +3,7 @@ digest_date = "2026-10-20"
 fired = ""
 
 [screenshot]
-last_region = "142,189,1830,820"
+last_region = "640,43,539,185"
 
 [security_migrations]
 calendar_credentials_v1 = true
@@ -12,5 +12,5 @@ calendar_credentials_v1 = true
 applied_builtin_ids = "alacritty"
 
 [wallpaper_panel]
-flatten = false
-sort = "date_desc"
+flatten = true
+sort = "date_asc"

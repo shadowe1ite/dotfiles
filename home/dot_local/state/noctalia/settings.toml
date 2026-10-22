@@ -8,12 +8,10 @@ order = [ "default" ]
 
     [bar.default]
     capsule = true
-    center = [ "clock", "control-center", "privacy", "widget", "bar" ]
+    center = [ "widget_2", "clock", "control-center", "widget", "bar" ]
     end = [ "tray", "sysmon", "battery", "network", "notifications" ]
     margin_ends = 0
-    reserve_space = false
     show_on_workspace_switch = false
-    smart_auto_hide = true
     start = [ "workspaces", "media", "lyrics" ]
     thickness = 40
 
@@ -153,7 +151,13 @@ panel_placement = "attached"
     "Web Security" = "bug | burpsuite, burp suite, caido, ffuf, sqlmap, nmap, nc, ncat, netcat, msfconsole, metasploit, theharvester, feroxbuster, httprobe, waybackurls, amass, 403jump, dirsearch, arjun, findomain, assetfinder, sublist3r, subbrute, aquatone, gowitness, subcat, waymore, gf, subjack, nuclei, httpx, subfinder, gau, dalfox, trufflehog, curl"
 
 [plugins]
-enabled = [ "noctalia/translator", "noctalia/screen_recorder", "shadow/lyrics", "ahmedhossamdev/sticky-notes" ]
+enabled = [
+    "noctalia/translator",
+    "noctalia/screen_recorder",
+    "shadow/lyrics",
+    "ahmedhossamdev/sticky-notes",
+    "shadowe1ite/claude-fm"
+]
 
 [shell]
 clipboard_image_action_command = "satty -f -"
@@ -225,13 +229,13 @@ wallpaper_scheme = "m3-content"
 directory = "/home/shadow/Pictures/Wallpapers/fav"
 
     [wallpaper.default]
-    path = "/home/shadow/Pictures/Wallpapers/fav/Green/green.jpeg"
+    path = "/home/shadow/Pictures/Wallpapers/fav/Green/07. Greenify.jpg"
 
     [wallpaper.last]
-    path = "/home/shadow/Pictures/Wallpapers/fav/Green/green.jpeg"
+    path = "/home/shadow/Pictures/Wallpapers/fav/Green/07. Greenify.jpg"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/shadow/Pictures/Wallpapers/fav/Green/green.jpeg"
+    path = "/home/shadow/Pictures/Wallpapers/fav/Green/07. Greenify.jpg"
 
 [widget.bar]
 type = "ahmedhossamdev/sticky-notes:bar"
@@ -268,6 +272,9 @@ capsule = true
 
 [widget.widget]
 type = "shadow/habits:widget"
+
+[widget.widget_2]
+type = "shadowe1ite/claude-fm:widget"
 
 [widget.workspaces]
 show_labels = false
