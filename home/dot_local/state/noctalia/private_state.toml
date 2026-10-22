@@ -3,7 +3,7 @@ digest_date = "2026-10-20"
 fired = ""
 
 [screenshot]
-last_region = "640,43,539,185"
+last_region = "625,43,540,186"
 
 [security_migrations]
 calendar_credentials_v1 = true
