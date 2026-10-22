@@ -1,0 +1,65 @@
+id           = "shadowe1ite/claude-fm"
+name         = "Claude FM"
+version      = "1.3.0"
+plugin_api   = 26
+author       = "shadowe1ite"
+license      = "MIT"
+icon         = "radio"
+description  = "Listen to Claude FM, Anthropic's lo-fi radio. Lightweight audio-only playback via mpv, with a compact panel and a tiny bar equalizer."
+tags         = ["music", "media", "radio", "lofi"]
+dependencies = ["mpv", "socat"]
+
+[[setting]]
+key             = "volume"
+type            = "int"
+label_key       = "settings.volume.label"
+description_key = "settings.volume.description"
+default         = 70
+min             = 0
+max             = 100
+
+[[setting]]
+key             = "autoplay"
+type            = "bool"
+label_key       = "settings.autoplay.label"
+description_key = "settings.autoplay.description"
+default         = false
+
+[[setting]]
+key             = "show_title"
+type            = "bool"
+label_key       = "settings.show_title.label"
+description_key = "settings.show_title.description"
+default         = true
+
+[[setting]]
+key             = "fps"
+type            = "select"
+label_key       = "settings.fps.label"
+description_key = "settings.fps.description"
+default         = "calm"
+options         = [
+  { value = "smooth", label_key = "settings.fps.smooth" },
+  { value = "calm", label_key = "settings.fps.calm" },
+  { value = "off", label_key = "settings.fps.off" },
+]
+
+[[service]]
+id    = "service"
+entry = "service.luau"
+
+[[widget]]
+id    = "widget"
+entry = "widget.luau"
+
+[[panel]]
+id              = "panel"
+entry           = "panel.luau"
+width           = 340
+height          = 200
+placement       = "attached"
+open_near_click = true
+
+[[shortcut]]
+id    = "shortcut"
+entry = "shortcut.luau"
