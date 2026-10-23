@@ -3,13 +3,14 @@ digest_date = "2026-10-20"
 fired = ""
 
 [screenshot]
-last_region = "625,43,540,186"
+last_region = "1030,46,488,590"
 
 [security_migrations]
 calendar_credentials_v1 = true
 
 [theme_templates]
 applied_builtin_ids = "alacritty"
+applied_community_ids = "opencode"
 
 [wallpaper_panel]
 flatten = true

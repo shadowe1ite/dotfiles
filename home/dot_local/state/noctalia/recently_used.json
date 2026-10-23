@@ -1,9 +1,12 @@
 {
   "Applications": [
+    "/usr/share/applications/zcode.desktop",
+    "/usr/share/applications/org.openrgb.OpenRGB.desktop",
+    "/usr/share/applications/hermes-desktop.desktop",
+    "/usr/share/applications/org.qbittorrent.qBittorrent.desktop",
     "/home/shadow/.local/share/applications/burpsuite-pro.desktop",
     "/usr/share/applications/vesktop.desktop",
     "/usr/share/applications/jadx-gui.desktop",
-    "/usr/share/applications/org.openrgb.OpenRGB.desktop",
     "/usr/share/applications/org.kde.dolphin.desktop",
     "/usr/share/applications/caido.desktop",
     "/usr/share/applications/chatgpt.desktop",
@@ -11,15 +14,12 @@
     "/usr/share/applications/brave-origin.desktop",
     "/usr/share/applications/firefox.desktop",
     "/usr/share/applications/chromium.desktop",
-    "/usr/share/applications/hermes-desktop.desktop",
     "/usr/share/applications/lstopo.desktop",
     "/usr/share/applications/tor-browser.desktop",
     "/usr/share/applications/com.github.jeromerobert.pdfarranger.desktop",
     "/usr/share/applications/qv4l2.desktop",
     "/home/shadow/.local/share/applications/com.anthropic.Claude.desktop",
-    "/usr/share/applications/blender.desktop",
-    "/usr/share/applications/com.anthropic.Claude.desktop",
-    "/usr/share/applications/com.github.neithern.g4music.desktop"
+    "/usr/share/applications/blender.desktop"
   ],
   "Emoji": [
     "emoji-🙂",

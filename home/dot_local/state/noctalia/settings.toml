@@ -8,7 +8,7 @@ order = [ "default" ]
 
     [bar.default]
     capsule = true
-    center = [ "widget_2", "clock", "control-center", "widget", "bar" ]
+    center = [ "widget_2", "clock", "control-center", "widget", "orb", "bar" ]
     end = [ "tray", "sysmon", "battery", "network", "notifications" ]
     margin_ends = 0
     show_on_workspace_switch = false
@@ -55,7 +55,8 @@ pinned = [
     "org.gnome.TextEditor",
     "burpsuite-pro",
     "vesktop",
-    "Alacritty"
+    "Alacritty",
+    "hermes-desktop"
 ]
 reserve_space = false
 show_dots = true
@@ -150,13 +151,18 @@ panel_placement = "attached"
     Steganography = "photo-search | steghide, stegseek, exiftool, sonic visualiser, sonicvisualiser, foremost"
     "Web Security" = "bug | burpsuite, burp suite, caido, ffuf, sqlmap, nmap, nc, ncat, netcat, msfconsole, metasploit, theharvester, feroxbuster, httprobe, waybackurls, amass, 403jump, dirsearch, arjun, findomain, assetfinder, sublist3r, subbrute, aquatone, gowitness, subcat, waymore, gf, subjack, nuclei, httpx, subfinder, gau, dalfox, trufflehog, curl"
 
+[plugin_settings."shadow/orb"]
+eye_color = "surface_variant"
+outline_color = "on_surface_variant"
+
 [plugins]
 enabled = [
     "noctalia/translator",
     "noctalia/screen_recorder",
     "shadow/lyrics",
     "ahmedhossamdev/sticky-notes",
-    "shadowe1ite/claude-fm"
+    "shadowe1ite/claude-fm",
+    "shadow/orb"
 ]
 
 [shell]
@@ -229,13 +235,13 @@ wallpaper_scheme = "m3-content"
 directory = "/home/shadow/Pictures/Wallpapers/fav"
 
     [wallpaper.default]
-    path = "/home/shadow/Pictures/Wallpapers/fav/Green/07. Greenify.jpg"
+    path = "/home/shadow/Pictures/Wallpapers/fav/Green/07. Rain Dark.jpg"
 
     [wallpaper.last]
-    path = "/home/shadow/Pictures/Wallpapers/fav/Green/07. Greenify.jpg"
+    path = "/home/shadow/Pictures/Wallpapers/fav/Green/07. Rain Dark.jpg"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/shadow/Pictures/Wallpapers/fav/Green/07. Greenify.jpg"
+    path = "/home/shadow/Pictures/Wallpapers/fav/Green/07. Rain Dark.jpg"
 
 [widget.bar]
 type = "ahmedhossamdev/sticky-notes:bar"
@@ -259,6 +265,9 @@ when_paused = "hide"
 capsule = true
 max_length = 150
 title_scroll = "on_hover"
+
+[widget.orb]
+type = "shadow/orb:orb"
 
 [widget.session]
 capsule = true
