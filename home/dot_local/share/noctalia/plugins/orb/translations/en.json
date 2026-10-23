@@ -1,0 +1,222 @@
+{
+  "settings": {
+    "body_color": {
+      "label": "Body color"
+    },
+    "eye_color": {
+      "label": "Eye color"
+    },
+    "outline": {
+      "label": "Outline",
+      "description": "A thin line around the orb, and around ball and card together when the card is out."
+    },
+    "outline_color": {
+      "label": "Outline color"
+    },
+    "outline_opacity": {
+      "label": "Outline opacity (%)"
+    },
+    "bar_size": {
+      "label": "Size in the bar",
+      "description": "Orb diameter in the bar, in pixels."
+    },
+    "orb_size": {
+      "label": "Size out of the bar",
+      "description": "Orb diameter when it is out, in pixels."
+    },
+    "card_width": {
+      "label": "Card width"
+    },
+    "card_height": {
+      "label": "Card height"
+    },
+    "card_horizontal": {
+      "label": "Card opens toward",
+      "description": "Auto picks the side with room."
+    },
+    "card_vertical": {
+      "label": "Card opens up or down"
+    },
+    "card_side": {
+      "auto": "Auto",
+      "right": "Right",
+      "left": "Left",
+      "down": "Down",
+      "up": "Up"
+    },
+    "remember_position": {
+      "label": "Remember where it was put",
+      "description": "When it comes out, it goes back to where you last put it down."
+    },
+    "follow_speed": {
+      "label": "Follow",
+      "description": "How closely it trails your cursor while it follows.",
+      "loose": "Loose",
+      "normal": "Normal",
+      "tight": "Tight"
+    },
+    "animation_speed": {
+      "label": "Animation speed",
+      "description": "Dripping out, diving in, the card opening and closing.",
+      "slow": "Slow",
+      "normal": "Normal",
+      "fast": "Fast"
+    },
+    "hermes_url": {
+      "label": "Hermes server",
+      "description": "Address of the machine running Hermes (no port), e.g. your Tailscale name."
+    },
+    "hermes_api_port": {
+      "label": "Hermes API port",
+      "description": "Port of Hermes' API server (API_SERVER_PORT). The key comes from your keyring: secret-tool store service orb-hermes kind api-key"
+    },
+    "hermes_dashboard_port": {
+      "label": "Hermes dashboard port"
+    },
+    "reset": {
+      "label": "Reset everything to defaults",
+      "description": "Turn on to put every Orb setting back to its default. The plugin reloads and this switch turns itself back off."
+    },
+    "double_click_ms": {
+      "label": "Double-click speed (ms)",
+      "description": "How quickly two clicks must follow to pick it up. A single click waits this long before it opens the card."
+    },
+    "home_position": {
+      "label": "Home position (%)",
+      "description": "Where along the bar the orb dives in and out, as a percentage of the bar length. 0 guesses from the widget's place in the bar."
+    },
+    "card_color": {
+      "label": "Card color",
+      "description": "The card's background. Pick a surface color (surface, surface_variant): replies use your theme's text color."
+    },
+    "hermes_ssh": {
+      "label": "SSH login",
+      "description": "user@host on the Hermes server. Files that are not images travel over SSH: attachments to ~/orb-inbox, files Hermes sends you to ~/Downloads."
+    }
+  },
+  "card": {
+    "title": "Hermes"
+  },
+  "tabs": {
+    "chat": "Chat",
+    "now": "Now",
+    "chats": "Chats",
+    "memory": "Memory",
+    "agents": "Agents",
+    "cron": "Cron"
+  },
+  "hermes": {
+    "loading": "Loading…",
+    "bubble": {
+      "thinking": "thinking…",
+      "working": "working…",
+      "waiting": "your turn"
+    },
+    "chat": {
+      "empty": "This chat carries on until you start a new one.",
+      "placeholder": "Message Hermes…",
+      "thinking": "Thinking…",
+      "working": "Working…",
+      "waiting": "Waiting for you",
+      "partial": "Stopped early — this is what it found so far.",
+      "failed": "Something went wrong.",
+      "stopped": "Stopped.",
+      "interrupted": "The connection dropped before the reply finished.",
+      "empty_title": "Ask Hermes anything",
+      "switched": "Switched to {model}",
+      "thinking_none": "Nothing shared yet.",
+      "thinking_show": "Show thinking",
+      "thinking_hide": "Hide thinking"
+    },
+    "approve": {
+      "title": "Hermes wants to run:",
+      "once": "Allow once",
+      "session": "Allow this chat",
+      "always": "Always allow",
+      "deny": "Deny"
+    },
+    "notice": {
+      "busy": "Hermes is busy — sending again in 5 seconds.",
+      "auth": "Hermes rejected the API key.",
+      "expired": "That chat is gone on the server. Your next message starts a new one.",
+      "offline": "Can't reach Hermes.",
+      "approval-failed": "Couldn't send your answer to Hermes.",
+      "no-key": "No API key stored. Close and reopen the card to set it up.",
+      "attach-failed": "Couldn't read an attached file.",
+      "upload-failed": "Couldn't copy the file to the server (SSH login in the Orb settings)."
+    },
+    "chats": {
+      "empty": "No chats yet.",
+      "title": "Your chats",
+      "current": "Open",
+      "delete": "Delete",
+      "deleting": "Deleting…",
+      "delete_failed": "Couldn't delete that chat.",
+      "delete_busy": "Hermes is still replying in that chat. Stop it, then delete."
+    },
+    "status": {
+      "online": "Online",
+      "degraded": "Running with problems",
+      "offline": "Offline",
+      "auth": "Needs your API key",
+      "unknown": "Connecting…"
+    },
+    "retry": "Try again",
+    "suggest": {
+      "today": "What's on my plate today?",
+      "chats": "Sum up my recent chats",
+      "cron": "Which jobs ran today?"
+    },
+    "setup": {
+      "title": "Connect Hermes first",
+      "rejected": "Hermes rejected the key"
+    },
+    "offline": {
+      "title": "Can't reach Hermes",
+      "text": "Check that the server is up and Tailscale is connected."
+    },
+    "cmd": {
+      "title": "rename this chat",
+      "footer": "Start a message with `//` to send a `/` as text.",
+      "new": "start a new chat",
+      "chats": "your past chats",
+      "attach": "attach files",
+      "model": "pick the model for this chat",
+      "retry": "send your last message again",
+      "stop": "stop the reply",
+      "fork": "copy this chat and carry on in the copy",
+      "skill": "ask Hermes to use one of its skills",
+      "approve": "allow what Hermes asked to run",
+      "deny": "refuse what Hermes asked to run",
+      "help": "this list",
+      "unknown": "No command `/{name}`. Type `/help` for the list, or start with `//` to send it as text.",
+      "nothing_to_retry": "Nothing to send again yet.",
+      "no_approval": "Hermes isn't waiting for an answer.",
+      "title_usage": "Usage: `/title <name>`",
+      "renamed": "Renamed this chat to **{title}**.",
+      "no_chat": "That needs a chat that has started: send a message first.",
+      "forked": "Copied this chat; you're in the copy now.",
+      "skill_usage": "Usage: `/skill <name> [what to do]`",
+      "model_default": "This chat uses Hermes' default model again.",
+      "model_failed": "Couldn't get the model list from Hermes.",
+      "model_unknown": "No signed-in provider offers `{model}`. `/model` lists them.",
+      "model_set": "This chat now uses **{model}**.",
+      "heading": "**Commands**"
+    },
+    "files": {
+      "loading": "loading…",
+      "open": "Open",
+      "saving": "Saving…",
+      "save": "Save",
+      "retry": "Try again"
+    },
+    "model": {
+      "title": "Model for this chat",
+      "default": "Hermes default",
+      "pick": "Model",
+      "loading": "Getting models…",
+      "failed": "Couldn't get the models",
+      "more": "Show all providers ({count} more)"
+    }
+  }
+}

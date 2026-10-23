@@ -1,0 +1,221 @@
+id           = "shadow/orb"
+name         = "Orb"
+version      = "0.5.0"
+plugin_api   = 36
+author       = "shadow"
+license      = "MIT"
+icon         = "mood-smile"
+description  = "A Marea-style companion that lives in the bar, comes out to follow your cursor, and grows a card out of itself."
+tags         = ["bar", "fun", "animation"]
+dependencies = ["libsecret", "openssh", "zenity"]
+
+[[setting]]
+key             = "body_color"
+type            = "color"
+label_key       = "settings.body_color.label"
+default         = "primary"
+
+[[setting]]
+key             = "eye_color"
+type            = "color"
+label_key       = "settings.eye_color.label"
+default         = "surface"
+
+[[setting]]
+key             = "card_color"
+type            = "color"
+label_key       = "settings.card_color.label"
+description_key = "settings.card_color.description"
+default         = "surface_variant"
+
+[[setting]]
+key             = "outline"
+type            = "bool"
+label_key       = "settings.outline.label"
+description_key = "settings.outline.description"
+default         = true
+
+[[setting]]
+key             = "outline_color"
+type            = "color"
+label_key       = "settings.outline_color.label"
+default         = "surface"
+visible_when    = { key = "outline", values = ["true"] }
+
+[[setting]]
+key             = "outline_opacity"
+type            = "int"
+label_key       = "settings.outline_opacity.label"
+default         = 10
+min             = 0
+max             = 100
+visible_when    = { key = "outline", values = ["true"] }
+
+[[setting]]
+key             = "bar_size"
+type            = "int"
+label_key       = "settings.bar_size.label"
+description_key = "settings.bar_size.description"
+default         = 26
+min             = 16
+max             = 36
+
+[[setting]]
+key             = "orb_size"
+type            = "int"
+label_key       = "settings.orb_size.label"
+description_key = "settings.orb_size.description"
+default         = 46
+min             = 24
+max             = 96
+
+[[setting]]
+key             = "card_width"
+type            = "int"
+label_key       = "settings.card_width.label"
+default         = 420
+min             = 260
+max             = 720
+
+[[setting]]
+key             = "card_height"
+type            = "int"
+label_key       = "settings.card_height.label"
+default         = 540
+min             = 180
+max             = 640
+
+[[setting]]
+key             = "card_horizontal"
+type            = "select"
+label_key       = "settings.card_horizontal.label"
+description_key = "settings.card_horizontal.description"
+default         = "auto"
+options         = [
+  { value = "auto", label_key = "settings.card_side.auto" },
+  { value = "right", label_key = "settings.card_side.right" },
+  { value = "left", label_key = "settings.card_side.left" },
+]
+
+[[setting]]
+key             = "card_vertical"
+type            = "select"
+label_key       = "settings.card_vertical.label"
+default         = "auto"
+options         = [
+  { value = "auto", label_key = "settings.card_side.auto" },
+  { value = "down", label_key = "settings.card_side.down" },
+  { value = "up", label_key = "settings.card_side.up" },
+]
+
+[[setting]]
+key             = "remember_position"
+type            = "bool"
+label_key       = "settings.remember_position.label"
+description_key = "settings.remember_position.description"
+default         = true
+
+[[setting]]
+key             = "follow_speed"
+type            = "select"
+label_key       = "settings.follow_speed.label"
+description_key = "settings.follow_speed.description"
+default         = "normal"
+options         = [
+  { value = "loose", label_key = "settings.follow_speed.loose" },
+  { value = "normal", label_key = "settings.follow_speed.normal" },
+  { value = "tight", label_key = "settings.follow_speed.tight" },
+]
+
+[[setting]]
+key             = "animation_speed"
+type            = "select"
+label_key       = "settings.animation_speed.label"
+description_key = "settings.animation_speed.description"
+default         = "normal"
+options         = [
+  { value = "slow", label_key = "settings.animation_speed.slow" },
+  { value = "normal", label_key = "settings.animation_speed.normal" },
+  { value = "fast", label_key = "settings.animation_speed.fast" },
+]
+
+[[setting]]
+key             = "double_click_ms"
+type            = "int"
+label_key       = "settings.double_click_ms.label"
+description_key = "settings.double_click_ms.description"
+default         = 320
+min             = 150
+max             = 700
+advanced        = true
+
+[[setting]]
+key             = "home_position"
+type            = "int"
+label_key       = "settings.home_position.label"
+description_key = "settings.home_position.description"
+default         = 0
+min             = 0
+max             = 100
+advanced        = true
+
+[[setting]]
+key             = "hermes_url"
+type            = "string"
+label_key       = "settings.hermes_url.label"
+description_key = "settings.hermes_url.description"
+default         = "http://server.tailf72995.ts.net"
+
+[[setting]]
+key             = "hermes_api_port"
+type            = "int"
+label_key       = "settings.hermes_api_port.label"
+description_key = "settings.hermes_api_port.description"
+default         = 8642
+min             = 1
+max             = 65535
+
+[[setting]]
+key             = "hermes_dashboard_port"
+type            = "int"
+label_key       = "settings.hermes_dashboard_port.label"
+default         = 9119
+min             = 1
+max             = 65535
+
+[[setting]]
+key             = "hermes_ssh"
+type            = "string"
+label_key       = "settings.hermes_ssh.label"
+description_key = "settings.hermes_ssh.description"
+default         = "0cto@server.tailf72995.ts.net"
+
+[[setting]]
+key             = "reset"
+type            = "bool"
+label_key       = "settings.reset.label"
+description_key = "settings.reset.description"
+default         = false
+
+# The brain: home / away / returning, IPC, and the settings reset.
+[[service]]
+id    = "service"
+entry = "service.luau"
+
+# The orb at home in the bar.
+[[widget]]
+id    = "orb"
+entry = "widget.luau"
+
+# The orb out of the bar: one surface that moves itself by its margins and
+# grows into its card (no Noctalia panels: the card is part of the ball).
+[[layer]]
+id             = "roamer"
+entry          = "roamer.luau"
+layer          = "top"
+anchors        = ["top", "left"]
+width          = 64
+height         = 64
+exclusive_zone = -1
+keyboard       = "none"
+output         = "focused"

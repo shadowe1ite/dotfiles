@@ -1,0 +1,26 @@
+0000000000000000000000000000000000000000 2ce7fdf67c7712142450fc7538694745f7539707 shadow <bring-clammy-level@duck.com> 1792752249 +0530	commit (initial): chore: orb before Hermes integration
+2ce7fdf67c7712142450fc7538694745f7539707 12d1d05e544bb5983d4aabc4504c22926f3feee9 shadow <bring-clammy-level@duck.com> 1792752489 +0530	commit: feat(hermes): pure modules for requests, SSE, chat, views, activity
+12d1d05e544bb5983d4aabc4504c22926f3feee9 5997478d1af2fbadaa854553385e6135f7700913 shadow <bring-clammy-level@duck.com> 1792752672 +0530	commit: feat(hermes): network client and service wiring
+5997478d1af2fbadaa854553385e6135f7700913 54aa01af5ed6dca3b4be982739026adf711bfc85 ALAN S <alansedp@gmail.com> 1792753596 +0530	commit: feat(hermes): tabbed card, live face and bar marks
+54aa01af5ed6dca3b4be982739026adf711bfc85 fad048706975ff43fcf246ff83c147a3d94608f0 ALAN S <alansedp@gmail.com> 1792753943 +0530	commit: fix: drop the bar widget and card tab tooltips
+fad048706975ff43fcf246ff83c147a3d94608f0 aba3c23458919e05b783212bebef13e7fce7e808 ALAN S <alansedp@gmail.com> 1792754768 +0530	commit: feat(card): own Card color and a cleaner Hermes card
+aba3c23458919e05b783212bebef13e7fce7e808 94196eec75be708f8b4cd57013d3e9c873901630 ALAN S <alansedp@gmail.com> 1792755125 +0530	commit: feat(card): lock the card to one setup screen until there is a key
+94196eec75be708f8b4cd57013d3e9c873901630 440ffeff9a2debb5713455a11c2998cd305bf082 ALAN S <alansedp@gmail.com> 1792755228 +0530	commit: feat(card): setup screen is just "Connect Hermes first"
+440ffeff9a2debb5713455a11c2998cd305bf082 b1ffbc2f399442671a8e5477e52b58a8ea449381 ALAN S <alansedp@gmail.com> 1792756996 +0530	commit: refactor(hermes): chat only
+b1ffbc2f399442671a8e5477e52b58a8ea449381 f29c62925b8d3ef1c005d990a54ae2806e8a7646 ALAN S <alansedp@gmail.com> 1792757169 +0530	commit: fix(chats): Hermes calls the orb's sessions api_server, not api-server
+f29c62925b8d3ef1c005d990a54ae2806e8a7646 838ed6760dbaa8e4dc80207602894035e854d002 ALAN S <alansedp@gmail.com> 1792758387 +0530	commit: feat(chat): slash commands and files both ways
+838ed6760dbaa8e4dc80207602894035e854d002 d43a151bd2c7009df32037b56f4278193465fe51 ALAN S <alansedp@gmail.com> 1792770442 +0530	commit: feat(chat): model picker, history events, card takes the keyboard
+d43a151bd2c7009df32037b56f4278193465fe51 e08eb03ded6d9147a69b0a3ae71e5fc82df30a3d ALAN S <alansedp@gmail.com> 1792771679 +0530	commit: fix(chat): picker lists the providers you set up; keyboard follows the pointer
+e08eb03ded6d9147a69b0a3ae71e5fc82df30a3d 66c4bfd05fb099bb999888e4698cb9f54af40d09 ALAN S <alansedp@gmail.com> 1792772880 +0530	commit: fix(chat): lock the picked model into the session
+66c4bfd05fb099bb999888e4698cb9f54af40d09 b4b676b4196a4eb98bf229bfcf0cc6dea33eb3e7 ALAN S <alansedp@gmail.com> 1792773188 +0530	commit: feat(chats): delete a chat
+b4b676b4196a4eb98bf229bfcf0cc6dea33eb3e7 ed9b32d9d34bc23d349b4a9fe19d27c711597b8e ALAN S <alansedp@gmail.com> 1792774777 +0530	commit: feat(chat): tap Thinking to read the model's reasoning
+ed9b32d9d34bc23d349b4a9fe19d27c711597b8e 101bd2eb0818289b4db597dc91f806d31709ac54 ALAN S <alansedp@gmail.com> 1792775100 +0530	commit: feat(orb): expressions instead of status dots
+101bd2eb0818289b4db597dc91f806d31709ac54 464c7b9ca6a6b9955c2dc03c1c7a1ffaaf12aa38 ALAN S <alansedp@gmail.com> 1792775386 +0530	commit: fix(chat): Show / Hide thinking, and keep it open when the reply lands
+464c7b9ca6a6b9955c2dc03c1c7a1ffaaf12aa38 e4e096c42089c4a110c96f39e12d47e12eb42a92 ALAN S <alansedp@gmail.com> 1792775853 +0530	commit: feat(orb): bolder, distinct expressions with props
+e4e096c42089c4a110c96f39e12d47e12eb42a92 ba5fd643c910226107f28532dcd46abae4224d16 ALAN S <alansedp@gmail.com> 1792776321 +0530	commit: fix(card): color the status text by the link
+ba5fd643c910226107f28532dcd46abae4224d16 3d69fb519eec3297f1ac13e23fcb303e087ca7f0 ALAN S <alansedp@gmail.com> 1792776333 +0530	revert: Revert "feat(orb): bolder, distinct expressions with props"
+3d69fb519eec3297f1ac13e23fcb303e087ca7f0 ca83b372b4befb627850beb39c78722713a97010 ALAN S <alansedp@gmail.com> 1792776346 +0530	commit (amend): Revert "feat(orb): bolder, distinct expressions with props"
+ca83b372b4befb627850beb39c78722713a97010 704e433de343153b96502d8f921065b784d28959 ALAN S <alansedp@gmail.com> 1792776413 +0530	commit: fix(card): bring back the green link dot next to the status
+704e433de343153b96502d8f921065b784d28959 09fc32edfad91a637695c100b1e508bd0f74531f ALAN S <alansedp@gmail.com> 1792776489 +0530	commit: fix(card): the header shows only whether Hermes is reachable
+09fc32edfad91a637695c100b1e508bd0f74531f 6af948da4df914e5bc31acfaa1313707a1d0fd16 ALAN S <alansedp@gmail.com> 1792776965 +0530	commit: fix(orb): no shivering
+6af948da4df914e5bc31acfaa1313707a1d0fd16 fa5f3034811ff1872e8f0a3d69cfe5953f0015cc ALAN S <alansedp@gmail.com> 1792777222 +0530	commit: feat(orb): bar click opens the card quickly

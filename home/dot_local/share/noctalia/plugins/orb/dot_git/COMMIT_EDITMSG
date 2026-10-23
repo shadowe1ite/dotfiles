@@ -1,0 +1,8 @@
+feat(orb): bar click opens the card quickly
+
+Coming out for the card, the drip is short (140 + 170 ms instead of 380 + 460, a 240 ms
+pop on side bars) and the dash to where the card fits is faster and capped at 300 ms
+(instead of 900), also when the orb is already out. About 0.6-0.9 s from click to card
+instead of 1.5-2 s. Other trips keep their pace.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
