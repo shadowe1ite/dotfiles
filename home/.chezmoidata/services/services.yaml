@@ -17,7 +17,6 @@ services:
     - bluetooth.service
     - docker.service
     - NetworkManager.service
-    - warp-svc.service
     - libvirtd.service
     - virtlogd.service
     - tailscale.service

@@ -1,7 +1,9 @@
+export CCR_API_KEY="$(pass show llm/api/local)"
 export PATH=$PATH:/home/shadow/.spicetify
 export PATH=/home/shadow/.pdtm/go/bin:$PATH
 export PATH=/home/shadow/go/bin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
+export PATH="/home/shadow/.bun/bin:$PATH"
 
 # Golang environment variables
 export GOROOT=/usr/lib/go
@@ -215,6 +217,70 @@ fn cuser() {
     DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$USER_UID/bus \
     zsh -c 'source ~/.zshrc'
   echo "[✓] User '$user' created !"
+}
+
+# nim
+claude-nim() {
+  local O S H
+
+  if [ -z "$CCR_API_KEY" ]; then
+    echo "Error: CCR_API_KEY is not set"
+    return 1
+  fi
+
+  if [ -n "$NIM_MODEL" ]; then
+    O="$NIM_MODEL"
+    S="$NIM_MODEL"
+    H="$NIM_MODEL"
+  else
+    O="z-ai/glm-5.3"
+    S="deepseek-v4.1-flash-free"
+    H="glm-5.3-flash-free"
+  fi
+
+  local context=131072
+  if [ "$O" = "z-ai/glm-5.3" ]; then
+    context=1048576
+  elif [[ "$O" == *-free ]]; then
+    context=200000
+  fi
+
+  env -u ANTHROPIC_API_KEY -u ANTHROPIC_MODEL \
+    ANTHROPIC_BASE_URL="https://amd.tailf72995.ts.net" \
+    ANTHROPIC_AUTH_TOKEN="$CCR_API_KEY" \
+    ANTHROPIC_DEFAULT_OPUS_MODEL="$O" \
+    ANTHROPIC_DEFAULT_SONNET_MODEL="$S" \
+    ANTHROPIC_DEFAULT_HAIKU_MODEL="$H" \
+    CLAUDE_CODE_SUBAGENT_MODEL="$O" \
+    CLAUDE_CODE_MAX_CONTEXT_TOKENS="$context" \
+    CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1 \
+    claude "$@"
+}
+
+# Force one model for all tiers
+claude-zen() {
+  NIM_MODEL="${1:-glm-5.3-flash-free}" \
+    claude-nim "${@:2}"
+}
+
+# Vidoc
+claude-vidoc() {
+  if [ -z "$CCR_API_KEY" ]; then
+    echo "Error: CCR_API_KEY is not set"
+    return 1
+  fi
+
+  env -u ANTHROPIC_API_KEY \
+    ANTHROPIC_BASE_URL="https://amd.tailf72995.ts.net" \
+    ANTHROPIC_AUTH_TOKEN="$CCR_API_KEY" \
+    ANTHROPIC_MODEL="vidoc-1" \
+    ANTHROPIC_DEFAULT_OPUS_MODEL="vidoc-1" \
+    ANTHROPIC_DEFAULT_SONNET_MODEL="vidoc-1" \
+    ANTHROPIC_DEFAULT_HAIKU_MODEL="vidoc-1" \
+    CLAUDE_CODE_SUBAGENT_MODEL="vidoc-1" \
+    CLAUDE_CODE_MAX_CONTEXT_TOKENS=131072 \
+    CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1 \
+    claude "$@"
 }
 
 [ -f ~/explicit_filter.restore ] && rm ~/explicit_filter.restore

@@ -1,7 +1,7 @@
 {
   "Applications": [
-    "/usr/share/applications/zcode.desktop",
     "/usr/share/applications/org.openrgb.OpenRGB.desktop",
+    "/usr/share/applications/zcode.desktop",
     "/usr/share/applications/hermes-desktop.desktop",
     "/usr/share/applications/org.qbittorrent.qBittorrent.desktop",
     "/home/shadow/.local/share/applications/burpsuite-pro.desktop",
