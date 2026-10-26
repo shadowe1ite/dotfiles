@@ -101,8 +101,8 @@ providers:
   amd-radeon:
     baseUrl: https://developer.amd.com.cn/radeon/api/v1
     api: openai-completions
-    apiKey: rc-eaf0b3a76755c94be4c1391e62eb209b8faf34bb2476b52c
-    auth: AMD_KEY
+    apiKey: AMD_KEY
+    auth: apiKey
 
     models:
       - id: DeepSeek-V4.1-Flash
