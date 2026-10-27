@@ -49,7 +49,14 @@ _habits_title_preexec() {
 
 # Shell integrations
 eval "$(starship init zsh)"
-eval "$(fzf --zsh)"
+if fzf --zsh >/dev/null 2>&1; then
+  eval "$(fzf --zsh)"
+else
+  # fzf < 0.48 (Debian/Raspbian) has no --zsh; it ships the same scripts here
+  for f in /usr/share/doc/fzf/examples/{key-bindings,completion}.zsh; do
+    [[ -f $f ]] && source "$f"
+  done
+fi
 eval "$(zoxide init --cmd cd zsh)"
 
 # Keybindings

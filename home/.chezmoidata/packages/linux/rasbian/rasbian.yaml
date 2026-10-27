@@ -1,5 +1,6 @@
 packages:
   - zsh
+  - git
   - fzf
   - bat
   - zoxide
