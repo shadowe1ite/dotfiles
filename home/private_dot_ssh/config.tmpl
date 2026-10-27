@@ -22,6 +22,11 @@ Host pi.local
       Hostname 192.168.1.154
       User {{ .user }}
 
+Host pizero
+      HostName 192.168.1.154
+      User {{ .user }}
+      IdentityFile ~/.ssh/id_ed25519_pizero
+
 Host main
   HostName github.com
   User git

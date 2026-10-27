@@ -59,6 +59,10 @@
 .local/
 .config/*
 .cache/*
+.vdirsyncer/
+.gitconfig
+.ssh/*
+!.ssh/config
 {{ if eq .chezmoi.osRelease.id "ubuntu" }}
 !.config/nvim
 {{ end }}
