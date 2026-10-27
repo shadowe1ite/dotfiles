@@ -19,9 +19,22 @@ sudo apt update -y
 sudo apt install -y {{ template "flat" (include ".chezmoidata/packages/linux/ubuntu/ubuntu.yaml" | fromYaml).packages }}
 {{ else if eq .chezmoi.osRelease.id "raspbian" }}
 sudo apt install -y {{ template "flat" (include ".chezmoidata/packages/linux/rasbian/rasbian.yaml" | fromYaml).packages }}
+
+# starship and eza aren't in Raspbian's repos. Use upstream arm-unknown-linux
+# builds: that target is ARMv6, so they also run on a Pi Zero / Pi 1.
+mkdir -p "$HOME/.local/bin"
+if [ ! -x "$HOME/.local/bin/starship" ]; then
+    curl -fsSL https://starship.rs/install.sh | sh -s -- -y -b "$HOME/.local/bin"
+fi
+if [ ! -x "$HOME/.local/bin/eza" ]; then
+    curl -fsSL https://github.com/eza-community/eza/releases/latest/download/eza_arm-unknown-linux-gnueabihf.tar.gz |
+        tar -xz -C "$HOME/.local/bin" ./eza
+fi
 {{ end }}
 
-sudo usermod -aG docker "$USER"
+if getent group docker > /dev/null; then
+    sudo usermod -aG docker "$USER"
+fi
 
 sudo chsh -s "$(which zsh)" "$USER"
 

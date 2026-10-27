@@ -1,9 +1,7 @@
 packages:
   - zsh
-  - starship
   - fzf
   - bat
-  - eza
   - zoxide
   - tmux
   - vim
