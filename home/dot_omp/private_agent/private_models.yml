@@ -17,6 +17,13 @@ providers:
         contextWindow: 1048576
         maxTokens: 16384
 
+      - id: vidoc-1
+        name: Vidoc 1
+        reasoning: true
+        input: [text]
+        contextWindow: 131072
+        maxTokens: 32768
+
       # OpenCode Free — GLM 5.3 Flash (200K context)
       - id: opencode-free/glm-5.3-flash-free
         name: GLM 5.3 Flash (Free)
