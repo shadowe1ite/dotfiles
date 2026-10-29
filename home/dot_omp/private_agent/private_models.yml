@@ -9,13 +9,22 @@ providers:
     disableStrictTools: true
 
     models:
-      # NVIDIA NIM — GLM 5.3 (1M context)
-      - id: z-ai/glm-5.3
-        name: GLM 5.3 (NVIDIA NIM)
+
+      # NVIDIA NIM — MiniMax M3.1 Flash (262K API context)
+      - id: minimaxai/minimax-m3.1-flash
+        name: MiniMax M3.1 Flash (NVIDIA NIM)
         reasoning: true
-        input: [text]
-        contextWindow: 1048576
+        input: [text, image]
+        contextWindow: 262144
         maxTokens: 16384
+    
+      # NVIDIA NIM — DeepSeek V4.1 Flash (1M Context)
+      - id: deepseek-ai/deepseek-v4.1-flash
+        name: DeepSeek V4.1 Flash (NVIDIA NIM)
+        reasoning: true
+        input: [text, image]
+        contextWindow: 1048576
+        maxTokens: 262144
 
       - id: vidoc-1
         name: Vidoc 1
