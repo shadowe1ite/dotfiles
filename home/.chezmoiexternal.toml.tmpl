@@ -1,6 +1,20 @@
 {{ $archMap := dict "amd64" "x86_64" "arm64" "aarch64" "386" "i686" }}
 {{ $processor := get $archMap .chezmoi.arch | default .chezmoi.arch }}
 
+{{ if and (eq .chezmoi.os "linux") (has .chezmoi.arch (list "amd64" "arm64")) }}
+{{ $caidoVersion := (gitHubLatestRelease "caido/caido").TagName | toString }}
+[".local/bin/caido"]
+type = "file"
+url = {{ printf "https://caido.download/releases/%s/caido-desktop-%s-linux-%s.AppImage" $caidoVersion $caidoVersion $processor | quote }}
+executable = true
+
+[".local/bin/caido-cli"]
+type = "archive-file"
+url = {{ printf "https://caido.download/releases/%s/caido-cli-%s-linux-%s.tar.gz" $caidoVersion $caidoVersion $processor | quote }}
+path = "./caido-cli"
+executable = true
+{{ end }}
+
 {{ if and (ne .chezmoi.osRelease.id "raspbian") (ne .chezmoi.osRelease.id "ubuntu") }}
 [".local/share/fonts"]
 type = "archive"

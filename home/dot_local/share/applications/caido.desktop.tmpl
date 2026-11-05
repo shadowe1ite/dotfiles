@@ -1,0 +1,11 @@
+{{ if and (eq .chezmoi.os "linux") (has .chezmoi.arch (list "amd64" "arm64")) -}}
+[Desktop Entry]
+Name=Caido
+Exec=env DESKTOPINTEGRATION=false "{{ .chezmoi.homeDir }}/.local/bin/caido" %U
+Terminal=false
+Type=Application
+Icon={{ .chezmoi.homeDir }}/.local/share/applications/caido.png
+StartupWMClass=Caido
+Comment=Official desktop application for Caido
+Categories=Network;
+{{ end -}}

@@ -65,7 +65,7 @@ window-rule {
 
 window-rule {
     match app-id="org.kde.dolphin"
-    open-on-workspace "files"
+    //open-on-workspace "files"
 }
 
 window-rule {
