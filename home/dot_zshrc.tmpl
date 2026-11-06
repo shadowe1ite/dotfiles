@@ -1,5 +1,6 @@
 if command -v pass >/dev/null 2>&1; then
   export CCR_API_KEY="$(pass show llm/api/local)"
+  export OMNIROUTE_API_KEY="$(pass show llm/api/omniroute)"
   export AMD_KEY="$(pass show llm/api/amd/2)"
 fi
 export PATH=$PATH:/home/shadow/.spicetify
@@ -234,8 +235,8 @@ fn cuser() {
 claude-nim() {
   local O S H
 
-  if [ -z "$CCR_API_KEY" ]; then
-    echo "Error: CCR_API_KEY is not set"
+  if [ -z "$OMNIROUTE_API_KEY" ]; then
+    echo "Error: OMNIROUTE_API_KEY is not set"
     return 1
   fi
 
@@ -244,9 +245,9 @@ claude-nim() {
     S="$NIM_MODEL"
     H="$NIM_MODEL"
   else
-    O="z-ai/glm-5.3"
-    S="deepseek-v4.1-flash-free"
-    H="glm-5.3-flash-free"
+    O="amd-cn/GLM-5.3-Flash"
+    S="amd-cn/DeepSeek-V4.1-Flash"
+    H="amd-cn/Qwen3.8-Flash-Next"
   fi
 
   local context=131072
@@ -257,8 +258,9 @@ claude-nim() {
   fi
 
   env -u ANTHROPIC_API_KEY -u ANTHROPIC_MODEL \
-    ANTHROPIC_BASE_URL="https://amd.tailf72995.ts.net" \
-    ANTHROPIC_AUTH_TOKEN="$CCR_API_KEY" \
+    ANTHROPIC_BASE_URL="http://amd:20128" \
+    ANTHROPIC_AUTH_TOKEN="$OMNIROUTE_API_KEY" \
+    ANTHROPIC_MODEL="$O" \
     ANTHROPIC_DEFAULT_OPUS_MODEL="$O" \
     ANTHROPIC_DEFAULT_SONNET_MODEL="$S" \
     ANTHROPIC_DEFAULT_HAIKU_MODEL="$H" \
@@ -270,7 +272,7 @@ claude-nim() {
 
 # Force one model for all tiers
 claude-zen() {
-  NIM_MODEL="${1:-glm-5.3-flash-free}" \
+  NIM_MODEL="${1:-amd-cn/GLM-5.3-Flash}" \
     claude-nim "${@:2}"
 }
 
