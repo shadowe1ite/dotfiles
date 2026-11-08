@@ -1,0 +1,21 @@
+symbolPreset: unicode
+composer:
+  shape: band
+theme:
+  dark: titanium
+  light: light
+setupVersion: 3
+browser:
+  enabled: true
+dev:
+  autoqaConsent: denied
+codexResets:
+  autoRedeem: "yes"
+memory:
+  backend: local
+update:
+  auto: true
+statusLine:
+  preset: default
+modelRoles:
+  default: amd-radeon/DeepSeek-V4.1-Flash
