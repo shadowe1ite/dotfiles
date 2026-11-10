@@ -1,0 +1,54 @@
+#!/usr/bin/env python3
+
+import subprocess
+import requests
+import sys
+
+def main():
+    try:
+        token = subprocess.check_output(
+            ["pass", "duckduckgo.com/token"],
+            text=True
+        ).strip()
+
+        if not token:
+            sys.exit("Empty DuckDuckGo token.")
+
+        response = requests.post(
+            "https://quack.duckduckgo.com/api/email/addresses",
+            headers={
+                "Accept": "*/*",
+                "Authorization": f"Bearer {token}",
+                "Origin": "https://duckduckgo.com",
+                "Referer": "https://duckduckgo.com/",
+                "User-Agent": (
+                    "Mozilla/5.0 (X11; Linux x86_64) "
+                    "AppleWebKit/537.36 (KHTML, like Gecko) "
+                    "Chrome/131.0.0.0 Safari/537.36"
+                ),
+            },
+            timeout=30
+        )
+
+        response.raise_for_status()
+        email = response.json()["address"] + "@duck.com"
+
+        subprocess.run(
+            ["wl-copy"],
+            input=email,
+            text=True,
+            check=True
+        )
+
+        print(email)
+
+    except subprocess.CalledProcessError:
+        sys.exit("Failed to retrieve token or copy email.")
+    except requests.RequestException as e:
+        sys.exit(f"API error: {e}")
+    except (KeyError, ValueError):
+        sys.exit("Unexpected API response.")
+
+
+if __name__ == "__main__":
+    main()
