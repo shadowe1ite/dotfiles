@@ -1,0 +1,59 @@
+{
+  "settings": {
+    "notify": {
+      "label": "Desktop notifications",
+      "description": "Notify when a new message arrives for a @duck.com alias."
+    },
+    "keep": {
+      "label": "Messages to keep",
+      "description": "How many recent DuckDuckGo messages to remember. Credentials are never stored."
+    }
+  },
+  "panel": {
+    "title": "Duck",
+    "generate": "New alias",
+    "new_short": "New",
+    "generating": "Creating…",
+    "copy_alias": "Copy alias",
+    "copy_code": "Copy code",
+    "mark_read": "Mark read",
+    "refresh": "Check for mail",
+    "clear": "Clear all",
+    "clear_confirm": "Remove every message from this inbox? Nothing is deleted in Gmail.",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "inbox": "INBOX",
+    "new_count": "{count} new",
+    "back": "Inbox",
+    "alias_kicker": "Alias",
+    "alias_hint": "A new address is copied to the clipboard as soon as it is created.",
+    "otp_label": "ONE-TIME CODE",
+    "no_preview": "This message has no text preview.",
+    "empty": "No new mail",
+    "empty_hint": "Mail that arrives after enabling shows up here.",
+    "no_subject": "(no subject)",
+    "connected": "Live",
+    "connecting": "Connecting",
+    "reconnecting": "Reconnecting",
+    "error": "Offline"
+  },
+  "shortcut": {
+    "label": "Duck",
+    "unread": "{count} new",
+    "generating": "Creating…"
+  },
+  "notify": {
+    "title": "Duck mail",
+    "generate_failed": "Could not create an alias",
+    "empty": "The generator did not print an address."
+  },
+  "tooltip": {
+    "address": "Alias",
+    "unread": "Unread",
+    "status": "Watcher",
+    "none": "None yet"
+  },
+  "time": {
+    "now": "now"
+  }
+}

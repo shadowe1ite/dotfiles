@@ -1,0 +1,46 @@
+id           = "shadow/duck"
+name         = "Duck"
+version      = "0.1.0"
+plugin_api   = 32
+author       = "shadow"
+license      = "MIT"
+icon         = "mail"
+description  = "DuckDuckGo email aliases on the bar, with a private Gmail watcher for mail sent to them."
+tags         = ["email", "privacy", "duckduckgo", "inbox", "bar", "panel"]
+dependencies = ["python", "pass", "wl-copy"]
+
+[[setting]]
+key             = "notify"
+type            = "bool"
+label_key       = "settings.notify.label"
+description_key = "settings.notify.description"
+default         = true
+
+[[setting]]
+key             = "keep"
+type            = "int"
+label_key       = "settings.keep.label"
+description_key = "settings.keep.description"
+default         = 30
+min             = 10
+max             = 100
+
+[[service]]
+id    = "service"
+entry = "service.luau"
+
+[[widget]]
+id    = "widget"
+entry = "widget.luau"
+
+[[panel]]
+id              = "panel"
+entry           = "panel.luau"
+width           = 440
+height          = 420
+placement       = "attached"
+open_near_click = true
+
+[[shortcut]]
+id    = "shortcut"
+entry = "shortcut.luau"
