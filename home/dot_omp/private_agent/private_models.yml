@@ -7,10 +7,50 @@ providers:
     discovery:
       type: openai-models-list
 
+  omniroute-clef:
+    baseUrl: http://amd:20128
+    api: typesafe
+    apiKey: OMNIROUTE_API_KEY
+    auth: apiKey
+    models:
+      - id: Clef
+        name: AMD Clef
+        contextWindow: 32768
+      - id: d3
+        name: AMD D3
+        contextWindow: 32768
+      - id: d3-flash
+        name: AMD D3 Flash
+        contextWindow: 32768
+
   amd-radeon:
     baseUrl: https://developer.amd.com.cn/radeon/api/v1
     api: openai-completions
     apiKey: AMD_KEY
+    auth: apiKey
+    discovery:
+      type: openai-models-list
+
+  amd-radeon-judge:
+    baseUrl: https://developer.amd.com.cn/radeon/api
+    api: typesafe
+    apiKey: AMD_KEY
+    auth: apiKey
+    models:
+      - id: Clef
+        name: AMD Clef
+        contextWindow: 32768
+      - id: d3
+        name: AMD D3
+        contextWindow: 32768
+      - id: d3-flash
+        name: AMD D3 Flash
+        contextWindow: 32768
+
+  llama-local:
+    baseUrl: http://127.0.0.1:8080/v1
+    api: openai-completions
+    apiKey: llama-local
     auth: apiKey
     discovery:
       type: openai-models-list
