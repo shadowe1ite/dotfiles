@@ -7,12 +7,15 @@ bash:
     - match: pass *
       approval: deny
 composer:
-  shape: band
+  shape: claude
+  tokenRate: true
 theme:
-  dark: titanium
+  dark: dark-ember
   light: light
 statusLine:
   preset: default
+  transparent: false
+  separator: ascii
 browser:
   enabled: true
 memory:
@@ -21,5 +24,24 @@ update:
   auto: true
 modelRoles:
   default: omniroute/amd/DeepSeek-V4.1-Flash
-  judge: amd-radeon/d3
+  judge: amd-radeon-judge/d3
 defaultThinkingLevel: auto
+retry:
+  maxRetries: 5
+  fallbackChains:
+    judge: []
+    # judge:
+    #   - amd-radeon-judge/d3-flash
+    #   - amd-radeon-judge/Clef
+
+task:
+  autoParallel: suggest  # spots 2+ jobs in a prompt, just tells you
+
+find:
+  enabled: "on"  # search code in plain English
+
+ttsr:
+  judge: "on"  # checks replies against your rules
+
+prewalk:
+  auto: "off"  # plans with main model, hands off to smol (no smol set, so no gain)
