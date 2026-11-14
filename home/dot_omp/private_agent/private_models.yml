@@ -7,7 +7,7 @@ providers:
     discovery:
       type: openai-models-list
 
-  omniroute-clef:
+  omniroute-judge:
     baseUrl: http://amd:20128
     api: typesafe
     apiKey: OMNIROUTE_API_KEY
