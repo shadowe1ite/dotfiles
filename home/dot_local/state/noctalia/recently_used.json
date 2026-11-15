@@ -1,28 +1,28 @@
 {
   "Applications": [
-    "/usr/share/applications/org.openrgb.OpenRGB.desktop",
-    "/usr/share/applications/zcode.desktop",
-    "/usr/share/applications/hermes-desktop.desktop",
-    "/usr/share/applications/org.qbittorrent.qBittorrent.desktop",
-    "/home/shadow/.local/share/applications/burpsuite-pro.desktop",
-    "/usr/share/applications/vesktop.desktop",
-    "/usr/share/applications/jadx-gui.desktop",
-    "/usr/share/applications/org.kde.dolphin.desktop",
-    "/usr/share/applications/caido.desktop",
-    "/usr/share/applications/chatgpt.desktop",
-    "/home/shadow/.local/share/applications/ghidra.desktop",
-    "/usr/share/applications/brave-origin.desktop",
     "/usr/share/applications/firefox.desktop",
-    "/usr/share/applications/chromium.desktop",
-    "/usr/share/applications/lstopo.desktop",
-    "/usr/share/applications/tor-browser.desktop",
-    "/usr/share/applications/com.github.jeromerobert.pdfarranger.desktop",
-    "/usr/share/applications/qv4l2.desktop",
+    "/usr/share/applications/BambuStudio.desktop",
+    "/usr/share/applications/vesktop.desktop",
+    "/usr/share/applications/org.gnome.Nautilus.desktop",
+    "/usr/share/applications/org.freedesktop.Piper.desktop",
+    "/usr/share/applications/brave-browser.desktop",
     "/home/shadow/.local/share/applications/com.anthropic.Claude.desktop",
-    "/usr/share/applications/blender.desktop"
+    "/usr/share/applications/com.anthropic.Claude.desktop",
+    "/usr/share/applications/cursor.desktop",
+    "/usr/share/applications/io.github.shorin_kiwata.NiriDisplaySettings.desktop",
+    "/usr/share/applications/com.github.jeromerobert.pdfarranger.desktop",
+    "/usr/share/applications/org.openrgb.OpenRGB.desktop",
+    "/usr/share/applications/org.gnome.Loupe.desktop",
+    "/usr/share/applications/org.kde.dolphin.desktop",
+    "/usr/share/applications/com.ranfdev.DistroShelf.desktop",
+    "/usr/share/applications/dev.zed.Zed.desktop",
+    "/usr/share/applications/brave-origin.desktop",
+    "/usr/share/applications/chatgpt.desktop",
+    "/usr/share/applications/com.raspberrypi.rpi-imager.desktop",
+    "/usr/share/applications/io.github.htkhiem.Euphonica.desktop"
   ],
   "Emoji": [
-    "emoji-🙂",
-    "emoji-👍"
+    "emoji-👍",
+    "emoji-🙂"
   ]
 }

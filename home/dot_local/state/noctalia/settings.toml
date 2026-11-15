@@ -8,7 +8,7 @@ order = [ "default" ]
 
     [bar.default]
     capsule = true
-    center = [ "widget_2", "clock", "control-center", "widget", "orb", "bar" ]
+    center = [ "widget_2", "clock", "control-center", "widget_3", "widget", "bar" ]
     end = [ "tray", "sysmon", "battery", "network", "notifications" ]
     margin_ends = 0
     show_on_workspace_switch = false
@@ -45,11 +45,11 @@ item_spacing = 0
 main_axis_padding = 0
 margin_edge = 10
 pinned = [
-    "firefox",
     "org.gnome.Evince",
     "org.kde.dolphin",
     "ghidra",
     "org.telegram.desktop",
+    "firefox",
     "org.wireshark.Wireshark",
     "com.github.neithern.g4music",
     "org.gnome.TextEditor",
@@ -162,7 +162,8 @@ enabled = [
     "shadow/lyrics",
     "ahmedhossamdev/sticky-notes",
     "shadowe1ite/claude-fm",
-    "shadow/orb"
+    "shadow/orb",
+    "shadow/duck"
 ]
 
 [shell]
@@ -235,13 +236,13 @@ wallpaper_scheme = "m3-content"
 directory = "/home/shadow/Pictures/Wallpapers/fav"
 
     [wallpaper.default]
-    path = "/home/shadow/Pictures/Wallpapers/fav/Green/07. Rain Dark.jpg"
+    path = "/home/shadow/Pictures/Wallpapers/fav/Green/green.jpeg"
 
     [wallpaper.last]
-    path = "/home/shadow/Pictures/Wallpapers/fav/Green/07. Rain Dark.jpg"
+    path = "/home/shadow/Pictures/Wallpapers/fav/Green/green.jpeg"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/shadow/Pictures/Wallpapers/fav/Green/07. Rain Dark.jpg"
+    path = "/home/shadow/Pictures/Wallpapers/fav/Green/green.jpeg"
 
 [widget.bar]
 type = "ahmedhossamdev/sticky-notes:bar"
@@ -266,9 +267,6 @@ capsule = true
 max_length = 150
 title_scroll = "on_hover"
 
-[widget.orb]
-type = "shadow/orb:orb"
-
 [widget.session]
 capsule = true
 
@@ -284,6 +282,9 @@ type = "shadow/habits:widget"
 
 [widget.widget_2]
 type = "shadowe1ite/claude-fm:widget"
+
+[widget.widget_3]
+type = "shadow/duck:widget"
 
 [widget.workspaces]
 show_labels = false

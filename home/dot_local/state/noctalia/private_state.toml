@@ -1,9 +1,9 @@
 [calendar_reminders]
-digest_date = "2026-10-20"
+digest_date = "2026-11-15"
 fired = ""
 
 [screenshot]
-last_region = "1030,46,488,590"
+last_region = "879,23,1041,1052"
 
 [security_migrations]
 calendar_credentials_v1 = true
