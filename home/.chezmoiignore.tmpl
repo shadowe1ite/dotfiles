@@ -17,6 +17,7 @@
 {{- end }}
 
 {{- if ne .chezmoi.username .user }}
+.local/bin/interceptor
 .chezmoiscripts/00-prepare.sh
 .chezmoiscripts/01-setup-gpg.sh
 .chezmoiscripts/02-configure-repo.sh
