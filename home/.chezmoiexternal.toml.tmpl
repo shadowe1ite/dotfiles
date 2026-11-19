@@ -42,7 +42,6 @@ url = {{ gitHubLatestReleaseAssetURL "Hacker-Valley-Media/Interceptor" (printf "
 stripComponents = 1
 {{ end }}
 
-{{/* omp GUI, disabled for now
 {{ if and (eq .chezmoi.os "linux") (eq .chezmoi.arch "amd64") (eq .chezmoi.username "shadow") }}
 [".local/bin/omp-gui"]
 type = "file"
@@ -50,7 +49,6 @@ url = {{ gitHubLatestReleaseAssetURL "nornzach/oh-my-pi-gui" "omp-*.AppImage" | 
 executable = true
 refreshPeriod = "168h"
 {{ end }}
-*/}}
 
 {{ if and (ne .chezmoi.osRelease.id "raspbian") (ne .chezmoi.osRelease.id "ubuntu") }}
 [".local/share/fonts"]

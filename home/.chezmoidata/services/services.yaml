@@ -19,4 +19,4 @@ services:
     - NetworkManager.service
     - libvirtd.service
     - virtlogd.service
-    - tailscale.service
+    - tailscaled.service

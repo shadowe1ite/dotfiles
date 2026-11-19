@@ -13,7 +13,7 @@ binds {
 
     Mod+E { spawn "noctalia" "msg" "panel-toggle" "launcher" "/emo "; }
     Mod+V { spawn "noctalia" "msg" "panel-toggle" "clipboard"; }
-    Alt+M { spawn "noctalia" "msg" "panel-toggle" "wallpaper"; }
+    Mod+M { spawn "noctalia" "msg" "panel-toggle" "wallpaper"; }
 
     // Notifications / Panels
     Ctrl+Shift+Grave { spawn "noctalia" "msg" "notification-clear-active"; }
