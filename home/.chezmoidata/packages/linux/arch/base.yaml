@@ -58,6 +58,7 @@ utils:
   - ydotool
   - zbar
   - cmake
+  - fuse2
 
 shell:
   - zsh

@@ -19,7 +19,8 @@ statusLine:
   showHookStatus: true
   sessionAccent: false
 browser:
-  enabled: true
+  enabled: false
+  headless: false
 memory:
   backend: "off"
 update:
@@ -42,3 +43,4 @@ ttsr:
 prewalk:
   auto: "off"
 hideThinkingBlock: true
+extendedContext: false
