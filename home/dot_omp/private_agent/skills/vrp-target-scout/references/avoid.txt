@@ -1,0 +1,3 @@
+# Projects to never pick. One per line: <name>  # short reason
+libavif     # saturated
+libpcap     # harsh maintainer
