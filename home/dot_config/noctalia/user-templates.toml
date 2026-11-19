@@ -125,3 +125,14 @@ output_path = "~/.config/obs-studio/themes/matugen.obt"
 input_path = "~/.config/matugen/templates/colors-pywalfox.json"
 output_path = "~/.cache/wal/colors.json"
 post_hook = "pywalfox update"
+
+# Semantic colors harmonized with the active palette (used by the omp template).
+[theme.templates.custom_colors]
+success = "#4caf50"
+warning = "#f9a825"
+
+# oh-my-pi coding agent. omp watches its custom theme files and reloads live,
+# so no post_hook is needed. Select it with: theme.dark/theme.light = noctalia
+[theme.templates.user.omp]
+input_path = '~/.config/noctalia/templates/omp.json'
+output_path = '~/.omp/agent/themes/noctalia.json'

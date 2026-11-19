@@ -3,7 +3,14 @@
     "interceptor": {
       "type": "stdio",
       "command": "interceptor",
-      "args": ["mcp"]
+      "args": [
+        "mcp",
+        "serve"
+      ]
+    },
+    "supermemory": {
+      "type": "stdio",
+      "command": "/home/shadow/.local/bin/supermemory-mcp"
     }
   }
 }

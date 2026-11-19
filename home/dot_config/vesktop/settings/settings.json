@@ -158,9 +158,6 @@
         "Experiments": {
             "enabled": false
         },
-        "ExpressionCloner": {
-            "enabled": false
-        },
         "F8Break": {
             "enabled": false
         },
@@ -543,6 +540,9 @@
         },
         "MusicRichPresence": {
             "enabled": false
+        },
+        "ExpressionManager": {
+            "enabled": false
         }
     },
     "notifications": {
@@ -555,7 +555,7 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1791871793406
+        "settingsSyncVersion": 1794656885110
     },
     "windowsMaterial": "none",
     "nativeTitleBar": false,

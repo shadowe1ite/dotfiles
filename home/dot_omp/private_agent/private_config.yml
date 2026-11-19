@@ -15,33 +15,30 @@ theme:
 statusLine:
   preset: default
   transparent: false
-  separator: ascii
+  separator: powerline
+  showHookStatus: true
+  sessionAccent: false
 browser:
   enabled: true
 memory:
-  backend: local
+  backend: "off"
 update:
   auto: true
 modelRoles:
-  default: omniroute/amd/DeepSeek-V4.1-Flash
+  default: cursor/grok-4.7
+  smol: omniroute/zed-hosted/gpt-6-luna
   judge: amd-radeon-judge/d3
 defaultThinkingLevel: auto
 retry:
   maxRetries: 5
   fallbackChains:
     judge: []
-    # judge:
-    #   - amd-radeon-judge/d3-flash
-    #   - amd-radeon-judge/Clef
-
 task:
-  autoParallel: suggest  # spots 2+ jobs in a prompt, just tells you
-
+  autoParallel: suggest
 find:
-  enabled: "on"  # search code in plain English
-
+  enabled: "on"
 ttsr:
-  judge: "on"  # checks replies against your rules
-
+  judge: "on"
 prewalk:
-  auto: "off"  # plans with main model, hands off to smol (no smol set, so no gain)
+  auto: "off"
+hideThinkingBlock: true
