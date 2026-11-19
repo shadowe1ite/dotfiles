@@ -1,4 +1,4 @@
-{{ if and (eq .chezmoi.os "linux") (has .chezmoi.arch (list "amd64" "arm64")) -}}
+{{ if and (eq .chezmoi.os "linux") (has .chezmoi.arch (list "amd64" "arm64")) (eq .chezmoi.username "shadow") -}}
 [Desktop Entry]
 Name=Caido
 Exec=env DESKTOPINTEGRATION=false "{{ .chezmoi.homeDir }}/.local/bin/caido" %U

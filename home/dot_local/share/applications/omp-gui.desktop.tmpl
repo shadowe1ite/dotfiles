@@ -1,0 +1,11 @@
+{{/* omp GUI desktop entry, disabled for now
+[Desktop Entry]
+Name=omp GUI
+Exec=env DESKTOPINTEGRATION=false "{{ .chezmoi.homeDir }}/.local/bin/omp-gui" %U
+Terminal=false
+Type=Application
+Icon={{ .chezmoi.homeDir }}/.local/share/applications/omp-gui.png
+StartupWMClass=omp
+Comment=Desktop GUI for the omp coding agent
+Categories=Development;
+*/}}

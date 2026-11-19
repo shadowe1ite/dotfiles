@@ -1,19 +1,56 @@
 {{ $archMap := dict "amd64" "x86_64" "arm64" "aarch64" "386" "i686" }}
 {{ $processor := get $archMap .chezmoi.arch | default .chezmoi.arch }}
 
-{{ if and (eq .chezmoi.os "linux") (has .chezmoi.arch (list "amd64" "arm64")) }}
+{{ if and (eq .chezmoi.os "linux") (has .chezmoi.arch (list "amd64" "arm64")) (eq .chezmoi.username "shadow") }}
 {{ $caidoVersion := (gitHubLatestRelease "caido/caido").TagName | toString }}
 [".local/bin/caido"]
 type = "file"
 url = {{ printf "https://caido.download/releases/%s/caido-desktop-%s-linux-%s.AppImage" $caidoVersion $caidoVersion $processor | quote }}
 executable = true
+refreshPeriod = "168h"
 
 [".local/bin/caido-cli"]
 type = "archive-file"
 url = {{ printf "https://caido.download/releases/%s/caido-cli-%s-linux-%s.tar.gz" $caidoVersion $caidoVersion $processor | quote }}
 path = "./caido-cli"
 executable = true
+
+{{ $cpu := get (dict "amd64" "x64" "arm64" "arm64") .chezmoi.arch }}
+[".local/bin/omp"]
+type = "file"
+url = {{ gitHubLatestReleaseAssetURL "can1357/oh-my-pi" (printf "omp-linux-%s" $cpu) | quote }}
+executable = true
+refreshPeriod = "12h"
+
+[".local/bin/claude"]
+type = "archive-file"
+url = {{ gitHubLatestReleaseAssetURL "anthropics/claude-code" (printf "claude-linux-%s.tar.gz" $cpu) | quote }}
+path = "claude"
+executable = true
+refreshPeriod = "12h"
+
+[".local/bin/opencode"]
+type = "archive-file"
+url = {{ gitHubLatestReleaseAssetURL "sst/opencode" (printf "opencode-linux-%s.tar.gz" $cpu) | quote }}
+path = "opencode"
+executable = true
+refreshPeriod = "12h"
+
+[".local/share/interceptor-release/current"]
+type = "archive"
+url = {{ gitHubLatestReleaseAssetURL "Hacker-Valley-Media/Interceptor" (printf "Interceptor-Browser-*-linux-%s.tar.gz" $cpu) | quote }}
+stripComponents = 1
 {{ end }}
+
+{{/* omp GUI, disabled for now
+{{ if and (eq .chezmoi.os "linux") (eq .chezmoi.arch "amd64") (eq .chezmoi.username "shadow") }}
+[".local/bin/omp-gui"]
+type = "file"
+url = {{ gitHubLatestReleaseAssetURL "nornzach/oh-my-pi-gui" "omp-*.AppImage" | quote }}
+executable = true
+refreshPeriod = "168h"
+{{ end }}
+*/}}
 
 {{ if and (ne .chezmoi.osRelease.id "raspbian") (ne .chezmoi.osRelease.id "ubuntu") }}
 [".local/share/fonts"]
@@ -39,11 +76,6 @@ stripComponents = 1
 type = "git-repo"
 url = "https://github.com/shadowe1ite/GFpattren"
 refreshPeriod = "168h"
-
-[".local/bin/cloudflared"]
-type = "file"
-url = {{ gitHubLatestReleaseAssetURL "cloudflare/cloudflared" (printf "cloudflared-%s-%s" .chezmoi.os .chezmoi.arch) | quote }}
-executable = true
 {{ end }}
 
 {{ if eq .chezmoi.osRelease.id "ubuntu" }}

@@ -1,6 +1,10 @@
 # TEMP: skip the Firefox session-restore file. Delete these two lines to re-enable.
 .mozilla/firefox/default/sessionstore-backups/recovery.jsonlz4
 
+# omp GUI launcher, disabled for now
+.local/share/applications/omp-gui.desktop
+.local/share/applications/omp-gui.png
+
 {{- $chassis := includeTemplate "sys-chassis.tmpl" . }}
 
 {{- if eq $chassis "vm" }}
