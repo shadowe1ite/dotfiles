@@ -1,7 +1,9 @@
 {
   "Applications": [
-    "/usr/share/applications/cursor.desktop",
+    "/home/shadow/.local/share/applications/caido.desktop",
     "/usr/share/applications/brave-browser.desktop",
+    "/home/shadow/.local/share/applications/omp-gui.desktop",
+    "/usr/share/applications/cursor.desktop",
     "/usr/share/applications/BambuStudio.desktop",
     "/usr/share/applications/org.qbittorrent.qBittorrent.desktop",
     "/usr/share/applications/org.kde.dolphin.desktop",
@@ -17,9 +19,7 @@
     "/usr/share/applications/org.gnome.Loupe.desktop",
     "/usr/share/applications/com.ranfdev.DistroShelf.desktop",
     "/usr/share/applications/dev.zed.Zed.desktop",
-    "/usr/share/applications/brave-origin.desktop",
-    "/usr/share/applications/chatgpt.desktop",
-    "/usr/share/applications/com.raspberrypi.rpi-imager.desktop"
+    "/usr/share/applications/brave-origin.desktop"
   ],
   "Emoji": [
     "emoji-👍",

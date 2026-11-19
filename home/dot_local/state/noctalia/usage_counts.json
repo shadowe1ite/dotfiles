@@ -1,13 +1,14 @@
 {
   "Applications": {
     "/home/shadow/.local/share/applications/burpsuite-pro.desktop": 11,
-    "/home/shadow/.local/share/applications/caido.desktop": 1,
+    "/home/shadow/.local/share/applications/caido.desktop": 3,
     "/home/shadow/.local/share/applications/com.anthropic.Claude.desktop": 33,
     "/home/shadow/.local/share/applications/ghidra.desktop": 3,
+    "/home/shadow/.local/share/applications/omp-gui.desktop": 2,
     "/usr/share/applications/BambuStudio.desktop": 8,
     "/usr/share/applications/Paseo.desktop": 3,
     "/usr/share/applications/blender.desktop": 4,
-    "/usr/share/applications/brave-browser.desktop": 27,
+    "/usr/share/applications/brave-browser.desktop": 28,
     "/usr/share/applications/brave-origin.desktop": 12,
     "/usr/share/applications/caido.desktop": 37,
     "/usr/share/applications/chatgpt.desktop": 24,

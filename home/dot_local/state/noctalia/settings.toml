@@ -48,6 +48,7 @@ pinned = [
     "org.gnome.Evince",
     "org.kde.dolphin",
     "ghidra",
+    "caido",
     "org.telegram.desktop",
     "firefox",
     "org.wireshark.Wireshark",
@@ -56,7 +57,8 @@ pinned = [
     "burpsuite-pro",
     "vesktop",
     "Alacritty",
-    "hermes-desktop"
+    "hermes-desktop",
+    "omp-gui"
 ]
 reserve_space = false
 show_dots = true
@@ -136,6 +138,9 @@ widget_order = [ "lockscreen-login-box@eDP-1", "lockscreen-widget-00000000000000
 
 [plugin_settings."ahmedhossamdev/sticky-notes"]
 no_colors = true
+
+[plugin_settings."noctalia/screen_recorder"]
+directory = "/home/shadow/Videos/Captures"
 
 [plugin_settings."shadow/habits"]
 panel_open_near_click = true
