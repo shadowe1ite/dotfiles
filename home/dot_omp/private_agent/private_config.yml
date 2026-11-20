@@ -48,3 +48,4 @@ mnemopi:
   embeddingApiUrl: https://integrate.api.nvidia.com/v1
   embeddingModel: nvidia/nemotron-3.5-embed-8b
   embeddingInputType: true
+  scoping: global
