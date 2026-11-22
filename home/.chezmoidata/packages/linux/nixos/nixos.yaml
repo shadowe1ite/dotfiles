@@ -10,4 +10,3 @@ packages:
   - curl
   - tmux
   - neovim
-  - tailscale

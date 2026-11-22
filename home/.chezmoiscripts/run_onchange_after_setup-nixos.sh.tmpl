@@ -44,7 +44,7 @@ Description=Personal tailscaled (userspace, own tailnet)
 After=network-online.target
 
 [Service]
-ExecStart=%h/.nix-profile/bin/tailscaled --tun=userspace-networking --statedir=%h/.local/share/tailscale-me --socket=%t/tailscale-me.sock --port=0 --socks5-server=localhost:1055 --outbound-http-proxy-listen=localhost:1055
+ExecStart=/run/current-system/sw/bin/tailscaled --tun=userspace-networking --statedir=%h/.local/share/tailscale-me --socket=%t/tailscale-me.sock --port=0 --socks5-server=localhost:1055 --outbound-http-proxy-listen=localhost:1055
 Restart=always
 RestartSec=5
 
