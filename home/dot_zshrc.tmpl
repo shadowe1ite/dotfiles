@@ -124,6 +124,8 @@ alias lfimap="/usr/share/lfimap/lfimap/lfimap.py"
 alias pwncat="PYTHONWARNINGS=ignore pwncat-cs"
 alias cdots="cd ~/.local/share/chezmoi"
 alias cz="chezmoi"
+# mothership VM: `ts` = my personal tailscaled; plain `tailscale` = TinkerHub mesh (don't `up` it)
+[[ -f /etc/NIXOS ]] && alias ts='tailscale --socket="$XDG_RUNTIME_DIR/tailscale-me.sock"'
 #alias httpx="httpx -no-color"
 
 # export

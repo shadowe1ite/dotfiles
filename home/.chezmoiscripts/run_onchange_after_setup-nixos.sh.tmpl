@@ -32,6 +32,31 @@ fi
 EOF
 fi
 
+# personal tailnet: a second, userspace tailscaled next to the system one
+# (system one = TinkerHub mesh, never touch it). Own state + socket under ~,
+# so it can't clash. Needs `linger = true;` in user-vms/alan.nix to start at
+# boot. First time only: `ts up` and open the login link.
+unit_dir="$HOME/.config/systemd/user"
+mkdir -p "$unit_dir"
+cat > "$unit_dir/tailscaled-me.service" <<'EOF'
+[Unit]
+Description=Personal tailscaled (userspace, own tailnet)
+After=network-online.target
+
+[Service]
+ExecStart=%h/.nix-profile/bin/tailscaled --tun=userspace-networking --statedir=%h/.local/share/tailscale-me --socket=%t/tailscale-me.sock --port=0 --socks5-server=localhost:1055 --outbound-http-proxy-listen=localhost:1055
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target
+EOF
+if systemctl --user daemon-reload 2>/dev/null; then
+    systemctl --user enable --now tailscaled-me.service || true
+else
+    echo "[setup-nixos] no user systemd session; run: systemctl --user enable --now tailscaled-me"
+fi
+
 # pre-install zimfw + plugins now, so the first SSH login doesn't sit silently
 # downloading them (looks hung; Ctrl+C leaves a half-loaded shell)
 echo "[setup-nixos] installing zsh plugins..."
