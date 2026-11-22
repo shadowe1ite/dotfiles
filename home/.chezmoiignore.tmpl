@@ -71,8 +71,7 @@
 !.config/starship.toml
 !.config/tmux
 {{ if eq .chezmoi.osRelease.id "nixos" }}
-# mothership VM: shell only — no apt/chsh/motd script, no desktop agent config
-.omp
+# mothership VM: shell only + omp — no apt/chsh/motd script
 !.chezmoiscripts/setup-nixos.sh
 {{ else }}
 !.chezmoiscripts/setup-remote.sh

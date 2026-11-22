@@ -4,6 +4,9 @@ if command -v pass >/dev/null 2>&1; then
   export AMD_KEY="$(pass show llm/api/amd/2)"
   export NVIDIA_API_KEY="$(pass show llm/api/nvidia/1)"
   export MNEMOPI_EMBEDDING_API_KEY="$NVIDIA_API_KEY"
+elif [[ -r ~/.config/secrets.env ]]; then
+  # no pass here (e.g. mothership VM): hand-made, chmod 600, never in git
+  set -a; source ~/.config/secrets.env; set +a
 fi
 export PATH=$PATH:/home/shadow/.spicetify
 export PATH=/home/shadow/.pdtm/go/bin:$PATH
@@ -127,6 +130,8 @@ alias cz="chezmoi"
 alias nix="noglob nix"   # extended_glob treats # as a pattern: `nix run nixpkgs#foo` → "no matches found"
 # mothership VM: `ts` = my personal tailscaled; plain `tailscale` = TinkerHub mesh (don't `up` it)
 [[ -e /run/current-system ]] && alias ts='tailscale --socket="$XDG_RUNTIME_DIR/tailscale-me.sock"'
+# omp reaches amd:20128 over my tailnet via the userspace tailscaled proxy
+[[ -e /run/current-system ]] && alias omp='HTTP_PROXY=http://localhost:1055 HTTPS_PROXY=http://localhost:1055 NO_PROXY=localhost,127.0.0.1 omp'
 #alias httpx="httpx -no-color"
 
 # export
