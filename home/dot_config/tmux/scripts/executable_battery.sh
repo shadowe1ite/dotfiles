@@ -13,7 +13,19 @@ for p in /sys/class/power_supply/BAT*/capacity /sys/class/power_supply/*/capacit
     if [[ -n "$v" ]]; then cap="$v"; break; fi
   fi
 done
-cap="${cap:-0}"
+
+# No battery (VM/server/Pi): show home storage instead, e.g. "󰋊 3.1G/40G 8%"
+if [[ -z "$cap" ]]; then
+  read -r size used pct < <(df -Ph "$HOME/" 2>/dev/null | awk 'NR==2 {print $2, $3, $5}') || true
+  if [[ -n "${pct:-}" ]]; then
+    p="${pct%\%}"
+    icon_color="$ICON_COLOR"
+    (( p >= 75 )) && icon_color="#F5C451"   # yellow
+    (( p >= 90 )) && icon_color="#FF5F5F"   # red
+    printf '#[fg=%s]󰋊#[fg=%s] %s/%s %s' "$icon_color" "$TEXT_COLOR" "$used" "$size" "$pct"
+  fi
+  exit 0
+fi
 
 # Read status
 status="Unknown"
