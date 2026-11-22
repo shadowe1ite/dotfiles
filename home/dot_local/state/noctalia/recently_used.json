@@ -1,12 +1,14 @@
 {
   "Applications": [
-    "/home/shadow/.local/share/applications/caido.desktop",
-    "/usr/share/applications/brave-browser.desktop",
-    "/home/shadow/.local/share/applications/omp-gui.desktop",
-    "/usr/share/applications/cursor.desktop",
-    "/usr/share/applications/BambuStudio.desktop",
-    "/usr/share/applications/org.qbittorrent.qBittorrent.desktop",
+    "/usr/share/applications/blender.desktop",
     "/usr/share/applications/org.kde.dolphin.desktop",
+    "/usr/share/applications/org.gnome.seahorse.Application.desktop",
+    "/usr/share/applications/BambuStudio.desktop",
+    "/usr/share/applications/cursor.desktop",
+    "/home/shadow/.local/share/applications/omp-gui.desktop",
+    "/usr/share/applications/brave-browser.desktop",
+    "/home/shadow/.local/share/applications/caido.desktop",
+    "/usr/share/applications/org.qbittorrent.qBittorrent.desktop",
     "/usr/share/applications/org.gnome.Nautilus.desktop",
     "/usr/share/applications/firefox.desktop",
     "/usr/share/applications/vesktop.desktop",
@@ -17,9 +19,7 @@
     "/usr/share/applications/com.github.jeromerobert.pdfarranger.desktop",
     "/usr/share/applications/org.openrgb.OpenRGB.desktop",
     "/usr/share/applications/org.gnome.Loupe.desktop",
-    "/usr/share/applications/com.ranfdev.DistroShelf.desktop",
-    "/usr/share/applications/dev.zed.Zed.desktop",
-    "/usr/share/applications/brave-origin.desktop"
+    "/usr/share/applications/com.ranfdev.DistroShelf.desktop"
   ],
   "Emoji": [
     "emoji-👍",

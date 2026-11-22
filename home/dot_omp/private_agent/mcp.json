@@ -8,9 +8,12 @@
         "serve"
       ]
     },
-    "supermemory": {
+    "blender": {
       "type": "stdio",
-      "command": "/home/shadow/.local/bin/supermemory-mcp"
+      "command": "/bin/uvx",
+      "args": [
+        "mcp-for-blender"
+      ]
     }
   }
 }

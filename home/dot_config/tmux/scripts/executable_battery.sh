@@ -13,35 +13,7 @@ for p in /sys/class/power_supply/BAT*/capacity /sys/class/power_supply/*/capacit
     if [[ -n "$v" ]]; then cap="$v"; break; fi
   fi
 done
-
-# No battery (VM/server/Pi): show home storage instead, e.g. "󰋊 3.1G/40G 8%"
-if [[ -z "$cap" ]]; then
-  if [[ -d /persist ]]; then
-    # mothership VM: ~ is a virtiofs share of a ZFS dataset; df shows the whole
-    # host pool (TBs), not my refquota. Measure with du (cached 5 min) against
-    # the tier quota (large = 40G; override with DISK_QUOTA_GB).
-    quota_gb="${DISK_QUOTA_GB:-40}"
-    cache="${XDG_RUNTIME_DIR:-/tmp}/tmux-home-du"
-    if [[ ! -s "$cache" || -n "$(find "$cache" -mmin +5 2>/dev/null)" ]]; then
-      (timeout 60 nice du -sxB1 /persist/home 2>/dev/null | awk '{print $1}' > "$cache.tmp" \
-        && mv "$cache.tmp" "$cache") >/dev/null 2>&1 &
-    fi
-    bytes="$(cat "$cache" 2>/dev/null || echo 0)"
-    used="$(numfmt --to=iec --suffix= "${bytes:-0}" 2>/dev/null || echo "?")"
-    size="${quota_gb}G"
-    pct="$(( ${bytes:-0} * 100 / (quota_gb * 1024 * 1024 * 1024) ))%"
-  else
-    read -r size used pct < <(df -Ph "$HOME/" 2>/dev/null | awk 'NR==2 {print $2, $3, $5}') || true
-  fi
-  if [[ -n "${pct:-}" ]]; then
-    p="${pct%\%}"
-    icon_color="$ICON_COLOR"
-    (( p >= 75 )) && icon_color="#F5C451"   # yellow
-    (( p >= 90 )) && icon_color="#FF5F5F"   # red
-    printf '#[fg=%s]󰋊#[fg=%s] %s/%s %s' "$icon_color" "$TEXT_COLOR" "$used" "$size" "$pct"
-  fi
-  exit 0
-fi
+cap="${cap:-0}"
 
 # Read status
 status="Unknown"

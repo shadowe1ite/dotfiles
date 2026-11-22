@@ -8,3 +8,8 @@ Print results in clean, readable Markdown:
 - Print in chat. Do not create SVG, mermaid, ASCII art, dashboards, or decorative artifacts unless explicitly asked.
 - Do not add counts, rankings, recommendations, or files that carry no new signal for the request.
 - Stop once the requested output is complete.
+
+Figma related tasks
+
+- when i ask to design something with figma. don't touch the directory don't write anything in directory like: *.js , *.html , etc. 
+- just directly design it in figma using figma mcp

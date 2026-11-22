@@ -26,8 +26,8 @@ memory:
 update:
   auto: true
 modelRoles:
-  default: cursor/grok-4.7
-  smol: omniroute/zed-hosted/gpt-6-luna
+  default: openai-codex/gpt-5.6-sol
+  smol: omniroute/amd/DeepSeek-V4.1-Flash:auto
   judge: amd-radeon-judge/d3
 defaultThinkingLevel: auto
 retry:
@@ -40,13 +40,12 @@ find:
   enabled: "on"
 ttsr:
   judge: "on"
-prewalk:
-  enabled: false
-  auto: suggest
-hideThinkingBlock: true
+hideThinkingBlock: false
 extendedContext: false
 mnemopi:
   embeddingApiUrl: https://integrate.api.nvidia.com/v1
   embeddingModel: nvidia/nemotron-3-embed-1b
   embeddingInputType: true
   scoping: global
+codexResets:
+  autoRedeem5h: "no"
