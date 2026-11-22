@@ -125,7 +125,7 @@ alias pwncat="PYTHONWARNINGS=ignore pwncat-cs"
 alias cdots="cd ~/.local/share/chezmoi"
 alias cz="chezmoi"
 # mothership VM: `ts` = my personal tailscaled; plain `tailscale` = TinkerHub mesh (don't `up` it)
-[[ -f /etc/NIXOS ]] && alias ts='tailscale --socket="$XDG_RUNTIME_DIR/tailscale-me.sock"'
+[[ -e /run/current-system ]] && alias ts='tailscale --socket="$XDG_RUNTIME_DIR/tailscale-me.sock"'
 #alias httpx="httpx -no-color"
 
 # export

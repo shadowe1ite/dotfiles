@@ -1,5 +1,5 @@
 setupVersion: 3
-symbolPreset: unicode
+symbolPreset: nerd
 bash:
   patterns:
     - match: pass
@@ -41,11 +41,12 @@ find:
 ttsr:
   judge: "on"
 prewalk:
-  auto: "off"
+  enabled: false
+  auto: suggest
 hideThinkingBlock: true
 extendedContext: false
 mnemopi:
   embeddingApiUrl: https://integrate.api.nvidia.com/v1
-  embeddingModel: nvidia/nemotron-3.5-embed-8b
+  embeddingModel: nvidia/nemotron-3-embed-1b
   embeddingInputType: true
   scoping: global
