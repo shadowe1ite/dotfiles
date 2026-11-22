@@ -1,0 +1,33 @@
+{{- if eq .chezmoi.osRelease.id "nixos" -}}
+#!/usr/bin/env bash
+# mothership member VM (NixOS microvm). The system is rebuilt from the
+# mothership repo on every boot, so only per-user state goes here:
+# packages in the user's nix profile, and a bash → zsh hand-off because the
+# login shell is set by mothership (chsh would not survive a restart).
+# Re-runs when the package list below changes.
+# packages: {{ (include ".chezmoidata/packages/linux/nixos/nixos.yaml" | sha256sum) }}
+set -euo pipefail
+
+nix() { command nix --extra-experimental-features 'nix-command flakes' "$@"; }
+
+installed=$(nix profile list 2>/dev/null || true)
+missing=()
+for p in {{ range (include ".chezmoidata/packages/linux/nixos/nixos.yaml" | fromYaml).packages }}{{ . }} {{ end }}; do
+    # `nix profile list` prints "Name: <pkg>" and "...legacyPackages.<system>.<pkg>"
+    grep -qE "^Name:[[:space:]]+$p\$|legacyPackages\.[^.]+\.$p([[:space:]]|\$)" <<<"$installed" \
+        || missing+=("nixpkgs#$p")
+done
+if ((${#missing[@]})); then
+    nix profile add "${missing[@]}"
+fi
+
+# start zsh on SSH login (idempotent)
+if ! grep -qs 'nix-profile/bin/zsh' "$HOME/.bash_profile"; then
+    cat >> "$HOME/.bash_profile" <<'EOF'
+if [ -t 1 ] && [ -z "$ZSH_VERSION" ] && [ -x "$HOME/.nix-profile/bin/zsh" ]; then
+  export SHELL="$HOME/.nix-profile/bin/zsh"
+  exec "$SHELL" -l
+fi
+EOF
+fi
+{{ end -}}

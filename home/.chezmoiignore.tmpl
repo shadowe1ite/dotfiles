@@ -49,7 +49,7 @@
 .chezmoiscripts/06a-setup-nvidia.sh
 {{ end }}
 
-{{ if or (eq .chezmoi.osRelease.id "raspbian") (eq .chezmoi.osRelease.id "ubuntu") }}
+{{ if or (eq .chezmoi.osRelease.id "raspbian") (eq .chezmoi.osRelease.id "ubuntu") (eq .chezmoi.osRelease.id "nixos") }}
 .chezmoiscripts/*
 .git-credentials
 .gdbinit
@@ -70,5 +70,11 @@
 {{ end }}
 !.config/starship.toml
 !.config/tmux
+{{ if eq .chezmoi.osRelease.id "nixos" }}
+# mothership VM: shell only — no apt/chsh/motd script, no desktop agent config
+.omp
+!.chezmoiscripts/setup-nixos.sh
+{{ else }}
 !.chezmoiscripts/setup-remote.sh
+{{ end }}
 {{ end }}

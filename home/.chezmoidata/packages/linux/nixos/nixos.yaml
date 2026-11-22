@@ -1,0 +1,12 @@
+packages:
+  - chezmoi
+  - zsh
+  - starship
+  - fzf
+  - zoxide
+  - eza
+  - bat
+  - git
+  - curl
+  - tmux
+  - neovim

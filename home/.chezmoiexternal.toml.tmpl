@@ -50,7 +50,7 @@ executable = true
 refreshPeriod = "168h"
 {{ end }}
 
-{{ if and (ne .chezmoi.osRelease.id "raspbian") (ne .chezmoi.osRelease.id "ubuntu") }}
+{{ if and (ne .chezmoi.osRelease.id "raspbian") (ne .chezmoi.osRelease.id "ubuntu") (ne .chezmoi.osRelease.id "nixos") }}
 [".local/share/fonts"]
 type = "archive"
 url = "https://smc.org.in/downloads/fonts/raghumalayalamsans/raghumalayalamsans.zip"
