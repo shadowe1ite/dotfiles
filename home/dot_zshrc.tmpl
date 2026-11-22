@@ -29,6 +29,7 @@ export ZIM_HOME="$HOME/.zim"
 
 # Auto-install ZimFW if missing
 if [[ ! -f "$ZIM_HOME/zimfw.zsh" ]]; then
+  print -P "%F{yellow}[zsh] first run: installing zimfw + plugins, takes ~1 min — don't Ctrl+C%f"
   mkdir -p "$ZIM_HOME"
   curl -fsSL https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh \
     -o "$ZIM_HOME/zimfw.zsh"
