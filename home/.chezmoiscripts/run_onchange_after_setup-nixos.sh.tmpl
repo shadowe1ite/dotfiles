@@ -35,5 +35,5 @@ fi
 # pre-install zimfw + plugins now, so the first SSH login doesn't sit silently
 # downloading them (looks hung; Ctrl+C leaves a half-loaded shell)
 echo "[setup-nixos] installing zsh plugins..."
-TERM=dumb "$HOME/.nix-profile/bin/zsh" -ic 'exit' </dev/null || true
+TERM=xterm-256color "$HOME/.nix-profile/bin/zsh" -ic 'exit' </dev/null >/dev/null || true
 {{ end -}}
