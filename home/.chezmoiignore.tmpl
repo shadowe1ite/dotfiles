@@ -73,6 +73,7 @@
 {{ if eq .chezmoi.osRelease.id "nixos" }}
 # mothership VM: shell only + omp — no apt/chsh/motd script
 !.chezmoiscripts/setup-nixos.sh
+!.chezmoiscripts/setup-vnc-interceptor.sh
 {{ else }}
 !.chezmoiscripts/setup-remote.sh
 {{ end }}

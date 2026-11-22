@@ -19,7 +19,8 @@ for p in {{ range (include ".chezmoidata/packages/linux/nixos/nixos.yaml" | from
         || missing+=("nixpkgs#$p")
 done
 if ((${#missing[@]})); then
-    nix profile add "${missing[@]}"
+    # --impure + NIXPKGS_ALLOW_UNFREE: brave is unfree in nixpkgs
+    NIXPKGS_ALLOW_UNFREE=1 nix profile add --impure "${missing[@]}"
 fi
 
 # start zsh on SSH login (idempotent)

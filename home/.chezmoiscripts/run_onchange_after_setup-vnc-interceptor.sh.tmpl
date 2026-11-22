@@ -1,0 +1,123 @@
+{{- if eq .chezmoi.osRelease.id "nixos" -}}
+#!/usr/bin/env bash
+# mothership VM: Interceptor in a headless Brave, viewable over VNC.
+#
+#   Xvnc :1 (localhost:5901 only, password) → openbox → brave --load-extension=Interceptor
+#   watch it from the laptop:  ssh neo-vnc   then VNC to localhost:5901
+#
+# Runs after setup-nixos.sh (alphabetical), which installs brave/tigervnc/openbox/python3.
+# Interceptor's CLI + daemon are prebuilt glibc binaries → need `nixLd = true;`
+# in user-vms/alan.nix. Bump INTERCEPTOR_VERSION to upgrade (re-runs this script).
+set -euo pipefail
+
+INTERCEPTOR_VERSION="2.1.15"
+REPO="Hacker-Valley-Media/Interceptor"
+APP="$HOME/.local/share/interceptor-app"
+PKG="Interceptor-Browser-$INTERCEPTOR_VERSION-linux-x64"
+UNITS="$HOME/.config/systemd/user"
+BRAVE_CFG="$HOME/.config/BraveSoftware/Brave-Browser"
+
+say() { echo "[setup-vnc-interceptor] $*"; }
+
+# 1. Interceptor release (checksum-verified), stable path via `current`
+if [[ ! -d "$APP/$PKG" ]]; then
+    say "downloading Interceptor $INTERCEPTOR_VERSION"
+    tmp="$(mktemp -d)"; trap 'rm -rf "$tmp"' EXIT
+    base="https://github.com/$REPO/releases/download/v$INTERCEPTOR_VERSION"
+    curl -fsSL -o "$tmp/$PKG.tar.gz" "$base/$PKG.tar.gz"
+    curl -fsSL -o "$tmp/SHA256SUMS"   "$base/SHA256SUMS"
+    (cd "$tmp" && grep " $PKG.tar.gz\$" SHA256SUMS | sha256sum --check --quiet)
+    mkdir -p "$APP"
+    tar -xzf "$tmp/$PKG.tar.gz" -C "$APP"
+fi
+ln -sfn "$APP/$PKG" "$APP/current"
+mkdir -p "$HOME/.local/bin"
+ln -sf "$APP/current/dist/interceptor" "$HOME/.local/bin/interceptor"
+
+# 2. native messaging host: lets the extension start the daemon
+mkdir -p "$BRAVE_CFG/NativeMessagingHosts"
+sed "s|__DAEMON_PATH__|$APP/current/daemon/interceptor-daemon|" \
+    "$APP/current/daemon/com.interceptor.host.json" \
+    > "$BRAVE_CFG/NativeMessagingHosts/com.interceptor.host.json"
+
+# 3. Chromium drops --load-extension unless Developer mode is on: force it
+#    before every browser start (browser is stopped at that point)
+cat > "$APP/devmode.py" <<'EOF'
+import json, os, sys
+p = sys.argv[1]
+os.makedirs(os.path.dirname(p), exist_ok=True)
+try:
+    d = json.load(open(p))
+except Exception:
+    d = {}
+d.setdefault("extensions", {}).setdefault("ui", {})["developer_mode"] = True
+json.dump(d, open(p, "w"))
+EOF
+
+# 4. user services
+mkdir -p "$UNITS"
+cat > "$UNITS/vnc.service" <<'EOF'
+[Unit]
+Description=Xvnc virtual display :1 (localhost:5901 only)
+ConditionPathExists=%h/.config/tigervnc/passwd
+
+[Service]
+ExecStart=%h/.nix-profile/bin/Xvnc :1 -geometry 1600x900 -depth 24 -localhost -rfbport 5901 -rfbauth %h/.config/tigervnc/passwd -SecurityTypes VncAuth -AlwaysShared
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=default.target
+EOF
+
+cat > "$UNITS/vnc-openbox.service" <<'EOF'
+[Unit]
+Description=openbox on :1
+Requires=vnc.service
+After=vnc.service
+PartOf=vnc.service
+
+[Service]
+Environment=DISPLAY=:1
+ExecStart=%h/.nix-profile/bin/openbox
+# X may not be up yet on first try: just retry
+Restart=on-failure
+RestartSec=1
+
+[Install]
+WantedBy=vnc.service
+EOF
+
+cat > "$UNITS/brave-interceptor.service" <<'EOF'
+[Unit]
+Description=Brave + Interceptor extension on :1
+Requires=vnc.service
+After=vnc.service vnc-openbox.service
+PartOf=vnc.service
+
+[Service]
+Environment=DISPLAY=:1
+ExecStartPre=%h/.nix-profile/bin/python3 %h/.local/share/interceptor-app/devmode.py %h/.config/BraveSoftware/Brave-Browser/Default/Preferences
+ExecStart=%h/.nix-profile/bin/brave --load-extension=%h/.local/share/interceptor-app/current/extension/dist --no-first-run --no-default-browser-check --password-store=basic --disable-gpu
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=vnc.service
+EOF
+
+if ! systemctl --user daemon-reload 2>/dev/null; then
+    say "no user systemd session; later run: systemctl --user enable --now vnc vnc-openbox brave-interceptor"
+    exit 0
+fi
+systemctl --user enable vnc.service vnc-openbox.service brave-interceptor.service
+
+if [[ -f "$HOME/.config/tigervnc/passwd" ]]; then
+    systemctl --user restart vnc.service vnc-openbox.service brave-interceptor.service || true
+    say "running: from the laptop  ssh neo-vnc  then VNC to localhost:5901"
+else
+    say "set a VNC password once, then start it:"
+    say "  mkdir -p ~/.config/tigervnc && vncpasswd ~/.config/tigervnc/passwd"
+    say "  systemctl --user start vnc"
+fi
+{{ end -}}
