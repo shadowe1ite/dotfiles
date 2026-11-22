@@ -4,8 +4,9 @@
 # mothership repo on every boot, so only per-user state goes here:
 # packages in the user's nix profile, and a bash → zsh hand-off because the
 # login shell is set by mothership (chsh would not survive a restart).
-# Re-runs when the package list below changes.
+# Runs after dotfiles are written; re-runs when the package list or zimrc changes.
 # packages: {{ (include ".chezmoidata/packages/linux/nixos/nixos.yaml" | sha256sum) }}
+# zimrc:    {{ (include "private_dot_zimrc" | sha256sum) }}
 set -euo pipefail
 
 nix() { command nix --extra-experimental-features 'nix-command flakes' "$@"; }
@@ -30,4 +31,9 @@ if [ -t 1 ] && [ -z "$ZSH_VERSION" ] && [ -x "$HOME/.nix-profile/bin/zsh" ]; the
 fi
 EOF
 fi
+
+# pre-install zimfw + plugins now, so the first SSH login doesn't sit silently
+# downloading them (looks hung; Ctrl+C leaves a half-loaded shell)
+echo "[setup-nixos] installing zsh plugins..."
+TERM=dumb "$HOME/.nix-profile/bin/zsh" -ic 'exit' </dev/null || true
 {{ end -}}
