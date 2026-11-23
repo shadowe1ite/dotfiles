@@ -49,11 +49,3 @@ Host neo
   IdentityFile ~/.ssh/id_ed25519_main
   IdentitiesOnly yes
 
-# VNC to the VM's Interceptor browser: `ssh neo-vnc`, then VNC to localhost:5901
-Host neo-vnc
-  HostName neo
-  User alan
-  IdentityFile ~/.ssh/id_ed25519_main
-  IdentitiesOnly yes
-  LocalForward 5901 localhost:5901
-  ExitOnForwardFailure yes

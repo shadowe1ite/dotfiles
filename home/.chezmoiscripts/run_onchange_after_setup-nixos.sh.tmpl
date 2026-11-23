@@ -19,7 +19,7 @@ for p in {{ range (include ".chezmoidata/packages/linux/nixos/nixos.yaml" | from
         || missing+=("nixpkgs#$p")
 done
 if ((${#missing[@]})); then
-    # --impure + NIXPKGS_ALLOW_UNFREE: brave is unfree in nixpkgs
+    # --impure + NIXPKGS_ALLOW_UNFREE: steam-run is unfree in nixpkgs
     NIXPKGS_ALLOW_UNFREE=1 nix profile add --impure "${missing[@]}"
 fi
 

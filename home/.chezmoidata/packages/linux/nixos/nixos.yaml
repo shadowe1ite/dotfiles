@@ -11,9 +11,11 @@ packages:
   - tmux
   - neovim
   - omp
-  # interceptor over VNC (brave is unfree → script installs with --impure)
+  # interceptor in chromium over VNC/noVNC (steam-run is unfree → --impure)
   - python3
   - tigervnc
   - openbox
+  - novnc
   - noto-fonts
-  - brave
+  - chromium
+  - steam-run
