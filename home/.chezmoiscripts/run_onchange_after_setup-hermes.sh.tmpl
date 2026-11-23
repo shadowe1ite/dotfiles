@@ -8,14 +8,4 @@ if [[ ! -x "$HOME/.local/bin/hermes" ]]; then
         | bash -s -- --non-interactive --skip-browser --skip-computer-use
 fi
 
-mkdir -p "$HOME/.hermes"
-if [[ ! -f "$HOME/.hermes/config.yaml" ]]; then
-    cat > "$HOME/.hermes/config.yaml" <<'EOF'
-model:
-  provider: custom
-  base_url: http://amd:20128/v1
-  key_env: OMNIROUTE_API_KEY
-  default: amd/DeepSeek-V4.1-Flash:auto
-EOF
-fi
 {{ end -}}
