@@ -134,6 +134,7 @@ alias nix="noglob nix"   # extended_glob treats # as a pattern: `nix run nixpkgs
 [[ -e /run/current-system ]] && alias ts='tailscale --socket="$XDG_RUNTIME_DIR/tailscale-me.sock"'
 # omp reaches amd:20128 over my tailnet via the userspace tailscaled proxy
 [[ -e /run/current-system ]] && alias omp='HTTP_PROXY=http://localhost:1055 HTTPS_PROXY=http://localhost:1055 NO_PROXY=localhost,127.0.0.1 omp'
+[[ -e /run/current-system ]] && alias hermes='HTTP_PROXY=http://localhost:1055 HTTPS_PROXY=http://localhost:1055 NO_PROXY=localhost,127.0.0.1 hermes'
 #alias httpx="httpx -no-color"
 
 # export

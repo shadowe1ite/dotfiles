@@ -1,0 +1,21 @@
+{{- if eq .chezmoi.osRelease.id "nixos" -}}
+#!/usr/bin/env bash
+# Hermes Agent on OmniRoute (same key as omp)
+set -euo pipefail
+
+if [[ ! -x "$HOME/.local/bin/hermes" ]]; then
+    curl -fsSL https://hermes-agent.nousresearch.com/install.sh \
+        | bash -s -- --non-interactive --skip-browser --skip-computer-use
+fi
+
+mkdir -p "$HOME/.hermes"
+if [[ ! -f "$HOME/.hermes/config.yaml" ]]; then
+    cat > "$HOME/.hermes/config.yaml" <<'EOF'
+model:
+  provider: custom
+  base_url: http://amd:20128/v1
+  key_env: OMNIROUTE_API_KEY
+  default: amd/DeepSeek-V4.1-Flash:auto
+EOF
+fi
+{{ end -}}
