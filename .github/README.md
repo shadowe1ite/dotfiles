@@ -31,5 +31,5 @@ model:
   provider: custom
   base_url: http://amd:20128/v1
   key_env: OMNIROUTE_API_KEY
-  default: auto/deepseek
+  default: amd/DeepSeek-V4.1-Flash
 ```
