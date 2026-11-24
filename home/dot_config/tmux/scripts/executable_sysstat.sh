@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# CPU and RAM for hosts without a battery (shown next to storage), e.g. " 7%  1.2G/3.8G"
+# CPU and RAM for hosts without a battery (shown next to storage), e.g. "󰻠 7% 󰍛 1.2G/3.8G"
 # Pure bash builtins: no awk/sed/free/top, no sleep. CPU% is the delta since tmux's last refresh.
 
 for p in /sys/class/power_supply/BAT*/capacity; do [[ -r "$p" ]] && exit 0; done
@@ -37,6 +37,6 @@ color() {
   printf '%s' "$c"
 }
 
-printf '#[fg=%s] #[fg=%s]%d%% #[fg=%s] #[fg=%s]%s/%s ' \
+printf '#[fg=%s]󰻠#[fg=%s] %d%% #[fg=%s]󰍛#[fg=%s] %s/%s ' \
   "$(color "$cpu")" "$TEXT_COLOR" "$cpu" \
   "$(color $(( mu * 100 / mt )))" "$TEXT_COLOR" "$(gib "$mu")" "$(gib "$mt")"
