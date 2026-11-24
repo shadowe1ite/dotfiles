@@ -37,6 +37,6 @@ color() {
   printf '%s' "$c"
 }
 
-printf '#[fg=%s]󰻠#[fg=%s] %d%% #[fg=%s]󰍛#[fg=%s] %s/%s ' \
+printf '#[fg=%s]󰻠#[fg=%s] %d%%   #[fg=%s]󰍛#[fg=%s] %s/%s   ' \
   "$(color "$cpu")" "$TEXT_COLOR" "$cpu" \
   "$(color $(( mu * 100 / mt )))" "$TEXT_COLOR" "$(gib "$mu")" "$(gib "$mt")"
