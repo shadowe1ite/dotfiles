@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Hermes desktop's SSH connection runs this as its "Remote Hermes path".
+# Non-interactive ssh skips ~/.zshrc, so load the OmniRoute key and the
+# personal-tailnet proxy that reaches amd:20128 (same as the `hermes` alias).
+[[ -r ~/.config/secrets.env ]] && { set -a; source ~/.config/secrets.env; set +a; }
+export HTTP_PROXY=http://localhost:1055 HTTPS_PROXY=http://localhost:1055 NO_PROXY=localhost,127.0.0.1
+export PATH="$HOME/.local/bin:$PATH"
+exec hermes "$@"
