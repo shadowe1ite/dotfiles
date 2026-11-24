@@ -78,3 +78,7 @@
 !.chezmoiscripts/setup-remote.sh
 {{ end }}
 {{ end }}
+
+{{ if ne .chezmoi.osRelease.id "nixos" }}
+.hermes
+{{ end }}

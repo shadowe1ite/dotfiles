@@ -1,15 +1,7 @@
 {{- if eq .chezmoi.osRelease.id "nixos" -}}
 #!/usr/bin/env bash
-# mothership VM: Interceptor in Chromium on a virtual desktop, viewable in a web browser.
-#
-#   Xvnc :1 (localhost:5901, no password) → openbox → chromium --load-extension=Interceptor
-#   `desk` (in tmux) runs it; noVNC on 127.0.0.1:6080 → open http://neo:6080/vnc.html over the personal tailnet
-#   (userspace tailscaled forwards tailnet connections to the VM's localhost)
-#
-# Runs after setup-nixos.sh (alphabetical), which installs the packages.
-# Interceptor's CLI + daemon are prebuilt glibc binaries; NixOS can't run them directly
-# (no nixLd), so both run through steam-run wrappers.
-# Bump INTERCEPTOR_VERSION to upgrade (re-runs this script).
+# Interceptor in Chromium on a virtual desktop. Start it with `desk` (in tmux),
+# then open http://neo:6080/vnc.html
 set -euo pipefail
 
 INTERCEPTOR_VERSION="2.1.15"
@@ -17,14 +9,8 @@ REPO="Hacker-Valley-Media/Interceptor"
 APP="$HOME/.local/share/interceptor-app"
 PKG="Interceptor-Browser-$INTERCEPTOR_VERSION-linux-x64"
 BIN="$HOME/.local/bin"
-UNITS="$HOME/.config/systemd/user"
-CHROMIUM_CFG="$HOME/.config/chromium"
 
-say() { echo "[setup-vnc-interceptor] $*"; }
-
-# 1. Interceptor release (checksum-verified), stable path via `current`
 if [[ ! -d "$APP/$PKG" ]]; then
-    say "downloading Interceptor $INTERCEPTOR_VERSION"
     tmp="$(mktemp -d)"; trap 'rm -rf "$tmp"' EXIT
     base="https://github.com/$REPO/releases/download/v$INTERCEPTOR_VERSION"
     curl -fsSL -o "$tmp/$PKG.tar.gz" "$base/$PKG.tar.gz"
@@ -35,27 +21,15 @@ if [[ ! -d "$APP/$PKG" ]]; then
 fi
 ln -sfn "$APP/$PKG" "$APP/current"
 
-# 2. steam-run wrappers (CLI for omp/you, daemon for the browser)
 mkdir -p "$BIN"
-rm -f "$BIN/interceptor" "$BIN/interceptor-daemon-wrap" "$BIN/interceptor-wrap"
-cat > "$BIN/interceptor" <<EOF
-#!/usr/bin/env bash
-exec "\$HOME/.nix-profile/bin/steam-run" "$APP/current/dist/interceptor" "\$@"
-EOF
-cat > "$BIN/interceptor-daemon" <<EOF
-#!/usr/bin/env bash
-exec "\$HOME/.nix-profile/bin/steam-run" "$APP/current/daemon/interceptor-daemon" "\$@"
-EOF
-chmod +x "$BIN/interceptor" "$BIN/interceptor-daemon"
+ln -sf "$APP/current/dist/interceptor" "$BIN/interceptor"
 
-# 3. native messaging host: lets the extension start the daemon
-mkdir -p "$CHROMIUM_CFG/NativeMessagingHosts"
-sed "s|__DAEMON_PATH__|$BIN/interceptor-daemon|" \
+mkdir -p "$HOME/.config/chromium/NativeMessagingHosts"
+sed "s|__DAEMON_PATH__|$APP/current/daemon/interceptor-daemon|" \
     "$APP/current/daemon/com.interceptor.host.json" \
-    > "$CHROMIUM_CFG/NativeMessagingHosts/com.interceptor.host.json"
+    > "$HOME/.config/chromium/NativeMessagingHosts/com.interceptor.host.json"
 
-# 4. Chromium drops --load-extension unless Developer mode is on: force it
-#    before every browser start (browser is stopped at that point)
+# Chromium ignores --load-extension unless Developer mode is on
 cat > "$APP/devmode.py" <<'EOF'
 import json, os, sys
 p = sys.argv[1]
@@ -68,15 +42,8 @@ d.setdefault("extensions", {}).setdefault("ui", {})["developer_mode"] = True
 json.dump(d, open(p, "w"))
 EOF
 
-# 5. `desk`: start the desktop by hand (in tmux), Ctrl+C stops it all
-for u in brave-interceptor chromium-interceptor novnc vnc-openbox vnc; do
-    systemctl --user disable --now "$u.service" 2>/dev/null || true
-    rm -f "$HOME/.config/systemd/user/$u.service"
-done
 cat > "$BIN/desk" <<'EOF'
 #!/usr/bin/env bash
-# Virtual desktop with Chromium + Interceptor: open http://neo:6080/vnc.html
-# Run inside tmux; Ctrl+C stops everything.
 export DISPLAY=:1
 APP="$HOME/.local/share/interceptor-app"
 
@@ -94,5 +61,4 @@ chromium --load-extension="$APP/current/extension/dist" \
 novnc --vnc localhost:5901 --listen 127.0.0.1:6080
 EOF
 chmod +x "$BIN/desk"
-say "start it in tmux with: desk   then open http://neo:6080/vnc.html"
 {{ end -}}
