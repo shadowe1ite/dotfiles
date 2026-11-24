@@ -4,7 +4,7 @@ set -euo pipefail
 {{- $bwFolderId := "3bb893f4-9a06-4477-afe5-b33c00c20c5d" }}
 
 sudoKeepAlive
-checkDeps gnupg jq bitwarden-cli git pass
+checkDeps gnupg jq bitwarden-cli-bin git pass
 
 mkdir -p "$HOME/.config/Bitwarden CLI"
 touch "$HOME/.config/Bitwarden CLI/data.json"
