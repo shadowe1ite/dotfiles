@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# CPU or RAM (`sysstat.sh cpu|ram`) for hosts without a battery, around storage: "󰻠 7%  󰋊 7%  󰍛 1.2G/3.8G"
+# CPU or RAM (`sysstat.sh cpu|ram`) for hosts without a battery, around storage: "󰻠 7%  󰋊 3.2G/40G  󰍛 21%"
 # Pure bash builtins: no awk/sed/free/top, no sleep. CPU% is the delta since tmux's last refresh.
 
 for p in /sys/class/power_supply/BAT*/capacity; do [[ -r "$p" ]] && exit 0; done
@@ -28,7 +28,6 @@ while read -r key val _; do
 done < /proc/meminfo
 mu=$(( mt - ma ))
 
-gib() { printf '%d.%dG' $(( $1 / 1048576 )) $(( $1 % 1048576 * 10 / 1048576 )); }
 
 color() {
   local c="$ICON_COLOR"
@@ -39,5 +38,5 @@ color() {
 
 case "${1:-}" in
   cpu) printf '#[fg=%s]󰻠#[fg=%s] %d%%  ' "$(color "$cpu")" "$TEXT_COLOR" "$cpu" ;;
-  ram) printf '  #[fg=%s]󰍛#[fg=%s] %s/%s' "$(color $(( mu * 100 / mt )))" "$TEXT_COLOR" "$(gib "$mu")" "$(gib "$mt")" ;;
+  ram) ram=$(( mu * 100 / mt )); printf '  #[fg=%s]󰍛#[fg=%s] %d%%' "$(color "$ram")" "$TEXT_COLOR" "$ram" ;;
 esac

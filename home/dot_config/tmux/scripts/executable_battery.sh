@@ -14,7 +14,7 @@ for p in /sys/class/power_supply/BAT*/capacity /sys/class/power_supply/*/capacit
   fi
 done
 
-# No battery (VM/server/Pi): show home storage instead, e.g. "󰋊 8%"
+# No battery (VM/server/Pi): show home storage instead, e.g. "󰋊 3.1G/40G"
 if [[ -z "$cap" ]]; then
   if [[ -d /persist ]]; then
     # mothership VM: ~ is a virtiofs share of a ZFS dataset; df shows the whole
@@ -38,7 +38,7 @@ if [[ -z "$cap" ]]; then
     icon_color="$ICON_COLOR"
     (( p >= 75 )) && icon_color="#F5C451"   # yellow
     (( p >= 90 )) && icon_color="#FF5F5F"   # red
-    printf '#[fg=%s]󰋊#[fg=%s] %s' "$icon_color" "$TEXT_COLOR" "$pct"
+    printf '#[fg=%s]󰋊#[fg=%s] %s/%s' "$icon_color" "$TEXT_COLOR" "$used" "$size"
   fi
   exit 0
 fi
