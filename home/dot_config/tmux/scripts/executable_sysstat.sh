@@ -18,7 +18,7 @@ if [[ -r "$cache" ]]; then
   dt=$(( total - ptotal ))
   (( dt > 0 )) && cpu=$(( (busy - pbusy) * 100 / dt ))
 fi
-echo "$total $busy" > "$cache"
+[[ "${1:-}" == cpu ]] && echo "$total $busy" > "$cache"
 
 while read -r key val _; do
   case "$key" in
