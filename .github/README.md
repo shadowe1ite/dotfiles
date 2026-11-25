@@ -33,3 +33,32 @@ model:
   key_env: OMNIROUTE_API_KEY
   default: amd/DeepSeek-V4.1-Flash
 ```
+
+### Reset to fresh
+
+The system is rebuilt on every boot; only `/persist` survives. Back up anything you need first.
+Never touch `/persist/tailscale` or `/persist/tailscale.authkey` (mesh identity, otherwise the VM re-joins as `alan-1`).
+
+On the VM:
+
+```bash
+nix profile remove --all
+sudo find /persist/home -mindepth 1 -delete
+sudo reboot
+```
+
+After it's back, free the store overlay. Only delete paths that aren't in the host's read-only store;
+don't use `nix-collect-garbage`, which can hide host paths in the persistent overlay.
+
+```bash
+nix-store --gc --print-dead 2>/dev/null | while read p; do
+  [ -e "/nix/.ro-store/${p#/nix/store/}" ] || nix-store --delete "$p"
+done
+```
+
+Elsewhere:
+
+- client: `ssh-keygen -R neo`
+- Tailscale admin console: Machines → `neo` → Remove
+
+Then set it up again with the **Fresh VM** command above.
