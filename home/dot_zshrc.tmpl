@@ -7,8 +7,6 @@ if command -v pass >/dev/null 2>&1; then
 elif [[ -r ~/.config/secrets.env ]]; then
   # no pass here (e.g. mothership VM): hand-made, chmod 600, never in git
   set -a; source ~/.config/secrets.env; set +a
-  # mnemopi embeddings use the Gemini key, same as the pass branch
-  [[ -n "$GEMINI_API_KEY" && -z "$MNEMOPI_EMBEDDING_API_KEY" ]] && export MNEMOPI_EMBEDDING_API_KEY="$GEMINI_API_KEY"
 fi
 export PATH=$PATH:/home/shadow/.spicetify
 export PATH=/home/shadow/.pdtm/go/bin:$PATH
