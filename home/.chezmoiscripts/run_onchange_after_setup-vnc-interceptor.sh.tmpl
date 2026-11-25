@@ -47,6 +47,11 @@ cat > "$BIN/desk" <<'EOF'
 export DISPLAY=:1
 APP="$HOME/.local/share/interceptor-app"
 
+# dark everywhere on this bare openbox session (no DE / portal to ask):
+# GTK3 apps get Adwaita dark, Qt apps take their colours from GTK
+export GTK_THEME=Adwaita:dark
+export QT_QPA_PLATFORMTHEME=gtk3
+
 Xvnc :1 -geometry 1600x900 -depth 24 -localhost -SecurityTypes None -AlwaysShared &
 XVNC=$!
 trap 'kill $XVNC 2>/dev/null; pkill -f "openbox|chromium" 2>/dev/null' EXIT
@@ -56,7 +61,8 @@ openbox &
 python3 "$APP/devmode.py" "$HOME/.config/chromium/Default/Preferences"
 chromium --load-extension="$APP/current/extension/dist" \
     --disable-features=DisableLoadExtensionCommandLineSwitch \
-    --no-first-run --no-default-browser-check --password-store=basic --disable-gpu &
+    --no-first-run --no-default-browser-check --password-store=basic --disable-gpu \
+    --force-dark-mode &
 
 novnc --vnc localhost:5901 --listen 127.0.0.1:6080
 EOF
