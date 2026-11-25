@@ -58,7 +58,14 @@ done
 
 Elsewhere:
 
-- client: `ssh-keygen -R neo`
-- Tailscale admin console: Machines → `neo` → Remove
+- client: `ssh-keygen -R neo` (new host key after a wipe)
+- Tailscale admin console: Machines → `neo` → Remove (before logging in again, or it comes back as `neo-1`)
 
-Then set it up again with the **Fresh VM** command above.
+Then set it up again with the **Fresh VM** command above, and log the personal tailnet back in **with the tag**.
+Without it, neo joins as you and can reach every machine again; tagged, it can only reach OmniRoute.
+
+```bash
+ts up --hostname=neo --advertise-tags=tag:mothership
+```
+
+Optional: get the old IP back with Machines → `neo` → Edit machine IPv4 → `100.100.26.122`.
