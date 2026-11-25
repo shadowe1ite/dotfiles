@@ -29,6 +29,10 @@ export PATH=$PATH:/sbin:/usr/sbin
 
 ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+# completions from `nix profile` packages (neo): zsh only looks in its own
+# store path, so _chezmoi, _eza, … stay invisible unless added before compinit
+[[ -d ~/.nix-profile/share/zsh/site-functions ]] && fpath=(~/.nix-profile/share/zsh/site-functions $fpath)
+
 # ZimFW init
 export ZIM_HOME="$HOME/.zim"
 
