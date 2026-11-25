@@ -137,6 +137,12 @@ alias nix="noglob nix"   # extended_glob treats # as a pattern: `nix run nixpkgs
 # omp reaches amd:20128 over my tailnet via the userspace tailscaled proxy
 [[ -e /run/current-system ]] && alias omp='HTTP_PROXY=http://localhost:1055 HTTPS_PROXY=http://localhost:1055 NO_PROXY=localhost,127.0.0.1 omp'
 [[ -e /run/current-system ]] && alias hermes='HTTP_PROXY=http://localhost:1055 HTTPS_PROXY=http://localhost:1055 NO_PROXY=localhost,127.0.0.1 hermes'
+[[ -e /run/current-system ]] && alias omh='HTTP_PROXY=http://localhost:1055 HTTPS_PROXY=http://localhost:1055 NO_PROXY=localhost,127.0.0.1 omh'
+# laptop: send the clipboard image to neo and put its remote path on the clipboard (paste into omp/omh there)
+[[ -e /run/current-system ]] || pimg() {
+  local f="/tmp/clip-$(date +%s).png"
+  wl-paste -t image/png | ssh neo "cat > $f" && echo -n "$f" | wl-copy && echo "$f"
+}
 #alias httpx="httpx -no-color"
 
 # export
