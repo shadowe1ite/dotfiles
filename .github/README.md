@@ -50,10 +50,15 @@ sudo reboot
 After it's back, free the store overlay. Only delete paths that aren't in the host's read-only store;
 don't use `nix-collect-garbage`, which can hide host paths in the persistent overlay.
 
+Collect the paths first, then delete in batches (one `nix-store --delete` per path rescans GC roots every time and takes hours).
+Safe to interrupt and re-run later; a few "still alive" errors are fine.
+
 ```bash
 nix-store --gc --print-dead 2>/dev/null | while read p; do
-  [ -e "/nix/.ro-store/${p#/nix/store/}" ] || nix-store --delete "$p"
-done
+  [ -e "/nix/.ro-store/${p#/nix/store/}" ] || echo "$p"
+done > ~/dead.txt
+xargs -a ~/dead.txt nix-store --delete
+rm ~/dead.txt
 ```
 
 Elsewhere:
@@ -65,7 +70,7 @@ Then set it up again with the **Fresh VM** command above, and log the personal t
 Without it, neo joins as you and can reach every machine again; tagged, it can only reach OmniRoute.
 
 ```bash
-ts up --hostname=neo --advertise-tags=tag:mothership --ssh
+ts up --hostname=neo --advertise-tags=tag:mothership
 ```
 
 Optional: get the old IP back with Machines → `neo` → Edit machine IPv4 → `100.100.26.122`.
