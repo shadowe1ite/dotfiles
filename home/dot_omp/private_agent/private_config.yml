@@ -26,8 +26,8 @@ memory:
 update:
   auto: true
 modelRoles:
-  default: openai-codex/gpt-5.6-sol
-  smol: omniroute/amd/DeepSeek-V4.1-Flash:auto
+  default: openai-codex/gpt-daybreak-blue-latest:high
+  smol: openai-codex/gpt-6-luna:xhigh
   judge: amd-radeon-judge/d3
 defaultThinkingLevel: auto
 retry:
@@ -40,12 +40,14 @@ find:
   enabled: "on"
 ttsr:
   judge: "on"
-hideThinkingBlock: false
+hideThinkingBlock: true
 extendedContext: false
 mnemopi:
-  embeddingApiUrl: https://integrate.api.nvidia.com/v1
-  embeddingModel: nvidia/nemotron-3-embed-1b
-  embeddingInputType: true
+  embeddingApiUrl: https://generativelanguage.googleapis.com/v1beta/openai/
+  embeddingModel: gemini-embedding-001
+  embeddingInputType: false
   scoping: global
 codexResets:
   autoRedeem5h: "no"
+dev:
+  autoqaConsent: denied
