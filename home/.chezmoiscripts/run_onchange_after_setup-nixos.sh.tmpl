@@ -57,6 +57,40 @@ else
     echo "[setup-nixos] no user systemd session; run: systemctl --user enable --now tailscaled-me"
 fi
 
+# zram swap: the VM has no swap, and the system (rebuilt every boot) won't
+# keep one, so a user service sets it up again on each boot via sudo -n.
+# zram = compressed swap in RAM; /persist is virtiofs and can't hold a swapfile.
+mkdir -p "$HOME/.local/bin"
+cat > "$HOME/.local/bin/zram-swap" <<'EOF'
+#!/usr/bin/env bash
+set -euo pipefail
+export PATH=/run/wrappers/bin:/run/current-system/sw/bin:$PATH
+swapon --show | grep -q zram0 && exit 0
+sudo -n modprobe zram
+echo zstd | sudo -n tee /sys/block/zram0/comp_algorithm >/dev/null
+echo 2G   | sudo -n tee /sys/block/zram0/disksize       >/dev/null
+sudo -n mkswap -q /dev/zram0
+sudo -n swapon -p 100 /dev/zram0
+sudo -n sysctl -q vm.swappiness=100
+EOF
+chmod +x "$HOME/.local/bin/zram-swap"
+
+cat > "$unit_dir/zram-swap.service" <<'EOF'
+[Unit]
+Description=zram swap (2G, zstd)
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=%h/.local/bin/zram-swap
+
+[Install]
+WantedBy=default.target
+EOF
+if systemctl --user daemon-reload 2>/dev/null; then
+    systemctl --user enable --now zram-swap.service || true
+fi
+
 # pre-install zimfw + plugins now, so the first SSH login doesn't sit silently
 # downloading them (looks hung; Ctrl+C leaves a half-loaded shell)
 echo "[setup-nixos] installing zsh plugins..."
