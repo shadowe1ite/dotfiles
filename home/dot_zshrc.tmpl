@@ -139,7 +139,8 @@ alias nix="noglob nix"   # extended_glob treats # as a pattern: `nix run nixpkgs
 # ~/.local/bin/wl-paste (fake), which reads the laptop clipboard through RemoteForward 19988
 [[ -e /run/current-system ]] && alias omp='HTTP_PROXY=http://localhost:1055 HTTPS_PROXY=http://localhost:1055 NO_PROXY=localhost,127.0.0.1 WAYLAND_DISPLAY=ssh-clip env -u SSH_CONNECTION -u SSH_CLIENT -u SSH_TTY omp'
 [[ -e /run/current-system ]] && alias hermes='HTTP_PROXY=http://localhost:1055 HTTPS_PROXY=http://localhost:1055 NO_PROXY=localhost,127.0.0.1 hermes'
-[[ -e /run/current-system ]] && alias omh='HTTP_PROXY=http://localhost:1055 HTTPS_PROXY=http://localhost:1055 NO_PROXY=localhost,127.0.0.1 omh'
+# fake Wayland so Hermes' image paste uses ~/.local/bin/wl-paste (fake, laptop clipboard via RemoteForward 19988)
+[[ -e /run/current-system ]] && alias omh='HTTP_PROXY=http://localhost:1055 HTTPS_PROXY=http://localhost:1055 NO_PROXY=localhost,127.0.0.1 WAYLAND_DISPLAY=ssh-clip omh'
 # laptop: send the clipboard image to neo and put its remote path on the clipboard (paste into omp/omh there)
 [[ -e /run/current-system ]] || pimg() {
   local f="/tmp/clip-$(date +%s).png"

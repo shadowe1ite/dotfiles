@@ -1,5 +1,5 @@
 [Unit]
-Description=Clipboard for ssh neo (RemoteForward 19988, fake xclip there)
+Description=Clipboard for ssh neo (RemoteForward 19988, fake wl-paste there)
 PartOf=graphical-session.target
 After=graphical-session.target
 

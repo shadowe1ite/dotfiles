@@ -1,5 +1,5 @@
 #!/bin/sh
-# neo: fake wl-paste reading the laptop clipboard via ssh RemoteForward 19988 (clipserve); omp's image paste uses it
+# neo: fake wl-paste reading the laptop clipboard via ssh RemoteForward 19988 (clipserve); omh and omp image paste use it
 p=type/text/plain
 while [ $# -gt 0 ]; do
   case $1 in
