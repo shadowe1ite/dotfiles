@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=Hermes
+GenericName=AI Agent Client
+Comment=Hermes desktop, remote-only (no local runtime; connects to neo over SSH)
+Exec=env HERMES_DESKTOP_IGNORE_EXISTING=1 /usr/bin/hermes-desktop %U
+Terminal=false
+Type=Application
+Icon=hermes
+StartupWMClass=Hermes
+Categories=Development;
+Keywords=AI;Agent;Chat;Assistant;
+MimeType=x-scheme-handler/hermes;
