@@ -65,7 +65,7 @@ Then set it up again with the **Fresh VM** command above, and log the personal t
 Without it, neo joins as you and can reach every machine again; tagged, it can only reach OmniRoute.
 
 ```bash
-ts up --hostname=neo --advertise-tags=tag:mothership
+ts up --hostname=neo --advertise-tags=tag:mothership --ssh
 ```
 
 Optional: get the old IP back with Machines → `neo` → Edit machine IPv4 → `100.100.26.122`.
