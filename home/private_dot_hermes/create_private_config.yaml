@@ -3,3 +3,13 @@ model:
   base_url: http://amd:20128/v1
   key_env: OMNIROUTE_API_KEY
   default: amd/DeepSeek-V4.1-Flash
+mcp_servers:
+  interceptor:
+    command: interceptor
+    args: [mcp, serve]
+    # Hermes hands MCP servers its own TMPDIR; pin interceptor to /tmp so its daemon
+    # socket/pid match what Chrome's native host, omp and the CLI look for
+    env:
+      INTERCEPTOR_TEMP: /tmp
+      TMPDIR: /tmp
+    enabled: true

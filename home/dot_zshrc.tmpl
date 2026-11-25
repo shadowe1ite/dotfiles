@@ -133,6 +133,8 @@ alias cdots="cd ~/.local/share/chezmoi"
 alias cz="chezmoi"
 alias nix="noglob nix"   # extended_glob treats # as a pattern: `nix run nixpkgs#foo` → "no matches found"
 # mothership VM: `ts` = my personal tailscaled; plain `tailscale` = TinkerHub mesh (don't `up` it)
+# interceptor keeps its daemon socket/pid in INTERCEPTOR_TEMP (else TMPDIR): pin it so every launcher agrees
+[[ -e /run/current-system ]] && export INTERCEPTOR_TEMP=/tmp
 [[ -e /run/current-system ]] && alias ts='tailscale --socket="$XDG_RUNTIME_DIR/tailscale-me.sock"'
 # omp reaches amd:20128 over my tailnet via the userspace tailscaled proxy
 # omp refuses image paste over SSH: hide the SSH vars and fake a Wayland session so it calls
