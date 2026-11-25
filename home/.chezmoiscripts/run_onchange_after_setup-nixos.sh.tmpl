@@ -91,6 +91,61 @@ if systemctl --user daemon-reload 2>/dev/null; then
     systemctl --user enable --now zram-swap.service || true
 fi
 
+# stable SSH host keys: /etc/ssh is wiped every boot, so sshd makes new keys
+# and every client screams "REMOTE HOST IDENTIFICATION HAS CHANGED". First run
+# saves the current keys under ~ (on /persist); every boot after puts them back.
+cat > "$HOME/.local/bin/ssh-hostkeys" <<'EOF'
+#!/usr/bin/env bash
+set -euo pipefail
+umask 077
+export PATH=/run/wrappers/bin:/run/current-system/sw/bin:$PATH
+store="$HOME/.local/share/ssh-hostkeys"
+
+if [[ ! -s "$store/ssh_host_ed25519_key" ]]; then
+    mkdir -p "$store"
+    for f in /etc/ssh/ssh_host_*_key; do
+        b=$(basename "$f")
+        sudo -n cat "$f"     > "$store/$b"
+        sudo -n cat "$f.pub" > "$store/$b.pub"
+    done
+    echo "saved host keys to $store"
+    exit 0
+fi
+
+changed=0
+for k in "$store"/ssh_host_*_key; do
+    dst="/etc/ssh/$(basename "$k")"
+    [[ "$(sha256sum < "$k")" == "$(sudo -n cat "$dst" 2>/dev/null | sha256sum)" ]] && continue
+    sudo -n tee "$dst"     < "$k"     >/dev/null
+    sudo -n tee "$dst.pub" < "$k.pub" >/dev/null
+    sudo -n chown root:root "$dst" "$dst.pub"
+    sudo -n chmod 600 "$dst"
+    sudo -n chmod 644 "$dst.pub"
+    changed=1
+done
+if ((changed)); then
+    sudo -n systemctl restart sshd
+    echo "restored host keys from $store"
+fi
+EOF
+chmod +x "$HOME/.local/bin/ssh-hostkeys"
+
+cat > "$unit_dir/ssh-hostkeys.service" <<'EOF'
+[Unit]
+Description=Restore saved SSH host keys
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=%h/.local/bin/ssh-hostkeys
+
+[Install]
+WantedBy=default.target
+EOF
+if systemctl --user daemon-reload 2>/dev/null; then
+    systemctl --user enable --now ssh-hostkeys.service || true
+fi
+
 # pre-install zimfw + plugins now, so the first SSH login doesn't sit silently
 # downloading them (looks hung; Ctrl+C leaves a half-loaded shell)
 echo "[setup-nixos] installing zsh plugins..."
