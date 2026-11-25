@@ -1,0 +1,12 @@
+#!/bin/sh
+# neo: fake wl-paste reading the laptop clipboard via ssh RemoteForward 19988 (clipserve); omp's image paste uses it
+p=type/text/plain
+while [ $# -gt 0 ]; do
+  case $1 in
+    -l|--list-types) p=targets ;;
+    -t|--type) p="type/$2"; shift ;;
+    --type=*) p="type/${1#--type=}" ;;
+  esac
+  shift
+done
+exec curl -sf --noproxy '*' -m 5 "http://127.0.0.1:19988/$p"
