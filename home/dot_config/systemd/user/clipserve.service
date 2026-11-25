@@ -1,0 +1,11 @@
+[Unit]
+Description=Clipboard for ssh neo (RemoteForward 19988, fake xclip there)
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+ExecStart=%h/.local/bin/clipserve
+Restart=on-failure
+
+[Install]
+WantedBy=graphical-session.target

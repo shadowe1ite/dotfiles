@@ -58,7 +58,10 @@
 .BurpSuite/
 .zen/
 .gnupg/
-.local/
+.local/*
+!.local/bin
+.local/bin/*
+!.local/bin/xclip
 .config/*
 .cache/*
 .vdirsyncer/
@@ -81,4 +84,5 @@
 
 {{ if ne .chezmoi.osRelease.id "nixos" }}
 .hermes
+.local/bin/xclip
 {{ end }}

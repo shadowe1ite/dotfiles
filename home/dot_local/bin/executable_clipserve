@@ -1,0 +1,24 @@
+#!/usr/bin/env python3
+# laptop: serve the Wayland clipboard on 127.0.0.1:19988 for the `RemoteForward` on Host neo,
+# where ~/.local/bin/xclip (fake) reads it — so image paste in omh/hermes on neo gets this clipboard
+import http.server, subprocess
+
+class H(http.server.BaseHTTPRequestHandler):
+    def do_GET(self):
+        if self.path == "/targets":
+            argv = ["wl-paste", "--list-types"]
+        elif self.path.startswith("/type/"):
+            argv = ["wl-paste", "-n", "-t", self.path[6:]]
+        else:
+            return self.send_error(404)
+        r = subprocess.run(argv, capture_output=True, timeout=5)
+        if r.returncode:
+            return self.send_error(404)
+        self.send_response(200)
+        self.end_headers()
+        self.wfile.write(r.stdout)
+
+    def log_message(self, *a):
+        pass
+
+http.server.ThreadingHTTPServer(("127.0.0.1", 19988), H).serve_forever()
