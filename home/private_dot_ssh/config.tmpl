@@ -48,3 +48,9 @@ Host neo
   User alan
   RemoteForward 19988 127.0.0.1:19988   # laptop clipboard (clipserve) -> fake wl-paste on neo
 
+# same VM without the forward, for tools (omher app) that fail when 19988 is already taken
+Host neo-bridge
+  HostName neo
+  User alan
+  ClearAllForwardings yes
+
